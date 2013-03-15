@@ -1,0 +1,225 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Speeding up the solvers &mdash; eofs 0.4.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinx13.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.4.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="eofs 0.4.0 documentation" href="../index.html" />
+    <link rel="up" title="User Guide" href="index.html" />
+    <link rel="next" title="Examples" href="../examples/index.html" />
+    <link rel="prev" title="Method of solution" href="method.html" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
+          rel='stylesheet' type='text/css' />
+     
+        <style type="text/css">
+            table.right { float: right; margin-left: 20px; }
+            table.right td { border: 1px solid #ccc; }
+        </style>
+        <script type="text/javascript">
+            // intelligent scrolling of the sidebar content
+            $(window).scroll(function() {
+                var sb = $('.sphinxsidebarwrapper');
+                var win = $(window);
+                var sbh = sb.height();
+                var offset = $('.sphinxsidebar').position()['top'];
+                var wintop = win.scrollTop();
+                var winbot = wintop + win.innerHeight();
+                var curtop = sb.position()['top'];
+                var curbot = curtop + sbh;
+                // does sidebar fit in window?
+                if (sbh < win.innerHeight()) {
+                    // yes: easy case -- always keep at the top
+                    sb.css('top', $u.min([$u.max([0, wintop - offset - 10]),
+                                         $(document).height() - sbh - 200]));
+                } else {
+                    // no: only scroll if top/bottom edge of sidebar is at
+                    // top/bottom edge of window
+                    if (curtop > wintop && curbot > winbot) {
+                        sb.css('top', $u.max([wintop - offset - 10, 0]));
+                    } else if (curtop < wintop && curbot < winbot) {
+                        sb.css('top', $u.min([winbot - sbh - offset - 20,
+                                             $(document).height() - sbh - 200]));
+                    }
+                }
+            });
+        </script>
+
+  </head>
+  <body>
+<div class="pageheader">
+  <div>
+    <a href="../index.html">
+      <img src="../_static/eofsheader.png" alt="SPHINX" />
+    </a>
+  </div>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../examples/index.html" title="Examples"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="method.html" title="Method of solution"
+             accesskey="P">previous</a> |</li>
+    <li><a href="../index.html">home</a>|&nbsp;</li>
+    <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" accesskey="U">User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+    <h3>Table of Contents</h3>
+    <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interfaces.html">Solver interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html">Basic usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multivariate.html">Multivariate solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eof2_compatibility.html">Compatibility with <strong>eof2</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="method.html">Method of solution</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Speeding up the solvers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API references</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../downloads.html">Downloads</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="method.html"
+                        title="previous chapter">Method of solution</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../examples/index.html"
+                        title="next chapter">Examples</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/userguide/speed.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="speeding-up-the-solvers">
+<h1>Speeding up the solvers<a class="headerlink" href="#speeding-up-the-solvers" title="Permalink to this headline">¶</a></h1>
+<p>All the solvers rely on the <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.svd.html#numpy.linalg.svd" title="(in NumPy v1.7)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy.linalg.svd</span></tt></a> function to compute the EOF solution. If you obtained <a class="reference external" href="http://numpy.org">numpy</a> from you package manager it is likely that this function uses standard <a class="reference external" href="http://www.netlib.org/lapack/">LAPACK</a>/<a class="reference external" href="http://www.netlib.org/blas/">BLAS</a> routines, which are single threaded. It is possible to get a large performance boost from the code by using a version of numpy that is built with an optimised linear algebra library. The following options all allow a performace boost for the solvers in <tt class="xref py py-obj docutils literal"><span class="pre">eofs</span></tt>:</p>
+<div class="section" id="numpy-built-with-the-intel-math-kernel-library-mkl">
+<h2>NumPy built with the Intel Math Kernel Library (MKL)<a class="headerlink" href="#numpy-built-with-the-intel-math-kernel-library-mkl" title="Permalink to this headline">¶</a></h2>
+<p>Intel&#8217;s MKL provides highly optimised BLAS and LAPACK routines which can take advantage of multicore processors.
+If you have access to Intel&#8217;s MKL you can build a <a class="reference external" href="http://numpy.org">numpy</a> library using it following the instructions from <a class="reference external" href="http://software.intel.com/en-us/articles/numpyscipy-with-intel-mkl">intel</a>.
+It is actually not that hard to do and can provide a great performance boost.</p>
+<div class="section" id="enthought-python-distribution-epd">
+<h3>Enthought Python Distribution (EPD)<a class="headerlink" href="#enthought-python-distribution-epd" title="Permalink to this headline">¶</a></h3>
+<p>The version of <a class="reference external" href="http://numpy.org">numpy</a> provided with EPD is linked against the Intel MKL, and you don&#8217;t need a license for the MKL yourself. EPD is free for academics.</p>
+</div>
+</div>
+<div class="section" id="numpy-built-with-the-amd-core-math-library-acml">
+<h2>Numpy built with the AMD Core Math Library (ACML)<a class="headerlink" href="#numpy-built-with-the-amd-core-math-library-acml" title="Permalink to this headline">¶</a></h2>
+<p>AMD&#8217;s ACML provides optimised BLAS and LAPACK routines in both single and multi-threaded versions. The ACML itself is free to download.
+You will have to build CBLAS first as ACML only includes Fortran interfaces.
+The following instructions worked for me:</p>
+<ol class="arabic">
+<li><p class="first">download CBLAS from the link at www.netlib.org/blas</p>
+</li>
+<li><p class="first">edit Makefile.LINUX and change BLLIB to point to your libacml.so or libacml_mp.so</p>
+</li>
+<li><p class="first">copy or link this make file to Makefile.in and build CBLAS</p>
+</li>
+<li><p class="first">copy the resulting cblas library to libcblas.a in the same directory as the ACML library</p>
+</li>
+<li><p class="first">download a stable version fo the numpy source code from <a class="reference external" href="http://sourceforge.net/projects/numpy/files/NumPy/">http://sourceforge.net/projects/numpy/files/NumPy/</a> or the latest code from <a class="reference external" href="https://github.com/numpy/numpy">https://github.com/numpy/numpy</a></p>
+</li>
+<li><p class="first">create a site.cfg in the numpy source tree (copy site.cfg.example) and add:</p>
+<div class="highlight-python"><pre>[blas]
+blas_libs = cblas, acml
+library_dirs = /path-to-acml-and-cblas/lib
+include_dirs = /path-to-acml-and-cblas/include
+
+[lapack]
+language = f77
+lapack_libs = acml
+library_dirs = /path-to-acml-and-cblas/lib
+include_dirs = /path-to-acml-and-cblas/include</pre>
+</div>
+</li>
+<li><p class="first">build and install numpy as normal</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../examples/index.html" title="Examples"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="method.html" title="Method of solution"
+             >previous</a> |</li>
+    <li><a href="../index.html">home</a>|&nbsp;</li>
+    <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" >User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013 Andrew Dawson.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

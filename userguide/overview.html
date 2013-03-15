@@ -1,0 +1,258 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Overview &mdash; eofs 0.4.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinx13.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.4.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="eofs 0.4.0 documentation" href="../index.html" />
+    <link rel="up" title="User Guide" href="index.html" />
+    <link rel="next" title="Solver interfaces" href="interfaces.html" />
+    <link rel="prev" title="User Guide" href="index.html" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
+          rel='stylesheet' type='text/css' />
+     
+        <style type="text/css">
+            table.right { float: right; margin-left: 20px; }
+            table.right td { border: 1px solid #ccc; }
+        </style>
+        <script type="text/javascript">
+            // intelligent scrolling of the sidebar content
+            $(window).scroll(function() {
+                var sb = $('.sphinxsidebarwrapper');
+                var win = $(window);
+                var sbh = sb.height();
+                var offset = $('.sphinxsidebar').position()['top'];
+                var wintop = win.scrollTop();
+                var winbot = wintop + win.innerHeight();
+                var curtop = sb.position()['top'];
+                var curbot = curtop + sbh;
+                // does sidebar fit in window?
+                if (sbh < win.innerHeight()) {
+                    // yes: easy case -- always keep at the top
+                    sb.css('top', $u.min([$u.max([0, wintop - offset - 10]),
+                                         $(document).height() - sbh - 200]));
+                } else {
+                    // no: only scroll if top/bottom edge of sidebar is at
+                    // top/bottom edge of window
+                    if (curtop > wintop && curbot > winbot) {
+                        sb.css('top', $u.max([wintop - offset - 10, 0]));
+                    } else if (curtop < wintop && curbot < winbot) {
+                        sb.css('top', $u.min([winbot - sbh - offset - 20,
+                                             $(document).height() - sbh - 200]));
+                    }
+                }
+            });
+        </script>
+
+  </head>
+  <body>
+<div class="pageheader">
+  <div>
+    <a href="../index.html">
+      <img src="../_static/eofsheader.png" alt="SPHINX" />
+    </a>
+  </div>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="interfaces.html" title="Solver interfaces"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="User Guide"
+             accesskey="P">previous</a> |</li>
+    <li><a href="../index.html">home</a>|&nbsp;</li>
+    <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" accesskey="U">User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+    <h3>Table of Contents</h3>
+    <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User Guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interfaces.html">Solver interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html">Basic usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multivariate.html">Multivariate solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eof2_compatibility.html">Compatibility with <strong>eof2</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="method.html">Method of solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="speed.html">Speeding up the solvers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API references</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../downloads.html">Downloads</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">User Guide</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="interfaces.html"
+                        title="next chapter">Solver interfaces</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/userguide/overview.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<p>The technique of Empirical Orthogonal Function analysis, usually just referred to as EOF analysis, is very common in geophysical sciences.
+The general aim of EOF analysis is to reduce the dimensionality of a spatial-temporal data set by transforming it to a new basis in terms of variance.
+This transformation turns the input spatial-temporal data set into a set of maps representing patterns of variance, and a time series for each map that determines the contribution of that map to the original data set at each time.
+The spatial patterns, which are by definition orthogonal to one-another, are referred to as the EOFs. The EOFs are basis functions in terms of variance. The time series of the EOFs are (in geophysics at least) referred to as the principal components, or PCs, and are the coefficients for each basis function at a given time.
+This transformation is advantageous as often a large fraction of the total variance is contained within the first few spatial patterns, meaning the rest can be discarded whilst still maintaining the major variances present in the original data.</p>
+<p>Since EOF analysis is really just expressing the original data set in terms of a new basis, the original data set can be completely reconstructed using the EOFs and PCs. However, in practice it is often only a subset of the EOFs that are of interest. Individual EOFs can sometimes have a physical interpretation assigned to them, or sometimes the EOFs and PCs are used to produce a data set that is truncated in terms of variance by reconstructing the original data set using only a limited number of EOFs.</p>
+<div class="section" id="eof-analysis-with-eofs">
+<h2>EOF analysis with <strong>eofs</strong><a class="headerlink" href="#eof-analysis-with-eofs" title="Permalink to this headline">¶</a></h2>
+<p><tt class="xref py py-obj docutils literal"><span class="pre">eofs</span></tt> uses solver classes to do EOF analysis. A solver class is a Python object that is initialized with a data set, that provides many methods for returning quantities of interest, such as the EOFs and PCs themselves. The typical usage pattern for <tt class="xref py py-obj docutils literal"><span class="pre">eofs</span></tt> is:</p>
+<ol class="arabic simple">
+<li>Import the solver class for the type of data being worked with.</li>
+<li>Create an instance of the solver class using the data to be analysed.<ul>
+<li>Other parameters such as weighting may also be specified as initialization time.</li>
+</ul>
+</li>
+<li>Call methods of the solver class to retrieve quantities of interest.</li>
+</ol>
+<p>All solver possess the same methods, a summary of these methods and what they return is given in the following table:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="32%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Method</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>pcs</strong></td>
+<td>Returns the (optionally scaled) principal component
+time series (PCS).</td>
+</tr>
+<tr class="row-odd"><td><strong>eofs</strong></td>
+<td>Returns the (optionally scaled) empirical orthogonal
+functions (EOFs).</td>
+</tr>
+<tr class="row-even"><td><strong>eofsAsCorrelation</strong></td>
+<td>Returns the EOFs expressed as the correlation
+between each PCa nd the input data set at each point
+in space</td>
+</tr>
+<tr class="row-odd"><td><strong>eofsAsCovariance</strong></td>
+<td>Returns the EOFs expressed as the covariance between
+each PC and the input data set at each point in
+space</td>
+</tr>
+<tr class="row-even"><td><strong>eigenvalues</strong></td>
+<td>Returns the eigenvalues (decreasing variances)
+associated with each EOF mode.</td>
+</tr>
+<tr class="row-odd"><td><strong>varianceFraction</strong></td>
+<td>Returns the fractions of the total variance
+accounted for by each EOF mode.</td>
+</tr>
+<tr class="row-even"><td><strong>totalAnomalyVariance</strong></td>
+<td>Returns the total variance in the input data set
+(sum of the eigenvalues).</td>
+</tr>
+<tr class="row-odd"><td><strong>northTest</strong></td>
+<td>Returns the typical errors associated with each
+eigenvalue using <em>North&#8217;s rule of thumb</em>.</td>
+</tr>
+<tr class="row-even"><td><strong>reconstructedField</strong></td>
+<td>Reconstructs the input data set using a given number
+of EOFs.</td>
+</tr>
+<tr class="row-odd"><td><strong>projectField</strong></td>
+<td>Projects a field onto the EOFs to produce a set of
+pseudo-PCs.</td>
+</tr>
+<tr class="row-even"><td><strong>getWeights</strong></td>
+<td>Returns the spatial weights used for the analysis.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="interfaces.html" title="Solver interfaces"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="User Guide"
+             >previous</a> |</li>
+    <li><a href="../index.html">home</a>|&nbsp;</li>
+    <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" >User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013 Andrew Dawson.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

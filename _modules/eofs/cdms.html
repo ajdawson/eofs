@@ -1,0 +1,808 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>eofs.cdms &mdash; eofs 0.4.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinx13.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.4.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="eofs 0.4.0 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
+          rel='stylesheet' type='text/css' />
+     
+        <style type="text/css">
+            table.right { float: right; margin-left: 20px; }
+            table.right td { border: 1px solid #ccc; }
+        </style>
+        <script type="text/javascript">
+            // intelligent scrolling of the sidebar content
+            $(window).scroll(function() {
+                var sb = $('.sphinxsidebarwrapper');
+                var win = $(window);
+                var sbh = sb.height();
+                var offset = $('.sphinxsidebar').position()['top'];
+                var wintop = win.scrollTop();
+                var winbot = wintop + win.innerHeight();
+                var curtop = sb.position()['top'];
+                var curbot = curtop + sbh;
+                // does sidebar fit in window?
+                if (sbh < win.innerHeight()) {
+                    // yes: easy case -- always keep at the top
+                    sb.css('top', $u.min([$u.max([0, wintop - offset - 10]),
+                                         $(document).height() - sbh - 200]));
+                } else {
+                    // no: only scroll if top/bottom edge of sidebar is at
+                    // top/bottom edge of window
+                    if (curtop > wintop && curbot > winbot) {
+                        sb.css('top', $u.max([wintop - offset - 10, 0]));
+                    } else if (curtop < wintop && curbot < winbot) {
+                        sb.css('top', $u.min([winbot - sbh - offset - 20,
+                                             $(document).height() - sbh - 200]));
+                    }
+                }
+            });
+        </script>
+
+  </head>
+  <body>
+<div class="pageheader">
+  <div>
+    <a href="../../index.html">
+      <img src="../../_static/eofsheader.png" alt="SPHINX" />
+    </a>
+  </div>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+    <li><a href="../../index.html">home</a>|&nbsp;</li>
+    <li><a href="../../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+    <h3>Table of Contents</h3>
+    <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../userguide/index.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API references</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../downloads.html">Downloads</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for eofs.cdms</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;Meta-data preserving EOF analysis for `cdms2`.&quot;&quot;&quot;</span>
+<span class="c"># (c) Copyright 2010-2013 Andrew Dawson. All Rights Reserved.</span>
+<span class="c">#</span>
+<span class="c"># This file is part of eofs.</span>
+<span class="c">#</span>
+<span class="c"># eofs is free software: you can redistribute it and/or modify</span>
+<span class="c"># it under the terms of the GNU General Public License as published by</span>
+<span class="c"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c"># (at your option) any later version.</span>
+<span class="c">#</span>
+<span class="c"># eofs is distributed in the hope that it will be useful, but WITHOUT</span>
+<span class="c"># ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span>
+<span class="c"># FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License</span>
+<span class="c"># for more details.</span>
+<span class="c">#</span>
+<span class="c"># You should have received a copy of the GNU General Public License</span>
+<span class="c"># along with eofs.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+
+<span class="kn">import</span> <span class="nn">cdms2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy.ma</span> <span class="kn">as</span> <span class="nn">ma</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">standard</span>
+<span class="kn">from</span> <span class="nn">.tools.cdms</span> <span class="kn">import</span> <span class="n">weights_array</span><span class="p">,</span> <span class="n">cdms2_name</span>
+
+
+<div class="viewcode-block" id="Eof"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof">[docs]</a><span class="k">class</span> <span class="nc">Eof</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;EOF analysis (meta-data enabled `cdms2` interface)&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create an Eof object.</span>
+
+<span class="sd">        The EOF solution is computed at initialization time. Method</span>
+<span class="sd">        calls are used to retrieve computed quantities.</span>
+
+<span class="sd">        **Argument:**</span>
+
+<span class="sd">        *dataset*</span>
+<span class="sd">            A `cdms2` variable containing the data to be analysed. Time</span>
+<span class="sd">            must be the first dimension. Missing values are allowed</span>
+<span class="sd">            provided that they are constant with time (e.g., values of</span>
+<span class="sd">            an oceanographic field over land).</span>
+
+<span class="sd">        **Optional arguments:**</span>
+
+<span class="sd">        *weights*</span>
+<span class="sd">            Sets the weighting method. The following pre-defined</span>
+<span class="sd">            weighting methods are available:</span>
+
+<span class="sd">            * *&#39;area&#39;* : Square-root of grid cell area normalized by</span>
+<span class="sd">              total grid area. Requires a latitude-longitude grid to be</span>
+<span class="sd">              present in the `cdms2` variable *dataset*. This is a</span>
+<span class="sd">              fairly standard weighting strategy. If you are unsure</span>
+<span class="sd">              which method to use and you have gridded data then this</span>
+<span class="sd">              should be your first choice.</span>
+
+<span class="sd">            * *&#39;coslat&#39;* : Square-root of cosine of latitude. Requires a</span>
+<span class="sd">              latitude dimension to be present in the `cdms2` variable</span>
+<span class="sd">              *dataset*.</span>
+
+<span class="sd">            * *None* : Equal weights for all grid points (*&#39;none&#39;* is</span>
+<span class="sd">              also accepted).</span>
+
+<span class="sd">             Alternatively an array of weights whose shape is compatible</span>
+<span class="sd">             with the `cdms2` variable *dataset* may be supplied instead</span>
+<span class="sd">             of specifying a weighting method.</span>
+
+<span class="sd">        *center*</span>
+<span class="sd">            If *True*, the mean along the first axis of *dataset* (the</span>
+<span class="sd">            time-mean) will be removed prior to analysis. If *False*,</span>
+<span class="sd">            the mean along the first axis will not be removed. Defaults</span>
+<span class="sd">            to *True* (mean is removed).</span>
+
+<span class="sd">            The covariance interpretation relies on the input data being</span>
+<span class="sd">            anomalies with a time-mean of 0. Therefore this option</span>
+<span class="sd">            should usually be set to *True*. Setting this option to</span>
+<span class="sd">            *True* has the useful side effect of propagating missing</span>
+<span class="sd">            values along the time dimension, ensuring that a solution</span>
+<span class="sd">            can be found even if missing values occur in different</span>
+<span class="sd">            locations at different times.</span>
+
+<span class="sd">        *ddof*</span>
+<span class="sd">            &#39;Delta degrees of freedom&#39;. The divisor used to normalize</span>
+<span class="sd">            the covariance matrix is *N - ddof* where *N* is the</span>
+<span class="sd">            number of samples. Defaults to *1*.</span>
+
+<span class="sd">        **Returns:**</span>
+
+<span class="sd">        *solver*</span>
+<span class="sd">            An `Eof` instance.</span>
+
+<span class="sd">        **Examples:**</span>
+
+<span class="sd">        EOF analysis with grid-cell-area weighting for the input field::</span>
+
+<span class="sd">            from eofs.cdms import Eof</span>
+<span class="sd">            solver = Eof(dataset, weights=&#39;area&#39;)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># Check that dataset is recognised by cdms2 as a variable.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">isVariable</span><span class="p">(</span><span class="n">dataset</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;the input data must be a cdms2 variable&#39;</span><span class="p">)</span>
+        <span class="c"># Store the time axis as an instance variable.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_timeax</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">getTime</span><span class="p">()</span>
+        <span class="c"># Verify that a time axis was found, getTime returns None when a</span>
+        <span class="c"># time axis is not found.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_timeax</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;time axis not found&#39;</span><span class="p">)</span>
+        <span class="c"># Check the dimension order of the input, time must be the first</span>
+        <span class="c"># dimension.</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">getOrder</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">order</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&#39;t&#39;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;time must be the first dimension, &#39;</span>
+                             <span class="s">&#39;consider using the reorder() method&#39;</span><span class="p">)</span>
+        <span class="c"># Verify the presence of at least one spatial dimension. The</span>
+        <span class="c"># instance variable channels will also be used as a partial axis</span>
+        <span class="c"># list when constructing meta-data. It contains the spatial</span>
+        <span class="c"># dimensions.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">getAxisList</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_timeax</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;one or more spatial dimensions are required&#39;</span><span class="p">)</span>
+        <span class="c"># Store the missing value attribute of the data set in an</span>
+        <span class="c"># instance variable so that it is recoverable later.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_missing_value</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">getMissing</span><span class="p">()</span>
+        <span class="c"># Generate an appropriate set of weights for the input dataset. There</span>
+        <span class="c"># are several weighting schemes. The &#39;area&#39; weighting scheme requires</span>
+        <span class="c"># a latitude-longitude grid to be present, the &#39;cos_lat&#39; scheme only</span>
+        <span class="c"># requires a latitude dimension.</span>
+        <span class="k">if</span> <span class="n">weights</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;none&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">):</span>
+            <span class="c"># No weights requested, set the weight array to None.</span>
+            <span class="n">wtarray</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c"># Generate a weights array of the appropriate kind, with a</span>
+                <span class="c"># shape compatible with the data set.</span>
+                <span class="n">scheme</span> <span class="o">=</span> <span class="n">weights</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+                <span class="n">wtarray</span> <span class="o">=</span> <span class="n">weights_array</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="n">scheme</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                <span class="c"># Weights is not a string, assume it is an array.</span>
+                <span class="n">wtarray</span> <span class="o">=</span> <span class="n">weights</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">,</span> <span class="n">err</span><span class="p">:</span>
+                <span class="c"># Weights is not recognized, raise an error.</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+        <span class="c"># Cast the wtarray to the same type as the dataset. This prevents the</span>
+        <span class="c"># promotion of 32-bit input to 64-bit on multiplication with the</span>
+        <span class="c"># weight array when not required. This will fail with a AttributeError</span>
+        <span class="c"># exception if the weights array is None, which it may be if no</span>
+        <span class="c"># weighting was requested.</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">wtarray</span> <span class="o">=</span> <span class="n">wtarray</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="c"># Create an EofSolver object using appropriate arguments for this</span>
+        <span class="c"># data set. The object will be used for the decomposition and</span>
+        <span class="c"># for returning the results.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span> <span class="o">=</span> <span class="n">standard</span><span class="o">.</span><span class="n">Eof</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">asma</span><span class="p">(),</span>
+                                    <span class="n">weights</span><span class="o">=</span><span class="n">wtarray</span><span class="p">,</span>
+                                    <span class="n">center</span><span class="o">=</span><span class="n">center</span><span class="p">,</span>
+                                    <span class="n">ddof</span><span class="o">=</span><span class="n">ddof</span><span class="p">)</span>
+        <span class="c">#: Number of EOFs in the solution.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">neofs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">neofs</span>
+        <span class="c"># name for the dataset.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dataset_name</span> <span class="o">=</span> <span class="n">cdms2_name</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">,</span> <span class="s">&#39;_&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dataset_id</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">id</span>
+
+<div class="viewcode-block" id="Eof.pcs"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof.pcs">[docs]</a>    <span class="k">def</span> <span class="nf">pcs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pcscaling</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">npcs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Principal component time series (PCs).</span>
+
+<span class="sd">        **Optional arguments:**</span>
+
+<span class="sd">        *pcscaling*</span>
+<span class="sd">            Set the scaling of the retrieved PCs. The following</span>
+<span class="sd">            values are accepted:</span>
+
+<span class="sd">            * *0* : Un-scaled principal components (default).</span>
+<span class="sd">            * *1* : Principal components are scaled to unit variance</span>
+<span class="sd">              (divided by the square-root of their eigenvalue).</span>
+<span class="sd">            * *2* : Principal components are multiplied by the</span>
+<span class="sd">              square-root of their eigenvalue.</span>
+
+<span class="sd">        *npcs*</span>
+<span class="sd">            Number of PCs to retrieve. Defaults to all the PCs. If the</span>
+<span class="sd">            number of requested PCs is more than the number that are</span>
+<span class="sd">            available, then all available PCs will be returned.</span>
+
+<span class="sd">        **Returns:**</span>
+
+<span class="sd">        *pcs*</span>
+<span class="sd">            A `cdms2` variable containing the ordered PCs. The PCs are</span>
+<span class="sd">            numbered from 0 to *npcs* - 1.</span>
+
+<span class="sd">        **Examples:**</span>
+
+<span class="sd">        All un-scaled PCs::</span>
+
+<span class="sd">            pcs = solver.pcs()</span>
+
+<span class="sd">        First 3 PCs scaled to unit variance::</span>
+
+<span class="sd">            pcs = solver.pcs(npcs=3, pcscaling=1)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pcs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">pcs</span><span class="p">(</span><span class="n">pcscaling</span><span class="p">,</span> <span class="n">npcs</span><span class="p">)</span>
+        <span class="n">pcsax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;pc&#39;</span><span class="p">)</span>
+        <span class="n">pcsax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;pc_number&#39;</span>
+        <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_timeax</span><span class="p">,</span> <span class="n">pcsax</span><span class="p">]</span>
+        <span class="n">pcs</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;pcs&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">)</span>
+        <span class="n">pcs</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;principal_components&#39;</span>
+        <span class="k">return</span> <span class="n">pcs</span>
+</div>
+<div class="viewcode-block" id="Eof.eofs"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof.eofs">[docs]</a>    <span class="k">def</span> <span class="nf">eofs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eofscaling</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">neofs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Emipirical orthogonal functions (EOFs).</span>
+
+<span class="sd">        **Optional arguments:**</span>
+
+<span class="sd">        *eofscaling*</span>
+<span class="sd">            Sets the scaling of the EOFs. The following values are</span>
+<span class="sd">            accepted:</span>
+
+<span class="sd">            * *0* : Un-scaled EOFs (default).</span>
+<span class="sd">            * *1* : EOFs are divided by the square-root of their</span>
+<span class="sd">              eigenvalues.</span>
+<span class="sd">            * *2* : EOFs are multiplied by the square-root of their</span>
+<span class="sd">              eigenvalues.</span>
+
+<span class="sd">        *neofs*</span>
+<span class="sd">            Number of EOFs to return. Defaults to all EOFs. If the</span>
+<span class="sd">            number of EOFs requested is more than the number that are</span>
+<span class="sd">            available, then all available EOFs will be returned.</span>
+
+<span class="sd">        **Returns:**</span>
+
+<span class="sd">        *eofs*</span>
+<span class="sd">           A `cdms2` variable containing the ordered EOFs. The EOFs are</span>
+<span class="sd">           numbered from 0 to *neofs* - 1.</span>
+
+<span class="sd">        **Examples:**</span>
+
+<span class="sd">        All EOFs with no scaling::</span>
+
+<span class="sd">            eofs = solver.eofs()</span>
+
+<span class="sd">        First 3 EOFs with scaling applied::</span>
+
+<span class="sd">            eofs = solver.eofs(neofs=3, eofscaling=1)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">eofs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">eofs</span><span class="p">(</span><span class="n">eofscaling</span><span class="p">,</span> <span class="n">neofs</span><span class="p">)</span>
+        <span class="n">eofs</span><span class="o">.</span><span class="n">fill_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_missing_value</span>
+        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">eofs</span><span class="p">)),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eof&#39;</span><span class="p">)</span>
+        <span class="n">eofax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;eof_number&#39;</span>
+        <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">eofax</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span>
+        <span class="n">eofs</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">eofs</span><span class="p">,</span>
+                                    <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eofs&#39;</span><span class="p">,</span>
+                                    <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">,</span>
+                                    <span class="n">fill_value</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_missing_value</span><span class="p">)</span>
+        <span class="n">eofs</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;empirical_orthogonal_functions&#39;</span>
+        <span class="k">return</span> <span class="n">eofs</span>
+</div>
+<div class="viewcode-block" id="Eof.eofsAsCorrelation"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof.eofsAsCorrelation">[docs]</a>    <span class="k">def</span> <span class="nf">eofsAsCorrelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">neofs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Empirical orthogonal functions (EOFs) expressed as the</span>
+<span class="sd">        correlation between the principal component time series (PCs)</span>
+<span class="sd">        and the time series of the `Eof` input *dataset* at each grid</span>
+<span class="sd">        point.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            These are not related to the EOFs computed from the</span>
+<span class="sd">            correlation matrix.</span>
+
+<span class="sd">        **Optional argument:**</span>
+
+<span class="sd">        *neofs*</span>
+<span class="sd">            Number of EOFs to return. Defaults to all EOFs. If the</span>
+<span class="sd">            number of EOFs requested is more than the number that are</span>
+<span class="sd">            available, then all available EOFs will be returned.</span>
+
+<span class="sd">        **Returns:**</span>
+
+<span class="sd">        *eofs*</span>
+<span class="sd">           A `cdms2` variable containing the ordered EOFs. The EOFs are</span>
+<span class="sd">           numbered from 0 to *neofs* - 1.</span>
+
+<span class="sd">        **Examples:**</span>
+
+<span class="sd">        All EOFs::</span>
+
+<span class="sd">            eofs = solver.eofsAsCorrelation()</span>
+
+<span class="sd">        The leading EOF::</span>
+
+<span class="sd">            eof1 = solver.eofsAsCorrelation(neofs=1)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">eofs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">eofsAsCorrelation</span><span class="p">(</span><span class="n">neofs</span><span class="p">)</span>
+        <span class="n">eofs</span><span class="o">.</span><span class="n">fill_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_missing_value</span>
+        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">eofs</span><span class="p">)),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eof&#39;</span><span class="p">)</span>
+        <span class="n">eofax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;eof_number&#39;</span>
+        <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">eofax</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span>
+        <span class="n">eofs</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">eofs</span><span class="p">,</span>
+                                    <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eofs&#39;</span><span class="p">,</span>
+                                    <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">,</span>
+                                    <span class="n">fill_value</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_missing_value</span><span class="p">)</span>
+        <span class="n">eofs</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;correlation_between_pcs_and_{:s}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_dataset_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">eofs</span>
+</div>
+<div class="viewcode-block" id="Eof.eofsAsCovariance"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof.eofsAsCovariance">[docs]</a>    <span class="k">def</span> <span class="nf">eofsAsCovariance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">neofs</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">pcscaling</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Empirical orthogonal functions (EOFs) expressed as the</span>
+<span class="sd">        covariance between the principal component time series (PCs)</span>
+<span class="sd">        and the time series of the `Eof` input *dataset* at each grid</span>
+<span class="sd">        point.</span>
+
+<span class="sd">        **Optional arguments:**</span>
+
+<span class="sd">        *neofs*</span>
+<span class="sd">            Number of EOFs to return. Defaults to all EOFs. If the</span>
+<span class="sd">            number of EOFs requested is more than the number that are</span>
+<span class="sd">            available, then all available EOFs will be returned.</span>
+
+<span class="sd">        *pcscaling*</span>
+<span class="sd">            Set the scaling of the PCs used to compute covariance. The</span>
+<span class="sd">            following values are accepted:</span>
+
+<span class="sd">            * *0* : Un-scaled PCs.</span>
+<span class="sd">            * *1* : PCs are scaled to unit variance (divided by the</span>
+<span class="sd">              square-root of their eigenvalue) (default).</span>
+<span class="sd">            * *2* : PCs are multiplied by the square-root of their</span>
+<span class="sd">              eigenvalue.</span>
+
+<span class="sd">            The default is to divide PCs by the square-root of their</span>
+<span class="sd">            eigenvalue so that the PCs are scaled to unit variance</span>
+<span class="sd">            (option 1).</span>
+
+<span class="sd">        **Returns:**</span>
+
+<span class="sd">        *eofs*</span>
+<span class="sd">           A `cdms2` variable containing the ordered EOFs. The EOFs are</span>
+<span class="sd">           numbered from 0 to *neofs* - 1.</span>
+
+<span class="sd">        **Examples:**</span>
+
+<span class="sd">        All EOFs::</span>
+
+<span class="sd">            eofs = solver.eofsAsCovariance()</span>
+
+<span class="sd">        The leading EOF::</span>
+
+<span class="sd">            eof1 = solver.eofsAsCovariance(neofs=1)</span>
+
+<span class="sd">        The leading EOF using un-scaled PCs::</span>
+
+<span class="sd">            eof1 = solver.eofsAsCovariance(neofs=1, pcscaling=0)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">eofs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">eofsAsCovariance</span><span class="p">(</span><span class="n">neofs</span><span class="p">,</span> <span class="n">pcscaling</span><span class="p">)</span>
+        <span class="n">eofs</span><span class="o">.</span><span class="n">fill_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_missing_value</span>
+        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">eofs</span><span class="p">)),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eof&#39;</span><span class="p">)</span>
+        <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">eofax</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span>
+        <span class="n">eofs</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">eofs</span><span class="p">,</span>
+                                    <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eofs_cov&#39;</span><span class="p">,</span>
+                                    <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">,</span>
+                                    <span class="n">fill_value</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_missing_value</span><span class="p">)</span>
+        <span class="n">eofs</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;covariance_between_pcs_and_{:s}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_dataset_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">eofs</span>
+</div>
+<div class="viewcode-block" id="Eof.eigenvalues"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof.eigenvalues">[docs]</a>    <span class="k">def</span> <span class="nf">eigenvalues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">neigs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Eigenvalues (decreasing variances) associated with each EOF.</span>
+
+<span class="sd">        **Optional argument:**</span>
+
+<span class="sd">        *neigs*</span>
+<span class="sd">            Number of eigenvalues to return. Defaults to all</span>
+<span class="sd">            eigenvalues.If the number of eigenvalues requested is more</span>
+<span class="sd">            than the number that are available, then all available</span>
+<span class="sd">            eigenvalues will be returned.</span>
+
+<span class="sd">        **Returns:**</span>
+
+<span class="sd">        *eigenvalues*</span>
+<span class="sd">            A `cdms2` variable containing the eigenvalues arranged</span>
+<span class="sd">            largest to smallest.</span>
+
+<span class="sd">        **Examples:**</span>
+
+<span class="sd">        All eigenvalues::</span>
+
+<span class="sd">            eigenvalues = solver.eigenvalues()</span>
+
+<span class="sd">        The first eigenvalue::</span>
+
+<span class="sd">            eigenvalue1 = solver.eigenvalues(neigs=1)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">lambdas</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">(</span><span class="n">neigs</span><span class="o">=</span><span class="n">neigs</span><span class="p">)</span>
+        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lambdas</span><span class="p">)),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eigenvalue&#39;</span><span class="p">)</span>
+        <span class="n">eofax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;eigenvalue_number&#39;</span>
+        <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">eofax</span><span class="p">]</span>
+        <span class="n">lambdas</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">lambdas</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eigenvalues&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">)</span>
+        <span class="n">lambdas</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;eigenvalues&#39;</span>
+        <span class="k">return</span> <span class="n">lambdas</span>
+</div>
+<div class="viewcode-block" id="Eof.varianceFraction"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof.varianceFraction">[docs]</a>    <span class="k">def</span> <span class="nf">varianceFraction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">neigs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Fractional EOF variances.</span>
+
+<span class="sd">        The fraction of the total variance explained by each EOF mode,</span>
+<span class="sd">        values between 0 and 1 inclusive.</span>
+
+<span class="sd">        **Optional argument:**</span>
+
+<span class="sd">        *neigs*</span>
+<span class="sd">            Number of eigenvalues to return the fractional variance for.</span>
+<span class="sd">            Defaults to all eigenvalues. If the number of eigenvalues</span>
+<span class="sd">            requested is more than the number that are available, then</span>
+<span class="sd">            fractional variances for all available eigenvalues will be</span>
+<span class="sd">            returned.</span>
+
+<span class="sd">        **Returns:**</span>
+
+<span class="sd">        *variance_fractions*</span>
+<span class="sd">            A `cdms2` variable containing the fractional variances for</span>
+<span class="sd">            each eigenvalue. The eigenvalues are numbered from 0 to</span>
+<span class="sd">            *neigs* - 1.</span>
+
+<span class="sd">        **Examples:**</span>
+
+<span class="sd">        The fractional variance represented by each eigenvalue::</span>
+
+<span class="sd">            variance_fractions = solver.varianceFraction()</span>
+
+<span class="sd">        The fractional variance represented by the first 3 eigenvalues::</span>
+
+<span class="sd">            variance_fractions = solver.VarianceFraction(neigs=3)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">vfrac</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">varianceFraction</span><span class="p">(</span><span class="n">neigs</span><span class="o">=</span><span class="n">neigs</span><span class="p">)</span>
+        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vfrac</span><span class="p">)),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eigenvalue&#39;</span><span class="p">)</span>
+        <span class="n">eofax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;eigenvalue_number&#39;</span>
+        <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">eofax</span><span class="p">]</span>
+        <span class="n">vfrac</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">vfrac</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;variance_fractions&#39;</span><span class="p">,</span>
+                                     <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">)</span>
+        <span class="n">vfrac</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;variance_fractions&#39;</span>
+        <span class="k">return</span> <span class="n">vfrac</span>
+</div>
+<div class="viewcode-block" id="Eof.totalAnomalyVariance"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof.totalAnomalyVariance">[docs]</a>    <span class="k">def</span> <span class="nf">totalAnomalyVariance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Total variance associated with the field of anomalies (the sum</span>
+<span class="sd">        of the eigenvalues).</span>
+
+<span class="sd">        **Returns:**</span>
+
+<span class="sd">        *total_variance*</span>
+<span class="sd">            A scalar value (not a `cdms2` variable).</span>
+
+<span class="sd">        **Example:**</span>
+
+<span class="sd">        Get the total variance::</span>
+
+<span class="sd">            total_variance = solver.totalAnomalyVariance()</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">totalAnomalyVariance</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="Eof.northTest"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof.northTest">[docs]</a>    <span class="k">def</span> <span class="nf">northTest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">neigs</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">vfscaled</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Typical errors for eigenvalues.</span>
+
+<span class="sd">        The method of North et al. (1982) is used to compute the typical</span>
+<span class="sd">        error for each eigenvalue. It is assumed that the number of</span>
+<span class="sd">        times in the input data set is the same as the number of</span>
+<span class="sd">        independent realizations. If this assumption is not valid then</span>
+<span class="sd">        the result may be inappropriate.</span>
+
+<span class="sd">        **Optional arguments:**</span>
+
+<span class="sd">        *neigs*</span>
+<span class="sd">            The number of eigenvalues to return typical errors for.</span>
+<span class="sd">            Defaults to typical errors for all eigenvalues.</span>
+
+<span class="sd">        *vfscaled*</span>
+<span class="sd">            If *True* scale the errors by the sum of the eigenvalues.</span>
+<span class="sd">            This yields typical errors with the same scale as the values</span>
+<span class="sd">            returned by `Eof.varianceFraction`. If *False* then no</span>
+<span class="sd">            scaling is done. Defaults to *False* (no scaling).</span>
+
+<span class="sd">        **Returns:**</span>
+
+<span class="sd">        *errors*</span>
+<span class="sd">            A `cdms2` variable containing the typical errors for each</span>
+<span class="sd">            eigenvalue. The egienvalues are numbered from 0 to</span>
+<span class="sd">            *neigs* - 1.</span>
+
+<span class="sd">        **References**</span>
+
+<span class="sd">        North G.R., T.L. Bell, R.F. Cahalan, and F.J. Moeng (1982)</span>
+<span class="sd">        Sampling errors in the estimation of empirical orthogonal</span>
+<span class="sd">        functions. *Mon. Weather. Rev.*, **110**, pp 669-706.</span>
+
+<span class="sd">        **Examples:**</span>
+
+<span class="sd">        Typical errors for all eigenvalues::</span>
+
+<span class="sd">            errors = solver.northTest()</span>
+
+<span class="sd">        Typical errors for the first 3 eigenvalues scaled by the sum of</span>
+<span class="sd">        the eigenvalues::</span>
+
+<span class="sd">            errors = solver.northTest(neigs=3, vfscaled=True)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">typerrs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">northTest</span><span class="p">(</span><span class="n">neigs</span><span class="o">=</span><span class="n">neigs</span><span class="p">,</span> <span class="n">vfscaled</span><span class="o">=</span><span class="n">vfscaled</span><span class="p">)</span>
+        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">typerrs</span><span class="p">)),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eigenvalue&#39;</span><span class="p">)</span>
+        <span class="n">eofax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;eigenvalue_number&#39;</span>
+        <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">eofax</span><span class="p">]</span>
+        <span class="n">typerrs</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">typerrs</span><span class="p">,</span>
+                                       <span class="nb">id</span><span class="o">=</span><span class="s">&#39;typical_errors&#39;</span><span class="p">,</span>
+                                       <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">)</span>
+        <span class="n">typerrs</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;typical_errors&#39;</span>
+        <span class="k">return</span> <span class="n">typerrs</span>
+</div>
+<div class="viewcode-block" id="Eof.reconstructedField"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof.reconstructedField">[docs]</a>    <span class="k">def</span> <span class="nf">reconstructedField</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">neofs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Reconstructed data field based on a subset of EOFs.</span>
+
+<span class="sd">        If weights were passed to the `Eof` instance the returned</span>
+<span class="sd">        reconstructed field will automatically have this weighting</span>
+<span class="sd">        removed. Otherwise the returned field will have the same</span>
+<span class="sd">        weighting as the `Eof` input *dataset*.</span>
+
+<span class="sd">        **Argument:**</span>
+
+<span class="sd">        *neofs*</span>
+<span class="sd">            Number of EOFs to use for the reconstruction.</span>
+
+<span class="sd">        **Returns:**</span>
+
+<span class="sd">        *reconstruction*</span>
+<span class="sd">            A `cdms2` variable with the same dimensions `Eof` input</span>
+<span class="sd">            *dataset* containing the reconstruction using *neofs* EOFs.</span>
+
+<span class="sd">        **Example:**</span>
+
+<span class="sd">        Reconstruct the input field using 3 EOFs::</span>
+
+<span class="sd">            reconstruction = solver.reconstructedField(neofs=3)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rfield</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">reconstructedField</span><span class="p">(</span><span class="n">neofs</span><span class="p">)</span>
+        <span class="n">rfield</span><span class="o">.</span><span class="n">fill_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_missing_value</span>
+        <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_timeax</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span>
+        <span class="n">rfield</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">rfield</span><span class="p">,</span>
+                                      <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dataset_id</span><span class="p">,</span>
+                                      <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">,</span>
+                                      <span class="n">fill_value</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_missing_value</span><span class="p">)</span>
+        <span class="n">rfield</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;{:s}_reconstructed_with_{:d}_EOFs&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_dataset_name</span><span class="p">,</span> <span class="n">neofs</span><span class="p">)</span>
+        <span class="n">rfield</span><span class="o">.</span><span class="n">neofs</span> <span class="o">=</span> <span class="n">neofs</span>
+        <span class="k">return</span> <span class="n">rfield</span>
+</div>
+<div class="viewcode-block" id="Eof.projectField"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof.projectField">[docs]</a>    <span class="k">def</span> <span class="nf">projectField</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">neofs</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">eofscaling</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">weighted</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Project a field onto the EOFs.</span>
+
+<span class="sd">        Given a data set, projects it onto the EOFs to generate a</span>
+<span class="sd">        corresponding set of pseudo-PCs.</span>
+
+<span class="sd">        **Argument:**</span>
+
+<span class="sd">        *field*</span>
+<span class="sd">            A `cdms2` variable containing the field to project onto the</span>
+<span class="sd">            EOFs. It must have the same corresponding spatial dimensions</span>
+<span class="sd">            (including missing values in the same places) as the `Eof`</span>
+<span class="sd">            input *dataset*. It may have a different length time</span>
+<span class="sd">            dimension to the `Eof` input *dataset* or no time dimension</span>
+<span class="sd">            at all. If a time dimension exists it must be the first</span>
+<span class="sd">            dimension.</span>
+
+<span class="sd">        **Optional arguments:**</span>
+
+<span class="sd">        *neofs*</span>
+<span class="sd">            Number of EOFs to project onto. Defaults to all EOFs. If the</span>
+<span class="sd">            number of EOFs requested is more than the number that are</span>
+<span class="sd">            available, then the field will be projected onto all</span>
+<span class="sd">            available EOFs.</span>
+
+<span class="sd">        *eofscaling*</span>
+<span class="sd">            Set the scaling of the EOFs that are projected</span>
+<span class="sd">            onto. The following values are accepted:</span>
+
+<span class="sd">            * *0* : Un-scaled EOFs (default).</span>
+<span class="sd">            * *1* : EOFs are divided by the square-root of their eigenvalue.</span>
+<span class="sd">            * *2* : EOFs are multiplied by the square-root of their</span>
+<span class="sd">              eigenvalue.</span>
+
+<span class="sd">        *weighted*</span>
+<span class="sd">            If *True* then the field is weighted using the same weights</span>
+<span class="sd">            used for the EOF analysis prior to projection. If *False*</span>
+<span class="sd">            then no weighting is applied. Defaults to *True* (weighting</span>
+<span class="sd">            is applied). Generally only the default setting should be</span>
+<span class="sd">            used.</span>
+
+<span class="sd">        **Returns:**</span>
+
+<span class="sd">        *pseudo_pcs*</span>
+<span class="sd">            A `cdms2` variable containing the pseudo-PCs. The PCs are</span>
+<span class="sd">            numbered from 0 to *neofs* - 1.</span>
+
+<span class="sd">        **Examples:**</span>
+
+<span class="sd">        Project a field onto all EOFs::</span>
+
+<span class="sd">            pseudo_pcs = solver.projectField(field)</span>
+
+<span class="sd">        Project fields onto the three leading EOFs::</span>
+
+<span class="sd">            pseudo_pcs = solver.projectField(field, neofs=3)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># Check that field is recognised by cdms2 as a variable.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">isVariable</span><span class="p">(</span><span class="n">field</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;the input field must be a cdms2 variable&#39;</span><span class="p">)</span>
+        <span class="n">dataset_name</span> <span class="o">=</span> <span class="n">cdms2_name</span><span class="p">(</span><span class="n">field</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">,</span> <span class="s">&#39;_&#39;</span><span class="p">)</span>
+        <span class="c"># Compute the projected PCs.</span>
+        <span class="n">pcs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">projectField</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">asma</span><span class="p">(),</span>
+                                        <span class="n">neofs</span><span class="o">=</span><span class="n">neofs</span><span class="p">,</span>
+                                        <span class="n">eofscaling</span><span class="o">=</span><span class="n">eofscaling</span><span class="p">,</span>
+                                        <span class="n">weighted</span><span class="o">=</span><span class="n">weighted</span><span class="p">)</span>
+        <span class="c"># Construct the required axes.</span>
+        <span class="k">if</span> <span class="n">pcs</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="c"># 2D PCs require a time axis and a PC axis.</span>
+            <span class="n">pcsax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;pc&#39;</span><span class="p">)</span>
+            <span class="n">pcsax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;pc_number&#39;</span>
+            <span class="n">timeax</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">getAxis</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c"># time is assumed to be first anyway</span>
+            <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">timeax</span><span class="p">,</span> <span class="n">pcsax</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># 1D PCs require only a PC axis.</span>
+            <span class="n">pcsax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;pc&#39;</span><span class="p">)</span>
+            <span class="n">pcsax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;pc_number&#39;</span>
+            <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">pcsax</span><span class="p">]</span>
+        <span class="c"># Apply meta data to the projected PCs.</span>
+        <span class="n">pcs</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;pseudo_pcs&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">)</span>
+        <span class="n">pcs</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;{:s}_pseudo_pcs&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pcs</span>
+</div>
+<div class="viewcode-block" id="Eof.getWeights"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof.getWeights">[docs]</a>    <span class="k">def</span> <span class="nf">getWeights</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Weights used for the analysis.</span>
+
+<span class="sd">        **Returns:**</span>
+
+<span class="sd">        *weights*</span>
+<span class="sd">            An array contaning the analysis weights (not a `cdms2`</span>
+<span class="sd">            variable).</span>
+
+<span class="sd">        **Example:**</span>
+
+<span class="sd">        The weights used for the analysis::</span>
+
+<span class="sd">            weights = solver.getWeights()</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getWeights</span><span class="p">()</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+    <li><a href="../../index.html">home</a>|&nbsp;</li>
+    <li><a href="../../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013 Andrew Dawson.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
