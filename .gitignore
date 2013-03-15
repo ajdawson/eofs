@@ -1,0 +1,20 @@
+## Generic files to ignore
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
+
+## Python specific
+*.mo
+*.egg
+*.egg-info
+*.EGG
+*.EGG-INFO
+build
+dist
+*.pyc
+*.pyo
+*.tmp*
+.coverage
+MANIFEST
