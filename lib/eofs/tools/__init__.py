@@ -34,4 +34,4 @@ try:
     from . import iris
     __all__.append('iris')
 except ImportError:
-    raise
+    pass
