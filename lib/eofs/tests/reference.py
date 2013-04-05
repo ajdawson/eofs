@@ -241,3 +241,122 @@ def reference_multivariate_solution(container_type, weights):
         except TypeError:
             solution[var] = None, None
     return solution
+
+
+def _read_reference_rotated_solution(scaled):
+    if scaled:
+        ident = 'scaled'
+    else:
+        ident = 'unscaled'
+    field_names = ['time_r',
+                   'latitude_r',
+                   'longitude_r',
+                   'sst_r',
+                   'rotated_eigenvalues.{!s}'.format(ident),
+                   'rotated_eofs.{!s}'.format(ident),
+                   'rotated_pcs.{!s}'.format(ident),
+                   'rotated_variance.{!s}'.format(ident),]
+    fields = {name.split('.')[0]: _tomasked(_retrieve_test_field(name))
+              for name in field_names}
+    fields['sst_r'] -= fields['sst_r'].mean(axis=0)
+    fields['rotated_pcs'] = fields['rotated_pcs'].transpose()
+    return fields
+
+
+def reference_rotated_solution(container_type, scaled):
+    """Obtain a reference rotated EOF analysis solution.
+
+    **Arguments:**
+
+    *container_type*
+        Either 'standard', 'cdms', or 'iris'.
+
+    *scaled*
+        If *True* use scaled EOFs, if *False* use un-scaled EOFs.
+
+    """
+    container_type = container_type.lower()
+    if container_type not in ('standard', 'iris', 'cdms'):
+        raise ValueError("unknown container type "
+                         "'{!s}'".format(container_type))
+    solution = _read_reference_rotated_solution(scaled)
+    time_units = 'days since 1800-1-1 00:00:00'
+    neofs = len(solution['rotated_eigenvalues'])
+    if container_type == 'cdms':
+        try:
+            time_dim = cdms2.createAxis(solution['time_r'], id='time')
+            time_dim.designateTime()
+            time_dim.units = time_units
+            lat_dim = cdms2.createAxis(solution['latitude_r'], id='latitude')
+            lat_dim.designateLatitude()
+            lon_dim = cdms2.createAxis(solution['longitude_r'], id='longitude')
+            lon_dim.designateLongitude()
+            eof_dim = cdms2.createAxis(np.arange(1, neofs+1), id='eof')
+            eof_dim.long_name = 'eof_number'
+            solution['sst_r'] = cdms2.createVariable(
+                solution['sst_r'],
+                axes=[time_dim, lat_dim, lon_dim],
+                id='sst')
+            solution['rotated_eigenvalues'] = cdms2.createVariable(
+                solution['rotated_eigenvalues'],
+                axes=[eof_dim],
+                id='eigenvalues')
+            solution['rotated_eofs'] = cdms2.createVariable(
+                solution['rotated_eofs'],
+                axes=[eof_dim, lat_dim, lon_dim],
+                id='eofs')
+            solution['rotated_pcs'] = cdms2.createVariable(
+                solution['rotated_pcs'],
+                axes=[time_dim, eof_dim],
+                id='pcs')
+            solution['rotated_variance'] = cdms2.createVariable(
+                solution['rotated_variance'],
+                axes=[eof_dim],
+                id='variance')
+        except NameError:
+            raise ValueError("cannot use container 'cdms' without the "
+                             "cdms2 module")
+    elif container_type == 'iris':
+        try:
+            time_dim = DimCoord(solution['time_r'],
+                                standard_name='time',
+                                units=Unit(time_units, 'gregorian'))
+            lat_dim = DimCoord(solution['latitude_r'],
+                               standard_name='latitude',
+                               units='degrees_north')
+            lat_dim.guess_bounds()
+            lon_dim = DimCoord(solution['longitude_r'],
+                               standard_name='longitude',
+                               units='degrees_east')
+            lon_dim.guess_bounds()
+            eof_dim = DimCoord(np.arange(1, neofs+1),
+                               long_name='eof')
+            solution['sst_r']= Cube(
+                solution['sst_r'],
+                dim_coords_and_dims=zip((time_dim, lat_dim, lon_dim),
+                                        range(3)),
+                long_name='sst')
+            solution['rotated_eigenvalues']= Cube(
+                solution['rotated_eigenvalues'],
+                dim_coords_and_dims=zip((eof_dim,),
+                                        range(1)),
+                long_name='rotated_eigenvalues')
+            solution['rotated_eofs']= Cube(
+                solution['rotated_eofs'],
+                dim_coords_and_dims=zip((eof_dim, lat_dim, lon_dim),
+                                        range(3)),
+                long_name='eofs')
+            solution['rotated_pcs']= Cube(
+                solution['rotated_pcs'],
+                dim_coords_and_dims=zip((time_dim, eof_dim),
+                                        range(2)),
+                long_name='pcs')
+            solution['rotated_variance']= Cube(
+                solution['rotated_variance'],
+                dim_coords_and_dims=zip((eof_dim,),
+                                        range(1)),
+                long_name='variance')
+        except NameError:
+            raise ValueError("cannot use container 'iris' without the "
+                             "iris module")
+    return solution

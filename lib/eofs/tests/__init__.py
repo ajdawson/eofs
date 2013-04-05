@@ -40,7 +40,7 @@ class EofsTest(object):
         """
         return value
 
-    def assert_array_almost_equal(self, a, b):
+    def assert_array_almost_equal(self, a, b, **kwargs):
         """Assertion that two arrays compare almost equal.
 
         The arrays are converted to :class:`numpy.ma.MaskedArray` using
@@ -48,15 +48,17 @@ class EofsTest(object):
         comparison is made.
 
         """
-        assert_array_almost_equal(self._tomasked(a), self._tomasked(b))
+        assert_array_almost_equal(self._tomasked(a), self._tomasked(b),
+                                  **kwargs)
 
-    def assert_almost_equal(self, a, b):
+    def assert_almost_equal(self, a, b, **kwargs):
         """Assertion that two values compare almost equal."""
-        assert_almost_equal(self._tomasked(a), self._tomasked(b))
+        assert_almost_equal(self._tomasked(a), self._tomasked(b), **kwargs)
 
-    def assert_true(self, cond):
+    def assert_true(self, cond, **kwargs):
         """Assertion that a condition is True."""
-        assert_true(cond)
+        assert_true(cond, **kwargs)
 
-    def assert_equal(self, a, b):
-        assert_equal(a, b)
+    def assert_equal(self, a, b, **kwargs):
+        """Assertion that two values are equal."""
+        assert_equal(a, b, **kwargs)

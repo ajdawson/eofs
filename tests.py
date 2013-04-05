@@ -25,6 +25,7 @@ default_test_modules = [
     'eofs.tests.test_tools',
     'eofs.tests.test_multivariate_solution',
     'eofs.tests.test_multivariate_error_handling',
+    'eofs.tests.test_rotation',
 ]
 
 
