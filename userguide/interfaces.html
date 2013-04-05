@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Solver interfaces &mdash; eofs 0.4.0 documentation</title>
+    <title>Solver interfaces &mdash; eofs 0.4.1 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.4.0',
+        VERSION:     '0.4.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 0.4.0 documentation" href="../index.html" />
+    <link rel="top" title="eofs 0.4.1 documentation" href="../index.html" />
     <link rel="up" title="User Guide" href="index.html" />
     <link rel="next" title="Basic usage" href="usage.html" />
     <link rel="prev" title="Overview" href="overview.html" />
@@ -164,7 +164,7 @@
 variable.</td>
 </tr>
 <tr class="row-odd"><td>iris</td>
-<td>Data read from a self-describing data format stored in an <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris.html#iris" title="(in Iris v1.2)"><tt class="xref py py-obj docutils literal"><span class="pre">iris</span></tt></a>
+<td>Data read from a self-describing data format stored in an <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris.html#iris" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">iris</span></tt></a>
 cube.</td>
 </tr>
 <tr class="row-even"><td>standard</td>
@@ -178,7 +178,7 @@ cube.</td>
 </div>
 <div class="section" id="iris-interface">
 <h2>Iris interface<a class="headerlink" href="#iris-interface" title="Permalink to this headline">¶</a></h2>
-<p>The iris interface works with <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.2)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> objects, which are the data containers used by the <a class="reference external" href="http://scitools.org.uk/iris">iris</a> data analysis package. The meta-data, including coordinate dimensions, associated with iris <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.2)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> objects is understood by the <tt class="xref py py-obj docutils literal"><span class="pre">eofs.iris.Eofs</span></tt> solver interface. The outputs of the <a class="reference internal" href="../api/eofs.iris.html#eofs.iris.Eof" title="eofs.iris.Eof"><tt class="xref py py-obj docutils literal"><span class="pre">eofs.iris.Eof</span></tt></a> solver are also contained in <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.2)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> objects, meaning they can be used with tools in the iris package, and easily written to a file.</p>
+<p>The iris interface works with <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> objects, which are the data containers used by the <a class="reference external" href="http://scitools.org.uk/iris">iris</a> data analysis package. The meta-data, including coordinate dimensions, associated with iris <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> objects is understood by the <tt class="xref py py-obj docutils literal"><span class="pre">eofs.iris.Eofs</span></tt> solver interface. The outputs of the <a class="reference internal" href="../api/eofs.iris.html#eofs.iris.Eof" title="eofs.iris.Eof"><tt class="xref py py-obj docutils literal"><span class="pre">eofs.iris.Eof</span></tt></a> solver are also contained in <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> objects, meaning they can be used with tools in the iris package, and easily written to a file.</p>
 </div>
 <div class="section" id="standard-interface">
 <h2>Standard interface<a class="headerlink" href="#standard-interface" title="Permalink to this headline">¶</a></h2>
