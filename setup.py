@@ -25,6 +25,7 @@ for line in open('lib/eofs/__init__.py').readlines():
 packages = ['eofs',
             'eofs.tools',
             'eofs.multivariate',
+            'eofs.experimental',
             'eofs.experimental.rotation',
             'eofs.examples',]
 
