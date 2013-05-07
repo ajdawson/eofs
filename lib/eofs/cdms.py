@@ -18,8 +18,6 @@
 from __future__ import absolute_import
 
 import cdms2
-import numpy as np
-import numpy.ma as ma
 
 from . import standard
 from .tools.cdms import weights_array, cdms2_name

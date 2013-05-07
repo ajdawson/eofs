@@ -41,7 +41,6 @@ def _check_flat_center(pcs, field):
         raise ValueError("PCs must be 1D or 2D")
     # Check if the field is 1D.
     if len(field.shape) == 1:
-        field_oned = True
         originalshape = tuple()
         channels = 1
     else:
