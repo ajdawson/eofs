@@ -18,8 +18,6 @@
 from __future__ import absolute_import
 from copy import copy
 
-import numpy as np
-import numpy.ma as ma
 from iris.cube import Cube
 from iris.coords import DimCoord
 
