@@ -79,7 +79,7 @@ def weights_array(cube, scheme):
         # Handle square-root of cosine of latitude weighting.
         try:
             weights = np.sqrt(cosine_latitude_weights(cube))
-        except (ValueError, CoordinateMultiDimError), err:
+        except (ValueError, CoordinateMultiDimError):
             raise ValueError('cannot generate latitude weights')
     else:
         raise ValueError("invalid weighting scheme: '{!s}'".format(scheme))
@@ -120,7 +120,6 @@ def coord_and_dim(cube, coord, multiple=False):
 
 
 def _time_coord_info(cube):
-    name = cube.name
     time, time_dim = coord_and_dim(cube, 'time')
     coords = list(copy(cube.dim_coords))
     coords.remove(time)

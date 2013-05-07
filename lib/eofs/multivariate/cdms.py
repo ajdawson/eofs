@@ -18,7 +18,6 @@
 from __future__ import absolute_import
 
 import cdms2
-import numpy as np
 
 from eofs.tools.cdms import weights_array, cdms2_name
 from . import standard
@@ -250,7 +249,6 @@ class MultivariateEof(object):
         neofs = eofset[0].shape[0]
         eofax = cdms2.createAxis(range(neofs), id='eof')
         eofax.long_name = 'eof_number'
-        varset = list()
         for iset in xrange(self._ndata):
             axlist = [eofax] + self._multichannels[iset]
             eofset[iset].fill_value = self._multimissing[iset]
