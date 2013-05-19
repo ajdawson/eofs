@@ -26,8 +26,8 @@ except ImportError:
 import eofs
 from eofs.tests import EofsTest
 
-from reference import reference_solution
-from utils import sign_adjustments
+from .reference import reference_solution
+from .utils import sign_adjustments
 
 
 # Create a mapping from interface name to tools module and solver class.

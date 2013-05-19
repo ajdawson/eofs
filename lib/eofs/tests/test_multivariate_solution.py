@@ -25,8 +25,8 @@ except:
 import eofs.multivariate as multivariate
 from eofs.tests import EofsTest
 
-from utils import sign_adjustments
-from reference import reference_multivariate_solution
+from .utils import sign_adjustments
+from .reference import reference_multivariate_solution
 
 
 # Create a mapping from interface name to solver class.
