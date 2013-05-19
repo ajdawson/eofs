@@ -26,7 +26,7 @@ except ImportError:
 import eofs
 from eofs.tests import EofsTest
 
-from reference import reference_solution
+from .reference import reference_solution
 
 
 # Create a mapping from interface name to solver class.

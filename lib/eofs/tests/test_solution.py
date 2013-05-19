@@ -25,8 +25,8 @@ except:
 import eofs
 from eofs.tests import EofsTest
 
-from utils import sign_adjustments
-from reference import reference_solution
+from .utils import sign_adjustments
+from .reference import reference_solution
 
 
 # Create a mapping from interface name to solver class.
