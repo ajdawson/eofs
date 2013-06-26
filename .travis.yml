@@ -1,0 +1,44 @@
+language: python
+
+python:
+  - "2.7"
+
+install:
+
+# Add a repository for up-to-dat geos/proj (from iris .travis.yml).
+  - sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3E5C1192
+  - yes | sudo add-apt-repository ppa:olivier-berten/geo
+  - sudo apt-get update
+
+# Install dependencies. Whilst eofs requires only numpy, it is better to test the
+# cdms2 and iris compatibility also. Most of these dependencies are for those
+# packages rather than eofs itself.
+  - sudo apt-get install python-pip python-scipy cython
+  - sudo apt-get install libudunits2-dev libhdf5-serial-dev libnetcdf-dev netcdf-bin
+  - sudo apt-get install libgeos-dev libproj-dev
+  - sudo apt-get install python-matplotlib
+  - sudo /usr/bin/pip install --use-mirrors shapely nose pyshp pep8 mock
+  - sudo /usr/bin/pip install pyke netCDF4
+  - sudo /usr/bin/pip install cdat-lite
+  - sudo /usr/bin/pip install coverage
+  - mkdir ../prereqs
+  - cd ../prereqs
+  - wget http://python-distribute.org/distribute_setup.py
+  - sudo /usr/bin/python distribute_setup.py
+  - git clone git://github.com/SciTools/cartopy.git
+  - cd cartopy
+  - git checkout v0.8.0
+  - sudo /usr/bin/python setup.py install
+  - cd ..
+  - git clone git://github.com/SciTools/iris.git
+  - cd iris
+  - git checkout v1.4.0
+  - /usr/bin/python setup.py std_names
+  - sudo /usr/bin/python setup.py install
+  - cd ../../eofs
+
+script:
+  - /usr/bin/python tests.py --verbosity=2 --with-coverage --cover-package=eofs
+
+notifications:
+  email: false
