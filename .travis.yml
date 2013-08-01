@@ -7,7 +7,7 @@ install:
 
 # Add a repository for up-to-dat geos/proj (from iris .travis.yml).
   - sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3E5C1192
-  - yes | sudo add-apt-repository ppa:olivier-berten/geo
+  - yes | sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable
   - sudo apt-get update
 
 # Install dependencies. Whilst eofs requires only numpy, it is better to test the
