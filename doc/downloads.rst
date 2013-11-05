@@ -5,12 +5,12 @@ Source code downloads for released versions, see the :doc:`changelog` for detail
 
 .. tabularcolumns:: |L|L|
 
-===============================================================  ====================
-Filename                                                         Summary
-===============================================================  ====================
-:download:`eofs-0.4.1.tar.gz </distribution/eofs-0.4.1.tar.gz>`  version 0.4.1 source
-:download:`eofs-0.4.0.tar.gz </distribution/eofs-0.4.0.tar.gz>`  version 0.4.0 source
-===============================================================  ====================
+===============================================================  ====================  ================
+Filename                                                         Summary               Released
+===============================================================  ====================  ================
+:download:`eofs-0.4.1.tar.gz </distribution/eofs-0.4.1.tar.gz>`  version 0.4.1 source  5 April 2013
+:download:`eofs-0.4.0.tar.gz </distribution/eofs-0.4.0.tar.gz>`  version 0.4.0 source  15 March 2013
+===============================================================  ====================  ================
 
 .. toctree::
    :maxdepth: 1
