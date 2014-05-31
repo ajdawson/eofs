@@ -136,8 +136,8 @@ class TestConstructorStandard(EofsTest):
     def test_input_first_dimension_different(self):
         solution = reference_multivariate_solution('standard', 'equal')
         sst1, sst2 = solution['sst']
-        sst1 = sst1[0:10]
-        sst2 = sst2[0:11]
+        sst1 = sst1[0:3]
+        sst2 = sst2[0:4]
         solver = self.solver_class([sst1, sst2])
 
     @raises(ValueError)
