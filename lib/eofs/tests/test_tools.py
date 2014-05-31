@@ -89,21 +89,21 @@ class ToolsTest(EofsTest):
         # single point covariance map should match reference EOFs as covariance
         # at the same point
         pcs = self.solver.pcs(npcs=1, pcscaling=1)[:, 0]
-        cov = self.tools['covariance'](pcs, self.solution['sst'][:, 0, 0])
+        cov = self.tools['covariance'](pcs, self.solution['sst'][:, 5, 5])
         eofs = self._tomasked(self.solver.eofs(neofs=self.neofs))
         reofs = self._tomasked(self.solution['eofs'])
         cov = self._tomasked(cov) * sign_adjustments(eofs, reofs)[0]
-        self.assert_almost_equal(cov, self.solution['eofscov'][0, 0, 0])
+        self.assert_almost_equal(cov, self.solution['eofscov'][0, 5, 5])
 
     def test_correlation_map_point(self):
         # single point correlation map should match reference EOFs as
         # correlation at the same point
         pcs = self.solver.pcs(npcs=1, pcscaling=1)[:, 0]
-        cor = self.tools['correlation'](pcs, self.solution['sst'][:, 0, 0])
+        cor = self.tools['correlation'](pcs, self.solution['sst'][:, 5, 5])
         eofs = self._tomasked(self.solver.eofs(neofs=self.neofs))
         reofs = self._tomasked(self.solution['eofs'])
         cor = self._tomasked(cor) * sign_adjustments(eofs, reofs)[0]
-        self.assert_almost_equal(cor, self.solution['eofscor'][0, 0, 0])
+        self.assert_almost_equal(cor, self.solution['eofscor'][0, 5, 5])
 
     def test_covcor_map_invalid_time_dimension(self):
         # generate tests for covariance/correlation maps with invalid time

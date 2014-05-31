@@ -91,7 +91,9 @@ def sign_adjustments(eofset, refeofset):
     for mode in xrange(nmodes):
         i = 0
         try:
-            while _close(eofset[mode,i], 0.) or _close(refeofset[mode,i], 0.):
+            while _close(eofset[mode,i], 0.) or _close(refeofset[mode,i], 0.) \
+                    or np.ma.is_masked(eofset[mode, i]) or \
+                    np.ma.is_masked(refeofset[mode, i]):
                 i += 1
         except IndexError:
             i = 0
