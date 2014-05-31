@@ -25,9 +25,11 @@ for line in open('lib/eofs/__init__.py').readlines():
 packages = ['eofs',
             'eofs.tools',
             'eofs.multivariate',
-            'eofs.examples',]
+            'eofs.examples',
+            'eofs.tests',]
 
-package_data = {'eofs.examples': ['example_data/*']}
+package_data = {'eofs.examples': ['example_data/*'],
+                'eofs.tests': ['data/*'],}
 
 
 if __name__ == '__main__':
