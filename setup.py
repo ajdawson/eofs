@@ -1,5 +1,5 @@
 """Build and install the eofs package."""
-# (c) Copyright 2013 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2013-2014 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -15,7 +15,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
-from distutils.core import setup
+from setuptools import setup
 
 
 for line in open('lib/eofs/__init__.py').readlines():
@@ -45,4 +45,6 @@ data sets, aimed at meteorology, oceanography and climate sciences
           """,
           packages=packages,
           package_dir={'':'lib'},
-          package_data=package_data,)
+          package_data=package_data,
+          install_requires=['numpy'],
+          use_2to3=True,)

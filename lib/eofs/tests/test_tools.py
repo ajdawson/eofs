@@ -1,5 +1,5 @@
 """Tests for the `eofs.tools` package."""
-# (c) Copyright 2013 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2013-2014 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -93,7 +93,7 @@ class ToolsTest(EofsTest):
         eofs = self._tomasked(self.solver.eofs(neofs=self.neofs))
         reofs = self._tomasked(self.solution['eofs'])
         cov = self._tomasked(cov) * sign_adjustments(eofs, reofs)[0]
-        self.assert_almost_equal(cov, self.solution['eofscov'][0, 5, 5])
+        self.assert_array_almost_equal(cov, self.solution['eofscov'][0, 5, 5])
 
     def test_correlation_map_point(self):
         # single point correlation map should match reference EOFs as
@@ -103,7 +103,7 @@ class ToolsTest(EofsTest):
         eofs = self._tomasked(self.solver.eofs(neofs=self.neofs))
         reofs = self._tomasked(self.solution['eofs'])
         cor = self._tomasked(cor) * sign_adjustments(eofs, reofs)[0]
-        self.assert_almost_equal(cor, self.solution['eofscor'][0, 5, 5])
+        self.assert_array_almost_equal(cor, self.solution['eofscor'][0, 5, 5])
 
     def test_covcor_map_invalid_time_dimension(self):
         # generate tests for covariance/correlation maps with invalid time

@@ -1,6 +1,6 @@
 """EOF analysis for data in `numpy` arrays."""
 # (c) Copyright 2000 Jon Saenz, Jesus Fernandez and Juan Zubillaga.
-# (c) Copyright 2010-2013 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2010-2014 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -292,7 +292,7 @@ class Eof(object):
             eof1 = solver.eofs(neofs=1, eofscaling=1)
 
         """
-        if neofs > self.neofs:
+        if neofs is None or neofs > self.neofs:
             neofs = self.neofs
         slicer = slice(0, neofs)
         neofs = neofs or self.neofs

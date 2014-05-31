@@ -2,6 +2,7 @@ language: python
 
 python:
     - "2.7"
+    - "3.3"
 
 install:
     # Make sure system components are up to date:
@@ -22,7 +23,7 @@ install:
     # Create a conda environment with the base dependencies:
     - conda create -n test-environment python=$TRAVIS_PYTHON_VERSION
     - source activate test-environment
-    - conda install nose coverage numpy
+    - conda install setuptools nose coverage numpy
     # Additional dependencies for Python 2.x:
     - if [[ "$TRAVIS_PYTHON_VERSION" == 2* ]]; then
         conda config --add channels rsignell;

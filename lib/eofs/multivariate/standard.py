@@ -1,5 +1,5 @@
 """Multivariate EOF analysis for `numpy` array data."""
-# (c) Copyright 2013 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2013-2014 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -153,7 +153,7 @@ class MultivariateEof(object):
             raise ValueError('number of weights is incorrect, '
                              'expecting {:d} but got {:d}'.format(
                                  self._ndata, len(weights)))
-        if not filter(lambda i: False if i is None else True, weights):
+        if all([w is None for w in weights]):
             # If all the entries are None, then just use the single value
             # None to indicate no weights are required.
             return None

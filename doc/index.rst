@@ -25,6 +25,7 @@ Download and installation
 -------------------------
 
 Released versions of `eofs` can be downloaded from the :doc:`downloads` page.
+You must have setuptools_ installed in order to install `eofs`.
 After downloading the source code archive, unzip it and change into the unzipped archive's directory, then to install in your home directory:
 
 .. code-block:: bash
@@ -69,7 +70,7 @@ More detailed description of usage are found in the :doc:`userguide/index` or th
 Requirements
 ------------
 
-This package requires as a minimum that you have numpy_ available.
+This package requires as a minimum that you have numpy_ available, and requires setuptools_ for installation.
 The `eofs.cdms` meta-data enabled interface can only be used if the `cdms2` module is available.
 This module is distributed as part of the CDAT_ project.
 It is also distributed as part of the cdat-lite_ package.
@@ -123,6 +124,8 @@ The package is restructured to make it easier to add new meta-data interfaces, a
 .. _cdat-lite: http://proj.badc.rl.ac.uk/cedaservices/wiki/CdatLite
 
 .. _nose: https://nose.readthedocs.org/en/latest/
+
+.. _setuptools: https://pypi.python.org/pypi/setuptools
 
 .. _issues: http://github.com/ajdawson/eofs/issues?state=open
 

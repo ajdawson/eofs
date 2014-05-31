@@ -1,5 +1,5 @@
 """Test `eofs.multivariate` computations against reference solutions."""
-# (c) Copyright 2013 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2013-2014 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -174,7 +174,6 @@ class MVSolutionTest(EofsTest):
         if weights is not None:
             for weight, ref in zip(weights, self.solution['weights']):
                 if weight is not None:
-                    print ref.shape, weight.shape
                     self.assert_array_almost_equal(weight, ref)
 
     def test_northTest(self):

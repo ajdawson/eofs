@@ -1,5 +1,5 @@
 """Test `eofs` computations against reference solutions."""
-# (c) Copyright 2013 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2013-14 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -238,9 +238,7 @@ class SolutionTest(EofsTest):
         pcs = self._tomasked(
             self.solver.projectField(self.solution['sst'][0],
                                      neofs=self.neofs))
-        print pcs.shape
         rpcs = self._tomasked(self.solution['pcs'])[0]
-        print rpcs.shape
         pcs *= sign_adjustments(pcs.transpose(), rpcs.transpose()).transpose()
         self.assert_array_almost_equal(pcs, rpcs)
 
