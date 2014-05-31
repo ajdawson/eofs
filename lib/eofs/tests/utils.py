@@ -1,5 +1,5 @@
 """Utilities for testing the `eofs` package."""
-# (c) Copyright 2013 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2013-2014 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
