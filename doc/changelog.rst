@@ -2,6 +2,17 @@ Changelog
 =========
 
 
+v0.5.x
+------
+
+:Release: v0.5.0
+:Date: 1 June 2014
+
+* Switched to setuptools for installation.
+* Support for Python 3.
+  Since neither cdms2 or `iris` are supported on Python 3 yet, only the standard interfaces have been tested on Python 3.
+
+
 v0.4.x
 ------
 
