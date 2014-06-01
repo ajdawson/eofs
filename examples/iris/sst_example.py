@@ -46,7 +46,7 @@ ax.set_title('EOF1 expressed as correlation', fontsize=16)
 
 # Plot the leading PC time series.
 plt.figure()
-iplt.plot(pc1, coords=['time'], color='b', linewidth=2)
+iplt.plot(pc1[:, 0], color='b', linewidth=2)
 ax = plt.gca()
 ax.axhline(0, color='k')
 ax.set_ylim(-3, 3)
