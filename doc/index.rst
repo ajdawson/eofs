@@ -103,7 +103,7 @@ It is always a good idea to run the tests during development, to do so:
 .. code-block:: bash
 
    $ cd eofs
-   $ python tests.py
+   $ nosetests -sv
 
 Running the tests requires nose_.
 
