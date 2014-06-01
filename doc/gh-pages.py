@@ -88,7 +88,7 @@ if __name__ == '__main__':
         # Check the correct branch is being used.
         cd(pages_dir)
         status = sh2('git status | head -n 1')
-        branch = re.match('\# On branch (.*)$', status).group(1)
+        branch = re.match('On branch (.*)$', status).group(1)
         if branch != 'gh-pages':
             e = 'On {}, git branch is {}, must be "gh-pages"'.format(
                     pages_dir, branch)
