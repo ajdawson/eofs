@@ -26,13 +26,19 @@ Download and installation
 
 Released versions of `eofs` can be downloaded from the :doc:`downloads` page.
 You must have setuptools_ installed in order to install `eofs`.
-After downloading the source code archive, unzip it and change into the unzipped archive's directory, then to install in your home directory:
+After downloading the source code archive, unzip it and change into the unzipped archive's directory, then to install it:
 
 .. code-block:: bash
 
-   $ python setup.py install --user
+   $ python setup.py install
 
-Alternatively you can check out the source code for the development version from the `github repository <https://github.com/ajdawson/eofs>`_.
+`eofs` can also be installed from PyPI using pip:
+
+.. code-block:: bash
+
+   $ pip install eofs
+
+You can also check out the source code for the development version from the `github repository <https://github.com/ajdawson/eofs>`_ to access features which are not yet in the released version.
 
 
 Getting started

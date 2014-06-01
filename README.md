@@ -21,7 +21,7 @@ Some of the key features are listed below:
 Requirements
 ------------
 
-eofs only requires the NumPy package.
+eofs only requires the NumPy package (and setuptools to install).
 In order to use the meta-data preserving interfaces one (or both) of cdms2 or iris > 1.2 is required.
 cdms2 is part of the Climate Data Analysis Tools ([CDAT](http://www2-pcmdi.llnl.gov/cdat)) or can be obtained separately in the [cdat_lite](http://proj.badc.rl.ac.uk/ndg/wiki/CdatLite) package.
 [Iris](http://scitools.org.uk/iris/) is a Python library for meteorology and climatology.
