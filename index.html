@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -7,15 +6,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Package description &mdash; eofs 0.4.1 documentation</title>
+    <title>Package description &mdash; eofs 0.5.0 documentation</title>
     
     <link rel="stylesheet" href="_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '0.4.1',
+        URL_ROOT:    './',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 0.4.1 documentation" href="#" />
+    <link rel="top" title="eofs 0.5.0 documentation" href="#" />
     <link rel="next" title="User Guide" href="userguide/index.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
           rel='stylesheet' type='text/css' />
@@ -89,6 +88,7 @@
     </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+    <h2>eofs v0.5.0</h2>
     <h3>Table of Contents</h3>
     <ul>
 <li class="toctree-l1"><a class="reference internal" href="userguide/index.html">User Guide</a></li>
@@ -141,15 +141,20 @@
 <div class="section" id="download-and-installation">
 <h2>Download and installation<a class="headerlink" href="#download-and-installation" title="Permalink to this headline">¶</a></h2>
 <p>Released versions of <tt class="xref py py-obj docutils literal"><span class="pre">eofs</span></tt> can be downloaded from the <a class="reference internal" href="downloads.html"><em>Downloads</em></a> page.
-After downloading the source code archive, unzip it and change into the unzipped archive&#8217;s directory, then to install in your home directory:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python setup.py install --user
+You must have <a class="reference external" href="https://pypi.python.org/pypi/setuptools">setuptools</a> installed in order to install <tt class="xref py py-obj docutils literal"><span class="pre">eofs</span></tt>.
+After downloading the source code archive, unzip it and change into the unzipped archive&#8217;s directory, then to install it:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python setup.py install
 </pre></div>
 </div>
-<p>Alternatively you can check out the source code for the development version from the <a class="reference external" href="https://github.com/ajdawson/eofs">github repository</a>.</p>
+<p><tt class="xref py py-obj docutils literal"><span class="pre">eofs</span></tt> can also be installed from PyPI using pip:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pip install eofs
+</pre></div>
+</div>
+<p>You can also check out the source code for the development version from the <a class="reference external" href="https://github.com/ajdawson/eofs">github repository</a> to access features which are not yet in the released version.</p>
 </div>
 <div class="section" id="getting-started">
 <h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
-<p><tt class="xref py py-obj docutils literal"><span class="pre">eofs</span></tt> provides three interfaces for EOF analysis: one for analysing data contained in <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#numpy" title="(in NumPy v1.7)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy</span></tt></a> arrays or masked arrays, suitable for any data set; and two for meta-data aware EOF analysis, suitable for analysing data read from self-describing files, using either the <tt class="xref py py-obj docutils literal"><span class="pre">cdms2</span></tt> or <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris.html#iris" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">iris</span></tt></a> packages.
+<p><tt class="xref py py-obj docutils literal"><span class="pre">eofs</span></tt> provides three interfaces for EOF analysis: one for analysing data contained in <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy</span></tt></a> arrays or masked arrays, suitable for any data set; and two for meta-data aware EOF analysis, suitable for analysing data read from self-describing files, using either the <tt class="xref py py-obj docutils literal"><span class="pre">cdms2</span></tt> or <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris.html#module-iris" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">iris</span></tt></a> packages.
 All the interfaces support the same set of operations.</p>
 <p>Regardless of which interface you use, the basic usage is the same.
 The EOF analysis is handled by a solver class.
@@ -175,7 +180,7 @@ Method calls are then used to retrieve the quantities of interest from the solve
 </div>
 <div class="section" id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
-<p>This package requires as a minimum that you have <a class="reference external" href="http://numpy.scipy.org">numpy</a> available.
+<p>This package requires as a minimum that you have <a class="reference external" href="http://numpy.scipy.org">numpy</a> available, and requires <a class="reference external" href="https://pypi.python.org/pypi/setuptools">setuptools</a> for installation.
 The <a class="reference internal" href="api/eofs.cdms.html#module-eofs.cdms" title="eofs.cdms"><tt class="xref py py-obj docutils literal"><span class="pre">eofs.cdms</span></tt></a> meta-data enabled interface can only be used if the <tt class="xref py py-obj docutils literal"><span class="pre">cdms2</span></tt> module is available.
 This module is distributed as part of the <a class="reference external" href="http://uv-cdat.llnl.gov">CDAT</a> project.
 It is also distributed as part of the <a class="reference external" href="http://proj.badc.rl.ac.uk/cedaservices/wiki/CdatLite">cdat-lite</a> package.
@@ -193,7 +198,7 @@ The <a class="reference internal" href="api/eofs.iris.html#module-eofs.iris" tit
 </div>
 <p>It is always a good idea to run the tests during development, to do so:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>eofs
-<span class="nv">$ </span>python tests.py
+<span class="nv">$ </span>nosetests -sv
 </pre></div>
 </div>
 <p>Running the tests requires <a class="reference external" href="https://nose.readthedocs.org/en/latest/">nose</a>.</p>
@@ -204,7 +209,7 @@ If you have code you would like to contribute, fork the <a class="reference exte
 <h2>History<a class="headerlink" href="#history" title="Permalink to this headline">¶</a></h2>
 <p><tt class="xref py py-obj docutils literal"><span class="pre">eofs</span></tt> is the successor to <a class="reference external" href="http://ajdawson.github.com/eof2">eof2</a>.
 <tt class="xref py py-obj docutils literal"><span class="pre">eof2</span></tt> was always written to be part of CDAT which already had a package called <tt class="xref py py-obj docutils literal"><span class="pre">eof</span></tt>, hence the name <tt class="xref py py-obj docutils literal"><span class="pre">eof2</span></tt>.
-When support for <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris.html#iris" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">iris</span></tt></a> was added it didn&#8217;t make sense to call the package <tt class="xref py py-obj docutils literal"><span class="pre">eof2</span></tt> anymore, and <tt class="xref py py-obj docutils literal"><span class="pre">eofs</span></tt> was created.
+When support for <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris.html#module-iris" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">iris</span></tt></a> was added it didn&#8217;t make sense to call the package <tt class="xref py py-obj docutils literal"><span class="pre">eof2</span></tt> anymore, and <tt class="xref py py-obj docutils literal"><span class="pre">eofs</span></tt> was created.
 <tt class="xref py py-obj docutils literal"><span class="pre">eofs</span></tt> is much more than just a name change.
 The package is restructured to make it easier to add new meta-data interfaces, and a comprehensive set of tests has been added to ensure that the package remains stable when new features are added.</p>
 </div>
@@ -232,7 +237,7 @@ The package is restructured to make it easier to add new meta-data interfaces, a
     </div>
     <div class="footer">
         &copy; Copyright 2013 Andrew Dawson.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

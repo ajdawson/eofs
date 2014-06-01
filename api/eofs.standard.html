@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -7,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>eofs.standard &mdash; eofs 0.4.1 documentation</title>
+    <title>eofs.standard &mdash; eofs 0.5.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -15,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.4.1',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 0.4.1 documentation" href="../index.html" />
+    <link rel="top" title="eofs 0.5.0 documentation" href="../index.html" />
     <link rel="up" title="API references" href="index.html" />
     <link rel="next" title="eofs.cdms" href="eofs.cdms.html" />
     <link rel="prev" title="API references" href="index.html" />
@@ -95,11 +94,16 @@
     </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+    <h2>eofs v0.5.0</h2>
     <h3>Table of Contents</h3>
-    <ul>
+    <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userguide/index.html">User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">API references</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API references</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#available-eof-solvers">Available EOF solvers</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#full-documentation">Full documentation</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../downloads.html">Downloads</a></li>
 </ul>
 
@@ -109,7 +113,7 @@
                         title="previous chapter">API references</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="eofs.cdms.html"
-                        title="next chapter"><tt class="docutils literal docutils literal docutils literal"><span class="pre">eofs.cdms</span></tt></a></p>
+                        title="next chapter"><tt class="docutils literal"><span class="pre">eofs.cdms</span></tt></a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/api/eofs.standard.txt"
@@ -138,18 +142,18 @@
             
   <div class="section" id="module-eofs.standard">
 <span id="eofs-standard"></span><h1><a class="reference internal" href="#module-eofs.standard" title="eofs.standard"><tt class="xref py py-mod docutils literal"><span class="pre">eofs.standard</span></tt></a><a class="headerlink" href="#module-eofs.standard" title="Permalink to this headline">¶</a></h1>
-<p>EOF analysis for data in <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#numpy" title="(in NumPy v1.7)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy</span></tt></a> arrays.</p>
+<p>EOF analysis for data in <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy</span></tt></a> arrays.</p>
 <dl class="class">
 <dt id="eofs.standard.Eof">
 <em class="property">class </em><tt class="descclassname">eofs.standard.</tt><tt class="descname">Eof</tt><big>(</big><em>dataset</em>, <em>weights=None</em>, <em>center=True</em>, <em>ddof=1</em><big>)</big><a class="reference internal" href="../_modules/eofs/standard.html#Eof"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.standard.Eof" title="Permalink to this definition">¶</a></dt>
-<dd><p>EOF analysis (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#numpy" title="(in NumPy v1.7)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy</span></tt></a> interface)</p>
+<dd><p>EOF analysis (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy</span></tt></a> interface)</p>
 <p>Create an Eof object.</p>
 <p>The EOF solution is computed at initialization time. Method
 calls are used to retrieve computed quantities.</p>
 <p><strong>Arguments:</strong></p>
 <dl class="docutils">
 <dt><em>dataset</em></dt>
-<dd>A <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.7)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy.ndarray</span></tt></a> or <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/maskedarray.baseclass.html#numpy.ma.MaskedArray" title="(in NumPy v1.7)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy.ma.MaskedArray</span></tt></a> with two or more
+<dd>A <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy.ndarray</span></tt></a> or <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/maskedarray.baseclass.html#numpy.ma.MaskedArray" title="(in NumPy v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy.ma.MaskedArray</span></tt></a> with two or more
 dimensions containing the data to be analysed. The first
 dimension is assumed to represent time. Missing values are
 permitted, either in the form of a masked array, or
@@ -528,7 +532,7 @@ corresponding set of pseudo-PCs.</p>
 <p><strong>Argument:</strong></p>
 <dl class="docutils">
 <dt><em>field</em></dt>
-<dd>A <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.7)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy.ndarray</span></tt></a> or <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/maskedarray.baseclass.html#numpy.ma.MaskedArray" title="(in NumPy v1.7)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy.ma.MaskedArray</span></tt></a> with two or more
+<dd>A <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy.ndarray</span></tt></a> or <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/maskedarray.baseclass.html#numpy.ma.MaskedArray" title="(in NumPy v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy.ma.MaskedArray</span></tt></a> with two or more
 dimensions containing the data to be projected onto the
 EOFs. It must have the same corresponding spatial dimensions
 (including missing values in the same places) as the <a class="reference internal" href="#eofs.standard.Eof" title="eofs.standard.Eof"><tt class="xref py py-obj docutils literal"><span class="pre">Eof</span></tt></a>
@@ -623,7 +627,7 @@ used.</dd>
     </div>
     <div class="footer">
         &copy; Copyright 2013 Andrew Dawson.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

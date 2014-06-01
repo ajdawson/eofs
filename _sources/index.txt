@@ -25,13 +25,20 @@ Download and installation
 -------------------------
 
 Released versions of `eofs` can be downloaded from the :doc:`downloads` page.
-After downloading the source code archive, unzip it and change into the unzipped archive's directory, then to install in your home directory:
+You must have setuptools_ installed in order to install `eofs`.
+After downloading the source code archive, unzip it and change into the unzipped archive's directory, then to install it:
 
 .. code-block:: bash
 
-   $ python setup.py install --user
+   $ python setup.py install
 
-Alternatively you can check out the source code for the development version from the `github repository <https://github.com/ajdawson/eofs>`_.
+`eofs` can also be installed from PyPI using pip:
+
+.. code-block:: bash
+
+   $ pip install eofs
+
+You can also check out the source code for the development version from the `github repository <https://github.com/ajdawson/eofs>`_ to access features which are not yet in the released version.
 
 
 Getting started
@@ -69,7 +76,7 @@ More detailed description of usage are found in the :doc:`userguide/index` or th
 Requirements
 ------------
 
-This package requires as a minimum that you have numpy_ available.
+This package requires as a minimum that you have numpy_ available, and requires setuptools_ for installation.
 The `eofs.cdms` meta-data enabled interface can only be used if the `cdms2` module is available.
 This module is distributed as part of the CDAT_ project.
 It is also distributed as part of the cdat-lite_ package.
@@ -96,7 +103,7 @@ It is always a good idea to run the tests during development, to do so:
 .. code-block:: bash
 
    $ cd eofs
-   $ python tests.py
+   $ nosetests -sv
 
 Running the tests requires nose_.
 
@@ -123,6 +130,8 @@ The package is restructured to make it easier to add new meta-data interfaces, a
 .. _cdat-lite: http://proj.badc.rl.ac.uk/cedaservices/wiki/CdatLite
 
 .. _nose: https://nose.readthedocs.org/en/latest/
+
+.. _setuptools: https://pypi.python.org/pypi/setuptools
 
 .. _issues: http://github.com/ajdawson/eofs/issues?state=open
 

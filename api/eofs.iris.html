@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -7,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>eofs.iris &mdash; eofs 0.4.1 documentation</title>
+    <title>eofs.iris &mdash; eofs 0.5.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -15,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.4.1',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 0.4.1 documentation" href="../index.html" />
+    <link rel="top" title="eofs 0.5.0 documentation" href="../index.html" />
     <link rel="up" title="API references" href="index.html" />
     <link rel="next" title="eofs.tools" href="eofs.tools.html" />
     <link rel="prev" title="eofs.cdms" href="eofs.cdms.html" />
@@ -95,18 +94,23 @@
     </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+    <h2>eofs v0.5.0</h2>
     <h3>Table of Contents</h3>
-    <ul>
+    <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userguide/index.html">User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">API references</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API references</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#available-eof-solvers">Available EOF solvers</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#full-documentation">Full documentation</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../downloads.html">Downloads</a></li>
 </ul>
 
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="eofs.cdms.html"
-                        title="previous chapter"><tt class="docutils literal docutils literal"><span class="pre">eofs.cdms</span></tt></a></p>
+                        title="previous chapter"><tt class="docutils literal"><span class="pre">eofs.cdms</span></tt></a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="eofs.tools.html"
                         title="next chapter"><tt class="docutils literal"><span class="pre">eofs.tools</span></tt></a></p>
@@ -138,18 +142,18 @@
             
   <div class="section" id="module-eofs.iris">
 <span id="eofs-iris"></span><h1><a class="reference internal" href="#module-eofs.iris" title="eofs.iris"><tt class="xref py py-mod docutils literal"><span class="pre">eofs.iris</span></tt></a><a class="headerlink" href="#module-eofs.iris" title="Permalink to this headline">¶</a></h1>
-<p>Meta-data preserving EOF analysis for <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris.html#iris" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">iris</span></tt></a>.</p>
+<p>Meta-data preserving EOF analysis for <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris.html#module-iris" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">iris</span></tt></a>.</p>
 <dl class="class">
 <dt id="eofs.iris.Eof">
 <em class="property">class </em><tt class="descclassname">eofs.iris.</tt><tt class="descname">Eof</tt><big>(</big><em>cube</em>, <em>weights=None</em>, <em>center=True</em>, <em>ddof=1</em><big>)</big><a class="reference internal" href="../_modules/eofs/iris.html#Eof"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.iris.Eof" title="Permalink to this definition">¶</a></dt>
-<dd><p>EOF analysis (meta-data enabled <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris.html#iris" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">iris</span></tt></a> interface)</p>
+<dd><p>EOF analysis (meta-data enabled <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris.html#module-iris" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">iris</span></tt></a> interface)</p>
 <p>Create an Eof object.</p>
 <p>The EOF solution is computed at initialization time. Method
 calls are used to retrieve computed quantities.</p>
 <p><strong>Argument:</strong></p>
 <dl class="docutils">
 <dt><em>dataset</em></dt>
-<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> instance containing the data to be
+<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> instance containing the data to be
 analysed. Time must be the first dimension. Missing values
 are allowed provided that they are constant with time (e.g.,
 values of an oceanographic field over land).</dd>
@@ -162,19 +166,19 @@ weighting methods are available:</p>
 <ul class="simple">
 <li><em>&#8216;area&#8217;</em> : Square-root of grid cell area normalized by
 total grid area. Requires a latitude-longitude grid to be
-present in the <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> <em>dataset</em>. This is a
+present in the <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> <em>dataset</em>. This is a
 fairly standard weighting strategy. If you are unsure
 which method to use and you have gridded data then this
 should be your first choice.</li>
 <li><em>&#8216;coslat&#8217;</em> : Square-root of cosine of latitude. Requires a
-latitude dimension to be present in the <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a>
+latitude dimension to be present in the <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a>
 <em>dataset</em>.</li>
 <li><em>None</em> : Equal weights for all grid points (<em>&#8216;none&#8217;</em> is
 also accepted).</li>
 </ul>
 <blockquote class="last">
 <div>Alternatively an array of weights whose shape is compatible
-with the <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> <em>dataset</em> may be supplied instead
+with the <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> <em>dataset</em> may be supplied instead
 of specifying a weighting method.</div></blockquote>
 </dd>
 <dt><em>center</em></dt>
@@ -237,7 +241,7 @@ available, then all available PCs will be returned.</dd>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>pcs</em></dt>
-<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> containing the ordered PCs. The PCs are
+<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> containing the ordered PCs. The PCs are
 numbered from 0 to <em>npcs</em> - 1.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
@@ -276,7 +280,7 @@ available, then all available EOFs will be returned.</dd>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>eofs</em></dt>
-<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> containing the ordered EOFs. The EOFs are
+<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> containing the ordered EOFs. The EOFs are
 numbered from 0 to <em>neofs</em> - 1.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
@@ -312,7 +316,7 @@ available, then all available EOFs will be returned.</dd>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>eofs</em></dt>
-<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> containing the ordered EOFs. The EOFs are
+<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> containing the ordered EOFs. The EOFs are
 numbered from 0 to <em>neofs</em> - 1.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
@@ -357,7 +361,7 @@ eigenvalue so that the PCs are scaled to unit variance
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>eofs</em></dt>
-<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> containing the ordered EOFs. The EOFs are
+<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> containing the ordered EOFs. The EOFs are
 numbered from 0 to <em>neofs</em> - 1.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
@@ -390,7 +394,7 @@ eigenvalues will be returned.</dd>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>eigenvalues</em></dt>
-<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> containing the eigenvalues arranged
+<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> containing the eigenvalues arranged
 largest to smallest. The eigenvalues are numbered from 0 to
 <em>neigs</em> - 1.</dd>
 </dl>
@@ -423,7 +427,7 @@ returned.</dd>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>variance_fractions</em></dt>
-<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> containing the fractional variances for
+<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> containing the fractional variances for
 each eigenvalue. The eigenvalues are numbered from 0 to
 <em>neigs</em> - 1.</dd>
 </dl>
@@ -446,7 +450,7 @@ of the eigenvalues).</p>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>total_variance</em></dt>
-<dd>A scalar value (not a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a>).</dd>
+<dd>A scalar value (not a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a>).</dd>
 </dl>
 <p><strong>Example:</strong></p>
 <p>Get the total variance:</p>
@@ -478,7 +482,7 @@ scaling is done. Defaults to <em>False</em> (no scaling).</dd>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>errors</em></dt>
-<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> containing the typical errors for each
+<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> containing the typical errors for each
 eigenvalue. The egienvalues are numbered from 0 to
 <em>neigs</em> - 1.</dd>
 </dl>
@@ -506,7 +510,7 @@ the eigenvalues:</p>
 reconstructed field will automatically have this weighting
 removed. Otherwise the returned field will have the same
 weighting as the <a class="reference internal" href="#eofs.iris.Eof" title="eofs.iris.Eof"><tt class="xref py py-obj docutils literal"><span class="pre">Eof</span></tt></a> input <em>dataset</em>.</p>
-<p>Returns the reconstructed field in a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a>.</p>
+<p>Returns the reconstructed field in a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a>.</p>
 <p><strong>Argument:</strong></p>
 <dl class="docutils">
 <dt><em>neofs</em></dt>
@@ -515,7 +519,7 @@ weighting as the <a class="reference internal" href="#eofs.iris.Eof" title="eofs
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>reconstruction</em></dt>
-<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> with the same dimensions <a class="reference internal" href="#eofs.iris.Eof" title="eofs.iris.Eof"><tt class="xref py py-obj docutils literal"><span class="pre">Eof</span></tt></a> input
+<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> with the same dimensions <a class="reference internal" href="#eofs.iris.Eof" title="eofs.iris.Eof"><tt class="xref py py-obj docutils literal"><span class="pre">Eof</span></tt></a> input
 <em>dataset</em> containing the reconstruction using <em>neofs</em> EOFs.</dd>
 </dl>
 <p><strong>Example:</strong></p>
@@ -569,7 +573,7 @@ used.</dd>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>pseudo_pcs</em></dt>
-<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> containing the pseudo-PCs. The PCs are
+<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> containing the pseudo-PCs. The PCs are
 numbered from 0 to <em>neofs</em> - 1.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
@@ -591,7 +595,7 @@ numbered from 0 to <em>neofs</em> - 1.</dd>
 <dl class="docutils">
 <dt><em>weights</em></dt>
 <dd>An array contaning the analysis weights (not a
-<a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a>).</dd>
+<a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a>).</dd>
 </dl>
 <p><strong>Example:</strong></p>
 <p>The weights used for the analysis:</p>
@@ -630,7 +634,7 @@ numbered from 0 to <em>neofs</em> - 1.</dd>
     </div>
     <div class="footer">
         &copy; Copyright 2013 Andrew Dawson.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

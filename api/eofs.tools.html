@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -7,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>eofs.tools &mdash; eofs 0.4.1 documentation</title>
+    <title>eofs.tools &mdash; eofs 0.5.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -15,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.4.1',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 0.4.1 documentation" href="../index.html" />
+    <link rel="top" title="eofs 0.5.0 documentation" href="../index.html" />
     <link rel="up" title="API references" href="index.html" />
     <link rel="next" title="eofs.multivariate.standard" href="eofs.multivariate.standard.html" />
     <link rel="prev" title="eofs.iris" href="eofs.iris.html" />
@@ -95,21 +94,26 @@
     </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+    <h2>eofs v0.5.0</h2>
     <h3>Table of Contents</h3>
-    <ul>
+    <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userguide/index.html">User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">API references</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API references</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#available-eof-solvers">Available EOF solvers</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#full-documentation">Full documentation</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../downloads.html">Downloads</a></li>
 </ul>
 
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="eofs.iris.html"
-                        title="previous chapter"><tt class="docutils literal docutils literal docutils literal"><span class="pre">eofs.iris</span></tt></a></p>
+                        title="previous chapter"><tt class="docutils literal"><span class="pre">eofs.iris</span></tt></a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="eofs.multivariate.standard.html"
-                        title="next chapter"><tt class="docutils literal docutils literal docutils literal"><span class="pre">eofs.multivariate.standard</span></tt></a></p>
+                        title="next chapter"><tt class="docutils literal"><span class="pre">eofs.multivariate.standard</span></tt></a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/api/eofs.tools.txt"
@@ -141,7 +145,7 @@
 <p>Tools related to EOF analysis.</p>
 <div class="section" id="module-eofs.tools.standard">
 <span id="eofs-tools-standard"></span><h2><a class="reference internal" href="#module-eofs.tools.standard" title="eofs.tools.standard"><tt class="xref py py-obj docutils literal"><span class="pre">eofs.tools.standard</span></tt></a><a class="headerlink" href="#module-eofs.tools.standard" title="Permalink to this headline">¶</a></h2>
-<p>Supplementary tools for the <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#numpy" title="(in NumPy v1.7)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy</span></tt></a> EOF analysis interface.</p>
+<p>Supplementary tools for the <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy</span></tt></a> EOF analysis interface.</p>
 <dl class="function">
 <dt id="eofs.tools.standard.correlation_map">
 <tt class="descclassname">eofs.tools.standard.</tt><tt class="descname">correlation_map</tt><big>(</big><em>pcs</em>, <em>field</em><big>)</big><a class="reference internal" href="../_modules/eofs/tools/standard.html#correlation_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.tools.standard.correlation_map" title="Permalink to this definition">¶</a></dt>
@@ -219,7 +223,7 @@ number of samples. Defaults to <em>1</em>.</dd>
 <dt id="eofs.tools.cdms.weights_array">
 <tt class="descclassname">eofs.tools.cdms.</tt><tt class="descname">weights_array</tt><big>(</big><em>dataset</em>, <em>scheme</em><big>)</big><a class="reference internal" href="../_modules/eofs/tools/cdms.html#weights_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.tools.cdms.weights_array" title="Permalink to this definition">¶</a></dt>
 <dd><p>Weights for a data set on a grid.</p>
-<p>Returned weights are a <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.7)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy.ndarray</span></tt></a> broadcastable to the shape of
+<p>Returned weights are a <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy.ndarray</span></tt></a> broadcastable to the shape of
 the input data.</p>
 <p><strong>Arguments:</strong></p>
 <dl class="docutils">
@@ -331,17 +335,17 @@ number of samples. Defaults to <em>1</em>.</dd>
 </div>
 <div class="section" id="module-eofs.tools.iris">
 <span id="eofs-tools-iris"></span><h2><a class="reference internal" href="#module-eofs.tools.iris" title="eofs.tools.iris"><tt class="xref py py-obj docutils literal"><span class="pre">eofs.tools.iris</span></tt></a><a class="headerlink" href="#module-eofs.tools.iris" title="Permalink to this headline">¶</a></h2>
-<p>Supplementary tools for the <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris.html#iris" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">iris</span></tt></a> EOF analysis interface.</p>
+<p>Supplementary tools for the <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris.html#module-iris" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">iris</span></tt></a> EOF analysis interface.</p>
 <dl class="function">
 <dt id="eofs.tools.iris.weights_array">
 <tt class="descclassname">eofs.tools.iris.</tt><tt class="descname">weights_array</tt><big>(</big><em>cube</em>, <em>scheme</em><big>)</big><a class="reference internal" href="../_modules/eofs/tools/iris.html#weights_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.tools.iris.weights_array" title="Permalink to this definition">¶</a></dt>
 <dd><p>Weights for a data set on a grid.</p>
-<p>Returned weights are a <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.7)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy.ndarray</span></tt></a> broadcastable to the shape of
+<p>Returned weights are a <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy.ndarray</span></tt></a> broadcastable to the shape of
 the input cube.</p>
 <p><strong>Arguments:</strong></p>
 <dl class="docutils">
 <dt><em>cube</em></dt>
-<dd>An <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> instance to generate weights for.</dd>
+<dd>An <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> instance to generate weights for.</dd>
 <dt><em>scheme</em></dt>
 <dd><p class="first">Weighting scheme to use. The following values are accepted:</p>
 <ul class="last">
@@ -359,13 +363,13 @@ the input cube.</p>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>weights</em></dt>
-<dd>An array contanining the weights (not a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a>).</dd>
+<dd>An array contanining the weights (not a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a>).</dd>
 </dl>
 <p><strong>Examples:</strong></p>
-<p>Area weights for a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> on 2D grid:</p>
+<p>Area weights for a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> on 2D grid:</p>
 <blockquote>
 <div>weights = weights_array(cube, scheme=&#8217;area&#8217;)</div></blockquote>
-<p>Square-root of cosine of latitude weights for a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a>
+<p>Square-root of cosine of latitude weights for a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a>
 with a latitude dimension:</p>
 <blockquote>
 <div>weights = weights_array(cube, scheme=&#8217;coslat&#8217;)</div></blockquote>
@@ -375,11 +379,11 @@ with a latitude dimension:</p>
 <dt id="eofs.tools.iris.coord_and_dim">
 <tt class="descclassname">eofs.tools.iris.</tt><tt class="descname">coord_and_dim</tt><big>(</big><em>cube</em>, <em>coord</em>, <em>multiple=False</em><big>)</big><a class="reference internal" href="../_modules/eofs/tools/iris.html#coord_and_dim"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.tools.iris.coord_and_dim" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve a coordinate dimension and its corresponding position from
-a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> instance.</p>
+a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> instance.</p>
 <p><strong>Arguments:</strong></p>
 <dl class="docutils">
 <dt><em>cube</em></dt>
-<dd>An <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> instance to retrieve the dimension from.</dd>
+<dd>An <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> instance to retrieve the dimension from.</dd>
 <dt><em>coord</em></dt>
 <dd>Name of the coordinate dimension to retrieve.</dd>
 </dl>
@@ -396,9 +400,9 @@ a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/ir
 <dd><p>Correlation between PCs and a field.</p>
 <p>Computes maps of the correlation between each PC and the given
 field at each grid point.</p>
-<p>Given a set of PCs contained in a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> (e.g., as output
+<p>Given a set of PCs contained in a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> (e.g., as output
 from <a class="reference internal" href="eofs.iris.html#eofs.iris.Eof.pcs" title="eofs.iris.Eof.pcs"><tt class="xref py py-obj docutils literal"><span class="pre">eofs.iris.Eof.pcs</span></tt></a>) and a field with a time dimension
-contained in a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">iris.cube.Cube</span></tt></a>, one correlation map per PC is
+contained in a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">iris.cube.Cube</span></tt></a>, one correlation map per PC is
 computed.</p>
 <p>The field must have the same length time dimension as the PCs. Any
 number of spatial dimensions (including zero) are allowed in the
@@ -406,14 +410,14 @@ field and there can be any number of PCs.</p>
 <p><strong>Arguments:</strong></p>
 <dl class="docutils">
 <dt><em>pcs</em></dt>
-<dd>PCs contained in a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a>.</dd>
+<dd>PCs contained in a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a>.</dd>
 <dt><em>field</em></dt>
-<dd>Field Spatial-temporal field contained in a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a>.</dd>
+<dd>Field Spatial-temporal field contained in a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a>.</dd>
 </dl>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>correlation_maps</em></dt>
-<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> containing the correlation maps.</dd>
+<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> containing the correlation maps.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
 <p>Assuming <em>solver</em> is an instance of <a class="reference internal" href="eofs.iris.html#eofs.iris.Eof" title="eofs.iris.Eof"><tt class="xref py py-obj docutils literal"><span class="pre">eofs.iris.Eof</span></tt></a>, compute
@@ -430,9 +434,9 @@ correlation maps for each PC:</p>
 <dd><p>Covariance between PCs and a field.</p>
 <p>Computes maps of the covariance between each PC and the given
 field at each grid point.</p>
-<p>Given a set of PCs contained in a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> (e.g., as output
+<p>Given a set of PCs contained in a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> (e.g., as output
 from <a class="reference internal" href="eofs.iris.html#eofs.iris.Eof.pcs" title="eofs.iris.Eof.pcs"><tt class="xref py py-obj docutils literal"><span class="pre">eofs.iris.Eof.pcs</span></tt></a>) and a field with a time dimension
-contained in a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">iris.cube.Cube</span></tt></a>, one covariance map per PC is
+contained in a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">iris.cube.Cube</span></tt></a>, one covariance map per PC is
 computed.</p>
 <p>The field must have the same length time dimension as the PCs. Any
 number of spatial dimensions (including zero) are allowed in the
@@ -440,9 +444,9 @@ field and there can be any number of PCs.</p>
 <p><strong>Arguments:</strong></p>
 <dl class="docutils">
 <dt><em>pcs</em></dt>
-<dd>PCs contained in a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a>.</dd>
+<dd>PCs contained in a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a>.</dd>
 <dt><em>field</em></dt>
-<dd>Field Spatial-temporal field contained in a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a>.</dd>
+<dd>Field Spatial-temporal field contained in a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a>.</dd>
 </dl>
 <p><strong>Keyword arguments:</strong></p>
 <dl class="docutils">
@@ -454,7 +458,7 @@ number of samples. Defaults to <em>1</em>.</dd>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>covariance_maps</em></dt>
-<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.3)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> containing the covariance maps.</dd>
+<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> containing the covariance maps.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
 <p>Compute covariance maps for each PC:</p>
@@ -493,7 +497,7 @@ number of samples. Defaults to <em>1</em>.</dd>
     </div>
     <div class="footer">
         &copy; Copyright 2013 Andrew Dawson.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

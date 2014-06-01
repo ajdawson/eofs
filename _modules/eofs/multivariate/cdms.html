@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -7,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>eofs.multivariate.cdms &mdash; eofs 0.4.1 documentation</title>
+    <title>eofs.multivariate.cdms &mdash; eofs 0.5.0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -15,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.4.1',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +24,7 @@
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 0.4.1 documentation" href="../../../index.html" />
+    <link rel="top" title="eofs 0.5.0 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
           rel='stylesheet' type='text/css' />
@@ -87,6 +86,7 @@
     </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+    <h2>eofs v0.5.0</h2>
     <h3>Table of Contents</h3>
     <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../userguide/index.html">User Guide</a></li>
@@ -135,10 +135,9 @@
 <span class="c">#</span>
 <span class="c"># You should have received a copy of the GNU General Public License</span>
 <span class="c"># along with eofs.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+
 
 <span class="kn">import</span> <span class="nn">cdms2</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
 <span class="kn">from</span> <span class="nn">eofs.tools.cdms</span> <span class="kn">import</span> <span class="n">weights_array</span><span class="p">,</span> <span class="n">cdms2_name</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">standard</span>
@@ -281,8 +280,7 @@
         <span class="c">#: Number of EOFs in the solution.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">neofs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">neofs</span>
         <span class="c"># Names of the input variables.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_dataset_names</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">cdms2_name</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">,</span> <span class="s">&#39;_&#39;</span><span class="p">),</span>
-                                  <span class="n">datasets</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dataset_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">cdms2_name</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">,</span> <span class="s">&#39;_&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">datasets</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_dataset_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">dataset</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">dataset</span> <span class="ow">in</span> <span class="n">datasets</span><span class="p">]</span>
 
 <div class="viewcode-block" id="MultivariateEof.pcs"><a class="viewcode-back" href="../../../api/eofs.multivariate.cdms.html#eofs.multivariate.cdms.MultivariateEof.pcs">[docs]</a>    <span class="k">def</span> <span class="nf">pcs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pcscaling</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">npcs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
@@ -322,7 +320,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">pcs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">pcs</span><span class="p">(</span><span class="n">pcscaling</span><span class="p">,</span> <span class="n">npcs</span><span class="p">)</span>
-        <span class="n">pcsax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;pc&#39;</span><span class="p">)</span>
+        <span class="n">pcsax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;pc&#39;</span><span class="p">)</span>
         <span class="n">pcsax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;pc_number&#39;</span>
         <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_timeax</span><span class="p">,</span> <span class="n">pcsax</span><span class="p">]</span>
         <span class="n">pcs</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;pcs&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">)</span>
@@ -368,10 +366,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">eofset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">eofs</span><span class="p">(</span><span class="n">eofscaling</span><span class="p">,</span> <span class="n">neofs</span><span class="p">)</span>
         <span class="n">neofs</span> <span class="o">=</span> <span class="n">eofset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">neofs</span><span class="p">),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eof&#39;</span><span class="p">)</span>
+        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">neofs</span><span class="p">)),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eof&#39;</span><span class="p">)</span>
         <span class="n">eofax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;eof_number&#39;</span>
-        <span class="n">varset</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">iset</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ndata</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">iset</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ndata</span><span class="p">):</span>
             <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">eofax</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multichannels</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span>
             <span class="n">eofset</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span><span class="o">.</span><span class="n">fill_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multimissing</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span>
             <span class="n">eofset</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span>
@@ -419,9 +416,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">eofset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">eofsAsCorrelation</span><span class="p">(</span><span class="n">neofs</span><span class="p">)</span>
         <span class="n">neofs</span> <span class="o">=</span> <span class="n">eofset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">neofs</span><span class="p">),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eof&#39;</span><span class="p">)</span>
+        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">neofs</span><span class="p">)),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eof&#39;</span><span class="p">)</span>
         <span class="n">eofax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;eof_number&#39;</span>
-        <span class="k">for</span> <span class="n">iset</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ndata</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">iset</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ndata</span><span class="p">):</span>
             <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">eofax</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multichannels</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span>
             <span class="n">eofset</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span><span class="o">.</span><span class="n">fill_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multimissing</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span>
             <span class="n">eofset</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span>
@@ -479,9 +476,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">eofset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">eofsAsCovariance</span><span class="p">(</span><span class="n">neofs</span><span class="p">)</span>
         <span class="n">neofs</span> <span class="o">=</span> <span class="n">eofset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">neofs</span><span class="p">),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eof&#39;</span><span class="p">)</span>
+        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">neofs</span><span class="p">)),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eof&#39;</span><span class="p">)</span>
         <span class="n">eofax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;eof_number&#39;</span>
-        <span class="k">for</span> <span class="n">iset</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ndata</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">iset</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ndata</span><span class="p">):</span>
             <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">eofax</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multichannels</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span>
             <span class="n">eofset</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span><span class="o">.</span><span class="n">fill_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multimissing</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span>
             <span class="n">eofset</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span>
@@ -524,7 +521,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">lambdas</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">(</span><span class="n">neigs</span><span class="o">=</span><span class="n">neigs</span><span class="p">)</span>
-        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lambdas</span><span class="p">)),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eigenvalue&#39;</span><span class="p">)</span>
+        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lambdas</span><span class="p">))),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eigenvalue&#39;</span><span class="p">)</span>
         <span class="n">eofax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;eigenvalue_number&#39;</span>
         <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">eofax</span><span class="p">]</span>
         <span class="n">lambdas</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">lambdas</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eigenvalues&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">)</span>
@@ -563,7 +560,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">vfrac</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">varianceFraction</span><span class="p">(</span><span class="n">neigs</span><span class="o">=</span><span class="n">neigs</span><span class="p">)</span>
-        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vfrac</span><span class="p">)),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eigenvalue&#39;</span><span class="p">)</span>
+        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vfrac</span><span class="p">))),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eigenvalue&#39;</span><span class="p">)</span>
         <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">eofax</span><span class="p">]</span>
         <span class="n">vfrac</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">vfrac</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;variance_fraction&#39;</span><span class="p">,</span>
                                      <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">)</span>
@@ -637,7 +634,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">typerrs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">northTest</span><span class="p">(</span><span class="n">neigs</span><span class="o">=</span><span class="n">neigs</span><span class="p">,</span> <span class="n">vfscaled</span><span class="o">=</span><span class="n">vfscaled</span><span class="p">)</span>
-        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">typerrs</span><span class="p">)),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eigenvalue&#39;</span><span class="p">)</span>
+        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">typerrs</span><span class="p">))),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eigenvalue&#39;</span><span class="p">)</span>
         <span class="n">eofax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;eof_number&#39;</span>
         <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">eofax</span><span class="p">]</span>
         <span class="n">typerrs</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">typerrs</span><span class="p">,</span>
@@ -678,7 +675,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">rfset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">reconstructedField</span><span class="p">(</span><span class="n">neofs</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">iset</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ndata</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">iset</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ndata</span><span class="p">):</span>
             <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_multitimeaxes</span><span class="p">[</span><span class="n">iset</span><span class="p">]]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multichannels</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span>
             <span class="n">rfset</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span><span class="o">.</span><span class="n">fill_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multimissing</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span>
             <span class="n">rfset</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span>
@@ -771,12 +768,12 @@
         <span class="c"># axis was present in the input field.</span>
         <span class="k">if</span> <span class="n">pcs</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
             <span class="c"># Time dimension present:</span>
-            <span class="n">pcsax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;pc&#39;</span><span class="p">)</span>
+            <span class="n">pcsax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;pc&#39;</span><span class="p">)</span>
             <span class="n">pcsax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;pc_number&#39;</span>
             <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">fields</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">getAxis</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">pcsax</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c"># A PC axis and a leading time axis.</span>
-            <span class="n">pcsax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;pc&#39;</span><span class="p">)</span>
+            <span class="n">pcsax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;pc&#39;</span><span class="p">)</span>
             <span class="n">pcsax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;pc_number&#39;</span>
             <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">pcsax</span><span class="p">]</span>
         <span class="c"># Apply meta data to the projected PCs.</span>
@@ -822,7 +819,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2013 Andrew Dawson.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>
