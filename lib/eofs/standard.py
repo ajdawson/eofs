@@ -21,7 +21,7 @@ import warnings
 
 import numpy as np
 import numpy.ma as ma
-
+from numpy.lib.stride_tricks import as_strided
 from .tools.standard import correlation_map, covariance_map
 
 
@@ -748,3 +748,383 @@ class Eof(object):
 
         """
         return self._weights
+
+
+class EEof(Eof, object):
+    """Extended EOF analysis (EEOF) (`numpy` interface)"""
+
+    def __init__(self, dataset, lag, weights=None, center=True, ddof=1):
+        """Create an Eof object.
+
+        The EEOF solution is computed at initialization time. Method
+        calls are used to retrieve computed quantities.
+
+        **Arguments:**
+
+        *dataset*
+            A `numpy.ndarray` or `numpy.ma.MaskedArray` with two or more
+            dimensions containing the data to be analysed. The first
+            dimension is assumed to represent time. Missing values are
+            permitted, either in the form of a masked array, or
+            `numpy.nan` values. Missing values must be constant with time
+            (e.g., values of an oceanographic field over land).
+
+        **Optional arguments:**
+
+        *weights*
+            An array of weights whose shape is compatible with those of
+            the input array *dataset*. The weights can have the same
+            shape as *dataset* or a shape compatible with an array
+            broadcast (i.e., the shape of the weights can can match the
+            rightmost parts of the shape of the input array *dataset*).
+            If the input array *dataset* does not require weighting then
+            the value *None* may be used. Defaults to *None* (no
+            weighting).
+
+        *center*
+            If *True*, the mean along the first axis of *dataset* (the
+            time-mean) will be removed prior to analysis. If *False*,
+            the mean along the first axis will not be removed. Defaults
+            to *True* (mean is removed).
+
+            The covariance interpretation relies on the input data being
+            anomaly data with a time-mean of 0. Therefore this option
+            should usually be set to *True*. Setting this option to
+            *True* has the useful side effect of propagating missing
+            values along the time dimension, ensuring that a solution
+            can be found even if missing values occur in different
+            locations at different times.
+
+        *ddof*
+            'Delta degrees of freedom'. The divisor used to normalize
+            the covariance matrix is *N - ddof* where *N* is the
+            number of samples. Defaults to *1*.
+
+        **Returns:**
+
+        *solver*
+            An `EEof` instance.
+
+        **Examples:**
+
+        EEOF analysis with no weighting::
+
+            from eofs.standard import EEof
+            solver = EEof(data)
+
+        EEOF analysis of a data array with spatial dimensions that
+        represent latitude and longitude with weighting. In this example
+        the data array is dimensioned (ntime, nlat, nlon), and in order
+        for the latitude weights to be broadcastable to this shape, an
+        extra length-1 dimension is added to the end::
+
+            from eofs.standard import EEof
+            import numpy as np
+            latitude = np.linspace(-90, 90, 73)
+            weights_array = np.cos(np.deg2rad(latitude))[:, np.newaxis]
+            solver = EEof(data, weights=weight_array)
+
+        Authors : Arulalan.T, Dileep.K
+
+        """
+        # Store the input data in an instance variable.
+        if dataset.ndim < 2:
+            raise ValueError('the input data set must be '
+                             'at least two dimensional')
+        self._data = dataset.copy()
+        # Check if the input is a masked array. If so fill it with NaN.
+        try:
+            self._data = self._data.filled(fill_value=np.nan)
+            self._filled = True
+        except AttributeError:
+            self._filled = False
+        # Store information about the shape/size of the input data.
+        self._records = self._data.shape[0]
+        self._originalshape = self._data.shape[1:]
+        self._lag = lag
+        self._window = lag + 1
+        channels = np.product(self._originalshape)
+        # Weight the data set according to weighting argument.
+        if weights is not None:
+            try:
+                # The broadcast_arrays call returns a list, so the second index
+                # is retained, but also we want to remove the time dimension
+                # from the weights so the the first index from the broadcast
+                # array is taken.
+                self._weights = np.broadcast_arrays(
+                    self._data[0:1], weights)[1][0]
+                self._data = self._data * self._weights
+            except ValueError:
+                raise ValueError('weight array dimensions are incompatible')
+            except TypeError:
+                raise TypeError('weights are not a valid type')
+        else:
+            self._weights = None
+        # Remove the time mean of the input data unless explicitly told
+        # not to by the "center" argument.
+        self._centered = center
+        if center:
+            self._data = self._center(self._data)
+        # Reshape to two dimensions (time, space) creating the design matrix.
+        self._data = self._data.reshape([self._records, channels])
+        # Find the indices of values that are not missing in one row. All the
+        # rows will have missing values in the same places provided the
+        # array was centered. If it wasn't then it is possible that some
+        # missing values will be missed and the singular value decomposition
+        # will produce not a number for everything.
+        if not self._valid_nan(self._data):
+            raise ValueError('missing values detected in different '
+                             'locations at different times')
+
+        # Get covariance matrix of eeof by passing reverse time axis input data
+        cov_matrix_eeof = self._embed_dimension(self._data[::-1], self._window)
+        nonMissingIndex = np.where(np.isnan(cov_matrix_eeof[0]) == False)[0]
+        # Remove missing values from the design matrix.
+        dataNoMissing = cov_matrix_eeof[:, nonMissingIndex]
+        # make memory free
+        del cov_matrix_eeof
+        # new channels dimension
+        new_channels = self._window * channels
+
+        # Compute the singular value decomposition of the design matrix.
+        try:
+            A, Lh, E = np.linalg.svd(dataNoMissing, full_matrices=False)
+        except (np.linalg.LinAlgError, ValueError):
+            raise ValueError('error encountered in SVD, check that missing '
+                             'values are in the same places at each time and '
+                             'that all the values are not missing')
+        # Singular values are the square-root of the eigenvalues of the
+        # covariance matrix. Construct the eigenvalues appropriately and
+        # normalize by N-ddof where N is the number of observations. This
+        # corresponds to the eigenvalues of the normalized covariance matrix.
+        self._ddof = ddof
+        normfactor = float(self._records - self._lag - self._ddof)
+        self._L = Lh * Lh / normfactor
+        # Store the number of eigenvalues (and hence EEOFs) that were actually
+        # computed.
+        self.neeofs = len(self._L) 
+        # Re-introduce missing values into the eigenvectors in the same places
+        # as they exist in the input maps. Create an array of not-a-numbers
+        # and then introduce data values where required. We have to use the
+        # astype method to ensure the eigenvectors are the same type as the
+        # input dataset since multiplication by np.NaN will promote to 64-bit.
+        self._flatE = np.ones([self.neeofs, new_channels],
+                              dtype=self._data.dtype) * np.NaN
+        self._flatE = self._flatE.astype(self._data.dtype)
+        self._flatE[:, nonMissingIndex] = E
+        # Remove the scaling on the principal component time-series that is
+        # implicitily introduced by using SVD instead of eigen-decomposition.
+        # The PCs may be re-scaled later if required.
+        self._P = A * Lh
+
+    def _embed_dimension(self, array, window):
+        """
+        Embed a given length window from the leading dimension of an array.
+
+        **Arguments:**
+
+        *array*
+            A 2-dimensional (nxm) `numpy.ndarray` or `numpy.ma.MaskedArray`.
+
+        *window*
+            An integer specifying the length of the embedding window.
+
+        **Returns:**
+
+            A 2-dimenensional (nx(m*window)) `numpy.ndarray` or
+            `numpy.ma.MaskedArray` which is a view on the input *array*.
+
+        **Example:**
+
+            data = np.arange(4*3).reshape(4, 3)
+            >>> data
+            array([[ 0,  1,  2],
+                   [ 3,  4,  5],
+                   [ 6,  7,  8],
+                   [ 9, 10, 11]])
+
+            >>> _embed_dimension(data, window=2)
+            array([[ 0,  1,  2,  3,  4,  5],
+                   [ 3,  4,  5,  6,  7,  8],
+                   [ 6,  7,  8,  9, 10, 11]])
+
+            >>> _embed_dimension(data, window=3)
+            array([[ 0,  1,  2,  3,  4,  5,  6,  7,  8],
+                   [ 3,  4,  5,  6,  7,  8,  9, 10, 11]])
+
+         Note : For window is 1, then there would be no changes in
+                input data shape. i.e. For lag=0, EEof is equal to
+                normal Eof.
+
+           >>> _embed_dimension(data, window=1)
+            array([[ 0,  1,  2],
+                   [ 3,  4,  5],
+                   [ 6,  7,  8],
+                   [ 9, 10, 11]])
+
+        Author: Dr Andrew Dawson
+        Date: 18-11-2013
+
+        """
+        if array.ndim != 2:
+            raise ValueError('array must have exactly 2 dimensions')
+        if window >= array.shape[0]:
+            raise ValueError('embedding window must be shorter than the '
+                             'first dimension of the array')
+        n, m = array.shape
+        nwin = n - window + 1
+        shape = (nwin, window) + array.shape[1:]
+
+        strides = (array.strides[0], array.strides[0]) + array.strides[1:]
+        windowed = as_strided(array, shape=shape, strides=strides)
+        if ma.isMaskedArray(array):
+            if array.mask is ma.nomask:
+                windowed_mask = array.mask
+            else:
+                strides = ((array.mask.strides[0], array.mask.strides[0]) +
+                           array.mask.strides[1:])
+                windowed_mask = as_strided(array.mask, shape=shape,
+                                           strides=strides)
+            # end of if array.mask is ma.nomask:
+            windowed = ma.array(windowed, mask=windowed_mask)
+        # end of if ma.isMaskedArray(array):
+        out_shape = (nwin, window * array.shape[1])
+
+        return windowed.reshape(out_shape)
+
+    def eeofs(self, eofscaling=0, neeofs=None):
+        """Extended Empirical orthogonal functions (EEOFs).
+
+        **Optional arguments:**
+
+        *eofscaling*
+            Sets the scaling of the EOFs. The following values are
+            accepted:
+
+            * *0* : Un-scaled EEOFs (default).
+            * *1* : EEOFs are divided by the square-root of their
+              eigenvalues.
+            * *2* : EEOFs are multiplied by the square-root of their
+              eigenvalues.
+
+        *neeofs*
+            Number of EEOFs to return. Defaults to all EEOFs. If the
+            number of EEOFs requested is more than the number that are
+            available, then all available EEOFs will be returned.
+
+        **Returns:**
+
+        *eofs*
+            An array with the ordered EEOFs along the first dimension.
+
+        **Examples:**
+
+        All EEOFs with no scaling::
+
+            eeofs = solver.eeofs()
+
+        The leading EEOF with scaling applied::
+
+            eeof1 = solver.eeofs(neeofs=1, eofscaling=1)
+
+        """
+        if neeofs is None or neeofs > self.neeofs:
+            neeofs = self.neeofs
+        slicer = slice(0, neeofs)
+        neeofs = neeofs or self.neeofs
+        flat_eofs = self._flatE[slicer].copy()
+        if eofscaling == 0:
+            # No modification. A copy needs to be returned in case it is
+            # modified. If no copy is made the internally stored eigenvectors
+            # could be modified unintentionally.
+            #rval = self._flatE[slicer].copy()
+            rval = flat_eofs
+        elif eofscaling == 1:
+            # Divide by the square-root of the eigenvalues.
+            rval = flat_eofs / np.sqrt(self._L[slicer])[:, np.newaxis]
+        elif eofscaling == 2:
+            # Multiply by the square-root of the eigenvalues.
+            rval = flat_eofs * np.sqrt(self._L[slicer])[:, np.newaxis]
+        else:
+            raise ValueError('invalid eof scaling option: '
+                             '{!s}'.format(eofscaling))
+        if self._filled:
+            rval = ma.array(rval, mask=np.where(np.isnan(rval), True, False))
+        return rval.reshape(((neeofs, self._window,) + self._originalshape))        
+            
+    def eigenvalues(self, neigs=None):
+        """Eigenvalues (decreasing variances) associated with each EEOF.
+
+        **Optional argument:**
+
+        *neigs*
+            Number of eigenvalues to return. Defaults to all
+            eigenvalues. If the number of eigenvalues requested is more
+            than the number that are available, then all available
+            eigenvalues will be returned.
+
+        **Returns:**
+
+        *eigenvalues*
+            An array containing the eigenvalues arranged largest to
+            smallest.
+
+        **Examples:**
+
+        All eigenvalues::
+
+            eigenvalues = solver.eigenvalues()
+
+        The first eigenvalue::
+
+            eigenvalue1 = solver.eigenvalues(neigs=1)
+
+        """
+        # Create a slicer and use it on the eigenvalue array. A copy must be
+        # returned in case the slicer takes all elements, in which case a
+        # reference to the eigenvalue array is returned. If this is modified
+        # then the internal eigenvalues array would then be modified as well.
+        if neigs is None or neigs > self.neeofs:
+            neigs = self.neeofs 
+        slicer = slice(0, neigs)
+        return self._L[slicer].copy()
+
+    def varianceFraction(self, neigs=None):
+        """Fractional EEOF mode variances.
+
+        The fraction of the total variance explained by each EOF mode,
+        values between 0 and 1 inclusive.
+
+        **Optional argument:**
+
+        *neigs*
+            Number of eigenvalues to return the fractional variance for.
+            Defaults to all eigenvalues. If the number of eigenvalues
+            requested is more than the number that are available, then
+            fractional variances for all available eigenvalues will be
+            returned.
+
+        **Returns:**
+
+        *variance_fractions*
+            An array containing the fractional variances.
+
+        **Examples:**
+
+        The fractional variance represented by each EEOF mode::
+
+            variance_fractions = solver.varianceFraction()
+
+        The fractional variance represented by the first EEOF mode::
+
+            variance_fraction_mode_1 = solver.VarianceFraction(neigs=1)
+
+        """
+        # Return the array of eigenvalues divided by the sum of the
+        # eigenvalues.
+        if neigs is None or neigs > self.neeofs:
+            neigs = self.neeofs
+        slicer = slice(0, neigs)
+        return sum(self._L[slicer]) / self._L.sum()
+    
+
