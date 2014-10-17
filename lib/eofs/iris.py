@@ -674,6 +674,12 @@ class EEof(object):
             are allowed provided that they are constant with time (e.g.,
             values of an oceanographic field over land).
 
+        *lag*
+            A no of lag window is used to reconstruct input matrix as 
+            extended input matrix to analysis Eof on it.
+            window = lag + 1, so lag must be greater or equal to zero.
+            zero lag will produced same result as Eof, instead of EEof.   
+            
         **Optional arguments:**
 
         *weights*
