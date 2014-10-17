@@ -21,6 +21,7 @@ import warnings
 
 import numpy as np
 import numpy.ma as ma
+
 from numpy.lib.stride_tricks import as_strided
 from .tools.standard import correlation_map, covariance_map
 
