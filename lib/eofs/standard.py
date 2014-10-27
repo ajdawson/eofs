@@ -959,9 +959,9 @@ class EEof(Eof, object):
             array([[ 0,  1,  2,  3,  4,  5,  6,  7,  8],
                    [ 3,  4,  5,  6,  7,  8,  9, 10, 11]])
                    
-           For general case, input array shape of (n, p), this 
-           _embed_dimension returns shape of (n - window + 1, p * window),
-           where n is no of rows and p is no of columns.
+           For general case, input array shape of (n, m), this 
+           _embed_dimension returns shape of (n - window + 1, m * window),
+           where n is no of rows and m is no of columns.
 
          Note1 : For window is 1, then there would be no changes in
                 input data shape. i.e. For lag=0, EEof is equal to
