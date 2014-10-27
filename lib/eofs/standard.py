@@ -938,7 +938,7 @@ class EEof(Eof, object):
 
         **Returns:**
 
-            A 2-dimenensional (nx(m*window)) `numpy.ndarray` or
+            A 2-dimenensional ((n-window+1) x (m*window)) `numpy.ndarray` or
             `numpy.ma.MaskedArray` which is a view on the input *array*.
 
         **Example:**
