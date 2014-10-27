@@ -958,8 +958,12 @@ class EEof(Eof, object):
             >>> _embed_dimension(data, window=3)
             array([[ 0,  1,  2,  3,  4,  5,  6,  7,  8],
                    [ 3,  4,  5,  6,  7,  8,  9, 10, 11]])
+                   
+           For general case, input array shape of (n, p), this 
+           _embed_dimension returns shape of (n - window + 1, p * window),
+           where n is no of rows and p is no of columns.
 
-         Note : For window is 1, then there would be no changes in
+         Note1 : For window is 1, then there would be no changes in
                 input data shape. i.e. For lag=0, EEof is equal to
                 normal Eof.
 
@@ -968,7 +972,14 @@ class EEof(Eof, object):
                    [ 3,  4,  5],
                    [ 6,  7,  8],
                    [ 9, 10, 11]])
-
+        
+        Note 2 : window = lag + 1
+        
+        References : A.Hannachi, 2004, "A Primer for EOF Analysis of Climate
+             Data", Department of Meteorology, University of Reading Reading
+             RG6 6BB, U.K. (page numbers 15-28) 
+        Link : http://eros.eas.gatech.edu/eas-8803/lectures/EOFs/eofprimer.pdf
+        
         Author: Dr Andrew Dawson
         Date: 18-11-2013
 
