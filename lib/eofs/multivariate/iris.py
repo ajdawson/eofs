@@ -17,6 +17,7 @@
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
 from __future__ import absolute_import
 
+import collections
 from copy import copy
 
 from iris.cube import Cube
@@ -90,6 +91,9 @@ class MultivariateEof(object):
         *ddof*
             'Delta degrees of freedom'. The divisor used to normalize
             the covariance matrix is *N - ddof* where *N* is the
+        Reconstruct the input field using EOFs 1, 2 and 5::
+
+            reconstruction = solver.reconstuctedField([1, 2, 5])
             number of samples. Defaults to *1*.
 
         **Returns:**
@@ -541,7 +545,9 @@ class MultivariateEof(object):
             Number of EOFs to use for the reconstruction. If the
             number of EOFs requested is more than the number that are
             available, then all available EOFs will be used for the
-            reconstruction.
+            reconstruction. Alternatively this argument can be an
+            iterable of mode numbers (where the first mode is 1) in
+            order to facilitate reconstruction with arbitrary modes.
 
         **Returns:**
 
@@ -556,8 +562,16 @@ class MultivariateEof(object):
 
             reconstruction_list = solver.reconstructedField(neofs=3)
 
+        Reconstruct the input field using EOFs 1, 2 and 5::
+
+            reconstruction_list = solver.reconstuctedField([1, 2, 5])
+
         """
         rfset = self._solver.reconstructedField(neofs)
+        if isinstance(neofs, collections.Iterable):
+            name_part = 'EOFs_{}'.format('_'.join([str(e) for e in neofs]))
+        else:
+            name_part = '{:d}_EOFs'.format(neofs)
         for iset in xrange(self._ncubes):
             coords = [self._time[iset]] + self._coords[iset]
             rfset[iset] = Cube(
@@ -565,8 +579,8 @@ class MultivariateEof(object):
                 dim_coords_and_dims=zip(coords, range(rfset[iset].ndim)),
                 var_name=self._cube_var_names[iset] or 'dataset_{:d}'.format(
                     iset),
-                long_name='{:s}_reconstructed_with_{:d}_EOFs'.format(
-                    self._cube_names[iset], neofs))
+                long_name='{:s}_reconstructed_with_{:s}'.format(
+                    self._cube_names[iset], name_part))
             rfset[iset].attributes.update({'neofs': neofs})
         return rfset
 

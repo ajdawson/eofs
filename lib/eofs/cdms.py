@@ -17,6 +17,8 @@
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
 from __future__ import absolute_import
 
+import collections
+
 import cdms2
 
 from . import standard
@@ -532,6 +534,9 @@ class Eof(object):
 
         *neofs*
             Number of EOFs to use for the reconstruction.
+            Alternatively this argument can be an iterable of mode
+            numbers (where the first mode is 1) in order to facilitate
+            reconstruction with arbitrary modes.
 
         **Returns:**
 
@@ -543,7 +548,11 @@ class Eof(object):
 
         Reconstruct the input field using 3 EOFs::
 
-            reconstruction = solver.reconstructedField(neofs=3)
+            reconstruction = solver.reconstructedField(3)
+
+        Reconstruct the input field using EOFs 1, 2 and 5::
+
+            reconstruction = solver.reconstuctedField([1, 2, 5])
 
         """
         rfield = self._solver.reconstructedField(neofs)
@@ -553,8 +562,12 @@ class Eof(object):
                                       id=self._dataset_id,
                                       axes=axlist,
                                       fill_value=self._missing_value)
-        rfield.long_name = '{:s}_reconstructed_with_{:d}_EOFs'.format(
-            self._dataset_name, neofs)
+        if isinstance(neofs, collections.Iterable):
+            name_part = 'EOFs_{}'.format('_'.join([str(e) for e in neofs]))
+        else:
+            name_part = '{:d}_EOFs'.format(neofs)
+        rfield.long_name = '{:s}_reconstructed_with_{:s}'.format(
+            self._dataset_name, name_part)
         rfield.neofs = neofs
         return rfield
 

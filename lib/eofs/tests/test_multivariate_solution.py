@@ -168,6 +168,11 @@ class MVSolutionTest(EofsTest):
         for sst, ref in zip(sst_fields, self.solution['sst']):
             self.assert_array_almost_equal(sst, ref)
 
+    def test_reconstructedField_arb(self):
+        sst_fields = self.solver.reconstructedField([1, 2, 5])
+        for sst, ref in zip(sst_fields, self.solution['rcon']):
+            self.assert_array_almost_equal(sst, ref)
+
     def test_getWeights(self):
         # analysis weights should match those from the reference solution
         weights = self.solver.getWeights()

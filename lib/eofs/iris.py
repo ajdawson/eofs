@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
 from __future__ import absolute_import
+import collections
 from copy import copy
 
 from iris.cube import Cube
@@ -518,6 +519,9 @@ class Eof(object):
 
         *neofs*
             Number of EOFs to use for the reconstruction.
+            Alternatively this argument can be an iterable of mode
+            numbers (where the first mode is 1) in order to facilitate
+            reconstruction with arbitrary modes.
 
         **Returns:**
 
@@ -529,16 +533,24 @@ class Eof(object):
 
         Reconstruct the input field using 3 EOFs::
 
-            reconstruction = solver.reconstructedField(neofs=3)
+            reconstruction = solver.reconstructedField(3)
+
+        Reconstruct the input field using EOFs 1, 2 and 5::
+
+            reconstruction = solver.reconstuctedField([1, 2, 5])
 
         """
         rfield = self._solver.reconstructedField(neofs)
         coords = [self._time] + self._coords
+        if isinstance(neofs, collections.Iterable):
+            name_part = 'EOFs_{}'.format('_'.join([str(e) for e in neofs]))
+        else:
+            name_part = '{}_EOFs'.format(neofs)
         rfield = Cube(rfield,
                       dim_coords_and_dims=zip(coords, range(rfield.ndim)),
                       var_name=self._cube_var_name or 'dataset',
-                      long_name='{:s}_reconstructed_with_{:d}_EOFs'.format(
-                                self._cube_name, neofs))
+                      long_name='{:s}_reconstructed_with_{:s}'.format(
+                                self._cube_name, name_part))
         rfield.attributes.update({'neofs': neofs})
         return rfield
 

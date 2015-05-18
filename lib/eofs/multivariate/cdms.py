@@ -17,6 +17,8 @@
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
 from __future__ import absolute_import
 
+import collections
+
 import cdms2
 
 from eofs.tools.cdms import weights_array, cdms2_name
@@ -539,7 +541,9 @@ class MultivariateEof(object):
             Number of EOFs to use for the reconstruction. If the
             number of EOFs requested is more than the number that are
             available, then all available EOFs will be used for the
-            reconstruction.
+            reconstruction. Alternatively this argument can be an
+            iterable of mode numbers (where the first mode is 1) in
+            order to facilitate reconstruction with arbitrary modes.
 
         **Returns:**
 
@@ -554,8 +558,16 @@ class MultivariateEof(object):
 
             reconstruction_list = solver.reconstructedField(neofs=3)
 
+        Reconstruct the input field using EOFs 1, 2 and 5::
+
+            reconstruction_list = solver.reconstuctedField([1, 2, 5])
+
         """
         rfset = self._solver.reconstructedField(neofs)
+        if isinstance(neofs, collections.Iterable):
+            name_part = 'EOFs_{}'.format('_'.join([str(e) for e in neofs]))
+        else:
+            name_part = '{:d}_EOFs'.format(neofs)
         for iset in xrange(self._ndata):
             axlist = [self._multitimeaxes[iset]] + self._multichannels[iset]
             rfset[iset].fill_value = self._multimissing[iset]
@@ -564,8 +576,8 @@ class MultivariateEof(object):
                 id=self._dataset_ids[iset],
                 axes=axlist,
                 fill_value=self._multimissing[iset])
-            rfset[iset].long_name = '{:s}_reconstructed_with_{:d}_EOFs'.format(
-                self._dataset_names[iset], neofs)
+            rfset[iset].long_name = '{:s}_reconstructed_with_{:s}'.format(
+                self._dataset_names[iset], name_part)
             rfset[iset].neofs = neofs
         return rfset
 
