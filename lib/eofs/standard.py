@@ -17,6 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
 from __future__ import absolute_import
+import collections
 import warnings
 
 import numpy as np
@@ -593,7 +594,9 @@ class Eof(object):
             Number of EOFs to use for the reconstruction. If the
             number of EOFs requested is more than the number that are
             available, then all available EOFs will be used for the
-            reconstruction.
+            reconstruction. Alternatively this argument can be an
+            iterable of mode numbers (where the first mode is 1) in
+            order to facilitate reconstruction with arbitrary modes.
 
         **Returns:**
 
@@ -601,16 +604,25 @@ class Eof(object):
             An array the same shape as the `Eof` input *dataset*
             contaning the reconstruction using *neofs* EOFs.
 
-        **Example:**
+        **Examples:**
 
         Reconstruct the input field using 3 EOFs::
 
-            reconstruction = solver.reconstructedField(neofs=3)
+            reconstruction = solver.reconstructedField(3)
+
+        Reconstruct the input field using EOFs 1, 2 and 5::
+
+            reconstruction = solver.reconstuctedField([1, 2, 5])
 
         """
+        # Determine how the PCs and EOFs will be selected.
+        if isinstance(neofs, collections.Iterable):
+            modes = [m - 1 for m in neofs]
+        else:
+            modes = slice(0, neofs)
         # Project principal components onto the EOFs to compute the
         # reconstructed field.
-        rval = np.dot(self._P[:, :neofs], self._flatE[:neofs])
+        rval = np.dot(self._P[:, modes], self._flatE[modes])
         # Reshape the reconstructed field so it has the same shape as the
         # input data set.
         rval = rval.reshape((self._records,) + self._originalshape)

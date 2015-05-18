@@ -201,6 +201,10 @@ class SolutionTest(EofsTest):
         sst = self.solver.reconstructedField(self.solver.neofs)
         self.assert_array_almost_equal(sst, self.solution['sst'])
 
+    def test_reconstructedField_arb(self):
+        sst = self.solver.reconstructedField([1, 2, 5])
+        self.assert_array_almost_equal(sst, self.solution['rcon'])
+
     def test_projectField(self):
         # generate tests for projecting a field onto the EOFs using each value
         # of the scaling parameter
@@ -347,6 +351,7 @@ class TestCDMSAreaWeightsTransposedGrid(CDMSSolutionTest):
         cls.solution['eofscor'] = cls.solution['eofscor'].reorder('-xy')
         cls.solution['eofscov'] = cls.solution['eofscov'].reorder('-xy')
         cls.solution['weights'] = cls.solution['weights'].transpose()
+        cls.solution['rcon'] = cls.solution['rcon'].reorder('-xy')
 
 
 class TestCDMSLatitudeWeightsManual(CDMSSolutionTest):

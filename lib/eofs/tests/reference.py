@@ -66,7 +66,8 @@ def _read_reference_solution(weights):
                    'variance.{!s}'.format(weights),
                    'weights.{!s}'.format(weights),
                    'errors.{!s}'.format(weights),
-                   'scaled_errors.{!s}'.format(weights),]
+                   'scaled_errors.{!s}'.format(weights),
+                   'rcon.{!s}'.format(weights),]
     fields = {name.split('.')[0]: _tomasked(_retrieve_test_field(name))
               for name in field_names}
     fields['sst'] -= fields['sst'].mean(axis=0)
@@ -140,6 +141,10 @@ def reference_solution(container_type, weights):
                 solution['scaled_errors'],
                 axes=[eof_dim],
                 id='scaled_errors')
+            solution['rcon'] = cdms2.createVariable(
+                solution['rcon'],
+                axes=[time_dim, lat_dim, lon_dim],
+                id='reconstructed_sst')
         except NameError:
             raise ValueError("cannot use container 'cdms' without the "
                              "cdms2 module")
@@ -203,6 +208,11 @@ def reference_solution(container_type, weights):
                 dim_coords_and_dims=zip((eof_dim,),
                                         range(1)),
                 long_name='scaled_errors')
+            solution['rcon']= Cube(
+                solution['rcon'],
+                dim_coords_and_dims=zip((time_dim, lat_dim, lon_dim),
+                                        range(3)),
+                long_name='reconstructed_sst')
         except NameError:
             raise ValueError("cannot use container 'iris' without the "
                              "iris module")
@@ -235,7 +245,8 @@ def reference_multivariate_solution(container_type, weights):
                 'eofs',
                 'eofscor',
                 'eofscov',
-                'weights',):
+                'weights',
+                'rcon',):
         try:
             solution[var] = solution[var][..., slice1], solution[var][..., slice2]
         except TypeError:

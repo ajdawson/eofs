@@ -506,7 +506,9 @@ class MultivariateEof(object):
             Number of EOFs to use for the reconstruction. If the
             number of EOFs requested is more than the number that are
             available, then all available EOFs will be used for the
-            reconstruction.
+            reconstruction. Alternatively this argument can be an
+            iterable of mode numbers (where the first mode is 1) in
+            order to facilitate reconstruction with arbitrary modes.
 
         **Returns:**
 
@@ -519,7 +521,11 @@ class MultivariateEof(object):
 
         Reconstruct the input data sets using 3 EOFs::
 
-            reconstruction_list = solver.reconstructedField(neofs=3)
+            reconstruction_list = solver.reconstructedField(3)
+
+        Reconstruct the input field using EOFs 1, 2 and 5::
+
+            reconstruction_list = solver.reconstuctedField([1, 2, 5])
 
         """
         rf = self._solver.reconstructedField(neofs)
