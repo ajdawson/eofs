@@ -5,9 +5,9 @@ python:
     - "3.3"
     - "3.4"
 
+sudo: false
+
 install:
-    # Make sure system components are up to date:
-    - sudo apt-get update
     # Install Miniconda so we can use it to manage dependencies:
     - if [[ "$TRAVIS_PYTHON_VERSION" == 2* ]]; then
         wget http://repo.continuum.io/miniconda/Miniconda-3.4.2-Linux-x86_64.sh -O miniconda.sh;
@@ -16,7 +16,6 @@ install:
       fi
     - bash miniconda.sh -b -p $HOME/miniconda
     - export PATH="$HOME/miniconda/bin:$PATH"
-    - hash -r
     - conda config --set always_yes yes --set changeps1 no
     - conda config --add channels ajdawson
     - conda update conda
