@@ -115,6 +115,27 @@ class Eof(object):
         self._coords.remove(self._time)
         if len(self._coords) < 1:
             raise ValueError('one or more non-time dimensions are required')
+        # Store the auxiliary coordinates from the cube, categorising them into
+        # coordinates spanning time only, coordinates spanning space only, and
+        # coordinates spanning both time and space. This is helpful due to the
+        # natural separation of space and time in EOF analysis. The time and
+        # space spanning coordinates are only useful for reconstruction, as all
+        # other methods return either a temporal field or a spatial field.
+        self._time_aux_coords = []
+        self._space_aux_coords = []
+        self._time_space_aux_coords = []
+        for coord in cube.aux_coords:
+            dims = cube.coord_dims(coord)
+            if dims == (0,):
+                # Coordinate spans time and time only.
+                self._time_aux_coords.append(coord)
+            elif dims:
+                if 0 in dims:
+                    # Coordinate spans time and at least one space dimension.
+                    self._time_space_aux_coords.append((coord, dims))
+                else:
+                    # Coordinate spans only space dimensions.
+                    self._space_aux_coords.append((coord, dims))
         # Define the weights array for the cube.
         if weights is None:
             wtarray = None
@@ -185,6 +206,9 @@ class Eof(object):
         pcs = Cube(pcs,
                    dim_coords_and_dims=zip(coords, range(pcs.ndim)),
                    var_name='pcs', long_name='principal_components')
+        # Add any auxiliary coords spanning time back to the returned cube.
+        for coord in self._time_aux_coords:
+            pcs.add_aux_coord(coord, 0)
         return pcs
 
     def eofs(self, eofscaling=0, neofs=None):
@@ -233,6 +257,9 @@ class Eof(object):
                     dim_coords_and_dims=zip(coords, range(eofs.ndim)),
                     var_name='eofs',
                     long_name='empirical_orthogonal_functions')
+        # Add any auxiliary coordinates spanning space to the returned cube.
+        for coord, dims in self._space_aux_coords:
+            eofs.add_aux_coord(coord, dims)
         return eofs
 
     def eofsAsCorrelation(self, neofs=None):
@@ -281,6 +308,9 @@ class Eof(object):
                     var_name='eofs',
                     long_name='correlation_between_pcs_and_{:s}'.format(
                               self._cube_name))
+        # Add any auxiliary coordinates spanning space to the returned cube.
+        for coord, dims in self._space_aux_coords:
+            eofs.add_aux_coord(coord, dims)
         return eofs
 
     def eofsAsCovariance(self, neofs=None, pcscaling=1):
@@ -342,6 +372,9 @@ class Eof(object):
                     var_name='eofs',
                     long_name='covariance_between_pcs_and_{:s}'.format(
                               self._cube_name))
+        # Add any auxiliary coordinates spanning space to the returned cube.
+        for coord, dims in self._space_aux_coords:
+            eofs.add_aux_coord(coord, dims)
         return eofs
 
     def eigenvalues(self, neigs=None):
@@ -552,6 +585,12 @@ class Eof(object):
                       long_name='{:s}_reconstructed_with_{:s}'.format(
                                 self._cube_name, name_part))
         rfield.attributes.update({'neofs': neofs})
+        # Add any auxiliary coordinates spanning time or space to the returned
+        # cube.
+        for coord in self._time_aux_coords:
+            rfield.add_aux_coord(coord, 0)
+        for coord, dims in self._space_aux_coords + self._time_space_aux_coords:
+            rfield.add_aux_coord(coord, dims)
         return rfield
 
     def projectField(self, cube, neofs=None, eofscaling=0, weighted=True):
@@ -632,23 +671,28 @@ class Eof(object):
                                         neofs=neofs,
                                         eofscaling=eofscaling,
                                         weighted=weighted)
+        # Create the PCs cube.
+        pcs = Cube(pcs,
+                   long_name='{}_pseudo_pcs'.format(cube_name),
+                   var_name='pseudo_pcs')
         # Construct the required dimensions.
         if pcs.ndim == 2:
             # 2D PCs require a time axis and a PC axis.
             pcdim = DimCoord(range(pcs.shape[1]),
                              var_name='pc',
                              long_name='pc_number')
-            coords = [time, pcdim]
+            pcs.add_dim_coord(time, 0)
+            pcs.add_dim_coord(pcdim, 1)
+            # Add any time-spanning auxiliary coordinates from the input cube to
+            # the returned PCs.
+            for coord in self._time_aux_coords:
+                pcs.add_aux_coord(coord, 0)
         else:
             # 1D PCs require only a PC axis.
             pcdim = DimCoord(range(pcs.shape[0]),
                              var_name='pc',
                              long_name='pc_number')
-            coords = [pcdim]
-        pcs = Cube(pcs,
-                   dim_coords_and_dims=zip(coords, range(pcs.ndim)),
-                   var_name='pseudo_pcs',
-                   long_name='{:s}_pseudo_pcs'.format(cube_name))
+            pcs.add_dim_coord(pcdim, 0)
         return pcs
 
     def getWeights(self):
