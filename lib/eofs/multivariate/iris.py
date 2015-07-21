@@ -131,9 +131,9 @@ class MultivariateEof(object):
             if time_dim != 0:
                 raise ValueError('time must be the first dimension, '
                                  'consider using the transpose() method')
-            self._time.append(time)
+            self._time.append(copy(time))
             # Make a list of the cube's other dimension coordinates.
-            coords = list(copy(cube.dim_coords))
+            coords = [copy(coord) for coord in cube.dim_coords]
             coords.remove(time)
             if len(coords) < 1:
                 raise ValueError('one or more non-time '
@@ -206,7 +206,7 @@ class MultivariateEof(object):
         pcdim = DimCoord(range(pcs.shape[1]),
                          var_name='pc',
                          long_name='pc_number')
-        coords = [self._time[0], pcdim]
+        coords = [copy(self._time[0]), pcdim]
         pcs = Cube(pcs,
                    dim_coords_and_dims=zip(coords, range(pcs.ndim)),
                    var_name='pcs',
@@ -256,7 +256,7 @@ class MultivariateEof(object):
                           var_name='eof',
                           long_name='eof_number')
         for iset in xrange(self._ncubes):
-            coords = [eofdim] + self._coords[iset]
+            coords = [eofdim] + [copy(coord) for coord in self._coords[iset]]
             eofset[iset] = Cube(
                 eofset[iset],
                 dim_coords_and_dims=zip(coords, range(eofset[iset].ndim)),
@@ -305,7 +305,7 @@ class MultivariateEof(object):
                           var_name='eof',
                           long_name='eof_number')
         for iset in xrange(self._ncubes):
-            coords = [eofdim] + self._coords[iset]
+            coords = [eofdim] + [copy(coord) for coord in self._coords[iset]]
             eofset[iset] = Cube(
                 eofset[iset],
                 dim_coords_and_dims=zip(coords, range(eofset[iset].ndim)),
@@ -364,7 +364,7 @@ class MultivariateEof(object):
                           var_name='eof',
                           long_name='eof_number')
         for iset in xrange(self._ncubes):
-            coords = [eofdim] + self._coords[iset]
+            coords = [eofdim] + [copy(coord) for coord in self._coords[iset]]
             eofset[iset] = Cube(
                 eofset[iset],
                 dim_coords_and_dims=zip(coords, range(eofset[iset].ndim)),
@@ -573,7 +573,8 @@ class MultivariateEof(object):
         else:
             name_part = '{:d}_EOFs'.format(neofs)
         for iset in xrange(self._ncubes):
-            coords = [self._time[iset]] + self._coords[iset]
+            coords = [copy(self._time[iset])] + \
+                     [copy(coord) for coord in self._coords[iset]]
             rfset[iset] = Cube(
                 rfset[iset],
                 dim_coords_and_dims=zip(coords, range(rfset[iset].ndim)),
@@ -674,7 +675,7 @@ class MultivariateEof(object):
                              var_name='pc',
                              long_name='pc_number')
             time, time_dim = coord_and_dim(cubes[0], 'time')
-            coords = [time, pcdim]
+            coords = [copy(time), pcdim]
         else:
             # 1D PCs require only a PC axis.
             pcdim = DimCoord(range(pcs.shape[0]),
