@@ -135,7 +135,7 @@ class MultivariateEof(object):
             # Make a list of the cube's other dimension coordinates.
             coords = [copy(coord) for coord in cube.dim_coords]
             coords.remove(time)
-            if len(coords) < 1:
+            if not coords:
                 raise ValueError('one or more non-time '
                                  'dimensions are required')
             self._coords.append(coords)

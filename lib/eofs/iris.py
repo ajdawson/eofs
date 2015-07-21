@@ -114,7 +114,7 @@ class Eof(object):
         # dimensions.
         self._coords = [copy(coord) for coord in cube.dim_coords]
         self._coords.remove(self._time)
-        if len(self._coords) < 1:
+        if not self._coords:
             raise ValueError('one or more non-time dimensions are required')
         # Store the auxiliary coordinates from the cube, categorising them into
         # coordinates spanning time only, coordinates spanning space only, and
