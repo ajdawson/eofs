@@ -123,7 +123,7 @@ class MultivariateEof(object):
         self._coords = []
         passweights = []
         for cube, weight in zip(cubes, weights):
-            if type(cube) is not Cube:
+            if not isinstance(cube, Cube):
                 raise TypeError('input is not an iris cube')
             # Record the time dimension and it's position. If its position is
             # not 0 then raise an error.
@@ -645,7 +645,7 @@ class MultivariateEof(object):
 
         """
         for cube in cubes:
-            if type(cube) is not Cube:
+            if not isinstance(cube, Cube):
                 raise TypeError('input is not an iris cube')
         if len(cubes) != self._ncubes:
             raise ValueError('number of cubes is incorrect, expecting {:d} '

@@ -100,7 +100,7 @@ class Eof(object):
 
         """
         # Check that the input is an Iris cube.
-        if type(cube) is not Cube:
+        if not isinstance(cube, Cube):
             raise TypeError('the input must be an iris cube')
         # Check for a time coordinate, raise an error if there isn't one.
         # The coord_and_dim function will raise a ValuerError with a
@@ -653,7 +653,7 @@ class Eof(object):
 
         """
         # Check that the input is an Iris cube.
-        if type(cube) is not Cube:
+        if not isinstance(cube, Cube):
             raise TypeError('the input must be an iris cube')
         cube_name = cube.name(default='dataset').replace(' ', '_')
         has_time = False
