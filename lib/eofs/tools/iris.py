@@ -121,9 +121,9 @@ def coord_and_dim(cube, coord, multiple=False):
 
 def _time_coord_info(cube):
     time, time_dim = coord_and_dim(cube, 'time')
-    coords = list(copy(cube.dim_coords))
+    coords = [copy(coord) for coord in cube.dim_coords]
     coords.remove(time)
-    coords = [time] + coords
+    coords = [copy(time)] + coords
     return time_dim, coords
 
 
