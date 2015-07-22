@@ -119,6 +119,72 @@ def coord_and_dim(cube, coord, multiple=False):
     return c, c_dim
 
 
+def classified_aux_coords(cube):
+    """
+    Classify a Cube's auxiliary coordinates into those that span only
+    the time dimension, those that span only space dimensions, and those
+    that span both time and space dimensions.
+
+    **Arguments:**
+
+    *cube*
+        An `~iris.cube.Cube` instance whose auxiliary coordinates should
+        be classified.
+
+    **Returns:**
+
+    *coord_sets*
+        A 3-tuple of lists of coordinates. The first element is the list
+        of all auxiliary coordinates spannning only the time dimension,
+        the second element is the list of all auxiliary coordinates
+        spannning only space dimensions, and the third element is the
+        list of all auxiliary coordinates spannning both time and space
+        dimensions.
+
+    """
+    try:
+        _, timedim = coord_and_dim(cube, 'time')
+    except ValueError:
+        timedim = None
+    time_only = []
+    space_only = []
+    time_and_space = []
+    for coord in cube.aux_coords:
+        dims = cube.coord_dims(coord)
+        if dims == (timedim,):
+            time_only.append((copy(coord), timedim))
+        elif dims:
+            if timedim in dims:
+                time_and_space.append((copy(coord), dims))
+            else:
+                space_only.append((copy(coord), dims))
+    return time_only, space_only, time_and_space
+
+
+def common_items(item_set):
+    """
+    Given an iterable of lists, constructs a list of every item that is
+    present in all of the lists.
+    
+    **Arguments:**
+
+    *item_set*
+        An iterable containing lists of items.
+
+    **Returns:**
+
+    *common*
+        A list of the items which occur in all sublists in the input.
+
+    """
+    common = []
+    for item in reduce(lambda x, y: x + y, item_set):
+        item_ok = all([item in items for items in item_set])
+        if item_ok and item not in common:
+            common.append(item)
+    return common
+
+
 def _time_coord_info(cube):
     time, time_dim = coord_and_dim(cube, 'time')
     coords = [copy(coord) for coord in cube.dim_coords]

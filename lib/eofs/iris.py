@@ -23,7 +23,7 @@ from iris.cube import Cube
 from iris.coords import DimCoord
 
 from . import standard
-from .tools.iris import coord_and_dim, weights_array
+from .tools.iris import coord_and_dim, weights_array, classified_aux_coords
 
 
 class Eof(object):
@@ -122,21 +122,9 @@ class Eof(object):
         # natural separation of space and time in EOF analysis. The time and
         # space spanning coordinates are only useful for reconstruction, as all
         # other methods return either a temporal field or a spatial field.
-        self._time_aux_coords = []
-        self._space_aux_coords = []
-        self._time_space_aux_coords = []
-        for coord in cube.aux_coords:
-            dims = cube.coord_dims(coord)
-            if dims == (0,):
-                # Coordinate spans time and time only.
-                self._time_aux_coords.append(copy(coord))
-            elif dims:
-                if 0 in dims:
-                    # Coordinate spans time and at least one space dimension.
-                    self._time_space_aux_coords.append((copy(coord), dims))
-                else:
-                    # Coordinate spans only space dimensions.
-                    self._space_aux_coords.append((copy(coord), dims))
+        (self._time_aux_coords, 
+         self._space_aux_coords,
+         self._time_space_aux_coords) = classified_aux_coords(cube)
         # Define the weights array for the cube.
         if weights is None:
             wtarray = None
@@ -208,8 +196,8 @@ class Eof(object):
                    dim_coords_and_dims=zip(coords, range(pcs.ndim)),
                    var_name='pcs', long_name='principal_components')
         # Add any auxiliary coords spanning time back to the returned cube.
-        for coord in self._time_aux_coords:
-            pcs.add_aux_coord(copy(coord), 0)
+        for coord, dims in self._time_aux_coords:
+            pcs.add_aux_coord(copy(coord), dims)
         return pcs
 
     def eofs(self, eofscaling=0, neofs=None):
@@ -586,11 +574,10 @@ class Eof(object):
                       long_name='{:s}_reconstructed_with_{:s}'.format(
                                 self._cube_name, name_part))
         rfield.attributes.update({'neofs': neofs})
-        # Add any auxiliary coordinates spanning time or space to the returned
-        # cube.
-        for coord in self._time_aux_coords:
-            rfield.add_aux_coord(copy(coord), 0)
-        for coord, dims in self._space_aux_coords + self._time_space_aux_coords:
+        # Add any auxiliary coordinates to the returned cube.
+        for coord, dims in (self._time_aux_coords +
+                            self._space_aux_coords +
+                            self._time_space_aux_coords):
             rfield.add_aux_coord(copy(coord), dims)
         return rfield
 
@@ -668,6 +655,7 @@ class Eof(object):
             if time_dim != 0:
                 raise ValueError('time must be the first dimension, '
                                  'consider using the transpose() method')
+            _time_aux_coords, _, _ = classified_aux_coords(cube)
         pcs = self._solver.projectField(cube.data,
                                         neofs=neofs,
                                         eofscaling=eofscaling,
@@ -686,8 +674,8 @@ class Eof(object):
             pcs.add_dim_coord(pcdim, 1)
             # Add any time-spanning auxiliary coordinates from the input cube
             # to the returned PCs.
-            for coord in self._time_aux_coords:
-                pcs.add_aux_coord(coord, 0)
+            for coord, dims in _time_aux_coords:
+                pcs.add_aux_coord(copy(coord), dims)
         else:
             # 1D PCs require only a PC axis.
             pcdim = DimCoord(range(pcs.shape[0]),
