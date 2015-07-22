@@ -143,7 +143,8 @@ class MultivariateEof(object):
                 raise ValueError('one or more non-time '
                                  'dimensions are required')
             self._coords.append(coords)
-            #
+            # Make a lists of the AuxCoords on the current cube and store
+            # them for reapplication later.
             _t, _s, _ts = classified_aux_coords(cube)
             self._time_aux_coords.append(_t)
             self._space_aux_coords.append(_s)
