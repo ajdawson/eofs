@@ -18,17 +18,23 @@ standard  Other data, stored in a `numpy.ndarray` or a `numpy.ma.MaskedArray`.
 ========= =====================================================================
 
 
+.. _cdms-interface:
+
 cdms interface
 --------------
 
 The `eofs.cdms` interface works with cdms variables, which are the core data container used by CDAT_. A cdms variable has meta-data associated with it, including dimensions, which are understood by the `eofs.cdms.Eof` solver interface. The outputs of the `eofs.cdms.Eof` solver are cdms variables with meta-data, which can be written straight to a netCDF file using cdms, or used with other parts of the CDAT framework.
 
 
+.. _iris-interface:
+
 Iris interface
 --------------
 
 The iris interface works with `~iris.cube.Cube` objects, which are the data containers used by the iris_ data analysis package. The meta-data, including coordinate dimensions, associated with iris `~iris.cube.Cube` objects is understood by the `eofs.iris.Eofs` solver interface. The outputs of the `eofs.iris.Eof` solver are also contained in `~iris.cube.Cube` objects, meaning they can be used with tools in the iris package, and easily written to a file.
 
+
+.. _standard-interface:
 
 Standard interface
 ------------------
