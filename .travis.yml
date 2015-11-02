@@ -16,6 +16,7 @@ install:
       fi
     - bash miniconda.sh -b -p $HOME/miniconda
     - export PATH="$HOME/miniconda/bin:$PATH"
+    - hash -r
     - conda config --set always_yes yes --set changeps1 no
     - conda config --add channels ajdawson
     - conda update conda
@@ -23,11 +24,12 @@ install:
     # Create a conda environment with the base dependencies:
     - conda create -n test-environment python=$TRAVIS_PYTHON_VERSION
     - source activate test-environment
-    - conda install setuptools nose coverage numpy
     # Additional dependencies for Python 2.x:
     - if [[ "$TRAVIS_PYTHON_VERSION" == 2* ]]; then
         conda config --add channels SciTools;
-        conda install cdat-lite iris;
+        conda install setuptools nose coverage numpy=1.9 cdat-lite iris;
+      else
+        conda install setuptools nose coverage numpy=1.9;
       fi
     # Install the package:
     - python setup.py install
