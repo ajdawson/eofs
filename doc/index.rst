@@ -13,7 +13,9 @@
 Package description
 ===================
 
-`eofs` is a Python package for EOF analysis of spatial-temporal data, some of its key features are:
+`eofs` is a Python package for EOF analysis of spatial-temporal data.
+Using EOFs (empirical orthogonal functions) is a common technique to decompose a signal varying in time and space into a form that is easier to interpret in terms of spatial and temporal variance.
+Some of the key features of `eofs` are:
 
 * **Suitable for large data sets:** computationally efficient for the large output data sets of modern climate models.
 * **Transparent handling of missing values:** missing values are removed automatically during computations and placed back into output fields.
@@ -24,21 +26,24 @@ Package description
 Download and installation
 -------------------------
 
-Released versions of `eofs` can be downloaded from the :doc:`downloads` page.
-You must have setuptools_ installed in order to install `eofs`.
+The core of the package runs on Python 2 or 3, on Linux, Windows or Mac OS X; basically anywhere Python+NumPy are available.
+The :ref:`cdms <cdms-interface>` and :ref:`iris <iris-interface>` interfaces are available on all platforms where their respective supporting packages CDAT_ and iris_ can be installed.
+
+`eofs` can be installed for all platforms using pip:
+
+    pip install eofs
+
+If you want to install on Linux or OS X, you can also use the conda_ package manager:
+
+    conda install -c ajdawson eofs
+
+The source code for released versions of `eofs` can be downloaded from the :doc:`downloads` page.
+You must have setuptools_ installed in order to install `eofs` from source.
 After downloading the source code archive, unzip it and change into the unzipped archive's directory, then to install it:
 
-.. code-block:: bash
+    python setup.py install
 
-   $ python setup.py install
-
-`eofs` can also be installed from PyPI using pip:
-
-.. code-block:: bash
-
-   $ pip install eofs
-
-You can also check out the source code for the development version from the `github repository <https://github.com/ajdawson/eofs>`_ to access features which are not yet in the released version.
+You can also check out the source code for the development version from the `github repository <https://github.com/ajdawson/eofs>`_ to access features which are not yet in a release.
 
 
 Getting started
@@ -48,21 +53,18 @@ Getting started
 All the interfaces support the same set of operations.
 
 Regardless of which interface you use, the basic usage is the same.
-The EOF analysis is handled by a solver class.
-The EOF solution is computed when the solver class in instantiated.
+The EOF analysis is handled by a solver class, and the EOF solution is computed when the solver class is created.
 Method calls are then used to retrieve the quantities of interest from the solver class.
 
-The following is a very simple illustrative example which computes the leading 2 EOFs of a temporal spatial field using the `eofs.cdms` interface:
+The following is a very simple illustrative example which computes the leading 2 EOFs of a temporal spatial field using the `eofs.iris` interface:
 
 .. code-block:: python
 
-   import cdms2
-   from eofs.cdms import Eof
+   import iris
+   from eofs.iris import Eof
 
    # read a spatial-temporal field, time must be the first dimension
-   ncin = cdms2.open('sst_monthly.nc')
-   sst = ncin('sst')
-   ncin.close()
+   sst = iris.load_cube('sst_monthly.nc')
 
    # create a solver class, taking advantage of built-in weighting
    solver = Eof(sst, weights='coslat')
@@ -94,16 +96,12 @@ Developing and contributing
 
 All development is done through `Github <http://github.com/ajdawson/eofs>`_. To check out the latest sources run:
 
-.. code-block:: bash
-
-   $ git clone git://github.com/ajdawson/eofs.git
+    git clone git://github.com/ajdawson/eofs.git
 
 It is always a good idea to run the tests during development, to do so:
 
-.. code-block:: bash
-
-   $ cd eofs
-   $ nosetests -sv
+    cd eofs
+    nosetests -sv
 
 Running the tests requires nose_.
 
@@ -136,3 +134,5 @@ The package is restructured to make it easier to add new meta-data interfaces, a
 .. _issues: http://github.com/ajdawson/eofs/issues?state=open
 
 .. _eof2: http://ajdawson.github.com/eof2
+
+.. _conda: http://conda.pydata.org/docs/
