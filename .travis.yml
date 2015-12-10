@@ -3,10 +3,12 @@ language: python
 python:
     - "2.7"
     - "3.3"
+    - "3.4"
+    - "3.5"
+
+sudo: false
 
 install:
-    # Make sure system components are up to date:
-    - sudo apt-get update
     # Install Miniconda so we can use it to manage dependencies:
     - if [[ "$TRAVIS_PYTHON_VERSION" == 2* ]]; then
         wget http://repo.continuum.io/miniconda/Miniconda-3.4.2-Linux-x86_64.sh -O miniconda.sh;
@@ -23,12 +25,12 @@ install:
     # Create a conda environment with the base dependencies:
     - conda create -n test-environment python=$TRAVIS_PYTHON_VERSION
     - source activate test-environment
-    - conda install setuptools nose coverage numpy
     # Additional dependencies for Python 2.x:
     - if [[ "$TRAVIS_PYTHON_VERSION" == 2* ]]; then
-        conda config --add channels rsignell;
-        conda install cdat-lite iris;
-        export UDUNITS2_XML_PATH=/home/travis/miniconda/envs/test-environment/share/udunits/udunits2.xml;
+        conda config --add channels SciTools;
+        conda install setuptools nose coverage numpy cdat-lite iris;
+      else
+        conda install setuptools nose coverage numpy;
       fi
     # Install the package:
     - python setup.py install
