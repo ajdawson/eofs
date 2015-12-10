@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Package description &mdash; eofs 0.5.0 documentation</title>
+    <title>Package description &mdash; eofs 0.5.1 documentation</title>
     
     <link rel="stylesheet" href="_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.5.0',
+        VERSION:     '0.5.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 0.5.0 documentation" href="#" />
+    <link rel="top" title="eofs 0.5.1 documentation" href="#" />
     <link rel="next" title="User Guide" href="userguide/index.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
           rel='stylesheet' type='text/css' />
@@ -88,7 +88,7 @@
     </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v0.5.0</h2>
+    <h2>eofs v0.5.1</h2>
     <h3>Table of Contents</h3>
     <ul>
 <li class="toctree-l1"><a class="reference internal" href="userguide/index.html">User Guide</a></li>
@@ -154,7 +154,7 @@ After downloading the source code archive, unzip it and change into the unzipped
 </div>
 <div class="section" id="getting-started">
 <h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
-<p><tt class="xref py py-obj docutils literal"><span class="pre">eofs</span></tt> provides three interfaces for EOF analysis: one for analysing data contained in <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy</span></tt></a> arrays or masked arrays, suitable for any data set; and two for meta-data aware EOF analysis, suitable for analysing data read from self-describing files, using either the <tt class="xref py py-obj docutils literal"><span class="pre">cdms2</span></tt> or <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris.html#module-iris" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">iris</span></tt></a> packages.
+<p><tt class="xref py py-obj docutils literal"><span class="pre">eofs</span></tt> provides three interfaces for EOF analysis: one for analysing data contained in <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.10)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy</span></tt></a> arrays or masked arrays, suitable for any data set; and two for meta-data aware EOF analysis, suitable for analysing data read from self-describing files, using either the <tt class="xref py py-obj docutils literal"><span class="pre">cdms2</span></tt> or <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris.html#module-iris" title="(in Iris v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">iris</span></tt></a> packages.
 All the interfaces support the same set of operations.</p>
 <p>Regardless of which interface you use, the basic usage is the same.
 The EOF analysis is handled by a solver class.
@@ -209,7 +209,7 @@ If you have code you would like to contribute, fork the <a class="reference exte
 <h2>History<a class="headerlink" href="#history" title="Permalink to this headline">¶</a></h2>
 <p><tt class="xref py py-obj docutils literal"><span class="pre">eofs</span></tt> is the successor to <a class="reference external" href="http://ajdawson.github.com/eof2">eof2</a>.
 <tt class="xref py py-obj docutils literal"><span class="pre">eof2</span></tt> was always written to be part of CDAT which already had a package called <tt class="xref py py-obj docutils literal"><span class="pre">eof</span></tt>, hence the name <tt class="xref py py-obj docutils literal"><span class="pre">eof2</span></tt>.
-When support for <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris.html#module-iris" title="(in Iris v1.6)"><tt class="xref py py-obj docutils literal"><span class="pre">iris</span></tt></a> was added it didn&#8217;t make sense to call the package <tt class="xref py py-obj docutils literal"><span class="pre">eof2</span></tt> anymore, and <tt class="xref py py-obj docutils literal"><span class="pre">eofs</span></tt> was created.
+When support for <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris.html#module-iris" title="(in Iris v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">iris</span></tt></a> was added it didn&#8217;t make sense to call the package <tt class="xref py py-obj docutils literal"><span class="pre">eof2</span></tt> anymore, and <tt class="xref py py-obj docutils literal"><span class="pre">eofs</span></tt> was created.
 <tt class="xref py py-obj docutils literal"><span class="pre">eofs</span></tt> is much more than just a name change.
 The package is restructured to make it easier to add new meta-data interfaces, and a comprehensive set of tests has been added to ensure that the package remains stable when new features are added.</p>
 </div>
@@ -236,8 +236,8 @@ The package is restructured to make it easier to add new meta-data interfaces, a
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2013-2014 Andrew Dawson.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+        &copy; Copyright 2013 Andrew Dawson.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>
