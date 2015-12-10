@@ -28,9 +28,9 @@ install:
     # Additional dependencies for Python 2.x:
     - if [[ "$TRAVIS_PYTHON_VERSION" == 2* ]]; then
         conda config --add channels SciTools;
-        conda install setuptools nose coverage numpy=1.9 cdat-lite iris;
+        conda install setuptools nose coverage numpy cdat-lite iris;
       else
-        conda install setuptools nose coverage numpy=1.9;
+        conda install setuptools nose coverage numpy;
       fi
     # Install the package:
     - python setup.py install
