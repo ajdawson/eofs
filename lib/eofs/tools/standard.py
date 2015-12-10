@@ -108,6 +108,7 @@ def correlation_map(pcs, field):
     div = np.float64(pcs_cent.shape[0])
     # Compute the correlation map.
     cor = ma.dot(field_cent.T, pcs_cent).T / div
+    cor = ma.masked_invalid(cor)
     cor /= ma.outer(pcs_std, field_std)
     # Return the correlation with the appropriate shape.
     return cor.reshape(out_shape)
@@ -160,4 +161,5 @@ def covariance_map(pcs, field, ddof=1):
     div = np.float64(pcs_cent.shape[0] - ddof)
     # Compute the covariance map, making sure it has the appropriate shape.
     cov = (ma.dot(field_cent.T, pcs_cent).T / div).reshape(out_shape)
+    cov = ma.masked_invalid(cov)
     return cov
