@@ -92,9 +92,6 @@ class MultivariateEof(object):
         *ddof*
             'Delta degrees of freedom'. The divisor used to normalize
             the covariance matrix is *N - ddof* where *N* is the
-        Reconstruct the input field using EOFs 1, 2 and 5::
-
-            reconstruction = solver.reconstuctedField([1, 2, 5])
             number of samples. Defaults to *1*.
 
         **Returns:**
