@@ -19,7 +19,7 @@ from eofs.cdms import Eof
 from eofs.examples import example_data_path
 
 
-# Read SST anomalies using the cdms2 module from CDAT. The file contains
+# Read SST anomalies using the cdms2 module from UV-CDAT. The file contains
 # November-March averages of SST anomaly in the central and northern Pacific.
 filename = example_data_path('sst_ndjfm_anom.nc')
 ncin = cdms2.open(filename, 'r')
