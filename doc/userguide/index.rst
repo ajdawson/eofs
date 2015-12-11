@@ -9,7 +9,6 @@ User Guide
    interfaces
    usage
    multivariate
-   eof2_compatibility
    method
    speed
 
