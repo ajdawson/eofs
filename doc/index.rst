@@ -98,7 +98,7 @@ If you would like to contribute code or documentation please see the :doc:`devgu
 
 .. _iris: http://scitools.org.uk/iris
 
-.. _numpy: http://numpy.scipy.org
+.. _numpy: http://www.numpy.org
 
 .. _cdat-lite: http://proj.badc.rl.ac.uk/cedaservices/wiki/CdatLite
 
