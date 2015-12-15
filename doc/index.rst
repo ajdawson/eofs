@@ -8,6 +8,7 @@
    examples/index
    api/index
    downloads
+   devguide/index
 
 
 Package description
