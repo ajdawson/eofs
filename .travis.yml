@@ -8,6 +8,19 @@ python:
 
 sudo: false
 
+env:
+    - TEST_MODE=complete
+    - TEST_MODE=basic
+
+matrix:
+    exclude:
+        - python: "3.3"
+          env: TEST_MODE=complete
+        - python: "3.4"
+          env: TEST_MODE=complete
+        - python: "3.5"
+          env: TEST_MODE=complete
+
 install:
     # Install Miniconda so we can use it to manage dependencies:
     - if [[ "$TRAVIS_PYTHON_VERSION" == 2* ]]; then
@@ -26,7 +39,7 @@ install:
     - conda create -n test-environment python=$TRAVIS_PYTHON_VERSION
     - source activate test-environment
     # Additional dependencies for Python 2.x:
-    - if [[ "$TRAVIS_PYTHON_VERSION" == 2* ]]; then
+    - if [[ "$TRAVIS_PYTHON_VERSION" == 2* ]] && [[ "$TEST_MODE" == "complete" ]]; then
         conda config --add channels SciTools;
         conda install setuptools nose coverage numpy cdat-lite iris;
       else
