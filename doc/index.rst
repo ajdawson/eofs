@@ -20,7 +20,7 @@ Some of the key features of `eofs` are:
 
 * **Suitable for large data sets:** computationally efficient for the large output data sets of modern climate models.
 * **Transparent handling of missing values:** missing values are removed automatically during computations and placed back into output fields.
-* **Automatic metadata:** metadata from input fields is used to construct metadata for output fields (requires the `cdms2` module from CDAT_ or the iris_ data analysis package).
+* **Automatic metadata:** metadata from input fields is used to construct metadata for output fields (requires the `cdms2` module from UV-CDAT_ or the iris_ data analysis package).
 * **No Compiler required:** a fast implementation written in pure Python using the power of numpy_, no Fortran or C dependencies.
 
 
@@ -28,19 +28,19 @@ Download and installation
 -------------------------
 
 The core of the package runs on Python 2 or 3, on Linux, Windows or Mac OS X; basically anywhere Python+NumPy are available.
-The :ref:`cdms <cdms-interface>` and :ref:`iris <iris-interface>` interfaces are available on all platforms where their respective supporting packages CDAT_ and iris_ can be installed.
+The :ref:`cdms <cdms-interface>` and :ref:`iris <iris-interface>` interfaces are available on all platforms where their respective supporting packages UV-CDAT_ and iris_ can be installed.
 
-`eofs` can be installed for all platforms using pip:
-
-    pip install eofs
-
-If you want to install on Linux or OS X, you can also use the conda_ package manager:
+`eofs` can be installed for all platforms using conda_ or pip::
 
     conda install -c ajdawson eofs
 
+or::
+
+    pip install eofs
+
 The source code for released versions of `eofs` can be downloaded from the :doc:`downloads` page.
 You must have setuptools_ installed in order to install `eofs` from source.
-After downloading the source code archive, unzip it and change into the unzipped archive's directory, then to install it:
+After downloading the source code archive, unzip it and change into the unzipped archive's directory, then to install it::
 
     python setup.py install
 
@@ -81,15 +81,8 @@ Requirements
 
 This package requires as a minimum that you have numpy_ available, and requires setuptools_ for installation.
 The `eofs.cdms` meta-data enabled interface can only be used if the `cdms2` module is available.
-This module is distributed as part of the CDAT_ project.
-It is also distributed as part of the cdat-lite_ package.
+This module is distributed as part of the UV-CDAT_ project.
 The `eofs.iris` meta-data enabled interface can only be used if the iris_ package is available at version 1.2 or higher.
-
-
-Compatibility with **eof2**
----------------------------
-
-See the :doc:`userguide/eof2_compatibility` section of the :doc:`userguide/index`.
 
 
 Developing and contributing
@@ -100,28 +93,14 @@ Bug reports and feature requests can be filed using the Github issues_ system.
 If you would like to contribute code or documentation please see the :doc:`devguide/index`.
 
 
-History
--------
-
-`eofs` is the successor to eof2_.
-`eof2` was always written to be part of CDAT which already had a package called `eof`, hence the name `eof2`.
-When support for `iris` was added it didn't make sense to call the package `eof2` anymore, and `eofs` was created.
-`eofs` is much more than just a name change.
-The package is restructured to make it easier to add new meta-data interfaces, and a comprehensive set of tests has been added to ensure that the package remains stable when new features are added.
-
-
-.. _CDAT: http://uv-cdat.llnl.gov
+.. _UV-CDAT: http://uv-cdat.llnl.gov
 
 .. _iris: http://scitools.org.uk/iris
 
-.. _numpy: http://numpy.scipy.org
-
-.. _cdat-lite: http://proj.badc.rl.ac.uk/cedaservices/wiki/CdatLite
+.. _numpy: http://www.numpy.org
 
 .. _setuptools: https://pypi.python.org/pypi/setuptools
 
 .. _issues: http://github.com/ajdawson/eofs/issues
-
-.. _eof2: http://ajdawson.github.com/eof2
 
 .. _conda: http://conda.pydata.org/docs/

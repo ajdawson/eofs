@@ -15,7 +15,7 @@ from eofs.cdms import Eof
 from eofs.examples import example_data_path
 
 
-# Read geopotential height data using the cdms2 module from CDAT. The file
+# Read geopotential height data using the cdms2 module from UV-CDAT. The file
 # contains December-February averages of geopotential height at 500 hPa for
 # the European/Atlantic domain (80W-40E, 20-90N).
 filename = example_data_path('hgt_djf.nc')
