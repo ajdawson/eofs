@@ -30,13 +30,13 @@ Download and installation
 The core of the package runs on Python 2 or 3, on Linux, Windows or Mac OS X; basically anywhere Python+NumPy are available.
 The :ref:`cdms <cdms-interface>` and :ref:`iris <iris-interface>` interfaces are available on all platforms where their respective supporting packages UV-CDAT_ and iris_ can be installed.
 
-`eofs` can be installed for all platforms using pip::
-
-    pip install eofs
-
-If you want to install on Linux or OS X, you can also use the conda_ package manager::
+`eofs` can be installed for all platforms using conda_ or pip::
 
     conda install -c ajdawson eofs
+
+or::
+
+    pip install eofs
 
 The source code for released versions of `eofs` can be downloaded from the :doc:`downloads` page.
 You must have setuptools_ installed in order to install `eofs` from source.
