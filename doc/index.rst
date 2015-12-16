@@ -95,19 +95,9 @@ See the :doc:`userguide/eof2_compatibility` section of the :doc:`userguide/index
 Developing and contributing
 ---------------------------
 
-All development is done through `Github <http://github.com/ajdawson/eofs>`_. To check out the latest sources run:
-
-    git clone git://github.com/ajdawson/eofs.git
-
-It is always a good idea to run the tests during development, to do so:
-
-    cd eofs
-    nosetests -sv
-
-Running the tests requires nose_.
-
-Bug reports and feature requests should be filed using the Github issues_ system.
-If you have code you would like to contribute, fork the `repository <http://github.com/ajdawson/eofs>`_ on Github, do the work on a feature branch of your fork, push your feature branch to *your* Github fork, and send a pull request.
+Contributions big or small are welcomed from anyone with an interest in the project.
+Bug reports and feature requests can be filed using the Github issues_ system.
+If you would like to contribute code or documentation please see the :doc:`devguide/index`.
 
 
 History
@@ -128,11 +118,9 @@ The package is restructured to make it easier to add new meta-data interfaces, a
 
 .. _cdat-lite: http://proj.badc.rl.ac.uk/cedaservices/wiki/CdatLite
 
-.. _nose: https://nose.readthedocs.org/en/latest/
-
 .. _setuptools: https://pypi.python.org/pypi/setuptools
 
-.. _issues: http://github.com/ajdawson/eofs/issues?state=open
+.. _issues: http://github.com/ajdawson/eofs/issues
 
 .. _eof2: http://ajdawson.github.com/eof2
 
