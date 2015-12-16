@@ -1,5 +1,5 @@
 """Meta-data preserving EOF analysis for `cdms2`."""
-# (c) Copyright 2010-2013 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2010-2015 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #

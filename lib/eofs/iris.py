@@ -1,5 +1,5 @@
 """Meta-data preserving EOF analysis for `iris`."""
-# (c) Copyright 2013 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2013-2015 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
