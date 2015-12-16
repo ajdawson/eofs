@@ -1,6 +1,6 @@
 """EOF analysis for data in `numpy` arrays."""
 # (c) Copyright 2000 Jon Saenz, Jesus Fernandez and Juan Zubillaga.
-# (c) Copyright 2010-2014 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2010-2015 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #

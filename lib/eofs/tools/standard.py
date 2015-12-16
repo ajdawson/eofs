@@ -1,5 +1,5 @@
 """Supplementary tools for the `numpy` EOF analysis interface."""
-# (c) Copyright 2010-2013 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2010-2015 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
