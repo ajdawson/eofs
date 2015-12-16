@@ -1,5 +1,5 @@
 """Fast and efficient EOF analysis for Python."""
-# (c) Copyright 2010-2013 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2010-2015 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -25,7 +25,7 @@ from . import tools
 __all__ = ['standard', 'tools']
 
 # Package version number.
-__version__ = '0.6.x'
+__version__ = '1.0.x'
 
 try:
     from . import cdms
