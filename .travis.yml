@@ -16,8 +16,6 @@ matrix:
     exclude:
         - python: "3.3"
           env: TEST_MODE=complete
-        - python: "3.4"
-          env: TEST_MODE=complete
         - python: "3.5"
           env: TEST_MODE=complete
 
@@ -38,10 +36,14 @@ install:
     # Create a conda environment with the base dependencies:
     - conda create -n test-environment python=$TRAVIS_PYTHON_VERSION
     - source activate test-environment
-    # Additional dependencies for Python 2.x:
+    # In complete testing mode, install cdat-lite and iris for Python 2 and
+    # iris for Python 3:
     - if [[ "$TRAVIS_PYTHON_VERSION" == 2* ]] && [[ "$TEST_MODE" == "complete" ]]; then
         conda config --add channels SciTools;
         conda install setuptools nose coverage numpy cdat-lite iris;
+      elif [[ "$TRAVIS_PYTHON_VERSION" == 3* ]] && [[ "$TEST_MODE" == "complete" ]]; then
+        conda config --add channels SciTools;
+        conda install setuptools nose coverage numpy iris;
       else
         conda install setuptools nose coverage numpy;
       fi
