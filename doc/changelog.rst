@@ -2,6 +2,17 @@ Changelog
 =========
 
 
+v1.0.x
+------
+
+:Release: v1.0.0
+:Date: 16 February 2016
+
+* Allow arbitrary mode selection when reconstructing a field from EOFs.
+* Auxiliary coordinates are now preserved in the `eofs.iris` and `eofs.multivariate.iris` interfaces.
+* Improved documentation, including the addition of a developer guide.
+
+
 v0.5.x
 ------
 
