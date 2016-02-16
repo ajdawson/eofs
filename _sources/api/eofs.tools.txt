@@ -1,5 +1,5 @@
-`eofs.tools`
-============
+:mod:`eofs.tools`
+=================
 
 .. default-role:: py:obj
 

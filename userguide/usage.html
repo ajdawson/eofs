@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Basic usage &mdash; eofs 0.5.1 documentation</title>
+    <title>Basic usage &mdash; eofs 1.0.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.1',
+        VERSION:     '1.0.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,8 +23,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 0.5.1 documentation" href="../index.html" />
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="eofs 1.0.0 documentation" href="../index.html" />
     <link rel="up" title="User Guide" href="index.html" />
     <link rel="next" title="Multivariate solvers" href="multivariate.html" />
     <link rel="prev" title="Solver interfaces" href="interfaces.html" />
@@ -65,7 +65,7 @@
         </script>
 
   </head>
-  <body>
+  <body role="document">
 <div class="pageheader">
   <div>
     <a href="../index.html">
@@ -74,7 +74,7 @@
   </div>
 </div>
 
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -89,12 +89,12 @@
     <li><a href="../index.html">home</a>|&nbsp;</li>
     <li><a href="../search.html">search</a>|&nbsp;</li>
 
-          <li><a href="index.html" accesskey="U">User Guide</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User Guide</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v0.5.1</h2>
+    <h2>eofs v1.0.0</h2>
     <h3>Table of Contents</h3>
     <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">User Guide</a><ul class="current">
@@ -102,7 +102,6 @@
 <li class="toctree-l2"><a class="reference internal" href="interfaces.html">Solver interfaces</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="">Basic usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="multivariate.html">Multivariate solvers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="eof2_compatibility.html">Compatibility with <strong>eof2</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="method.html">Method of solution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="speed.html">Speeding up the solvers</a></li>
 </ul>
@@ -110,6 +109,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/index.html">API references</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../downloads.html">Downloads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/index.html">Developer Guide</a></li>
 </ul>
 
 
@@ -119,12 +119,14 @@
   <h4>Next topic</h4>
   <p class="topless"><a href="multivariate.html"
                         title="next chapter">Multivariate solvers</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../_sources/userguide/usage.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/userguide/usage.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
@@ -143,14 +145,14 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="basic-usage">
 <h1>Basic usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h1>
 <p>This section describes the basic usage of the solver classes in a generic way that is applicable to all interfaces.</p>
 <div class="section" id="importing-the-solver-class">
 <h2>Importing the solver class<a class="headerlink" href="#importing-the-solver-class" title="Permalink to this headline">¶</a></h2>
-<p>The solver classes are all called <tt class="xref py py-obj docutils literal"><span class="pre">Eof</span></tt> and are stored in interface specific modules: <tt class="xref py py-obj docutils literal"><span class="pre">eofs.&lt;interface&gt;.Eof</span></tt>. To import the standard interface solver class:</p>
+<p>The solver classes are all called <code class="xref py py-obj docutils literal"><span class="pre">Eof</span></code> and are stored in interface specific modules: <code class="xref py py-obj docutils literal"><span class="pre">eofs.&lt;interface&gt;.Eof</span></code>. To import the standard interface solver class:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">eofs.standard</span> <span class="kn">import</span> <span class="n">Eof</span>
 </pre></div>
 </div>
@@ -175,9 +177,9 @@
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">It is strongly recommended that weights be applied in this way, rather than applying weighting to <tt class="docutils literal"><span class="pre">data</span></tt> before passing it to the solver class. The solver class handles weighting in an intelligent way internally, and passing the weights using the <em>weights</em> keyword is the only way to let the solver class know that weights are required.</p>
+<p class="last">It is strongly recommended that weights be applied in this way, rather than applying weighting to <code class="docutils literal"><span class="pre">data</span></code> before passing it to the solver class. The solver class handles weighting in an intelligent way internally, and passing the weights using the <em>weights</em> keyword is the only way to let the solver class know that weights are required.</p>
 </div>
-<p>Two more keyword arguments are accepted by all interfaces. The <em>center</em> argument, which defaults to <tt class="docutils literal"><span class="pre">True</span></tt> determines whether or not the time-mean is removed from the input data set before analysis. In general this should be set to <tt class="docutils literal"><span class="pre">True</span></tt> unless you are absolutely sure you don&#8217;t want to do this! The <em>ddof</em> keyword controls the degrees of freedom used in normalizing the covariance matrix. Its default value is <tt class="docutils literal"><span class="pre">1</span></tt> meaning the covariance matrix is normalized by <span class="math">\(N - 1\)</span> where <span class="math">\(N\)</span> is the number of temporal samples in the input data set.</p>
+<p>Two more keyword arguments are accepted by all interfaces. The <em>center</em> argument, which defaults to <code class="docutils literal"><span class="pre">True</span></code> determines whether or not the time-mean is removed from the input data set before analysis. In general this should be set to <code class="docutils literal"><span class="pre">True</span></code> unless you are absolutely sure you don&#8217;t want to do this! The <em>ddof</em> keyword controls the degrees of freedom used in normalizing the covariance matrix. Its default value is <code class="docutils literal"><span class="pre">1</span></code> meaning the covariance matrix is normalized by <span class="math">\(N - 1\)</span> where <span class="math">\(N\)</span> is the number of temporal samples in the input data set.</p>
 </div>
 <div class="section" id="retrieving-results-from-the-solver">
 <h2>Retrieving results from the solver<a class="headerlink" href="#retrieving-results-from-the-solver" title="Permalink to this headline">¶</a></h2>
@@ -210,7 +212,7 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -225,12 +227,12 @@
     <li><a href="../index.html">home</a>|&nbsp;</li>
     <li><a href="../search.html">search</a>|&nbsp;</li>
 
-          <li><a href="index.html" >User Guide</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >User Guide</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2013-2015 Andrew Dawson.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013-2016 Andrew Dawson.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>
 </html>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>eofs.standard &mdash; eofs 0.5.1 documentation</title>
+    <title>eofs.standard &mdash; eofs 1.0.0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.5.1',
+        VERSION:     '1.0.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,8 +23,8 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 0.5.1 documentation" href="../../index.html" />
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="eofs 1.0.0 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
           rel='stylesheet' type='text/css' />
@@ -63,7 +63,7 @@
         </script>
 
   </head>
-  <body>
+  <body role="document">
 <div class="pageheader">
   <div>
     <a href="../../index.html">
@@ -72,7 +72,7 @@
   </div>
 </div>
 
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -81,22 +81,23 @@
     <li><a href="../../index.html">home</a>|&nbsp;</li>
     <li><a href="../../search.html">search</a>|&nbsp;</li>
 
-          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v0.5.1</h2>
+    <h2>eofs v1.0.0</h2>
     <h3>Table of Contents</h3>
     <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../userguide/index.html">User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API references</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../downloads.html">Downloads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devguide/index.html">Developer Guide</a></li>
 </ul>
 
 
-<div id="searchbox" style="display: none">
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
       <input type="text" name="q" />
@@ -115,12 +116,12 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <h1>Source code for eofs.standard</h1><div class="highlight"><pre>
 <span class="sd">&quot;&quot;&quot;EOF analysis for data in `numpy` arrays.&quot;&quot;&quot;</span>
 <span class="c"># (c) Copyright 2000 Jon Saenz, Jesus Fernandez and Juan Zubillaga.</span>
-<span class="c"># (c) Copyright 2010-2014 Andrew Dawson. All Rights Reserved.</span>
+<span class="c"># (c) Copyright 2010-2015 Andrew Dawson. All Rights Reserved.</span>
 <span class="c">#</span>
 <span class="c"># This file is part of eofs.</span>
 <span class="c">#</span>
@@ -137,6 +138,7 @@
 <span class="c"># You should have received a copy of the GNU General Public License</span>
 <span class="c"># along with eofs.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+<span class="kn">import</span> <span class="nn">collections</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -713,7 +715,9 @@
 <span class="sd">            Number of EOFs to use for the reconstruction. If the</span>
 <span class="sd">            number of EOFs requested is more than the number that are</span>
 <span class="sd">            available, then all available EOFs will be used for the</span>
-<span class="sd">            reconstruction.</span>
+<span class="sd">            reconstruction. Alternatively this argument can be an</span>
+<span class="sd">            iterable of mode numbers (where the first mode is 1) in</span>
+<span class="sd">            order to facilitate reconstruction with arbitrary modes.</span>
 
 <span class="sd">        **Returns:**</span>
 
@@ -721,16 +725,25 @@
 <span class="sd">            An array the same shape as the `Eof` input *dataset*</span>
 <span class="sd">            contaning the reconstruction using *neofs* EOFs.</span>
 
-<span class="sd">        **Example:**</span>
+<span class="sd">        **Examples:**</span>
 
 <span class="sd">        Reconstruct the input field using 3 EOFs::</span>
 
-<span class="sd">            reconstruction = solver.reconstructedField(neofs=3)</span>
+<span class="sd">            reconstruction = solver.reconstructedField(3)</span>
+
+<span class="sd">        Reconstruct the input field using EOFs 1, 2 and 5::</span>
+
+<span class="sd">            reconstruction = solver.reconstuctedField([1, 2, 5])</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># Determine how the PCs and EOFs will be selected.</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">neofs</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">):</span>
+            <span class="n">modes</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">neofs</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">modes</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">neofs</span><span class="p">)</span>
         <span class="c"># Project principal components onto the EOFs to compute the</span>
         <span class="c"># reconstructed field.</span>
-        <span class="n">rval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_P</span><span class="p">[:,</span> <span class="p">:</span><span class="n">neofs</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flatE</span><span class="p">[:</span><span class="n">neofs</span><span class="p">])</span>
+        <span class="n">rval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_P</span><span class="p">[:,</span> <span class="n">modes</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flatE</span><span class="p">[</span><span class="n">modes</span><span class="p">])</span>
         <span class="c"># Reshape the reconstructed field so it has the same shape as the</span>
         <span class="c"># input data set.</span>
         <span class="n">rval</span> <span class="o">=</span> <span class="n">rval</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_records</span><span class="p">,)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_originalshape</span><span class="p">)</span>
@@ -875,7 +888,7 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -884,12 +897,12 @@
     <li><a href="../../index.html">home</a>|&nbsp;</li>
     <li><a href="../../search.html">search</a>|&nbsp;</li>
 
-          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2013-2015 Andrew Dawson.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013-2016 Andrew Dawson.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>
 </html>

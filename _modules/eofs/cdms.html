@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>eofs.cdms &mdash; eofs 0.5.1 documentation</title>
+    <title>eofs.cdms &mdash; eofs 1.0.0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.5.1',
+        VERSION:     '1.0.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,8 +23,8 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 0.5.1 documentation" href="../../index.html" />
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="eofs 1.0.0 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
           rel='stylesheet' type='text/css' />
@@ -63,7 +63,7 @@
         </script>
 
   </head>
-  <body>
+  <body role="document">
 <div class="pageheader">
   <div>
     <a href="../../index.html">
@@ -72,7 +72,7 @@
   </div>
 </div>
 
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -81,22 +81,23 @@
     <li><a href="../../index.html">home</a>|&nbsp;</li>
     <li><a href="../../search.html">search</a>|&nbsp;</li>
 
-          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v0.5.1</h2>
+    <h2>eofs v1.0.0</h2>
     <h3>Table of Contents</h3>
     <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../userguide/index.html">User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API references</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../downloads.html">Downloads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devguide/index.html">Developer Guide</a></li>
 </ul>
 
 
-<div id="searchbox" style="display: none">
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
       <input type="text" name="q" />
@@ -115,11 +116,11 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <h1>Source code for eofs.cdms</h1><div class="highlight"><pre>
 <span class="sd">&quot;&quot;&quot;Meta-data preserving EOF analysis for `cdms2`.&quot;&quot;&quot;</span>
-<span class="c"># (c) Copyright 2010-2013 Andrew Dawson. All Rights Reserved.</span>
+<span class="c"># (c) Copyright 2010-2015 Andrew Dawson. All Rights Reserved.</span>
 <span class="c">#</span>
 <span class="c"># This file is part of eofs.</span>
 <span class="c">#</span>
@@ -136,6 +137,8 @@
 <span class="c"># You should have received a copy of the GNU General Public License</span>
 <span class="c"># along with eofs.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+
+<span class="kn">import</span> <span class="nn">collections</span>
 
 <span class="kn">import</span> <span class="nn">cdms2</span>
 
@@ -652,6 +655,9 @@
 
 <span class="sd">        *neofs*</span>
 <span class="sd">            Number of EOFs to use for the reconstruction.</span>
+<span class="sd">            Alternatively this argument can be an iterable of mode</span>
+<span class="sd">            numbers (where the first mode is 1) in order to facilitate</span>
+<span class="sd">            reconstruction with arbitrary modes.</span>
 
 <span class="sd">        **Returns:**</span>
 
@@ -663,7 +669,11 @@
 
 <span class="sd">        Reconstruct the input field using 3 EOFs::</span>
 
-<span class="sd">            reconstruction = solver.reconstructedField(neofs=3)</span>
+<span class="sd">            reconstruction = solver.reconstructedField(3)</span>
+
+<span class="sd">        Reconstruct the input field using EOFs 1, 2 and 5::</span>
+
+<span class="sd">            reconstruction = solver.reconstuctedField([1, 2, 5])</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">rfield</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">reconstructedField</span><span class="p">(</span><span class="n">neofs</span><span class="p">)</span>
@@ -673,8 +683,12 @@
                                       <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dataset_id</span><span class="p">,</span>
                                       <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">,</span>
                                       <span class="n">fill_value</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_missing_value</span><span class="p">)</span>
-        <span class="n">rfield</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;{:s}_reconstructed_with_{:d}_EOFs&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_dataset_name</span><span class="p">,</span> <span class="n">neofs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">neofs</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">):</span>
+            <span class="n">name_part</span> <span class="o">=</span> <span class="s">&#39;EOFs_{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">neofs</span><span class="p">]))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">name_part</span> <span class="o">=</span> <span class="s">&#39;{:d}_EOFs&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">neofs</span><span class="p">)</span>
+        <span class="n">rfield</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;{:s}_reconstructed_with_{:s}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_dataset_name</span><span class="p">,</span> <span class="n">name_part</span><span class="p">)</span>
         <span class="n">rfield</span><span class="o">.</span><span class="n">neofs</span> <span class="o">=</span> <span class="n">neofs</span>
         <span class="k">return</span> <span class="n">rfield</span>
 </div>
@@ -786,7 +800,7 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -795,12 +809,12 @@
     <li><a href="../../index.html">home</a>|&nbsp;</li>
     <li><a href="../../search.html">search</a>|&nbsp;</li>
 
-          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2013-2015 Andrew Dawson.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013-2016 Andrew Dawson.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>
 </html>

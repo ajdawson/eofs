@@ -38,9 +38,10 @@ solver = Eof(z_djf, weights='coslat')
 eof1 = solver.eofsAsCovariance(neofs=1)
 
 # Plot the leading EOF expressed as covariance in the European/Atlantic domain.
-ax = plt.axes(projection=ccrs.Orthographic(central_longitude=-20, central_latitude=60))
-iplt.contourf(eof1[0, 0], cmap=plt.cm.RdBu_r)
+proj = ccrs.Orthographic(central_longitude=-20, central_latitude=60)
+ax = plt.axes(projection=proj)
 ax.coastlines()
 ax.set_global()
+iplt.contourf(eof1[0, 0], cmap=plt.cm.RdBu_r)
 ax.set_title('EOF1 expressed as covariance', fontsize=16)
 plt.show()

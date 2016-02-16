@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>eofs.multivariate.standard &mdash; eofs 0.5.1 documentation</title>
+    <title>eofs.multivariate.standard &mdash; eofs 1.0.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.1',
+        VERSION:     '1.0.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,8 +23,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 0.5.1 documentation" href="../index.html" />
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="eofs 1.0.0 documentation" href="../index.html" />
     <link rel="up" title="API references" href="index.html" />
     <link rel="next" title="eofs.multivariate.cdms" href="eofs.multivariate.cdms.html" />
     <link rel="prev" title="eofs.tools" href="eofs.tools.html" />
@@ -65,7 +65,7 @@
         </script>
 
   </head>
-  <body>
+  <body role="document">
 <div class="pageheader">
   <div>
     <a href="../index.html">
@@ -74,7 +74,7 @@
   </div>
 </div>
 
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -89,12 +89,12 @@
     <li><a href="../index.html">home</a>|&nbsp;</li>
     <li><a href="../search.html">search</a>|&nbsp;</li>
 
-          <li><a href="index.html" accesskey="U">API references</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">API references</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v0.5.1</h2>
+    <h2>eofs v1.0.0</h2>
     <h3>Table of Contents</h3>
     <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userguide/index.html">User Guide</a></li>
@@ -105,21 +105,24 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../downloads.html">Downloads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/index.html">Developer Guide</a></li>
 </ul>
 
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="eofs.tools.html"
-                        title="previous chapter"><tt class="docutils literal"><span class="pre">eofs.tools</span></tt></a></p>
+                        title="previous chapter"><code class="docutils literal"><span class="pre">eofs.tools</span></code></a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="eofs.multivariate.cdms.html"
-                        title="next chapter"><tt class="docutils literal"><span class="pre">eofs.multivariate.cdms</span></tt></a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../_sources/api/eofs.multivariate.standard.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+                        title="next chapter"><code class="docutils literal"><span class="pre">eofs.multivariate.cdms</span></code></a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/eofs.multivariate.standard.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
@@ -138,27 +141,27 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="module-eofs.multivariate.standard">
-<span id="eofs-multivariate-standard"></span><h1><a class="reference internal" href="#module-eofs.multivariate.standard" title="eofs.multivariate.standard"><tt class="xref py py-mod docutils literal"><span class="pre">eofs.multivariate.standard</span></tt></a><a class="headerlink" href="#module-eofs.multivariate.standard" title="Permalink to this headline">¶</a></h1>
-<p>Multivariate EOF analysis for <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.10)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy</span></tt></a> array data.</p>
+<span id="eofs-multivariate-standard"></span><h1><a class="reference internal" href="#module-eofs.multivariate.standard" title="eofs.multivariate.standard"><code class="xref py py-mod docutils literal"><span class="pre">eofs.multivariate.standard</span></code></a><a class="headerlink" href="#module-eofs.multivariate.standard" title="Permalink to this headline">¶</a></h1>
+<p>Multivariate EOF analysis for <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.10)"><code class="xref py py-obj docutils literal"><span class="pre">numpy</span></code></a> array data.</p>
 <dl class="class">
 <dt id="eofs.multivariate.standard.MultivariateEof">
-<em class="property">class </em><tt class="descclassname">eofs.multivariate.standard.</tt><tt class="descname">MultivariateEof</tt><big>(</big><em>datasets</em>, <em>weights=None</em>, <em>center=True</em>, <em>ddof=1</em><big>)</big><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof" title="Permalink to this definition">¶</a></dt>
-<dd><p>Multivariate EOF analysis (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.10)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy</span></tt></a> interface)</p>
+<em class="property">class </em><code class="descclassname">eofs.multivariate.standard.</code><code class="descname">MultivariateEof</code><span class="sig-paren">(</span><em>datasets</em>, <em>weights=None</em>, <em>center=True</em>, <em>ddof=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multivariate EOF analysis (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.10)"><code class="xref py py-obj docutils literal"><span class="pre">numpy</span></code></a> interface)</p>
 <p>Create a MultivariateEof instance.</p>
 <p>The EOF solution is computed at initialization time. Method
 calls are used to retrieve computed quantities.</p>
 <p><strong>Arguments:</strong></p>
 <dl class="docutils">
 <dt><em>datasets</em></dt>
-<dd>A list/tuple containing one or more <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy.ndarray</span></tt></a> or
-<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/maskedarray.baseclass.html#numpy.ma.MaskedArray" title="(in NumPy v1.10)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy.ma.MaskedArray</span></tt></a> objects, each with two or more
+<dd>A list/tuple containing one or more <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ndarray</span></code></a> or
+<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/maskedarray.baseclass.html#numpy.ma.MaskedArray" title="(in NumPy v1.10)"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ma.MaskedArray</span></code></a> objects, each with two or more
 dimensions, containing the data to be analysed. The first
 dimension of each array is assumed to represent time.
 Missing values are permitted, either in the
-form of masked arrays, or <tt class="xref py py-obj docutils literal"><span class="pre">numpy.nan</span></tt> values. Missing values
+form of masked arrays, or <code class="xref py py-obj docutils literal"><span class="pre">numpy.nan</span></code> values. Missing values
 must be constant with time in each field (e.g., values of an
 oceanographic field over land).</dd>
 </dl>
@@ -197,7 +200,7 @@ number of samples. Defaults to <em>1</em>.</dd>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>solver</em></dt>
-<dd>An <a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><tt class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></tt></a> instance.</dd>
+<dd>An <a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><code class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></code></a> instance.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
 <p>EOF analysis of three variables with no weighting:</p>
@@ -221,13 +224,13 @@ length-1 dimension is added to the end:</p>
 </div>
 <dl class="attribute">
 <dt id="eofs.multivariate.standard.MultivariateEof.neofs">
-<tt class="descname">neofs</tt><em class="property"> = None</em><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof.neofs" title="Permalink to this definition">¶</a></dt>
+<code class="descname">neofs</code><em class="property"> = None</em><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof.neofs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of EOFs in the solution.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="eofs.multivariate.standard.MultivariateEof.pcs">
-<tt class="descname">pcs</tt><big>(</big><em>pcscaling=0</em>, <em>npcs=None</em><big>)</big><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof.pcs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof.pcs" title="Permalink to this definition">¶</a></dt>
+<code class="descname">pcs</code><span class="sig-paren">(</span><em>pcscaling=0</em>, <em>npcs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof.pcs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof.pcs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Principal component time series (PCs).</p>
 <p><strong>Optional arguments:</strong></p>
 <dl class="docutils">
@@ -261,7 +264,7 @@ eigenvalue.</li>
 
 <dl class="method">
 <dt id="eofs.multivariate.standard.MultivariateEof.eofs">
-<tt class="descname">eofs</tt><big>(</big><em>eofscaling=0</em>, <em>neofs=None</em><big>)</big><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof.eofs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof.eofs" title="Permalink to this definition">¶</a></dt>
+<code class="descname">eofs</code><span class="sig-paren">(</span><em>eofscaling=0</em>, <em>neofs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof.eofs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof.eofs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Empirical orthogonal functions (EOFs).</p>
 <p><strong>Optional arguments:</strong></p>
 <dl class="docutils">
@@ -300,10 +303,10 @@ variable along the first dimension.</dd>
 
 <dl class="method">
 <dt id="eofs.multivariate.standard.MultivariateEof.eofsAsCorrelation">
-<tt class="descname">eofsAsCorrelation</tt><big>(</big><em>neofs=None</em><big>)</big><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof.eofsAsCorrelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof.eofsAsCorrelation" title="Permalink to this definition">¶</a></dt>
+<code class="descname">eofsAsCorrelation</code><span class="sig-paren">(</span><em>neofs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof.eofsAsCorrelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof.eofsAsCorrelation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Empirical orthogonal functions (EOFs) expressed as the
 correlation between the principal component time series (PCs)
-and the each data set in the <a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><tt class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></tt></a> input <em>datasets</em>.</p>
+and the each data set in the <a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><code class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></code></a> input <em>datasets</em>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">These are not related to the EOFs computed from the
@@ -335,10 +338,10 @@ variable along the first dimension.</dd>
 
 <dl class="method">
 <dt id="eofs.multivariate.standard.MultivariateEof.eofsAsCovariance">
-<tt class="descname">eofsAsCovariance</tt><big>(</big><em>neofs=None</em>, <em>pcscaling=1</em><big>)</big><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof.eofsAsCovariance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof.eofsAsCovariance" title="Permalink to this definition">¶</a></dt>
+<code class="descname">eofsAsCovariance</code><span class="sig-paren">(</span><em>neofs=None</em>, <em>pcscaling=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof.eofsAsCovariance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof.eofsAsCovariance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Empirical orthogonal functions (EOFs) expressed as the
 covariance between the principal component time series (PCs)
-and the each data set in the <a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><tt class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></tt></a> input <em>datasets</em>.</p>
+and the each data set in the <a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><code class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></code></a> input <em>datasets</em>.</p>
 <p><strong>Optional argument:</strong></p>
 <dl class="docutils">
 <dt><em>neofs</em></dt>
@@ -383,7 +386,7 @@ variable along the first dimension.</dd>
 
 <dl class="method">
 <dt id="eofs.multivariate.standard.MultivariateEof.eigenvalues">
-<tt class="descname">eigenvalues</tt><big>(</big><em>neigs=None</em><big>)</big><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof.eigenvalues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof.eigenvalues" title="Permalink to this definition">¶</a></dt>
+<code class="descname">eigenvalues</code><span class="sig-paren">(</span><em>neigs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof.eigenvalues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof.eigenvalues" title="Permalink to this definition">¶</a></dt>
 <dd><p>Eigenvalues (decreasing variances) associated with each EOF
 mode.</p>
 <p>Returns the eigenvalues in an array.</p>
@@ -414,7 +417,7 @@ smallest.</dd>
 
 <dl class="method">
 <dt id="eofs.multivariate.standard.MultivariateEof.varianceFraction">
-<tt class="descname">varianceFraction</tt><big>(</big><em>neigs=None</em><big>)</big><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof.varianceFraction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof.varianceFraction" title="Permalink to this definition">¶</a></dt>
+<code class="descname">varianceFraction</code><span class="sig-paren">(</span><em>neigs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof.varianceFraction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof.varianceFraction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fractional EOF mode variances.</p>
 <p>The fraction of the total variance explained by each EOF mode,
 values between 0 and 1 inclusive.</p>
@@ -445,7 +448,7 @@ returned.</dd>
 
 <dl class="method">
 <dt id="eofs.multivariate.standard.MultivariateEof.totalAnomalyVariance">
-<tt class="descname">totalAnomalyVariance</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof.totalAnomalyVariance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof.totalAnomalyVariance" title="Permalink to this definition">¶</a></dt>
+<code class="descname">totalAnomalyVariance</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof.totalAnomalyVariance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof.totalAnomalyVariance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Total variance associated with the field of anomalies (the sum
 of the eigenvalues).</p>
 <p><strong>Returns:</strong></p>
@@ -462,7 +465,7 @@ of the eigenvalues).</p>
 
 <dl class="method">
 <dt id="eofs.multivariate.standard.MultivariateEof.northTest">
-<tt class="descname">northTest</tt><big>(</big><em>neigs=None</em>, <em>vfscaled=False</em><big>)</big><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof.northTest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof.northTest" title="Permalink to this definition">¶</a></dt>
+<code class="descname">northTest</code><span class="sig-paren">(</span><em>neigs=None</em>, <em>vfscaled=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof.northTest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof.northTest" title="Permalink to this definition">¶</a></dt>
 <dd><p>Typical errors for eigenvalues.</p>
 <p>The method of North et al. (1982) is used to compute the typical
 error for each eigenvalue. It is assumed that the number of
@@ -480,7 +483,7 @@ eigenvalues will be returned.</dd>
 <dt><em>vfscaled</em></dt>
 <dd>If <em>True</em> scale the errors by the sum of the eigenvalues.
 This yields typical errors with the same scale as the values
-returned by <a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof.varianceFraction" title="eofs.multivariate.standard.MultivariateEof.varianceFraction"><tt class="xref py py-obj docutils literal"><span class="pre">MultivariateEof.varianceFraction</span></tt></a>. If <em>False</em>
+returned by <a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof.varianceFraction" title="eofs.multivariate.standard.MultivariateEof.varianceFraction"><code class="xref py py-obj docutils literal"><span class="pre">MultivariateEof.varianceFraction</span></code></a>. If <em>False</em>
 then no scaling is done. Defaults to <em>False</em> (no scaling).</dd>
 </dl>
 <p><strong>Returns:</strong></p>
@@ -506,52 +509,58 @@ the eigenvalues:</p>
 
 <dl class="method">
 <dt id="eofs.multivariate.standard.MultivariateEof.reconstructedField">
-<tt class="descname">reconstructedField</tt><big>(</big><em>neofs</em><big>)</big><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof.reconstructedField"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof.reconstructedField" title="Permalink to this definition">¶</a></dt>
+<code class="descname">reconstructedField</code><span class="sig-paren">(</span><em>neofs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof.reconstructedField"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof.reconstructedField" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reconstructed data sets based on a subset of EOFs.</p>
-<p>If weights were passed to the <a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><tt class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></tt></a> instance the
+<p>If weights were passed to the <a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><code class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></code></a> instance the
 returned reconstructed fields will automatically have this
 weighting removed. Otherwise each returned field will have the
 same weighting as the corresponding  array in the
-<a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><tt class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></tt></a> input <em>datasets</em>.</p>
+<a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><code class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></code></a> input <em>datasets</em>.</p>
 <p><strong>Argument:</strong></p>
 <dl class="docutils">
 <dt><em>neofs</em></dt>
 <dd>Number of EOFs to use for the reconstruction. If the
 number of EOFs requested is more than the number that are
 available, then all available EOFs will be used for the
-reconstruction.</dd>
+reconstruction. Alternatively this argument can be an
+iterable of mode numbers (where the first mode is 1) in
+order to facilitate reconstruction with arbitrary modes.</dd>
 </dl>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>reconstruction_list</em></dt>
 <dd>A list of arrays with the same shapes as the arrays in the
-<a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><tt class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></tt></a> input <em>datasets</em> contaning the
+<a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><code class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></code></a> input <em>datasets</em> contaning the
 reconstructions using <em>neofs</em> EOFs.</dd>
 </dl>
 <p><strong>Example:</strong></p>
 <p>Reconstruct the input data sets using 3 EOFs:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">reconstruction_list</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">reconstructedField</span><span class="p">(</span><span class="n">neofs</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">reconstruction_list</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">reconstructedField</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Reconstruct the input field using EOFs 1, 2 and 5:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">reconstruction_list</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">reconstuctedField</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="eofs.multivariate.standard.MultivariateEof.projectField">
-<tt class="descname">projectField</tt><big>(</big><em>fields</em>, <em>neofs=None</em>, <em>eofscaling=0</em>, <em>weighted=True</em><big>)</big><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof.projectField"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof.projectField" title="Permalink to this definition">¶</a></dt>
+<code class="descname">projectField</code><span class="sig-paren">(</span><em>fields</em>, <em>neofs=None</em>, <em>eofscaling=0</em>, <em>weighted=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof.projectField"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof.projectField" title="Permalink to this definition">¶</a></dt>
 <dd><p>Project a set of fields onto the EOFs.</p>
 <p>Given a set of data sets, projects them onto the EOFs to
 generate a corresponding set of pseudo-PCs.</p>
 <p><strong>Argument:</strong></p>
 <dl class="docutils">
 <dt><em>fields</em></dt>
-<dd>A list/tuple containing one or more <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy.ndarray</span></tt></a> or
-<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/maskedarray.baseclass.html#numpy.ma.MaskedArray" title="(in NumPy v1.10)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy.ma.MaskedArray</span></tt></a> objects, each with two or more
+<dd>A list/tuple containing one or more <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ndarray</span></code></a> or
+<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/maskedarray.baseclass.html#numpy.ma.MaskedArray" title="(in NumPy v1.10)"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ma.MaskedArray</span></code></a> objects, each with two or more
 dimensions, containing the fields to be projected onto the
 EOFs. Each field must have the same spatial dimensions
 (including missing values in the same places) as the
-corresponding data set in the <a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><tt class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></tt></a> input
+corresponding data set in the <a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><code class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></code></a> input
 <em>datasets</em>. The data sets may have different length time
-dimensions to the <a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><tt class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></tt></a> inputs <em>datasets</em> or no
+dimensions to the <a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><code class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></code></a> inputs <em>datasets</em> or no
 time dimension at all, but this must be consistent for all
 fields.</dd>
 </dl>
@@ -598,7 +607,7 @@ should be used.</dd>
 
 <dl class="method">
 <dt id="eofs.multivariate.standard.MultivariateEof.getWeights">
-<tt class="descname">getWeights</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof.getWeights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof.getWeights" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getWeights</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof.getWeights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof.getWeights" title="Permalink to this definition">¶</a></dt>
 <dd><p>Weights used for the analysis.</p>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
@@ -623,7 +632,7 @@ variable.</dd>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -638,12 +647,12 @@ variable.</dd>
     <li><a href="../index.html">home</a>|&nbsp;</li>
     <li><a href="../search.html">search</a>|&nbsp;</li>
 
-          <li><a href="index.html" >API references</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >API references</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2013-2015 Andrew Dawson.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013-2016 Andrew Dawson.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>
 </html>

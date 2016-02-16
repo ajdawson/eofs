@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>eofs.multivariate.cdms &mdash; eofs 0.5.1 documentation</title>
+    <title>eofs.multivariate.cdms &mdash; eofs 1.0.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.1',
+        VERSION:     '1.0.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,8 +23,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 0.5.1 documentation" href="../index.html" />
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="eofs 1.0.0 documentation" href="../index.html" />
     <link rel="up" title="API references" href="index.html" />
     <link rel="next" title="eofs.multivariate.iris" href="eofs.multivariate.iris.html" />
     <link rel="prev" title="eofs.multivariate.standard" href="eofs.multivariate.standard.html" />
@@ -65,7 +65,7 @@
         </script>
 
   </head>
-  <body>
+  <body role="document">
 <div class="pageheader">
   <div>
     <a href="../index.html">
@@ -74,7 +74,7 @@
   </div>
 </div>
 
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -89,12 +89,12 @@
     <li><a href="../index.html">home</a>|&nbsp;</li>
     <li><a href="../search.html">search</a>|&nbsp;</li>
 
-          <li><a href="index.html" accesskey="U">API references</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">API references</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v0.5.1</h2>
+    <h2>eofs v1.0.0</h2>
     <h3>Table of Contents</h3>
     <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userguide/index.html">User Guide</a></li>
@@ -105,21 +105,24 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../downloads.html">Downloads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/index.html">Developer Guide</a></li>
 </ul>
 
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="eofs.multivariate.standard.html"
-                        title="previous chapter"><tt class="docutils literal"><span class="pre">eofs.multivariate.standard</span></tt></a></p>
+                        title="previous chapter"><code class="docutils literal"><span class="pre">eofs.multivariate.standard</span></code></a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="eofs.multivariate.iris.html"
-                        title="next chapter"><tt class="docutils literal"><span class="pre">eofs.multivariate.iris</span></tt></a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../_sources/api/eofs.multivariate.cdms.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+                        title="next chapter"><code class="docutils literal"><span class="pre">eofs.multivariate.iris</span></code></a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/eofs.multivariate.cdms.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
@@ -138,22 +141,22 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="module-eofs.multivariate.cdms">
-<span id="eofs-multivariate-cdms"></span><h1><a class="reference internal" href="#module-eofs.multivariate.cdms" title="eofs.multivariate.cdms"><tt class="xref py py-mod docutils literal"><span class="pre">eofs.multivariate.cdms</span></tt></a><a class="headerlink" href="#module-eofs.multivariate.cdms" title="Permalink to this headline">¶</a></h1>
-<p>Multivariate EOF analysis for <tt class="xref py py-obj docutils literal"><span class="pre">cdms2</span></tt> variables.</p>
+<span id="eofs-multivariate-cdms"></span><h1><a class="reference internal" href="#module-eofs.multivariate.cdms" title="eofs.multivariate.cdms"><code class="xref py py-mod docutils literal"><span class="pre">eofs.multivariate.cdms</span></code></a><a class="headerlink" href="#module-eofs.multivariate.cdms" title="Permalink to this headline">¶</a></h1>
+<p>Multivariate EOF analysis for <code class="xref py py-obj docutils literal"><span class="pre">cdms2</span></code> variables.</p>
 <dl class="class">
 <dt id="eofs.multivariate.cdms.MultivariateEof">
-<em class="property">class </em><tt class="descclassname">eofs.multivariate.cdms.</tt><tt class="descname">MultivariateEof</tt><big>(</big><em>datasets</em>, <em>weights=None</em>, <em>center=True</em>, <em>ddof=1</em><big>)</big><a class="reference internal" href="../_modules/eofs/multivariate/cdms.html#MultivariateEof"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.cdms.MultivariateEof" title="Permalink to this definition">¶</a></dt>
-<dd><p>Multivariate EOF analysis (meta-data enabled <tt class="xref py py-obj docutils literal"><span class="pre">cdms2</span></tt> interface)</p>
+<em class="property">class </em><code class="descclassname">eofs.multivariate.cdms.</code><code class="descname">MultivariateEof</code><span class="sig-paren">(</span><em>datasets</em>, <em>weights=None</em>, <em>center=True</em>, <em>ddof=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/cdms.html#MultivariateEof"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.cdms.MultivariateEof" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multivariate EOF analysis (meta-data enabled <code class="xref py py-obj docutils literal"><span class="pre">cdms2</span></code> interface)</p>
 <p>Create a MultivariateEof object.</p>
 <p>The EOF solution is computed at initialization time. Method
 calls are used to retrieve computed quantities.</p>
 <p><strong>Arguments:</strong></p>
 <dl class="docutils">
 <dt><em>datasets</em></dt>
-<dd>A list/tuple containing one or more <tt class="xref py py-obj docutils literal"><span class="pre">cdms2</span></tt> variables, each
+<dd>A list/tuple containing one or more <code class="xref py py-obj docutils literal"><span class="pre">cdms2</span></code> variables, each
 two or more dimensions, containing the data to be analysed.
 Time must be the first dimension of each variable. Missing
 values are allowed provided that they are constant with time
@@ -171,19 +174,19 @@ methods are available:</p>
 <ul class="simple">
 <li><em>&#8216;area&#8217;</em> : Square-root of grid cell area normalized by
 total grid area. Requires a latitude-longitude grid to be
-present in the corresponding <tt class="xref py py-obj docutils literal"><span class="pre">cdms2</span></tt> variable. This is a
+present in the corresponding <code class="xref py py-obj docutils literal"><span class="pre">cdms2</span></code> variable. This is a
 fairly standard weighting strategy. If you are unsure
 which method to use and you have gridded data then this
 should be your first choice.</li>
 <li><em>&#8216;coslat&#8217;</em> : Square-root of cosine of latitude. Requires a
 latitude dimension to be present in the corresponding
-<tt class="xref py py-obj docutils literal"><span class="pre">cdms2</span></tt> variable.</li>
+<code class="xref py py-obj docutils literal"><span class="pre">cdms2</span></code> variable.</li>
 <li><em>None</em> : Equal weights for all grid points (<em>&#8216;none&#8217;</em> is
 also accepted).</li>
 </ul>
 <blockquote class="last">
 <div>Alternatively a sequence of arrays of weights whose shapes
-are compatible with the corresponding <tt class="xref py py-obj docutils literal"><span class="pre">cdms2</span></tt> variables in
+are compatible with the corresponding <code class="xref py py-obj docutils literal"><span class="pre">cdms2</span></code> variables in
 <em>datasets</em> may be supplied instead of specifying a
 weighting method.</div></blockquote>
 </dd>
@@ -208,7 +211,7 @@ number of samples. Defaults to <em>1</em>.</dd>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>solver</em></dt>
-<dd>An <a class="reference internal" href="#eofs.multivariate.cdms.MultivariateEof" title="eofs.multivariate.cdms.MultivariateEof"><tt class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></tt></a> instance.</dd>
+<dd>An <a class="reference internal" href="#eofs.multivariate.cdms.MultivariateEof" title="eofs.multivariate.cdms.MultivariateEof"><code class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></code></a> instance.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
 <p>EOF analysis with grid-cell-area weighting using two input
@@ -219,13 +222,13 @@ fields:</p>
 </div>
 <dl class="attribute">
 <dt id="eofs.multivariate.cdms.MultivariateEof.neofs">
-<tt class="descname">neofs</tt><em class="property"> = None</em><a class="headerlink" href="#eofs.multivariate.cdms.MultivariateEof.neofs" title="Permalink to this definition">¶</a></dt>
+<code class="descname">neofs</code><em class="property"> = None</em><a class="headerlink" href="#eofs.multivariate.cdms.MultivariateEof.neofs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of EOFs in the solution.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="eofs.multivariate.cdms.MultivariateEof.pcs">
-<tt class="descname">pcs</tt><big>(</big><em>pcscaling=0</em>, <em>npcs=None</em><big>)</big><a class="reference internal" href="../_modules/eofs/multivariate/cdms.html#MultivariateEof.pcs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.cdms.MultivariateEof.pcs" title="Permalink to this definition">¶</a></dt>
+<code class="descname">pcs</code><span class="sig-paren">(</span><em>pcscaling=0</em>, <em>npcs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/cdms.html#MultivariateEof.pcs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.cdms.MultivariateEof.pcs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Principal component time series (PCs).</p>
 <p><strong>Optional arguments:</strong></p>
 <dl class="docutils">
@@ -248,7 +251,7 @@ available, then all available PCs will be returned.</dd>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>pcs</em></dt>
-<dd>A <tt class="xref py py-obj docutils literal"><span class="pre">cdms2</span></tt> variable containing the ordered PCs.</dd>
+<dd>A <code class="xref py py-obj docutils literal"><span class="pre">cdms2</span></code> variable containing the ordered PCs.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
 <p>All un-scaled PCs:</p>
@@ -263,7 +266,7 @@ available, then all available PCs will be returned.</dd>
 
 <dl class="method">
 <dt id="eofs.multivariate.cdms.MultivariateEof.eofs">
-<tt class="descname">eofs</tt><big>(</big><em>eofscaling=0</em>, <em>neofs=None</em><big>)</big><a class="reference internal" href="../_modules/eofs/multivariate/cdms.html#MultivariateEof.eofs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.cdms.MultivariateEof.eofs" title="Permalink to this definition">¶</a></dt>
+<code class="descname">eofs</code><span class="sig-paren">(</span><em>eofscaling=0</em>, <em>neofs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/cdms.html#MultivariateEof.eofs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.cdms.MultivariateEof.eofs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Empirical orthogonal functions (EOFs).</p>
 <p><strong>Optional arguments:</strong></p>
 <dl class="docutils">
@@ -286,7 +289,7 @@ available, then all available EOFs will be returned.</dd>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>eofs_list</em></dt>
-<dd>A list of <tt class="xref py py-obj docutils literal"><span class="pre">cdms2</span></tt> variables containing the ordered EOFs for
+<dd>A list of <code class="xref py py-obj docutils literal"><span class="pre">cdms2</span></code> variables containing the ordered EOFs for
 each variable.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
@@ -302,10 +305,10 @@ each variable.</dd>
 
 <dl class="method">
 <dt id="eofs.multivariate.cdms.MultivariateEof.eofsAsCorrelation">
-<tt class="descname">eofsAsCorrelation</tt><big>(</big><em>neofs=None</em><big>)</big><a class="reference internal" href="../_modules/eofs/multivariate/cdms.html#MultivariateEof.eofsAsCorrelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.cdms.MultivariateEof.eofsAsCorrelation" title="Permalink to this definition">¶</a></dt>
+<code class="descname">eofsAsCorrelation</code><span class="sig-paren">(</span><em>neofs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/cdms.html#MultivariateEof.eofsAsCorrelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.cdms.MultivariateEof.eofsAsCorrelation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Empirical orthogonal functions (EOFs) expressed as the
 correlation between the principal component time series (PCs)
-and the each data set in the <a class="reference internal" href="#eofs.multivariate.cdms.MultivariateEof" title="eofs.multivariate.cdms.MultivariateEof"><tt class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></tt></a> input <em>datasets</em>.</p>
+and the each data set in the <a class="reference internal" href="#eofs.multivariate.cdms.MultivariateEof" title="eofs.multivariate.cdms.MultivariateEof"><code class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></code></a> input <em>datasets</em>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">These are not related to the EOFs computed from the
@@ -321,7 +324,7 @@ available, then all available EOFs will be returned.</dd>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>eofs_list</em></dt>
-<dd>A list of <tt class="xref py py-obj docutils literal"><span class="pre">cdms2</span></tt> variables containing the ordered EOFs for
+<dd>A list of <code class="xref py py-obj docutils literal"><span class="pre">cdms2</span></code> variables containing the ordered EOFs for
 each variable.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
@@ -337,10 +340,10 @@ each variable.</dd>
 
 <dl class="method">
 <dt id="eofs.multivariate.cdms.MultivariateEof.eofsAsCovariance">
-<tt class="descname">eofsAsCovariance</tt><big>(</big><em>neofs=None</em>, <em>pcscaling=1</em><big>)</big><a class="reference internal" href="../_modules/eofs/multivariate/cdms.html#MultivariateEof.eofsAsCovariance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.cdms.MultivariateEof.eofsAsCovariance" title="Permalink to this definition">¶</a></dt>
+<code class="descname">eofsAsCovariance</code><span class="sig-paren">(</span><em>neofs=None</em>, <em>pcscaling=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/cdms.html#MultivariateEof.eofsAsCovariance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.cdms.MultivariateEof.eofsAsCovariance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Empirical orthogonal functions (EOFs) expressed as the
 covariance between the principal component time series (PCs)
-and the each data set in the <a class="reference internal" href="#eofs.multivariate.cdms.MultivariateEof" title="eofs.multivariate.cdms.MultivariateEof"><tt class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></tt></a> input <em>datasets</em>.</p>
+and the each data set in the <a class="reference internal" href="#eofs.multivariate.cdms.MultivariateEof" title="eofs.multivariate.cdms.MultivariateEof"><code class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></code></a> input <em>datasets</em>.</p>
 <p><strong>Optional argument:</strong></p>
 <dl class="docutils">
 <dt><em>neofs</em></dt>
@@ -365,7 +368,7 @@ eigenvalue so that the PCs are scaled to unit variance
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>eofs_list</em></dt>
-<dd>A list of <tt class="xref py py-obj docutils literal"><span class="pre">cdms2</span></tt> variables containing the ordered EOFs for
+<dd>A list of <code class="xref py py-obj docutils literal"><span class="pre">cdms2</span></code> variables containing the ordered EOFs for
 each variable.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
@@ -381,7 +384,7 @@ each variable.</dd>
 
 <dl class="method">
 <dt id="eofs.multivariate.cdms.MultivariateEof.eigenvalues">
-<tt class="descname">eigenvalues</tt><big>(</big><em>neigs=None</em><big>)</big><a class="reference internal" href="../_modules/eofs/multivariate/cdms.html#MultivariateEof.eigenvalues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.cdms.MultivariateEof.eigenvalues" title="Permalink to this definition">¶</a></dt>
+<code class="descname">eigenvalues</code><span class="sig-paren">(</span><em>neigs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/cdms.html#MultivariateEof.eigenvalues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.cdms.MultivariateEof.eigenvalues" title="Permalink to this definition">¶</a></dt>
 <dd><p>Eigenvalues (decreasing variances) associated with each EOF
 mode.</p>
 <p><strong>Optional argument:</strong></p>
@@ -395,7 +398,7 @@ eigenvalues will be returned.</dd>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>eigenvalues</em></dt>
-<dd>A <tt class="xref py py-obj docutils literal"><span class="pre">cdms2</span></tt> variable containing the eigenvalues arranged
+<dd>A <code class="xref py py-obj docutils literal"><span class="pre">cdms2</span></code> variable containing the eigenvalues arranged
 largest to smallest.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
@@ -411,7 +414,7 @@ largest to smallest.</dd>
 
 <dl class="method">
 <dt id="eofs.multivariate.cdms.MultivariateEof.varianceFraction">
-<tt class="descname">varianceFraction</tt><big>(</big><em>neigs=None</em><big>)</big><a class="reference internal" href="../_modules/eofs/multivariate/cdms.html#MultivariateEof.varianceFraction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.cdms.MultivariateEof.varianceFraction" title="Permalink to this definition">¶</a></dt>
+<code class="descname">varianceFraction</code><span class="sig-paren">(</span><em>neigs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/cdms.html#MultivariateEof.varianceFraction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.cdms.MultivariateEof.varianceFraction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fractional EOF mode variances.</p>
 <p>The fraction of the total variance explained by each EOF mode,
 values between 0 and 1 inclusive.</p>
@@ -427,7 +430,7 @@ returned.</dd>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>variance_fractions</em></dt>
-<dd>A <tt class="xref py py-obj docutils literal"><span class="pre">cdms2</span></tt> variable containing the fractional variances.</dd>
+<dd>A <code class="xref py py-obj docutils literal"><span class="pre">cdms2</span></code> variable containing the fractional variances.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
 <p>The fractional variance represented by each EOF mode:</p>
@@ -442,13 +445,13 @@ returned.</dd>
 
 <dl class="method">
 <dt id="eofs.multivariate.cdms.MultivariateEof.totalAnomalyVariance">
-<tt class="descname">totalAnomalyVariance</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/eofs/multivariate/cdms.html#MultivariateEof.totalAnomalyVariance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.cdms.MultivariateEof.totalAnomalyVariance" title="Permalink to this definition">¶</a></dt>
+<code class="descname">totalAnomalyVariance</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/cdms.html#MultivariateEof.totalAnomalyVariance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.cdms.MultivariateEof.totalAnomalyVariance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Total variance associated with the field of anomalies (the sum
 of the eigenvalues).</p>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>total_variance</em></dt>
-<dd>A scalar value (not a <tt class="xref py py-obj docutils literal"><span class="pre">cdms2</span></tt> variable).</dd>
+<dd>A scalar value (not a <code class="xref py py-obj docutils literal"><span class="pre">cdms2</span></code> variable).</dd>
 </dl>
 <p><strong>Example:</strong></p>
 <p>Get the total variance:</p>
@@ -459,7 +462,7 @@ of the eigenvalues).</p>
 
 <dl class="method">
 <dt id="eofs.multivariate.cdms.MultivariateEof.northTest">
-<tt class="descname">northTest</tt><big>(</big><em>neigs=None</em>, <em>vfscaled=False</em><big>)</big><a class="reference internal" href="../_modules/eofs/multivariate/cdms.html#MultivariateEof.northTest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.cdms.MultivariateEof.northTest" title="Permalink to this definition">¶</a></dt>
+<code class="descname">northTest</code><span class="sig-paren">(</span><em>neigs=None</em>, <em>vfscaled=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/cdms.html#MultivariateEof.northTest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.cdms.MultivariateEof.northTest" title="Permalink to this definition">¶</a></dt>
 <dd><p>Typical errors for eigenvalues.</p>
 <p>The method of North et al. (1982) is used to compute the typical
 error for each eigenvalue. It is assumed that the number of
@@ -477,13 +480,13 @@ eigenvalues will be returned.</dd>
 <dt><em>vfscaled</em></dt>
 <dd>If <em>True</em> scale the errors by the sum of the eigenvalues.
 This yields typical errors with the same scale as the values
-returned by <a class="reference internal" href="#eofs.multivariate.cdms.MultivariateEof.varianceFraction" title="eofs.multivariate.cdms.MultivariateEof.varianceFraction"><tt class="xref py py-obj docutils literal"><span class="pre">MultivariateEof.varianceFraction</span></tt></a>. If <em>False</em>
+returned by <a class="reference internal" href="#eofs.multivariate.cdms.MultivariateEof.varianceFraction" title="eofs.multivariate.cdms.MultivariateEof.varianceFraction"><code class="xref py py-obj docutils literal"><span class="pre">MultivariateEof.varianceFraction</span></code></a>. If <em>False</em>
 then no scaling is done. Defaults to <em>False</em> (no scaling).</dd>
 </dl>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>errors</em></dt>
-<dd>A <tt class="xref py py-obj docutils literal"><span class="pre">cdms2</span></tt> variable containing the typical errors.</dd>
+<dd>A <code class="xref py py-obj docutils literal"><span class="pre">cdms2</span></code> variable containing the typical errors.</dd>
 </dl>
 <p><strong>References</strong></p>
 <p>North G.R., T.L. Bell, R.F. Cahalan, and F.J. Moeng (1982)
@@ -503,26 +506,28 @@ the eigenvalues:</p>
 
 <dl class="method">
 <dt id="eofs.multivariate.cdms.MultivariateEof.reconstructedField">
-<tt class="descname">reconstructedField</tt><big>(</big><em>neofs</em><big>)</big><a class="reference internal" href="../_modules/eofs/multivariate/cdms.html#MultivariateEof.reconstructedField"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.cdms.MultivariateEof.reconstructedField" title="Permalink to this definition">¶</a></dt>
+<code class="descname">reconstructedField</code><span class="sig-paren">(</span><em>neofs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/cdms.html#MultivariateEof.reconstructedField"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.cdms.MultivariateEof.reconstructedField" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reconstructed data sets based on a subset of EOFs.</p>
-<p>If weights were passed to the <a class="reference internal" href="#eofs.multivariate.cdms.MultivariateEof" title="eofs.multivariate.cdms.MultivariateEof"><tt class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></tt></a> instance the
+<p>If weights were passed to the <a class="reference internal" href="#eofs.multivariate.cdms.MultivariateEof" title="eofs.multivariate.cdms.MultivariateEof"><code class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></code></a> instance the
 returned reconstructed fields will automatically have this
 weighting removed. Otherwise each returned field will have the
 same weighting as the corresponding  array in the
-<a class="reference internal" href="#eofs.multivariate.cdms.MultivariateEof" title="eofs.multivariate.cdms.MultivariateEof"><tt class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></tt></a> input <em>datasets</em>.</p>
+<a class="reference internal" href="#eofs.multivariate.cdms.MultivariateEof" title="eofs.multivariate.cdms.MultivariateEof"><code class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></code></a> input <em>datasets</em>.</p>
 <p><strong>Argument:</strong></p>
 <dl class="docutils">
 <dt><em>neofs</em></dt>
 <dd>Number of EOFs to use for the reconstruction. If the
 number of EOFs requested is more than the number that are
 available, then all available EOFs will be used for the
-reconstruction.</dd>
+reconstruction. Alternatively this argument can be an
+iterable of mode numbers (where the first mode is 1) in
+order to facilitate reconstruction with arbitrary modes.</dd>
 </dl>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>reconstruction_list</em></dt>
-<dd>A list of <tt class="xref py py-obj docutils literal"><span class="pre">cdms2</span></tt> variable with the same dimensions as the
-variables in the <a class="reference internal" href="#eofs.multivariate.cdms.MultivariateEof" title="eofs.multivariate.cdms.MultivariateEof"><tt class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></tt></a> input <em>datasets</em>
+<dd>A list of <code class="xref py py-obj docutils literal"><span class="pre">cdms2</span></code> variable with the same dimensions as the
+variables in the <a class="reference internal" href="#eofs.multivariate.cdms.MultivariateEof" title="eofs.multivariate.cdms.MultivariateEof"><code class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></code></a> input <em>datasets</em>
 contaning the reconstructions using <em>neofs</em> EOFs.</dd>
 </dl>
 <p><strong>Example:</strong></p>
@@ -530,24 +535,28 @@ contaning the reconstructions using <em>neofs</em> EOFs.</dd>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">reconstruction_list</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">reconstructedField</span><span class="p">(</span><span class="n">neofs</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>Reconstruct the input field using EOFs 1, 2 and 5:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">reconstruction_list</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">reconstuctedField</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
 <dt id="eofs.multivariate.cdms.MultivariateEof.projectField">
-<tt class="descname">projectField</tt><big>(</big><em>fields</em>, <em>neofs=None</em>, <em>eofscaling=0</em>, <em>weighted=True</em><big>)</big><a class="reference internal" href="../_modules/eofs/multivariate/cdms.html#MultivariateEof.projectField"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.cdms.MultivariateEof.projectField" title="Permalink to this definition">¶</a></dt>
+<code class="descname">projectField</code><span class="sig-paren">(</span><em>fields</em>, <em>neofs=None</em>, <em>eofscaling=0</em>, <em>weighted=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/cdms.html#MultivariateEof.projectField"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.cdms.MultivariateEof.projectField" title="Permalink to this definition">¶</a></dt>
 <dd><p>Project a set of fields onto the EOFs.</p>
 <p>Given a set of fields, projects them onto the EOFs to generate a
 corresponding set of pseudo-PCs.</p>
 <p><strong>Argument:</strong></p>
 <dl class="docutils">
 <dt><em>fields</em></dt>
-<dd>A list/tuple containing one or more <tt class="xref py py-obj docutils literal"><span class="pre">cdms2</span></tt> variables, each
+<dd>A list/tuple containing one or more <code class="xref py py-obj docutils literal"><span class="pre">cdms2</span></code> variables, each
 with two or more dimensions, containing the data to be
 projected onto the EOFs. Each field must have the same
 spatial dimensions (including missing values in the same
 places) as the corresponding data set in the
-<a class="reference internal" href="#eofs.multivariate.cdms.MultivariateEof" title="eofs.multivariate.cdms.MultivariateEof"><tt class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></tt></a> input <em>datasets</em>. The fields may have
-different length time dimensions to the <a class="reference internal" href="#eofs.multivariate.cdms.MultivariateEof" title="eofs.multivariate.cdms.MultivariateEof"><tt class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></tt></a>
+<a class="reference internal" href="#eofs.multivariate.cdms.MultivariateEof" title="eofs.multivariate.cdms.MultivariateEof"><code class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></code></a> input <em>datasets</em>. The fields may have
+different length time dimensions to the <a class="reference internal" href="#eofs.multivariate.cdms.MultivariateEof" title="eofs.multivariate.cdms.MultivariateEof"><code class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></code></a>
 inputs <em>datasets</em> or no time dimension at all, but this
 must be consistent for all fields.</dd>
 </dl>
@@ -579,7 +588,7 @@ should be used.</dd>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>pseudo_pcs</em></dt>
-<dd>A <tt class="xref py py-obj docutils literal"><span class="pre">cdms2</span></tt> variable containing the ordered pseudo-PCs.</dd>
+<dd>A <code class="xref py py-obj docutils literal"><span class="pre">cdms2</span></code> variable containing the ordered pseudo-PCs.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
 <p>Project a data set onto all EOFs:</p>
@@ -594,13 +603,13 @@ should be used.</dd>
 
 <dl class="method">
 <dt id="eofs.multivariate.cdms.MultivariateEof.getWeights">
-<tt class="descname">getWeights</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/eofs/multivariate/cdms.html#MultivariateEof.getWeights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.cdms.MultivariateEof.getWeights" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getWeights</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/cdms.html#MultivariateEof.getWeights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.cdms.MultivariateEof.getWeights" title="Permalink to this definition">¶</a></dt>
 <dd><p>Weights used for the analysis.</p>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>weights_list</em></dt>
 <dd>A list of arrays containing the analysis weights for each
-variable (not <tt class="xref py py-obj docutils literal"><span class="pre">cdms2</span></tt> variables).</dd>
+variable (not <code class="xref py py-obj docutils literal"><span class="pre">cdms2</span></code> variables).</dd>
 </dl>
 <p><strong>Example:</strong></p>
 <p>The weights used for the analysis:</p>
@@ -619,7 +628,7 @@ variable (not <tt class="xref py py-obj docutils literal"><span class="pre">cdms
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -634,12 +643,12 @@ variable (not <tt class="xref py py-obj docutils literal"><span class="pre">cdms
     <li><a href="../index.html">home</a>|&nbsp;</li>
     <li><a href="../search.html">search</a>|&nbsp;</li>
 
-          <li><a href="index.html" >API references</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >API references</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2013-2015 Andrew Dawson.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013-2016 Andrew Dawson.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>
 </html>

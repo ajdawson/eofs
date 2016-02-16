@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>eofs.standard &mdash; eofs 0.5.1 documentation</title>
+    <title>eofs.standard &mdash; eofs 1.0.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.1',
+        VERSION:     '1.0.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,8 +23,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 0.5.1 documentation" href="../index.html" />
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="eofs 1.0.0 documentation" href="../index.html" />
     <link rel="up" title="API references" href="index.html" />
     <link rel="next" title="eofs.cdms" href="eofs.cdms.html" />
     <link rel="prev" title="API references" href="index.html" />
@@ -65,7 +65,7 @@
         </script>
 
   </head>
-  <body>
+  <body role="document">
 <div class="pageheader">
   <div>
     <a href="../index.html">
@@ -74,7 +74,7 @@
   </div>
 </div>
 
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -89,12 +89,12 @@
     <li><a href="../index.html">home</a>|&nbsp;</li>
     <li><a href="../search.html">search</a>|&nbsp;</li>
 
-          <li><a href="index.html" accesskey="U">API references</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">API references</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v0.5.1</h2>
+    <h2>eofs v1.0.0</h2>
     <h3>Table of Contents</h3>
     <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userguide/index.html">User Guide</a></li>
@@ -105,6 +105,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../downloads.html">Downloads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/index.html">Developer Guide</a></li>
 </ul>
 
 
@@ -113,13 +114,15 @@
                         title="previous chapter">API references</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="eofs.cdms.html"
-                        title="next chapter"><tt class="docutils literal"><span class="pre">eofs.cdms</span></tt></a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../_sources/api/eofs.standard.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+                        title="next chapter"><code class="docutils literal"><span class="pre">eofs.cdms</span></code></a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/eofs.standard.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
@@ -138,26 +141,26 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="module-eofs.standard">
-<span id="eofs-standard"></span><h1><a class="reference internal" href="#module-eofs.standard" title="eofs.standard"><tt class="xref py py-mod docutils literal"><span class="pre">eofs.standard</span></tt></a><a class="headerlink" href="#module-eofs.standard" title="Permalink to this headline">¶</a></h1>
-<p>EOF analysis for data in <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.10)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy</span></tt></a> arrays.</p>
+<span id="eofs-standard"></span><h1><a class="reference internal" href="#module-eofs.standard" title="eofs.standard"><code class="xref py py-mod docutils literal"><span class="pre">eofs.standard</span></code></a><a class="headerlink" href="#module-eofs.standard" title="Permalink to this headline">¶</a></h1>
+<p>EOF analysis for data in <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.10)"><code class="xref py py-obj docutils literal"><span class="pre">numpy</span></code></a> arrays.</p>
 <dl class="class">
 <dt id="eofs.standard.Eof">
-<em class="property">class </em><tt class="descclassname">eofs.standard.</tt><tt class="descname">Eof</tt><big>(</big><em>dataset</em>, <em>weights=None</em>, <em>center=True</em>, <em>ddof=1</em><big>)</big><a class="reference internal" href="../_modules/eofs/standard.html#Eof"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.standard.Eof" title="Permalink to this definition">¶</a></dt>
-<dd><p>EOF analysis (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.10)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy</span></tt></a> interface)</p>
+<em class="property">class </em><code class="descclassname">eofs.standard.</code><code class="descname">Eof</code><span class="sig-paren">(</span><em>dataset</em>, <em>weights=None</em>, <em>center=True</em>, <em>ddof=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/standard.html#Eof"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.standard.Eof" title="Permalink to this definition">¶</a></dt>
+<dd><p>EOF analysis (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.10)"><code class="xref py py-obj docutils literal"><span class="pre">numpy</span></code></a> interface)</p>
 <p>Create an Eof object.</p>
 <p>The EOF solution is computed at initialization time. Method
 calls are used to retrieve computed quantities.</p>
 <p><strong>Arguments:</strong></p>
 <dl class="docutils">
 <dt><em>dataset</em></dt>
-<dd>A <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy.ndarray</span></tt></a> or <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/maskedarray.baseclass.html#numpy.ma.MaskedArray" title="(in NumPy v1.10)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy.ma.MaskedArray</span></tt></a> with two or more
+<dd>A <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ndarray</span></code></a> or <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/maskedarray.baseclass.html#numpy.ma.MaskedArray" title="(in NumPy v1.10)"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ma.MaskedArray</span></code></a> with two or more
 dimensions containing the data to be analysed. The first
 dimension is assumed to represent time. Missing values are
 permitted, either in the form of a masked array, or
-<tt class="xref py py-obj docutils literal"><span class="pre">numpy.nan</span></tt> values. Missing values must be constant with time
+<code class="xref py py-obj docutils literal"><span class="pre">numpy.nan</span></code> values. Missing values must be constant with time
 (e.g., values of an oceanographic field over land).</dd>
 </dl>
 <p><strong>Optional arguments:</strong></p>
@@ -192,7 +195,7 @@ number of samples. Defaults to <em>1</em>.</dd>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>solver</em></dt>
-<dd>An <a class="reference internal" href="#eofs.standard.Eof" title="eofs.standard.Eof"><tt class="xref py py-obj docutils literal"><span class="pre">Eof</span></tt></a> instance.</dd>
+<dd>An <a class="reference internal" href="#eofs.standard.Eof" title="eofs.standard.Eof"><code class="xref py py-obj docutils literal"><span class="pre">Eof</span></code></a> instance.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
 <p>EOF analysis with no weighting:</p>
@@ -214,7 +217,7 @@ extra length-1 dimension is added to the end:</p>
 </div>
 <dl class="method">
 <dt id="eofs.standard.Eof.pcs">
-<tt class="descname">pcs</tt><big>(</big><em>pcscaling=0</em>, <em>npcs=None</em><big>)</big><a class="reference internal" href="../_modules/eofs/standard.html#Eof.pcs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.standard.Eof.pcs" title="Permalink to this definition">¶</a></dt>
+<code class="descname">pcs</code><span class="sig-paren">(</span><em>pcscaling=0</em>, <em>npcs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/standard.html#Eof.pcs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.standard.Eof.pcs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Principal component time series (PCs).</p>
 <p><strong>Optional arguments:</strong></p>
 <dl class="docutils">
@@ -252,7 +255,7 @@ available, then all available PCs will be returned.</dd>
 
 <dl class="method">
 <dt id="eofs.standard.Eof.eofs">
-<tt class="descname">eofs</tt><big>(</big><em>eofscaling=0</em>, <em>neofs=None</em><big>)</big><a class="reference internal" href="../_modules/eofs/standard.html#Eof.eofs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.standard.Eof.eofs" title="Permalink to this definition">¶</a></dt>
+<code class="descname">eofs</code><span class="sig-paren">(</span><em>eofscaling=0</em>, <em>neofs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/standard.html#Eof.eofs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.standard.Eof.eofs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Empirical orthogonal functions (EOFs).</p>
 <p><strong>Optional arguments:</strong></p>
 <dl class="docutils">
@@ -290,11 +293,11 @@ available, then all available EOFs will be returned.</dd>
 
 <dl class="method">
 <dt id="eofs.standard.Eof.eofsAsCorrelation">
-<tt class="descname">eofsAsCorrelation</tt><big>(</big><em>neofs=None</em><big>)</big><a class="reference internal" href="../_modules/eofs/standard.html#Eof.eofsAsCorrelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.standard.Eof.eofsAsCorrelation" title="Permalink to this definition">¶</a></dt>
+<code class="descname">eofsAsCorrelation</code><span class="sig-paren">(</span><em>neofs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/standard.html#Eof.eofsAsCorrelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.standard.Eof.eofsAsCorrelation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Correlation map EOFs.</p>
 <p>Empirical orthogonal functions (EOFs) expressed as the
 correlation between the principal component time series (PCs)
-and the time series of the <a class="reference internal" href="#eofs.standard.Eof" title="eofs.standard.Eof"><tt class="xref py py-obj docutils literal"><span class="pre">Eof</span></tt></a> input <em>dataset</em> at each grid
+and the time series of the <a class="reference internal" href="#eofs.standard.Eof" title="eofs.standard.Eof"><code class="xref py py-obj docutils literal"><span class="pre">Eof</span></code></a> input <em>dataset</em> at each grid
 point.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -326,11 +329,11 @@ available, then all available EOFs will be returned.</dd>
 
 <dl class="method">
 <dt id="eofs.standard.Eof.eofsAsCovariance">
-<tt class="descname">eofsAsCovariance</tt><big>(</big><em>neofs=None</em>, <em>pcscaling=1</em><big>)</big><a class="reference internal" href="../_modules/eofs/standard.html#Eof.eofsAsCovariance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.standard.Eof.eofsAsCovariance" title="Permalink to this definition">¶</a></dt>
+<code class="descname">eofsAsCovariance</code><span class="sig-paren">(</span><em>neofs=None</em>, <em>pcscaling=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/standard.html#Eof.eofsAsCovariance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.standard.Eof.eofsAsCovariance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Covariance map EOFs.</p>
 <p>Empirical orthogonal functions (EOFs) expressed as the
 covariance between the principal component time series (PCs)
-and the time series of the <a class="reference internal" href="#eofs.standard.Eof" title="eofs.standard.Eof"><tt class="xref py py-obj docutils literal"><span class="pre">Eof</span></tt></a> input <em>dataset</em> at each grid
+and the time series of the <a class="reference internal" href="#eofs.standard.Eof" title="eofs.standard.Eof"><code class="xref py py-obj docutils literal"><span class="pre">Eof</span></code></a> input <em>dataset</em> at each grid
 point.</p>
 <p><strong>Optional arguments:</strong></p>
 <dl class="docutils">
@@ -375,7 +378,7 @@ eigenvalue so that the PCs are scaled to unit variance
 
 <dl class="method">
 <dt id="eofs.standard.Eof.eigenvalues">
-<tt class="descname">eigenvalues</tt><big>(</big><em>neigs=None</em><big>)</big><a class="reference internal" href="../_modules/eofs/standard.html#Eof.eigenvalues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.standard.Eof.eigenvalues" title="Permalink to this definition">¶</a></dt>
+<code class="descname">eigenvalues</code><span class="sig-paren">(</span><em>neigs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/standard.html#Eof.eigenvalues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.standard.Eof.eigenvalues" title="Permalink to this definition">¶</a></dt>
 <dd><p>Eigenvalues (decreasing variances) associated with each EOF.</p>
 <p><strong>Optional argument:</strong></p>
 <dl class="docutils">
@@ -404,7 +407,7 @@ smallest.</dd>
 
 <dl class="method">
 <dt id="eofs.standard.Eof.varianceFraction">
-<tt class="descname">varianceFraction</tt><big>(</big><em>neigs=None</em><big>)</big><a class="reference internal" href="../_modules/eofs/standard.html#Eof.varianceFraction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.standard.Eof.varianceFraction" title="Permalink to this definition">¶</a></dt>
+<code class="descname">varianceFraction</code><span class="sig-paren">(</span><em>neigs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/standard.html#Eof.varianceFraction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.standard.Eof.varianceFraction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fractional EOF mode variances.</p>
 <p>The fraction of the total variance explained by each EOF mode,
 values between 0 and 1 inclusive.</p>
@@ -435,7 +438,7 @@ returned.</dd>
 
 <dl class="method">
 <dt id="eofs.standard.Eof.totalAnomalyVariance">
-<tt class="descname">totalAnomalyVariance</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/eofs/standard.html#Eof.totalAnomalyVariance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.standard.Eof.totalAnomalyVariance" title="Permalink to this definition">¶</a></dt>
+<code class="descname">totalAnomalyVariance</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/standard.html#Eof.totalAnomalyVariance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.standard.Eof.totalAnomalyVariance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Total variance associated with the field of anomalies (the sum
 of the eigenvalues).</p>
 <p><strong>Returns:</strong></p>
@@ -452,7 +455,7 @@ of the eigenvalues).</p>
 
 <dl class="method">
 <dt id="eofs.standard.Eof.northTest">
-<tt class="descname">northTest</tt><big>(</big><em>neigs=None</em>, <em>vfscaled=False</em><big>)</big><a class="reference internal" href="../_modules/eofs/standard.html#Eof.northTest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.standard.Eof.northTest" title="Permalink to this definition">¶</a></dt>
+<code class="descname">northTest</code><span class="sig-paren">(</span><em>neigs=None</em>, <em>vfscaled=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/standard.html#Eof.northTest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.standard.Eof.northTest" title="Permalink to this definition">¶</a></dt>
 <dd><p>Typical errors for eigenvalues.</p>
 <p>The method of North et al. (1982) is used to compute the typical
 error for each eigenvalue. It is assumed that the number of
@@ -470,7 +473,7 @@ eigenvalues will be returned.</dd>
 <dt><em>vfscaled</em></dt>
 <dd>If <em>True</em> scale the errors by the sum of the eigenvalues.
 This yields typical errors with the same scale as the values
-returned by <a class="reference internal" href="#eofs.standard.Eof.varianceFraction" title="eofs.standard.Eof.varianceFraction"><tt class="xref py py-obj docutils literal"><span class="pre">Eof.varianceFraction</span></tt></a>. If <em>False</em> then no
+returned by <a class="reference internal" href="#eofs.standard.Eof.varianceFraction" title="eofs.standard.Eof.varianceFraction"><code class="xref py py-obj docutils literal"><span class="pre">Eof.varianceFraction</span></code></a>. If <em>False</em> then no
 scaling is done. Defaults to <em>False</em> (no scaling).</dd>
 </dl>
 <p><strong>Returns:</strong></p>
@@ -496,48 +499,54 @@ the eigenvalues:</p>
 
 <dl class="method">
 <dt id="eofs.standard.Eof.reconstructedField">
-<tt class="descname">reconstructedField</tt><big>(</big><em>neofs</em><big>)</big><a class="reference internal" href="../_modules/eofs/standard.html#Eof.reconstructedField"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.standard.Eof.reconstructedField" title="Permalink to this definition">¶</a></dt>
+<code class="descname">reconstructedField</code><span class="sig-paren">(</span><em>neofs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/standard.html#Eof.reconstructedField"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.standard.Eof.reconstructedField" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reconstructed data field based on a subset of EOFs.</p>
-<p>If weights were passed to the <a class="reference internal" href="#eofs.standard.Eof" title="eofs.standard.Eof"><tt class="xref py py-obj docutils literal"><span class="pre">Eof</span></tt></a> instance the returned
+<p>If weights were passed to the <a class="reference internal" href="#eofs.standard.Eof" title="eofs.standard.Eof"><code class="xref py py-obj docutils literal"><span class="pre">Eof</span></code></a> instance the returned
 reconstructed field will automatically have this weighting
 removed. Otherwise the returned field will have the same
-weighting as the <a class="reference internal" href="#eofs.standard.Eof" title="eofs.standard.Eof"><tt class="xref py py-obj docutils literal"><span class="pre">Eof</span></tt></a> input <em>dataset</em>.</p>
+weighting as the <a class="reference internal" href="#eofs.standard.Eof" title="eofs.standard.Eof"><code class="xref py py-obj docutils literal"><span class="pre">Eof</span></code></a> input <em>dataset</em>.</p>
 <p><strong>Argument:</strong></p>
 <dl class="docutils">
 <dt><em>neofs</em></dt>
 <dd>Number of EOFs to use for the reconstruction. If the
 number of EOFs requested is more than the number that are
 available, then all available EOFs will be used for the
-reconstruction.</dd>
+reconstruction. Alternatively this argument can be an
+iterable of mode numbers (where the first mode is 1) in
+order to facilitate reconstruction with arbitrary modes.</dd>
 </dl>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>reconstruction</em></dt>
-<dd>An array the same shape as the <a class="reference internal" href="#eofs.standard.Eof" title="eofs.standard.Eof"><tt class="xref py py-obj docutils literal"><span class="pre">Eof</span></tt></a> input <em>dataset</em>
+<dd>An array the same shape as the <a class="reference internal" href="#eofs.standard.Eof" title="eofs.standard.Eof"><code class="xref py py-obj docutils literal"><span class="pre">Eof</span></code></a> input <em>dataset</em>
 contaning the reconstruction using <em>neofs</em> EOFs.</dd>
 </dl>
-<p><strong>Example:</strong></p>
+<p><strong>Examples:</strong></p>
 <p>Reconstruct the input field using 3 EOFs:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">reconstruction</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">reconstructedField</span><span class="p">(</span><span class="n">neofs</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">reconstruction</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">reconstructedField</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Reconstruct the input field using EOFs 1, 2 and 5:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">reconstruction</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">reconstuctedField</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="eofs.standard.Eof.projectField">
-<tt class="descname">projectField</tt><big>(</big><em>field</em>, <em>neofs=None</em>, <em>eofscaling=0</em>, <em>weighted=True</em><big>)</big><a class="reference internal" href="../_modules/eofs/standard.html#Eof.projectField"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.standard.Eof.projectField" title="Permalink to this definition">¶</a></dt>
+<code class="descname">projectField</code><span class="sig-paren">(</span><em>field</em>, <em>neofs=None</em>, <em>eofscaling=0</em>, <em>weighted=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/standard.html#Eof.projectField"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.standard.Eof.projectField" title="Permalink to this definition">¶</a></dt>
 <dd><p>Project a field onto the EOFs.</p>
 <p>Given a data set, projects it onto the EOFs to generate a
 corresponding set of pseudo-PCs.</p>
 <p><strong>Argument:</strong></p>
 <dl class="docutils">
 <dt><em>field</em></dt>
-<dd>A <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy.ndarray</span></tt></a> or <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/maskedarray.baseclass.html#numpy.ma.MaskedArray" title="(in NumPy v1.10)"><tt class="xref py py-obj docutils literal"><span class="pre">numpy.ma.MaskedArray</span></tt></a> with two or more
+<dd>A <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ndarray</span></code></a> or <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/maskedarray.baseclass.html#numpy.ma.MaskedArray" title="(in NumPy v1.10)"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ma.MaskedArray</span></code></a> with two or more
 dimensions containing the data to be projected onto the
 EOFs. It must have the same corresponding spatial dimensions
-(including missing values in the same places) as the <a class="reference internal" href="#eofs.standard.Eof" title="eofs.standard.Eof"><tt class="xref py py-obj docutils literal"><span class="pre">Eof</span></tt></a>
+(including missing values in the same places) as the <a class="reference internal" href="#eofs.standard.Eof" title="eofs.standard.Eof"><code class="xref py py-obj docutils literal"><span class="pre">Eof</span></code></a>
 input <em>dataset</em>. <em>field</em> may have a different length time
-dimension to the <a class="reference internal" href="#eofs.standard.Eof" title="eofs.standard.Eof"><tt class="xref py py-obj docutils literal"><span class="pre">Eof</span></tt></a> input <em>dataset</em> or no time dimension
+dimension to the <a class="reference internal" href="#eofs.standard.Eof" title="eofs.standard.Eof"><code class="xref py py-obj docutils literal"><span class="pre">Eof</span></code></a> input <em>dataset</em> or no time dimension
 at all.</dd>
 </dl>
 <p><strong>Optional arguments:</strong></p>
@@ -583,7 +592,7 @@ used.</dd>
 
 <dl class="method">
 <dt id="eofs.standard.Eof.getWeights">
-<tt class="descname">getWeights</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/eofs/standard.html#Eof.getWeights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.standard.Eof.getWeights" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getWeights</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/standard.html#Eof.getWeights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.standard.Eof.getWeights" title="Permalink to this definition">¶</a></dt>
 <dd><p>Weights used for the analysis.</p>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
@@ -607,7 +616,7 @@ used.</dd>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -622,12 +631,12 @@ used.</dd>
     <li><a href="../index.html">home</a>|&nbsp;</li>
     <li><a href="../search.html">search</a>|&nbsp;</li>
 
-          <li><a href="index.html" >API references</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >API references</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2013-2015 Andrew Dawson.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013-2016 Andrew Dawson.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>
 </html>

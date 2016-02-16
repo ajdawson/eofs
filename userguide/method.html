@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Method of solution &mdash; eofs 0.5.1 documentation</title>
+    <title>Method of solution &mdash; eofs 1.0.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.1',
+        VERSION:     '1.0.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,11 +23,11 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 0.5.1 documentation" href="../index.html" />
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="eofs 1.0.0 documentation" href="../index.html" />
     <link rel="up" title="User Guide" href="index.html" />
     <link rel="next" title="Speeding up the solvers" href="speed.html" />
-    <link rel="prev" title="Compatibility with eof2" href="eof2_compatibility.html" />
+    <link rel="prev" title="Multivariate solvers" href="multivariate.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
           rel='stylesheet' type='text/css' />
      
@@ -65,7 +65,7 @@
         </script>
 
   </head>
-  <body>
+  <body role="document">
 <div class="pageheader">
   <div>
     <a href="../index.html">
@@ -74,7 +74,7 @@
   </div>
 </div>
 
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -84,17 +84,17 @@
           <a href="speed.html" title="Speeding up the solvers"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="eof2_compatibility.html" title="Compatibility with eof2"
+          <a href="multivariate.html" title="Multivariate solvers"
              accesskey="P">previous</a> |</li>
     <li><a href="../index.html">home</a>|&nbsp;</li>
     <li><a href="../search.html">search</a>|&nbsp;</li>
 
-          <li><a href="index.html" accesskey="U">User Guide</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User Guide</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v0.5.1</h2>
+    <h2>eofs v1.0.0</h2>
     <h3>Table of Contents</h3>
     <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">User Guide</a><ul class="current">
@@ -102,7 +102,6 @@
 <li class="toctree-l2"><a class="reference internal" href="interfaces.html">Solver interfaces</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html">Basic usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="multivariate.html">Multivariate solvers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="eof2_compatibility.html">Compatibility with <strong>eof2</strong></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="">Method of solution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="speed.html">Speeding up the solvers</a></li>
 </ul>
@@ -110,21 +109,24 @@
 <li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/index.html">API references</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../downloads.html">Downloads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/index.html">Developer Guide</a></li>
 </ul>
 
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="eof2_compatibility.html"
-                        title="previous chapter">Compatibility with <strong>eof2</strong></a></p>
+  <p class="topless"><a href="multivariate.html"
+                        title="previous chapter">Multivariate solvers</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="speed.html"
                         title="next chapter">Speeding up the solvers</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../_sources/userguide/method.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/userguide/method.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
@@ -143,12 +145,12 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="method-of-solution">
 <h1>Method of solution<a class="headerlink" href="#method-of-solution" title="Permalink to this headline">¶</a></h1>
-<p><tt class="xref py py-obj docutils literal"><span class="pre">eofs</span></tt> uses a technique based on <a class="reference external" href="http://en.wikipedia.org/wiki/Singular_value_decomposition">singular value decomposition (SVD)</a> to compute the EOF solution <a class="footnote-reference" href="#id5" id="id1">[1]</a>. This avoids having to compute a potentially very large covariance matrix, making <tt class="xref py py-obj docutils literal"><span class="pre">eofs</span></tt> usable for large data sets.</p>
-<p>The input to an EOF analysis is a temporal-spatial field, represented in Python by an array or array-like structure of two or more dimensions. When an <tt class="xref py py-obj docutils literal"><span class="pre">eofs</span></tt> solver class receives a field as input it is reshaped and stored internally as a two-dimensional array where time is the first dimension and all spatial dimensions are represented by the second dimension. It is a formal requirement of EOF analysis that this array have a time-mean of zero, therefore the <tt class="xref py py-obj docutils literal"><span class="pre">eofs</span></tt> solver classes will by default subtract the mean along the first dimension.</p>
+<p><cite>eofs</cite> uses a technique based on <a class="reference external" href="http://en.wikipedia.org/wiki/Singular_value_decomposition">singular value decomposition (SVD)</a> to compute the EOF solution <a class="footnote-reference" href="#id5" id="id1">[1]</a>. This avoids having to compute a potentially very large covariance matrix, making <cite>eofs</cite> usable for large data sets.</p>
+<p>The input to an EOF analysis is a temporal-spatial field, represented in Python by an array or array-like structure of two or more dimensions. When an <cite>eofs</cite> solver class receives a field as input it is reshaped and stored internally as a two-dimensional array where time is the first dimension and all spatial dimensions are represented by the second dimension. It is a formal requirement of EOF analysis that this array have a time-mean of zero, therefore the <cite>eofs</cite> solver classes will by default subtract the mean along the first dimension.</p>
 <p>Any missing values in the input array will be identified and removed <a class="footnote-reference" href="#id6" id="id2">[2]</a>, and the SVD of the array computed. The EOFs are the right singular vectors and the standardized PCs are the left singular vectors, while the singular values are proportional to the variances associated with each EOF mode. The SVD is computed in truncated form, where only singular vectors (EOFs/PCs) that correspond to non-zero singular values are returned. This is done to further reduce the computational cost of the analysis <a class="footnote-reference" href="#id7" id="id3">[3]</a>. Since a singular value is proportional to the variance explained by its associated EOF mode neglecting modes with a singular value of zero maintains a full solution.</p>
 <div class="section" id="mathematical-motivation-for-the-svd-method">
 <h2>Mathematical motivation for the SVD method<a class="headerlink" href="#mathematical-motivation-for-the-svd-method" title="Permalink to this headline">¶</a></h2>
@@ -167,7 +169,7 @@ The time-mean is then removed from of the <span class="math">\(M\)</span> time s
 <p>where the columns of <span class="math">\(\mathbf{C}\)</span> are the eigenvectors (EOFs) and the eigenvalues (EOF variances) are on the leading diagonal of <span class="math">\(\Lambda\)</span>. The PCs <span class="math">\(\mathbf{P}\)</span> can then be computed from the projection of <span class="math">\(\mathbf{A}\)</span> onto the EOFs:</p>
 <div class="math">
 \[\mathbf{P} = \mathbf{A C}.\]</div>
-<p>Since computing the covariance matrix can be an expensive operation, a different method is used in <tt class="xref py py-obj docutils literal"><span class="pre">eofs</span></tt>. Instead of computing the covariance matrix, the SVD of <span class="math">\(\mathbf{A}\)</span> is computed:</p>
+<p>Since computing the covariance matrix can be an expensive operation, a different method is used in <cite>eofs</cite>. Instead of computing the covariance matrix, the SVD of <span class="math">\(\mathbf{A}\)</span> is computed:</p>
 <div class="math">
 \[\mathrm{SVD}\left(\mathbf{A}\right) = \mathbf{U} \Gamma \mathbf{V}^\intercal.\]</div>
 <p>The columns of <span class="math">\(\mathbf{U}\)</span> and <span class="math">\(\mathbf{V}\)</span> are the singular vectors and the singular values are on the leading diagonal of <span class="math">\(\Gamma\)</span>. To demonstrate the equivalence of this method and the covariance matrix method we write the covariance matrix in two ways, first a rearranged form of <a href="#equation-eig">(1)</a> <a class="footnote-reference" href="#id8" id="id4">[4]</a>:</p>
@@ -220,7 +222,7 @@ The time-mean is then removed from of the <span class="math">\(M\)</span> time s
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -230,17 +232,17 @@ The time-mean is then removed from of the <span class="math">\(M\)</span> time s
           <a href="speed.html" title="Speeding up the solvers"
              >next</a> |</li>
         <li class="right" >
-          <a href="eof2_compatibility.html" title="Compatibility with eof2"
+          <a href="multivariate.html" title="Multivariate solvers"
              >previous</a> |</li>
     <li><a href="../index.html">home</a>|&nbsp;</li>
     <li><a href="../search.html">search</a>|&nbsp;</li>
 
-          <li><a href="index.html" >User Guide</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >User Guide</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2013-2015 Andrew Dawson.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013-2016 Andrew Dawson.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>
 </html>

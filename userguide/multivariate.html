@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Multivariate solvers &mdash; eofs 0.5.1 documentation</title>
+    <title>Multivariate solvers &mdash; eofs 1.0.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.1',
+        VERSION:     '1.0.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,10 +23,10 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 0.5.1 documentation" href="../index.html" />
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="eofs 1.0.0 documentation" href="../index.html" />
     <link rel="up" title="User Guide" href="index.html" />
-    <link rel="next" title="Compatibility with eof2" href="eof2_compatibility.html" />
+    <link rel="next" title="Method of solution" href="method.html" />
     <link rel="prev" title="Basic usage" href="usage.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
           rel='stylesheet' type='text/css' />
@@ -65,7 +65,7 @@
         </script>
 
   </head>
-  <body>
+  <body role="document">
 <div class="pageheader">
   <div>
     <a href="../index.html">
@@ -74,14 +74,14 @@
   </div>
 </div>
 
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="eof2_compatibility.html" title="Compatibility with eof2"
+          <a href="method.html" title="Method of solution"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="usage.html" title="Basic usage"
@@ -89,12 +89,12 @@
     <li><a href="../index.html">home</a>|&nbsp;</li>
     <li><a href="../search.html">search</a>|&nbsp;</li>
 
-          <li><a href="index.html" accesskey="U">User Guide</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User Guide</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v0.5.1</h2>
+    <h2>eofs v1.0.0</h2>
     <h3>Table of Contents</h3>
     <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">User Guide</a><ul class="current">
@@ -102,7 +102,6 @@
 <li class="toctree-l2"><a class="reference internal" href="interfaces.html">Solver interfaces</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html">Basic usage</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="">Multivariate solvers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="eof2_compatibility.html">Compatibility with <strong>eof2</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="method.html">Method of solution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="speed.html">Speeding up the solvers</a></li>
 </ul>
@@ -110,6 +109,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/index.html">API references</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../downloads.html">Downloads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/index.html">Developer Guide</a></li>
 </ul>
 
 
@@ -117,14 +117,16 @@
   <p class="topless"><a href="usage.html"
                         title="previous chapter">Basic usage</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="eof2_compatibility.html"
-                        title="next chapter">Compatibility with <strong>eof2</strong></a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../_sources/userguide/multivariate.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <p class="topless"><a href="method.html"
+                        title="next chapter">Method of solution</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/userguide/multivariate.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
@@ -143,12 +145,12 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="multivariate-solvers">
 <h1>Multivariate solvers<a class="headerlink" href="#multivariate-solvers" title="Permalink to this headline">¶</a></h1>
-<p>In addition to the regular EOF solvers, <tt class="xref py py-obj docutils literal"><span class="pre">eofs</span></tt> also provides a set of multivariate EOF solvers. These are intended to simplify combined EOF analysis of multiple fields, a good example of this type of analysis is the canonical realtime-multivariate-MJO index calculation of <a class="reference external" href="http://dx.doi.org/10.1175/1520-0493(2004)132&lt;1917:AARMMI&gt;2.0.CO;2">Wheeler and Hendon (2004)</a>.</p>
-<p>The multivariate solvers are all named <tt class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></tt> and are kept in the sub-package <tt class="xref py py-obj docutils literal"><span class="pre">eofs.multivariate</span></tt>. The structure of this package mirrors the structure of the main package, so the multivariate solver for the standard interface is accessed with:</p>
+<p>In addition to the regular EOF solvers, <cite>eofs</cite> also provides a set of multivariate EOF solvers. These are intended to simplify combined EOF analysis of multiple fields, a good example of this type of analysis is the canonical realtime-multivariate-MJO index calculation of <a class="reference external" href="http://dx.doi.org/10.1175/1520-0493(2004)132&lt;1917:AARMMI&gt;2.0.CO;2">Wheeler and Hendon (2004)</a>.</p>
+<p>The multivariate solvers are all named <cite>MultivariateEof</cite> and are kept in the sub-package <cite>eofs.multivariate</cite>. The structure of this package mirrors the structure of the main package, so the multivariate solver for the standard interface is accessed with:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">eofs.multivariate.standard</span> <span class="kn">import</span> <span class="n">MultivariateEof</span>
 </pre></div>
 </div>
@@ -170,14 +172,14 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="eof2_compatibility.html" title="Compatibility with eof2"
+          <a href="method.html" title="Method of solution"
              >next</a> |</li>
         <li class="right" >
           <a href="usage.html" title="Basic usage"
@@ -185,12 +187,12 @@
     <li><a href="../index.html">home</a>|&nbsp;</li>
     <li><a href="../search.html">search</a>|&nbsp;</li>
 
-          <li><a href="index.html" >User Guide</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >User Guide</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2013-2015 Andrew Dawson.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013-2016 Andrew Dawson.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>
 </html>

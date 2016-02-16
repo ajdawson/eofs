@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>eofs.iris &mdash; eofs 0.5.1 documentation</title>
+    <title>eofs.iris &mdash; eofs 1.0.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.1',
+        VERSION:     '1.0.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,8 +23,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 0.5.1 documentation" href="../index.html" />
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="eofs 1.0.0 documentation" href="../index.html" />
     <link rel="up" title="API references" href="index.html" />
     <link rel="next" title="eofs.tools" href="eofs.tools.html" />
     <link rel="prev" title="eofs.cdms" href="eofs.cdms.html" />
@@ -65,7 +65,7 @@
         </script>
 
   </head>
-  <body>
+  <body role="document">
 <div class="pageheader">
   <div>
     <a href="../index.html">
@@ -74,7 +74,7 @@
   </div>
 </div>
 
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -89,12 +89,12 @@
     <li><a href="../index.html">home</a>|&nbsp;</li>
     <li><a href="../search.html">search</a>|&nbsp;</li>
 
-          <li><a href="index.html" accesskey="U">API references</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">API references</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v0.5.1</h2>
+    <h2>eofs v1.0.0</h2>
     <h3>Table of Contents</h3>
     <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userguide/index.html">User Guide</a></li>
@@ -105,21 +105,24 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../downloads.html">Downloads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/index.html">Developer Guide</a></li>
 </ul>
 
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="eofs.cdms.html"
-                        title="previous chapter"><tt class="docutils literal"><span class="pre">eofs.cdms</span></tt></a></p>
+                        title="previous chapter"><code class="docutils literal"><span class="pre">eofs.cdms</span></code></a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="eofs.tools.html"
-                        title="next chapter"><tt class="docutils literal"><span class="pre">eofs.tools</span></tt></a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../_sources/api/eofs.iris.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+                        title="next chapter"><code class="docutils literal"><span class="pre">eofs.tools</span></code></a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/eofs.iris.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
@@ -138,22 +141,22 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="module-eofs.iris">
-<span id="eofs-iris"></span><h1><a class="reference internal" href="#module-eofs.iris" title="eofs.iris"><tt class="xref py py-mod docutils literal"><span class="pre">eofs.iris</span></tt></a><a class="headerlink" href="#module-eofs.iris" title="Permalink to this headline">¶</a></h1>
-<p>Meta-data preserving EOF analysis for <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris.html#module-iris" title="(in Iris v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">iris</span></tt></a>.</p>
+<span id="eofs-iris"></span><h1><a class="reference internal" href="#module-eofs.iris" title="eofs.iris"><code class="xref py py-mod docutils literal"><span class="pre">eofs.iris</span></code></a><a class="headerlink" href="#module-eofs.iris" title="Permalink to this headline">¶</a></h1>
+<p>Meta-data preserving EOF analysis for <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris.html#module-iris" title="(in Iris v1.9)"><code class="xref py py-obj docutils literal"><span class="pre">iris</span></code></a>.</p>
 <dl class="class">
 <dt id="eofs.iris.Eof">
-<em class="property">class </em><tt class="descclassname">eofs.iris.</tt><tt class="descname">Eof</tt><big>(</big><em>cube</em>, <em>weights=None</em>, <em>center=True</em>, <em>ddof=1</em><big>)</big><a class="reference internal" href="../_modules/eofs/iris.html#Eof"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.iris.Eof" title="Permalink to this definition">¶</a></dt>
-<dd><p>EOF analysis (meta-data enabled <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris.html#module-iris" title="(in Iris v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">iris</span></tt></a> interface)</p>
+<em class="property">class </em><code class="descclassname">eofs.iris.</code><code class="descname">Eof</code><span class="sig-paren">(</span><em>cube</em>, <em>weights=None</em>, <em>center=True</em>, <em>ddof=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/iris.html#Eof"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.iris.Eof" title="Permalink to this definition">¶</a></dt>
+<dd><p>EOF analysis (meta-data enabled <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris.html#module-iris" title="(in Iris v1.9)"><code class="xref py py-obj docutils literal"><span class="pre">iris</span></code></a> interface)</p>
 <p>Create an Eof object.</p>
 <p>The EOF solution is computed at initialization time. Method
 calls are used to retrieve computed quantities.</p>
 <p><strong>Argument:</strong></p>
 <dl class="docutils">
 <dt><em>dataset</em></dt>
-<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> instance containing the data to be
+<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.9)"><code class="xref py py-obj docutils literal"><span class="pre">Cube</span></code></a> instance containing the data to be
 analysed. Time must be the first dimension. Missing values
 are allowed provided that they are constant with time (e.g.,
 values of an oceanographic field over land).</dd>
@@ -166,19 +169,19 @@ weighting methods are available:</p>
 <ul class="simple">
 <li><em>&#8216;area&#8217;</em> : Square-root of grid cell area normalized by
 total grid area. Requires a latitude-longitude grid to be
-present in the <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> <em>dataset</em>. This is a
+present in the <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.9)"><code class="xref py py-obj docutils literal"><span class="pre">Cube</span></code></a> <em>dataset</em>. This is a
 fairly standard weighting strategy. If you are unsure
 which method to use and you have gridded data then this
 should be your first choice.</li>
 <li><em>&#8216;coslat&#8217;</em> : Square-root of cosine of latitude. Requires a
-latitude dimension to be present in the <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a>
+latitude dimension to be present in the <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.9)"><code class="xref py py-obj docutils literal"><span class="pre">Cube</span></code></a>
 <em>dataset</em>.</li>
 <li><em>None</em> : Equal weights for all grid points (<em>&#8216;none&#8217;</em> is
 also accepted).</li>
 </ul>
 <blockquote class="last">
 <div>Alternatively an array of weights whose shape is compatible
-with the <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> <em>dataset</em> may be supplied instead
+with the <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.9)"><code class="xref py py-obj docutils literal"><span class="pre">Cube</span></code></a> <em>dataset</em> may be supplied instead
 of specifying a weighting method.</div></blockquote>
 </dd>
 <dt><em>center</em></dt>
@@ -202,7 +205,7 @@ number of samples. Defaults to <em>1</em>.</dd>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>solver</em></dt>
-<dd>An <a class="reference internal" href="#eofs.iris.Eof" title="eofs.iris.Eof"><tt class="xref py py-obj docutils literal"><span class="pre">Eof</span></tt></a> instance.</dd>
+<dd>An <a class="reference internal" href="#eofs.iris.Eof" title="eofs.iris.Eof"><code class="xref py py-obj docutils literal"><span class="pre">Eof</span></code></a> instance.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
 <p>EOF analysis with grid-cell-area weighting for the input field:</p>
@@ -212,13 +215,13 @@ number of samples. Defaults to <em>1</em>.</dd>
 </div>
 <dl class="attribute">
 <dt id="eofs.iris.Eof.neofs">
-<tt class="descname">neofs</tt><em class="property"> = None</em><a class="headerlink" href="#eofs.iris.Eof.neofs" title="Permalink to this definition">¶</a></dt>
+<code class="descname">neofs</code><em class="property"> = None</em><a class="headerlink" href="#eofs.iris.Eof.neofs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of EOFs in the solution.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="eofs.iris.Eof.pcs">
-<tt class="descname">pcs</tt><big>(</big><em>pcscaling=0</em>, <em>npcs=None</em><big>)</big><a class="reference internal" href="../_modules/eofs/iris.html#Eof.pcs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.iris.Eof.pcs" title="Permalink to this definition">¶</a></dt>
+<code class="descname">pcs</code><span class="sig-paren">(</span><em>pcscaling=0</em>, <em>npcs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/iris.html#Eof.pcs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.iris.Eof.pcs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Principal component time series (PCs).</p>
 <p><strong>Optional arguments:</strong></p>
 <dl class="docutils">
@@ -241,7 +244,7 @@ available, then all available PCs will be returned.</dd>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>pcs</em></dt>
-<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> containing the ordered PCs. The PCs are
+<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.9)"><code class="xref py py-obj docutils literal"><span class="pre">Cube</span></code></a> containing the ordered PCs. The PCs are
 numbered from 0 to <em>npcs</em> - 1.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
@@ -257,7 +260,7 @@ numbered from 0 to <em>npcs</em> - 1.</dd>
 
 <dl class="method">
 <dt id="eofs.iris.Eof.eofs">
-<tt class="descname">eofs</tt><big>(</big><em>eofscaling=0</em>, <em>neofs=None</em><big>)</big><a class="reference internal" href="../_modules/eofs/iris.html#Eof.eofs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.iris.Eof.eofs" title="Permalink to this definition">¶</a></dt>
+<code class="descname">eofs</code><span class="sig-paren">(</span><em>eofscaling=0</em>, <em>neofs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/iris.html#Eof.eofs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.iris.Eof.eofs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Emipirical orthogonal functions (EOFs).</p>
 <p><strong>Optional arguments:</strong></p>
 <dl class="docutils">
@@ -280,7 +283,7 @@ available, then all available EOFs will be returned.</dd>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>eofs</em></dt>
-<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> containing the ordered EOFs. The EOFs are
+<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.9)"><code class="xref py py-obj docutils literal"><span class="pre">Cube</span></code></a> containing the ordered EOFs. The EOFs are
 numbered from 0 to <em>neofs</em> - 1.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
@@ -296,10 +299,10 @@ numbered from 0 to <em>neofs</em> - 1.</dd>
 
 <dl class="method">
 <dt id="eofs.iris.Eof.eofsAsCorrelation">
-<tt class="descname">eofsAsCorrelation</tt><big>(</big><em>neofs=None</em><big>)</big><a class="reference internal" href="../_modules/eofs/iris.html#Eof.eofsAsCorrelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.iris.Eof.eofsAsCorrelation" title="Permalink to this definition">¶</a></dt>
+<code class="descname">eofsAsCorrelation</code><span class="sig-paren">(</span><em>neofs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/iris.html#Eof.eofsAsCorrelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.iris.Eof.eofsAsCorrelation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Empirical orthogonal functions (EOFs) expressed as the
 correlation between the principal component time series (PCs)
-and the time series of the <a class="reference internal" href="#eofs.iris.Eof" title="eofs.iris.Eof"><tt class="xref py py-obj docutils literal"><span class="pre">Eof</span></tt></a> input <em>dataset</em> at each grid
+and the time series of the <a class="reference internal" href="#eofs.iris.Eof" title="eofs.iris.Eof"><code class="xref py py-obj docutils literal"><span class="pre">Eof</span></code></a> input <em>dataset</em> at each grid
 point.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -316,7 +319,7 @@ available, then all available EOFs will be returned.</dd>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>eofs</em></dt>
-<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> containing the ordered EOFs. The EOFs are
+<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.9)"><code class="xref py py-obj docutils literal"><span class="pre">Cube</span></code></a> containing the ordered EOFs. The EOFs are
 numbered from 0 to <em>neofs</em> - 1.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
@@ -332,10 +335,10 @@ numbered from 0 to <em>neofs</em> - 1.</dd>
 
 <dl class="method">
 <dt id="eofs.iris.Eof.eofsAsCovariance">
-<tt class="descname">eofsAsCovariance</tt><big>(</big><em>neofs=None</em>, <em>pcscaling=1</em><big>)</big><a class="reference internal" href="../_modules/eofs/iris.html#Eof.eofsAsCovariance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.iris.Eof.eofsAsCovariance" title="Permalink to this definition">¶</a></dt>
+<code class="descname">eofsAsCovariance</code><span class="sig-paren">(</span><em>neofs=None</em>, <em>pcscaling=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/iris.html#Eof.eofsAsCovariance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.iris.Eof.eofsAsCovariance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Empirical orthogonal functions (EOFs) expressed as the
 covariance between the principal component time series (PCs)
-and the time series of the <a class="reference internal" href="#eofs.iris.Eof" title="eofs.iris.Eof"><tt class="xref py py-obj docutils literal"><span class="pre">Eof</span></tt></a> input <em>dataset</em> at each grid
+and the time series of the <a class="reference internal" href="#eofs.iris.Eof" title="eofs.iris.Eof"><code class="xref py py-obj docutils literal"><span class="pre">Eof</span></code></a> input <em>dataset</em> at each grid
 point.</p>
 <p><strong>Optional arguments:</strong></p>
 <dl class="docutils">
@@ -361,7 +364,7 @@ eigenvalue so that the PCs are scaled to unit variance
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>eofs</em></dt>
-<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> containing the ordered EOFs. The EOFs are
+<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.9)"><code class="xref py py-obj docutils literal"><span class="pre">Cube</span></code></a> containing the ordered EOFs. The EOFs are
 numbered from 0 to <em>neofs</em> - 1.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
@@ -381,7 +384,7 @@ numbered from 0 to <em>neofs</em> - 1.</dd>
 
 <dl class="method">
 <dt id="eofs.iris.Eof.eigenvalues">
-<tt class="descname">eigenvalues</tt><big>(</big><em>neigs=None</em><big>)</big><a class="reference internal" href="../_modules/eofs/iris.html#Eof.eigenvalues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.iris.Eof.eigenvalues" title="Permalink to this definition">¶</a></dt>
+<code class="descname">eigenvalues</code><span class="sig-paren">(</span><em>neigs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/iris.html#Eof.eigenvalues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.iris.Eof.eigenvalues" title="Permalink to this definition">¶</a></dt>
 <dd><p>Eigenvalues (decreasing variances) associated with each EOF.</p>
 <p><strong>Optional argument:</strong></p>
 <dl class="docutils">
@@ -394,7 +397,7 @@ eigenvalues will be returned.</dd>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>eigenvalues</em></dt>
-<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> containing the eigenvalues arranged
+<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.9)"><code class="xref py py-obj docutils literal"><span class="pre">Cube</span></code></a> containing the eigenvalues arranged
 largest to smallest. The eigenvalues are numbered from 0 to
 <em>neigs</em> - 1.</dd>
 </dl>
@@ -411,7 +414,7 @@ largest to smallest. The eigenvalues are numbered from 0 to
 
 <dl class="method">
 <dt id="eofs.iris.Eof.varianceFraction">
-<tt class="descname">varianceFraction</tt><big>(</big><em>neigs=None</em><big>)</big><a class="reference internal" href="../_modules/eofs/iris.html#Eof.varianceFraction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.iris.Eof.varianceFraction" title="Permalink to this definition">¶</a></dt>
+<code class="descname">varianceFraction</code><span class="sig-paren">(</span><em>neigs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/iris.html#Eof.varianceFraction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.iris.Eof.varianceFraction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fractional EOF mode variances.</p>
 <p>The fraction of the total variance explained by each EOF mode,
 values between 0 and 1 inclusive.</p>
@@ -427,7 +430,7 @@ returned.</dd>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>variance_fractions</em></dt>
-<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> containing the fractional variances for
+<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.9)"><code class="xref py py-obj docutils literal"><span class="pre">Cube</span></code></a> containing the fractional variances for
 each eigenvalue. The eigenvalues are numbered from 0 to
 <em>neigs</em> - 1.</dd>
 </dl>
@@ -444,13 +447,13 @@ each eigenvalue. The eigenvalues are numbered from 0 to
 
 <dl class="method">
 <dt id="eofs.iris.Eof.totalAnomalyVariance">
-<tt class="descname">totalAnomalyVariance</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/eofs/iris.html#Eof.totalAnomalyVariance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.iris.Eof.totalAnomalyVariance" title="Permalink to this definition">¶</a></dt>
+<code class="descname">totalAnomalyVariance</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/iris.html#Eof.totalAnomalyVariance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.iris.Eof.totalAnomalyVariance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Total variance associated with the field of anomalies (the sum
 of the eigenvalues).</p>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>total_variance</em></dt>
-<dd>A scalar value (not a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a>).</dd>
+<dd>A scalar value (not a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.9)"><code class="xref py py-obj docutils literal"><span class="pre">Cube</span></code></a>).</dd>
 </dl>
 <p><strong>Example:</strong></p>
 <p>Get the total variance:</p>
@@ -461,7 +464,7 @@ of the eigenvalues).</p>
 
 <dl class="method">
 <dt id="eofs.iris.Eof.northTest">
-<tt class="descname">northTest</tt><big>(</big><em>neigs=None</em>, <em>vfscaled=False</em><big>)</big><a class="reference internal" href="../_modules/eofs/iris.html#Eof.northTest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.iris.Eof.northTest" title="Permalink to this definition">¶</a></dt>
+<code class="descname">northTest</code><span class="sig-paren">(</span><em>neigs=None</em>, <em>vfscaled=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/iris.html#Eof.northTest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.iris.Eof.northTest" title="Permalink to this definition">¶</a></dt>
 <dd><p>Typical errors for eigenvalues.</p>
 <p>The method of North et al. (1982) is used to compute the typical
 error for each eigenvalue. It is assumed that the number of
@@ -476,13 +479,13 @@ Defaults to typical errors for all eigenvalues.</dd>
 <dt><em>vfscaled</em></dt>
 <dd>If <em>True</em> scale the errors by the sum of the eigenvalues.
 This yields typical errors with the same scale as the values
-returned by <a class="reference internal" href="#eofs.iris.Eof.varianceFraction" title="eofs.iris.Eof.varianceFraction"><tt class="xref py py-obj docutils literal"><span class="pre">Eof.varianceFraction</span></tt></a>. If <em>False</em> then no
+returned by <a class="reference internal" href="#eofs.iris.Eof.varianceFraction" title="eofs.iris.Eof.varianceFraction"><code class="xref py py-obj docutils literal"><span class="pre">Eof.varianceFraction</span></code></a>. If <em>False</em> then no
 scaling is done. Defaults to <em>False</em> (no scaling).</dd>
 </dl>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>errors</em></dt>
-<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> containing the typical errors for each
+<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.9)"><code class="xref py py-obj docutils literal"><span class="pre">Cube</span></code></a> containing the typical errors for each
 eigenvalue. The egienvalues are numbered from 0 to
 <em>neigs</em> - 1.</dd>
 </dl>
@@ -504,45 +507,52 @@ the eigenvalues:</p>
 
 <dl class="method">
 <dt id="eofs.iris.Eof.reconstructedField">
-<tt class="descname">reconstructedField</tt><big>(</big><em>neofs</em><big>)</big><a class="reference internal" href="../_modules/eofs/iris.html#Eof.reconstructedField"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.iris.Eof.reconstructedField" title="Permalink to this definition">¶</a></dt>
+<code class="descname">reconstructedField</code><span class="sig-paren">(</span><em>neofs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/iris.html#Eof.reconstructedField"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.iris.Eof.reconstructedField" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reconstructed data field based on a subset of EOFs.</p>
-<p>If weights were passed to the <a class="reference internal" href="#eofs.iris.Eof" title="eofs.iris.Eof"><tt class="xref py py-obj docutils literal"><span class="pre">Eof</span></tt></a> instance the returned
+<p>If weights were passed to the <a class="reference internal" href="#eofs.iris.Eof" title="eofs.iris.Eof"><code class="xref py py-obj docutils literal"><span class="pre">Eof</span></code></a> instance the returned
 reconstructed field will automatically have this weighting
 removed. Otherwise the returned field will have the same
-weighting as the <a class="reference internal" href="#eofs.iris.Eof" title="eofs.iris.Eof"><tt class="xref py py-obj docutils literal"><span class="pre">Eof</span></tt></a> input <em>dataset</em>.</p>
-<p>Returns the reconstructed field in a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a>.</p>
+weighting as the <a class="reference internal" href="#eofs.iris.Eof" title="eofs.iris.Eof"><code class="xref py py-obj docutils literal"><span class="pre">Eof</span></code></a> input <em>dataset</em>.</p>
+<p>Returns the reconstructed field in a <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.9)"><code class="xref py py-obj docutils literal"><span class="pre">Cube</span></code></a>.</p>
 <p><strong>Argument:</strong></p>
 <dl class="docutils">
 <dt><em>neofs</em></dt>
-<dd>Number of EOFs to use for the reconstruction.</dd>
+<dd>Number of EOFs to use for the reconstruction.
+Alternatively this argument can be an iterable of mode
+numbers (where the first mode is 1) in order to facilitate
+reconstruction with arbitrary modes.</dd>
 </dl>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>reconstruction</em></dt>
-<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> with the same dimensions <a class="reference internal" href="#eofs.iris.Eof" title="eofs.iris.Eof"><tt class="xref py py-obj docutils literal"><span class="pre">Eof</span></tt></a> input
+<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.9)"><code class="xref py py-obj docutils literal"><span class="pre">Cube</span></code></a> with the same dimensions <a class="reference internal" href="#eofs.iris.Eof" title="eofs.iris.Eof"><code class="xref py py-obj docutils literal"><span class="pre">Eof</span></code></a> input
 <em>dataset</em> containing the reconstruction using <em>neofs</em> EOFs.</dd>
 </dl>
 <p><strong>Example:</strong></p>
 <p>Reconstruct the input field using 3 EOFs:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">reconstruction</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">reconstructedField</span><span class="p">(</span><span class="n">neofs</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">reconstruction</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">reconstructedField</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Reconstruct the input field using EOFs 1, 2 and 5:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">reconstruction</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">reconstuctedField</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="eofs.iris.Eof.projectField">
-<tt class="descname">projectField</tt><big>(</big><em>cube</em>, <em>neofs=None</em>, <em>eofscaling=0</em>, <em>weighted=True</em><big>)</big><a class="reference internal" href="../_modules/eofs/iris.html#Eof.projectField"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.iris.Eof.projectField" title="Permalink to this definition">¶</a></dt>
+<code class="descname">projectField</code><span class="sig-paren">(</span><em>cube</em>, <em>neofs=None</em>, <em>eofscaling=0</em>, <em>weighted=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/iris.html#Eof.projectField"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.iris.Eof.projectField" title="Permalink to this definition">¶</a></dt>
 <dd><p>Project a field onto the EOFs.</p>
 <p>Given a data set, projects it onto the EOFs to generate a
 corresponding set of pseudo-PCs.</p>
 <p><strong>Argument:</strong></p>
 <dl class="docutils">
 <dt><em>field</em></dt>
-<dd>A <tt class="xref py py-obj docutils literal"><span class="pre">cdms2</span></tt> variable containing the field to project onto the
+<dd>A <code class="xref py py-obj docutils literal"><span class="pre">cdms2</span></code> variable containing the field to project onto the
 EOFs. It must have the same corresponding spatial dimensions
-(including missing values in the same places) as the <a class="reference internal" href="#eofs.iris.Eof" title="eofs.iris.Eof"><tt class="xref py py-obj docutils literal"><span class="pre">Eof</span></tt></a>
+(including missing values in the same places) as the <a class="reference internal" href="#eofs.iris.Eof" title="eofs.iris.Eof"><code class="xref py py-obj docutils literal"><span class="pre">Eof</span></code></a>
 input <em>dataset</em>. It may have a different length time
-dimension to the <a class="reference internal" href="#eofs.iris.Eof" title="eofs.iris.Eof"><tt class="xref py py-obj docutils literal"><span class="pre">Eof</span></tt></a> input <em>dataset</em> or no time dimension
+dimension to the <a class="reference internal" href="#eofs.iris.Eof" title="eofs.iris.Eof"><code class="xref py py-obj docutils literal"><span class="pre">Eof</span></code></a> input <em>dataset</em> or no time dimension
 at all. If a time dimension exists it must be the first
 dimension.</dd>
 </dl>
@@ -573,7 +583,7 @@ used.</dd>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>pseudo_pcs</em></dt>
-<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a> containing the pseudo-PCs. The PCs are
+<dd>A <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.9)"><code class="xref py py-obj docutils literal"><span class="pre">Cube</span></code></a> containing the pseudo-PCs. The PCs are
 numbered from 0 to <em>neofs</em> - 1.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
@@ -589,13 +599,13 @@ numbered from 0 to <em>neofs</em> - 1.</dd>
 
 <dl class="method">
 <dt id="eofs.iris.Eof.getWeights">
-<tt class="descname">getWeights</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/eofs/iris.html#Eof.getWeights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.iris.Eof.getWeights" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getWeights</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/iris.html#Eof.getWeights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.iris.Eof.getWeights" title="Permalink to this definition">¶</a></dt>
 <dd><p>Weights used for the analysis.</p>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>weights</em></dt>
 <dd>An array contaning the analysis weights (not a
-<a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.8)"><tt class="xref py py-obj docutils literal"><span class="pre">Cube</span></tt></a>).</dd>
+<a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.9)"><code class="xref py py-obj docutils literal"><span class="pre">Cube</span></code></a>).</dd>
 </dl>
 <p><strong>Example:</strong></p>
 <p>The weights used for the analysis:</p>
@@ -614,7 +624,7 @@ numbered from 0 to <em>neofs</em> - 1.</dd>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -629,12 +639,12 @@ numbered from 0 to <em>neofs</em> - 1.</dd>
     <li><a href="../index.html">home</a>|&nbsp;</li>
     <li><a href="../search.html">search</a>|&nbsp;</li>
 
-          <li><a href="index.html" >API references</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >API references</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2013-2015 Andrew Dawson.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013-2016 Andrew Dawson.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>
 </html>

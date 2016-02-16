@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Overview &mdash; eofs 0.5.1 documentation</title>
+    <title>Overview &mdash; eofs 1.0.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.1',
+        VERSION:     '1.0.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,8 +23,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 0.5.1 documentation" href="../index.html" />
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="eofs 1.0.0 documentation" href="../index.html" />
     <link rel="up" title="User Guide" href="index.html" />
     <link rel="next" title="Solver interfaces" href="interfaces.html" />
     <link rel="prev" title="User Guide" href="index.html" />
@@ -65,7 +65,7 @@
         </script>
 
   </head>
-  <body>
+  <body role="document">
 <div class="pageheader">
   <div>
     <a href="../index.html">
@@ -74,7 +74,7 @@
   </div>
 </div>
 
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -89,12 +89,12 @@
     <li><a href="../index.html">home</a>|&nbsp;</li>
     <li><a href="../search.html">search</a>|&nbsp;</li>
 
-          <li><a href="index.html" accesskey="U">User Guide</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User Guide</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v0.5.1</h2>
+    <h2>eofs v1.0.0</h2>
     <h3>Table of Contents</h3>
     <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">User Guide</a><ul class="current">
@@ -102,7 +102,6 @@
 <li class="toctree-l2"><a class="reference internal" href="interfaces.html">Solver interfaces</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html">Basic usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="multivariate.html">Multivariate solvers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="eof2_compatibility.html">Compatibility with <strong>eof2</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="method.html">Method of solution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="speed.html">Speeding up the solvers</a></li>
 </ul>
@@ -110,6 +109,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/index.html">API references</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../downloads.html">Downloads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/index.html">Developer Guide</a></li>
 </ul>
 
 
@@ -119,12 +119,14 @@
   <h4>Next topic</h4>
   <p class="topless"><a href="interfaces.html"
                         title="next chapter">Solver interfaces</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../_sources/userguide/overview.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/userguide/overview.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
@@ -143,7 +145,7 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="overview">
 <h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
@@ -155,7 +157,7 @@ This transformation is advantageous as often a large fraction of the total varia
 <p>Since EOF analysis is really just expressing the original data set in terms of a new basis, the original data set can be completely reconstructed using the EOFs and PCs. However, in practice it is often only a subset of the EOFs that are of interest. Individual EOFs can sometimes have a physical interpretation assigned to them, or sometimes the EOFs and PCs are used to produce a data set that is truncated in terms of variance by reconstructing the original data set using only a limited number of EOFs.</p>
 <div class="section" id="eof-analysis-with-eofs">
 <h2>EOF analysis with <strong>eofs</strong><a class="headerlink" href="#eof-analysis-with-eofs" title="Permalink to this headline">¶</a></h2>
-<p><tt class="xref py py-obj docutils literal"><span class="pre">eofs</span></tt> uses solver classes to do EOF analysis. A solver class is a Python object that is initialized with a data set, that provides many methods for returning quantities of interest, such as the EOFs and PCs themselves. The typical usage pattern for <tt class="xref py py-obj docutils literal"><span class="pre">eofs</span></tt> is:</p>
+<p><cite>eofs</cite> uses solver classes to do EOF analysis. A solver class is a Python object that is initialized with a data set, that provides many methods for returning quantities of interest, such as the EOFs and PCs themselves. The typical usage pattern for <cite>eofs</cite> is:</p>
 <ol class="arabic simple">
 <li>Import the solver class for the type of data being worked with.</li>
 <li>Create an instance of the solver class using the data to be analysed.<ul>
@@ -232,7 +234,7 @@ pseudo-PCs.</td>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -247,12 +249,12 @@ pseudo-PCs.</td>
     <li><a href="../index.html">home</a>|&nbsp;</li>
     <li><a href="../search.html">search</a>|&nbsp;</li>
 
-          <li><a href="index.html" >User Guide</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >User Guide</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2013-2015 Andrew Dawson.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013-2016 Andrew Dawson.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>
 </html>
