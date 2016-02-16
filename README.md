@@ -7,7 +7,7 @@ eofs - EOF analysis in Python
 Overview
 --------
 
-eofs is a Python package for performing EOF analysis on spatial-temporal data sets, licensed under the GNU GPLv3.
+eofs is a Python package for performing empirical orthogonal function (EOF) analysis on spatial-temporal data sets, licensed under the GNU GPLv3.
 
 The package was created to simplify the process of EOF analysis in the Python environment.
 Some of the key features are listed below:
