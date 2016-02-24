@@ -26,10 +26,10 @@ packages = ['eofs',
             'eofs.tools',
             'eofs.multivariate',
             'eofs.examples',
-            'eofs.tests',]
+            'eofs.tests']
 
 package_data = {'eofs.examples': ['example_data/*'],
-                'eofs.tests': ['data/*'],}
+                'eofs.tests': ['data/*']}
 
 
 if __name__ == '__main__':
@@ -44,6 +44,6 @@ eofs is a package for performing EOF analysis on spatial-temporal
 data sets, aimed at meteorology, oceanography and climate sciences
           """,
           packages=packages,
-          package_dir={'':'lib'},
+          package_dir={'': 'lib'},
           package_data=package_data,
           install_requires=['numpy'])

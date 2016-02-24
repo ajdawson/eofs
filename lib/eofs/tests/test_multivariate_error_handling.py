@@ -1,5 +1,5 @@
 """Tests for error handling in `eofs.multivariate`."""
-# (c) Copyright 2013-2015 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2013-2016 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -50,21 +50,22 @@ class MVErrorHandlersTest(EofsTest):
     @classmethod
     def setup_class(cls):
         try:
-            cls.solution = reference_multivariate_solution(cls.interface, cls.weights)
+            cls.solution = reference_multivariate_solution(cls.interface,
+                                                           cls.weights)
         except ValueError:
             raise SkipTest('library component not available '
                            'for {!s} interface'.format(cls.interface))
         cls.neofs = cls.solution['eigenvalues'].shape[0]
         try:
-            cls.solver = solvers[cls.interface](cls.solution['sst'],
-                                                weights=cls.solution['weights'])
+            cls.solver = solvers[cls.interface](
+                cls.solution['sst'], weights=cls.solution['weights'])
         except KeyError:
             raise SkipTest('library component not available '
                            'for {!s} interface'.format(cls.interface))
 
     @raises(ValueError)
     def test_projectField_wrong_number_fields(self):
-        pcs  = self.solver.projectField([self.solution['sst'][0]])
+        pcs = self.solver.projectField([self.solution['sst'][0]])
 
     @raises(ValueError)
     def testProjectField_time_dimension_mixture(self):
@@ -74,7 +75,7 @@ class MVErrorHandlersTest(EofsTest):
         pcs = self.solver.projectField([sst1, sst2])
 
 
-#-----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Error Handler tests for the standard interface
 
 
@@ -83,7 +84,7 @@ class TestErrorHandlersStandard(MVErrorHandlersTest):
     weights = 'equal'
 
 
-#-----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Error Handler tests for the cdms interface
 
 
@@ -103,7 +104,7 @@ class TestErrorHandlersCDMS(MVErrorHandlersTest):
         pcs = self.solver.projectField([sst1, sst2])
 
 
-#-----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Error Handler tests for the iris interface
 
 
@@ -123,7 +124,7 @@ class TestErrorHandlersIris(MVErrorHandlersTest):
         pcs = self.solver.projectField([sst1, sst2])
 
 
-#-----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Constructor tests for the standard interface
 
 
@@ -157,7 +158,7 @@ class TestConstructorStandard(EofsTest):
                                    weights=[weights1, weights2])
 
 
-#-----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Constructor tests for the cdms interface
 
 
@@ -198,7 +199,7 @@ class TestConstructorCDMS(EofsTest):
         solver = self.solver_class([sst1, sst2])
 
 
-#-----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Constructor tests for the standard interface
 
 

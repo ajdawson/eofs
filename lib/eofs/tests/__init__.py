@@ -1,5 +1,5 @@
 """Test for the `eofs` package."""
-# (c) Copyright 2013 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2013-2016 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -61,5 +61,5 @@ class EofsTest(object):
         """Assertion that a condition is True."""
         assert_true(cond)
 
-    def assert_equal(self, a, b):
-        assert_equal(a, b)
+    def assert_equal(self, a, b, message=None):
+        assert_equal(a, b, message)

@@ -1,5 +1,5 @@
 """Test `eofs` computations against reference solutions."""
-# (c) Copyright 2013-2015 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2013-2016 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -249,7 +249,7 @@ class SolutionTest(EofsTest):
         self.assert_array_almost_equal(pcs, rpcs)
 
 
-#-----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Tests for the standard interface
 
 
@@ -288,7 +288,8 @@ class TestStandardMissingValuesAsNaN(StandardSolutionTest):
     def modify_solution(cls):
         for name in cls.solution:
             try:
-                cls.solution[name] = cls.solution[name].filled(fill_value=np.nan)
+                cls.solution[name] = cls.solution[name].filled(
+                    fill_value=np.nan)
             except AttributeError:
                 pass
 
@@ -296,7 +297,7 @@ class TestStandardMissingValuesAsNaN(StandardSolutionTest):
         return np.ma.MaskedArray(value, mask=np.isnan(value))
 
 
-#-----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Tests for the cdms interface
 
 
@@ -314,27 +315,27 @@ class CDMSSolutionTest(SolutionTest):
 class TestCDMSEqualWeights(CDMSSolutionTest):
     """Equal grid weighting."""
     weights = 'equal'
-    
+
 
 class TestCDMSLatitudeWeights(CDMSSolutionTest):
     """
     Square-root of cosine of latitude grid weighting (automatically
     generated weights).
-    
+
     """
     weights = 'latitude'
     alternate_weights_arg = 'coslat'
-    
+
 
 class TestCDMSAreaWeights(CDMSSolutionTest):
     """
     Square-root of normalised grid cell area grid weighting
     (automatically generated weights).
-    
+
     """
     weights = 'area'
     alternate_weights_arg = 'area'
-    
+
 
 class TestCDMSAreaWeightsTransposedGrid(CDMSSolutionTest):
     """
@@ -360,7 +361,7 @@ class TestCDMSLatitudeWeightsManual(CDMSSolutionTest):
     """
     Square-root of cosine of latitude grid weighting (weights from
     reference solution).
-    
+
     """
     weights = 'latitude'
 
@@ -374,7 +375,7 @@ class TestCDMSAreaWeightsManual(CDMSSolutionTest):
     weights = 'area'
 
 
-#-----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Tests for the iris interface
 
 
@@ -397,7 +398,7 @@ class TestIrisLatitudeWeights(IrisSolutionTest):
     """
     Square-root of cosine of latitude grid weighting (automatically
     generated weights).
-    
+
     """
     weights = 'latitude'
     alternate_weights_arg = 'coslat'
@@ -407,7 +408,7 @@ class TestIrisAreaWeights(IrisSolutionTest):
     """
     Square-root of normalised grid cell area grid weighting
     (automatically generated weights).
-    
+
     """
     weights = 'area'
     alternate_weights_arg = 'area'
@@ -417,7 +418,7 @@ class TestIrisLatitudeWeightsManual(IrisSolutionTest):
     """
     Square-root of cosine of latitude grid weighting (weights from
     reference solution).
-    
+
     """
     weights = 'latitude'
 

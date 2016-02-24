@@ -1,5 +1,5 @@
 """Tests for the `eofs.tools` package."""
-# (c) Copyright 2013-2014 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2013-2016 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -61,10 +61,10 @@ class ToolsTest(EofsTest):
                            'for {!s} interface'.format(cls.interface))
         cls.neofs = cls.solution['eigenvalues'].shape[0]
         try:
-            cls.solver = solvers[cls.interface](cls.solution['sst'],
-                                                weights=cls.solution['weights'])
+            cls.solver = solvers[cls.interface](
+                cls.solution['sst'], weights=cls.solution['weights'])
             cls.tools = {'covariance': tools[cls.interface].covariance_map,
-                         'correlation': tools[cls.interface].correlation_map,}
+                         'correlation': tools[cls.interface].correlation_map}
         except KeyError:
             raise SkipTest('library component not available '
                            'for {!s} interface'.format(cls.interface))
@@ -128,10 +128,11 @@ class ToolsTest(EofsTest):
     @raises(ValueError)
     def check_covcor_map_invalid_pc_shape(self, maptype):
         # compute a map for PCs with invalid shape
-        covcor = self.tools[maptype](self.solution['sst'], self.solution['sst'])
+        covcor = self.tools[maptype](self.solution['sst'],
+                                     self.solution['sst'])
 
 
-#-----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Tests for the standard interface
 
 
@@ -144,7 +145,7 @@ class TestToolsStandard(ToolsTest):
         return value
 
 
-#-----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Tests for the cdms interface
 
 
@@ -160,7 +161,7 @@ class TestToolsCDMS(ToolsTest):
             return value
 
 
-#-----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Tests for the iris interface
 
 

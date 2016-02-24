@@ -1,5 +1,5 @@
 """Tests for error handling in `eofs`."""
-# (c) Copyright 2013 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2013-2016 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -56,8 +56,8 @@ class ErrorHandlersTest(EofsTest):
                            'for {!s} interface'.format(cls.interface))
         cls.neofs = cls.solution['eigenvalues'].shape[0]
         try:
-            cls.solver = solvers[cls.interface](cls.solution['sst'],
-                                                weights=cls.solution['weights'])
+            cls.solver = solvers[cls.interface](
+                cls.solution['sst'], weights=cls.solution['weights'])
         except KeyError:
             raise SkipTest('library component not available '
                            'for {!s} interface'.format(cls.interface))
@@ -94,7 +94,7 @@ class ErrorHandlersTest(EofsTest):
         pcs = self.solver.projectField(data)
 
 
-#-----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Error Handler tests for the standard interface
 
 
@@ -103,7 +103,7 @@ class TestErroHandlersStandard(ErrorHandlersTest):
     weights = 'equal'
 
 
-#-----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Error Handler tests for the cdms interface
 
 
@@ -119,7 +119,7 @@ class TestErrorHandlersCDMS(ErrorHandlersTest):
         pcs = self.solver.projectField(solution['sst'])
 
 
-#-----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Error Handler tests for the iris interface
 
 
@@ -152,7 +152,7 @@ class TestErrorHandlersIris(ErrorHandlersTest):
         pcs = self.solver.projectField(data)
 
 
-#-----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Constructor tests for the standard interface
 
 
@@ -195,7 +195,7 @@ class TestConstructorStandard(EofsTest):
         mask = data.mask
         mask[-1] = True
         solver = self.solver_class(data)
-        
+
     @raises(ValueError)
     def test_input_with_non_uniform_missing_values(self):
         # missing values in different places at different times leads to
@@ -205,9 +205,9 @@ class TestConstructorStandard(EofsTest):
         mask = data.mask
         mask[-1] = True
         solver = self.solver_class(data, center=False)
-        
 
-#-----------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------
 # Constructor tests for the cdms interface
 
 
@@ -281,12 +281,12 @@ class TestConstructorCDMS(EofsTest):
         newdim.designateLevel()
         data = cdms2.createVariable(cdms2.MV.reshape(data, data.shape + (1,)),
                                     axes=data.getAxisList() + [newdim],
-                                    id = data.id)
+                                    id=data.id)
         data = data.reorder('txzy')
         solver = self.solver_class(data, weights='area')
 
 
-#-----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Constructor tests for the iris interface
 
 
