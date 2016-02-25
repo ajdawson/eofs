@@ -1,5 +1,5 @@
 """Supplementary tools for the `iris` EOF analysis interface."""
-# (c) Copyright 2013-2015 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2013-2016 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -306,7 +306,7 @@ def covariance_map(pcs, field, ddof=1):
     """
     # Compute the covariance map and retrieve appropriate Iris coordinate
     # dimensions for it.
-    cov, dims = _map_and_dims(pcs, field, standard.covariance_map, ddof=1)
+    cov, dims = _map_and_dims(pcs, field, standard.covariance_map, ddof=ddof)
     if not dims:
         # There are no output dimensions, return a scalar.
         return cov
