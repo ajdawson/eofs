@@ -598,10 +598,12 @@ class MultivariateEof(object):
         # Make sure the input fields have valid shapes/dimensionalities.
         for field, shape in zip(fields, self._shapes):
             self._solver._verify_projection_shape(field, shape)
+
         # Check for a time dimension in each field.
-        time_check = lambda f, e: len(e) + 1 == f.ndim
+        def time_check(field, shape):
+            return len(shape) + 1 == field.ndim
         has_time = [time_check(f, e) for f, e in zip(fields, self._shapes)]
-        if filter(lambda t: t != has_time[0], has_time):
+        if [t for t in has_time if t != has_time[0]]:
             raise ValueError('detected a mixture of fields with and without '
                              'time dimensions, this is not allowed')
         has_time = has_time[0]

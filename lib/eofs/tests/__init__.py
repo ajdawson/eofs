@@ -22,6 +22,9 @@ import numpy as np
 from numpy.testing.utils import assert_array_almost_equal
 
 
+np.seterr(all='ignore')
+
+
 class EofsTest(object):
     """Base class for tests."""
 

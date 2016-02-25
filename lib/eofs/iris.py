@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
 from __future__ import absolute_import
+
 import collections
 from copy import copy
 
@@ -122,7 +123,7 @@ class Eof(object):
         # natural separation of space and time in EOF analysis. The time and
         # space spanning coordinates are only useful for reconstruction, as all
         # other methods return either a temporal field or a spatial field.
-        (self._time_aux_coords, 
+        (self._time_aux_coords,
          self._space_aux_coords,
          self._time_space_aux_coords) = classified_aux_coords(cube)
         # Define the weights array for the cube.
@@ -188,13 +189,15 @@ class Eof(object):
 
         """
         pcs = self._solver.pcs(pcscaling, npcs)
-        pcdim = DimCoord(range(pcs.shape[1]),
+        pcdim = DimCoord(list(range(pcs.shape[1])),
                          var_name='pc',
                          long_name='pc_number')
         coords = [copy(self._time), pcdim]
-        pcs = Cube(pcs,
-                   dim_coords_and_dims=zip(coords, range(pcs.ndim)),
-                   var_name='pcs', long_name='principal_components')
+        pcs = Cube(
+            pcs,
+            dim_coords_and_dims=list(zip(coords, list(range(pcs.ndim)))),
+            var_name='pcs',
+            long_name='principal_components')
         # Add any auxiliary coords spanning time back to the returned cube.
         for coord, dims in self._time_aux_coords:
             pcs.add_aux_coord(copy(coord), dims)
@@ -238,14 +241,15 @@ class Eof(object):
 
         """
         eofs = self._solver.eofs(eofscaling, neofs)
-        eofdim = DimCoord(range(eofs.shape[0]),
+        eofdim = DimCoord(list(range(eofs.shape[0])),
                           var_name='eof',
                           long_name='eof_number')
         coords = [eofdim] + [copy(coord) for coord in self._coords]
-        eofs = Cube(eofs,
-                    dim_coords_and_dims=zip(coords, range(eofs.ndim)),
-                    var_name='eofs',
-                    long_name='empirical_orthogonal_functions')
+        eofs = Cube(
+            eofs,
+            dim_coords_and_dims=list(zip(coords, list(range(eofs.ndim)))),
+            var_name='eofs',
+            long_name='empirical_orthogonal_functions')
         # Add any auxiliary coordinates spanning space to the returned cube.
         for coord, dims in self._space_aux_coords:
             eofs.add_aux_coord(copy(coord), dims)
@@ -288,15 +292,16 @@ class Eof(object):
 
         """
         eofs = self._solver.eofsAsCorrelation(neofs)
-        eofdim = DimCoord(range(eofs.shape[0]),
+        eofdim = DimCoord(list(range(eofs.shape[0])),
                           var_name='eof',
                           long_name='eof_number')
         coords = [eofdim] + [copy(coord) for coord in self._coords]
-        eofs = Cube(eofs,
-                    dim_coords_and_dims=zip(coords, range(eofs.ndim)),
-                    var_name='eofs',
-                    long_name='correlation_between_pcs_and_{:s}'.format(
-                              self._cube_name))
+        eofs = Cube(
+            eofs,
+            dim_coords_and_dims=list(zip(coords, list(range(eofs.ndim)))),
+            var_name='eofs',
+            long_name='correlation_between_pcs_and_{:s}'.format(
+                self._cube_name))
         # Add any auxiliary coordinates spanning space to the returned cube.
         for coord, dims in self._space_aux_coords:
             eofs.add_aux_coord(copy(coord), dims)
@@ -352,15 +357,16 @@ class Eof(object):
 
         """
         eofs = self._solver.eofsAsCovariance(neofs, pcscaling)
-        eofdim = DimCoord(range(eofs.shape[0]),
+        eofdim = DimCoord(list(range(eofs.shape[0])),
                           var_name='eof',
                           long_name='eof_number')
         coords = [eofdim] + [copy(coord) for coord in self._coords]
-        eofs = Cube(eofs,
-                    dim_coords_and_dims=zip(coords, range(eofs.ndim)),
-                    var_name='eofs',
-                    long_name='covariance_between_pcs_and_{:s}'.format(
-                              self._cube_name))
+        eofs = Cube(
+            eofs,
+            dim_coords_and_dims=list(zip(coords, list(range(eofs.ndim)))),
+            var_name='eofs',
+            long_name='covariance_between_pcs_and_{:s}'.format(
+                self._cube_name))
         # Add any auxiliary coordinates spanning space to the returned cube.
         for coord, dims in self._space_aux_coords:
             eofs.add_aux_coord(copy(coord), dims)
@@ -396,14 +402,15 @@ class Eof(object):
 
         """
         lambdas = self._solver.eigenvalues(neigs=neigs)
-        eofdim = DimCoord(range(lambdas.shape[0]),
+        eofdim = DimCoord(list(range(lambdas.shape[0])),
                           var_name='eigenvalue',
                           long_name='eigenvalue_number')
         coords = [eofdim]
-        lambdas = Cube(lambdas,
-                       dim_coords_and_dims=zip(coords, range(lambdas.ndim)),
-                       var_name='eigenvalues',
-                       long_name='eigenvalues')
+        lambdas = Cube(
+            lambdas,
+            dim_coords_and_dims=list(zip(coords, list(range(lambdas.ndim)))),
+            var_name='eigenvalues',
+            long_name='eigenvalues')
         return lambdas
 
     def varianceFraction(self, neigs=None):
@@ -441,14 +448,15 @@ class Eof(object):
 
         """
         vfrac = self._solver.varianceFraction(neigs=neigs)
-        eofdim = DimCoord(range(vfrac.shape[0]),
+        eofdim = DimCoord(list(range(vfrac.shape[0])),
                           var_name='eigenvalue',
                           long_name='eigenvalue_number')
         coords = [eofdim]
-        vfrac = Cube(vfrac,
-                     dim_coords_and_dims=zip(coords, range(vfrac.ndim)),
-                     var_name='variance_fractions',
-                     long_name='variance_fractions')
+        vfrac = Cube(
+            vfrac,
+            dim_coords_and_dims=list(zip(coords, list(range(vfrac.ndim)))),
+            var_name='variance_fractions',
+            long_name='variance_fractions')
         return vfrac
 
     def totalAnomalyVariance(self):
@@ -517,14 +525,15 @@ class Eof(object):
 
         """
         typerrs = self._solver.northTest(neigs=neigs, vfscaled=vfscaled)
-        eofdim = DimCoord(range(typerrs.shape[0]),
+        eofdim = DimCoord(list(range(typerrs.shape[0])),
                           var_name='eigenvalue',
                           long_name='eigenvalue_number')
         coords = [eofdim]
-        typerrs = Cube(typerrs,
-                       dim_coords_and_dims=zip(coords, range(typerrs.ndim)),
-                       var_name='typical_errors',
-                       long_name='typical_errors')
+        typerrs = Cube(
+            typerrs,
+            dim_coords_and_dims=list(zip(coords, list(range(typerrs.ndim)))),
+            var_name='typical_errors',
+            long_name='typical_errors')
         return typerrs
 
     def reconstructedField(self, neofs):
@@ -568,11 +577,12 @@ class Eof(object):
             name_part = 'EOFs_{}'.format('_'.join([str(e) for e in neofs]))
         else:
             name_part = '{}_EOFs'.format(neofs)
-        rfield = Cube(rfield,
-                      dim_coords_and_dims=zip(coords, range(rfield.ndim)),
-                      var_name=self._cube_var_name or 'dataset',
-                      long_name='{:s}_reconstructed_with_{:s}'.format(
-                                self._cube_name, name_part))
+        rfield = Cube(
+            rfield,
+            dim_coords_and_dims=list(zip(coords, list(range(rfield.ndim)))),
+            var_name=self._cube_var_name or 'dataset',
+            long_name='{:s}_reconstructed_with_{:s}'.format(
+                self._cube_name, name_part))
         rfield.attributes.update({'neofs': neofs})
         # Add any auxiliary coordinates to the returned cube.
         for coord, dims in (self._time_aux_coords +
@@ -667,7 +677,7 @@ class Eof(object):
         # Construct the required dimensions.
         if pcs.ndim == 2:
             # 2D PCs require a time axis and a PC axis.
-            pcdim = DimCoord(range(pcs.shape[1]),
+            pcdim = DimCoord(list(range(pcs.shape[1])),
                              var_name='pc',
                              long_name='pc_number')
             pcs.add_dim_coord(copy(time), 0)
@@ -678,7 +688,7 @@ class Eof(object):
                 pcs.add_aux_coord(copy(coord), dims)
         else:
             # 1D PCs require only a PC axis.
-            pcdim = DimCoord(range(pcs.shape[0]),
+            pcdim = DimCoord(list(range(pcs.shape[0])),
                              var_name='pc',
                              long_name='pc_number')
             pcs.add_dim_coord(pcdim, 0)

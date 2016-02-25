@@ -172,8 +172,8 @@ class MultivariateEof(object):
         #: Number of EOFs in the solution.
         self.neofs = self._solver.neofs
         # Names of the cubes.
-        self._cube_names = map(
-            lambda c: c.name(default='dataset').replace(' ', '_'), cubes)
+        self._cube_names = [c.name(default='dataset').replace(' ', '_')
+                            for c in cubes]
         self._cube_var_names = [cube.var_name for cube in cubes]
 
     def pcs(self, pcscaling=0, npcs=None):
@@ -213,14 +213,15 @@ class MultivariateEof(object):
 
         """
         pcs = self._solver.pcs(pcscaling, npcs)
-        pcdim = DimCoord(range(pcs.shape[1]),
+        pcdim = DimCoord(list(range(pcs.shape[1])),
                          var_name='pc',
                          long_name='pc_number')
         coords = [copy(self._time[0]), pcdim]
-        pcs = Cube(pcs,
-                   dim_coords_and_dims=zip(coords, range(pcs.ndim)),
-                   var_name='pcs',
-                   long_name='principal_components')
+        pcs = Cube(
+            pcs,
+            dim_coords_and_dims=list(zip(coords, list(range(pcs.ndim)))),
+            var_name='pcs',
+            long_name='principal_components')
         # Add any AuxCoords that described the time dimension of all the input
         # cubes.
         for coord, dims in self._common_time_aux_coords:
@@ -266,14 +267,15 @@ class MultivariateEof(object):
         """
         eofset = self._solver.eofs(eofscaling=eofscaling, neofs=neofs)
         neofs = eofset[0].shape[0]
-        eofdim = DimCoord(range(neofs),
+        eofdim = DimCoord(list(range(neofs)),
                           var_name='eof',
                           long_name='eof_number')
-        for iset in xrange(self._ncubes):
+        for iset in range(self._ncubes):
             coords = [eofdim] + [copy(coord) for coord in self._coords[iset]]
             eofset[iset] = Cube(
                 eofset[iset],
-                dim_coords_and_dims=zip(coords, range(eofset[iset].ndim)),
+                dim_coords_and_dims=list(zip(coords,
+                                             range(eofset[iset].ndim))),
                 var_name='eofs',
                 long_name='empirical_orthogonal_functions')
             for coord, dims in self._space_aux_coords[iset]:
@@ -317,14 +319,15 @@ class MultivariateEof(object):
         """
         eofset = self._solver.eofsAsCorrelation(neofs=neofs)
         neofs = eofset[0].shape[0]
-        eofdim = DimCoord(range(neofs),
+        eofdim = DimCoord(list(range(neofs)),
                           var_name='eof',
                           long_name='eof_number')
-        for iset in xrange(self._ncubes):
+        for iset in range(self._ncubes):
             coords = [eofdim] + [copy(coord) for coord in self._coords[iset]]
             eofset[iset] = Cube(
                 eofset[iset],
-                dim_coords_and_dims=zip(coords, range(eofset[iset].ndim)),
+                dim_coords_and_dims=list(zip(coords,
+                                             range(eofset[iset].ndim))),
                 var_name='eofs',
                 long_name='correlation_between_pcs_and_{:s}'.format(
                           self._cube_names[iset]))
@@ -378,14 +381,15 @@ class MultivariateEof(object):
         """
         eofset = self._solver.eofsAsCovariance(neofs=neofs)
         neofs = eofset[0].shape[0]
-        eofdim = DimCoord(range(neofs),
+        eofdim = DimCoord(list(range(neofs)),
                           var_name='eof',
                           long_name='eof_number')
-        for iset in xrange(self._ncubes):
+        for iset in range(self._ncubes):
             coords = [eofdim] + [copy(coord) for coord in self._coords[iset]]
             eofset[iset] = Cube(
                 eofset[iset],
-                dim_coords_and_dims=zip(coords, range(eofset[iset].ndim)),
+                dim_coords_and_dims=list(zip(coords,
+                                             range(eofset[iset].ndim))),
                 var_name='eofs',
                 long_name='covariance_between_pcs_and_{:s}'.format(
                           self._cube_names[iset]))
@@ -424,14 +428,15 @@ class MultivariateEof(object):
 
         """
         lambdas = self._solver.eigenvalues(neigs=neigs)
-        eofdim = DimCoord(range(lambdas.shape[0]),
+        eofdim = DimCoord(list(range(lambdas.shape[0])),
                           var_name='eigenvalue',
                           long_name='eigenvalue_number')
         coords = [eofdim]
-        lambdas = Cube(lambdas,
-                       dim_coords_and_dims=zip(coords, range(lambdas.ndim)),
-                       var_name='eigenvalues',
-                       long_name='eigenvalues')
+        lambdas = Cube(
+            lambdas,
+            dim_coords_and_dims=list(zip(coords, range(lambdas.ndim))),
+            var_name='eigenvalues',
+            long_name='eigenvalues')
         return lambdas
 
     def varianceFraction(self, neigs=None):
@@ -463,14 +468,15 @@ class MultivariateEof(object):
 
         """
         vfrac = self._solver.varianceFraction(neigs=neigs)
-        eofdim = DimCoord(range(vfrac.shape[0]),
+        eofdim = DimCoord(list(range(vfrac.shape[0])),
                           var_name='eigenvalue',
                           long_name='eigenvalue_number')
         coords = [eofdim]
-        vfrac = Cube(vfrac,
-                     dim_coords_and_dims=zip(coords, range(vfrac.ndim)),
-                     var_name='variance_fraction',
-                     long_name='variance_fraction')
+        vfrac = Cube(
+            vfrac,
+            dim_coords_and_dims=list(zip(coords, range(vfrac.ndim))),
+            var_name='variance_fraction',
+            long_name='variance_fraction')
         return vfrac
 
     def totalAnomalyVariance(self):
@@ -540,14 +546,15 @@ class MultivariateEof(object):
 
         """
         typerrs = self._solver.northTest(neigs=neigs, vfscaled=vfscaled)
-        eofdim = DimCoord(range(typerrs.shape[0]),
+        eofdim = DimCoord(list(range(typerrs.shape[0])),
                           var_name='eigenvalue',
                           long_name='eigenvalue_number')
         coords = [eofdim]
-        typerrs = Cube(typerrs,
-                       dim_coords_and_dims=zip(coords, range(typerrs.ndim)),
-                       var_name='typical_errors',
-                       long_name='typical_errors')
+        typerrs = Cube(
+            typerrs,
+            dim_coords_and_dims=list(zip(coords, range(typerrs.ndim))),
+            var_name='typical_errors',
+            long_name='typical_errors')
         return typerrs
 
     def reconstructedField(self, neofs):
@@ -592,12 +599,12 @@ class MultivariateEof(object):
             name_part = 'EOFs_{}'.format('_'.join([str(e) for e in neofs]))
         else:
             name_part = '{:d}_EOFs'.format(neofs)
-        for iset in xrange(self._ncubes):
+        for iset in range(self._ncubes):
             coords = [copy(self._time[iset])] + \
                      [copy(coord) for coord in self._coords[iset]]
             rfset[iset] = Cube(
                 rfset[iset],
-                dim_coords_and_dims=zip(coords, range(rfset[iset].ndim)),
+                dim_coords_and_dims=list(zip(coords, range(rfset[iset].ndim))),
                 var_name=self._cube_var_names[iset] or 'dataset_{:d}'.format(
                     iset),
                 long_name='{:s}_reconstructed_with_{:s}'.format(
@@ -696,14 +703,14 @@ class MultivariateEof(object):
         _common_time_aux_coords = common_items(_all_time_aux_coords)
         # Compute the PCs.
         pcs = self._solver.projectField([cube.data for cube in cubes],
-                                         neofs=neofs,
-                                         eofscaling=eofscaling,
-                                         weighted=weighted)
+                                        neofs=neofs,
+                                        eofscaling=eofscaling,
+                                        weighted=weighted)
         pcs = Cube(pcs, var_name='pseudo_pcs', long_name='pseudo_pcs')
         # Construct the required dimensions.
         if pcs.ndim == 2:
             # 2D PCs require a time axis and a PC axis.
-            pcdim = DimCoord(range(pcs.shape[1]),
+            pcdim = DimCoord(list(range(pcs.shape[1])),
                              var_name='pc',
                              long_name='pc_number')
             time, time_dim = coord_and_dim(cubes[0], 'time')
@@ -714,7 +721,7 @@ class MultivariateEof(object):
                 pcs.add_aux_coord(copy(coord), dims)
         else:
             # 1D PCs require only a PC axis.
-            pcdim = DimCoord(range(pcs.shape[0]),
+            pcdim = DimCoord(list(range(pcs.shape[0])),
                              var_name='pc',
                              long_name='pc_number')
             pcs.add_dim_coord(pcdim, 0)

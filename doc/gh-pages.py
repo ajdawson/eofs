@@ -6,6 +6,8 @@ appropriate repository and makes a commit.
 The commit needs to be pushed manually after it has been verified.
 
 """
+from __future__ import print_function
+
 import os
 import re
 import sys
@@ -35,7 +37,7 @@ def sh2(cmd):
     """Execute command in a subshell, return stdout.
 
     Stderr is unbuffered from the subshell.x.
-    
+
     """
     p = Popen(cmd, stdout=PIPE, shell=True)
     out = p.communicate()[0]
@@ -49,7 +51,7 @@ def sh2(cmd):
 def init_repo(path):
     """Clone the gh-pages repo to a given location."""
     sh('git clone {} {}'.format(pages_repo, path))
-    here = os.getcwdu()
+    here = os.getcwd()
     cd(path)
     sh('git checkout gh-pages')
     cd(here)
@@ -65,9 +67,9 @@ if __name__ == '__main__':
         msg = sys.argv[1]
     except IndexError:
         msg = 'Updated documentation.'
-    
+
     # Check out the repository.
-    startdir = os.getcwdu()
+    startdir = os.getcwd()
     if not os.path.exists(pages_dir):
         # Initialize the repository.
         init_repo(pages_dir)
@@ -99,8 +101,8 @@ if __name__ == '__main__':
         sh('git commit -m "{}"'.format(msg))
 
         # Print a summary of last 3 commits.
-        print
-        print 'Most recent 3 commits to "gh-pages":'
+        print()
+        print('Most recent 3 commits to "gh-pages":')
         sys.stdout.flush()
         sh('git --no-pager log --oneline HEAD~3..')
 
@@ -110,7 +112,6 @@ if __name__ == '__main__':
         cd(startdir)
 
     # Print a summary message.
-    print
-    print 'Done. Please verify the build in: {}'.format(pages_dir)
-    print 'If everything looks good, "git push origin gh-pages"'
-
+    print()
+    print('Done. Please verify the build in: {}'.format(pages_dir))
+    print('If everything looks good, "git push origin gh-pages"')

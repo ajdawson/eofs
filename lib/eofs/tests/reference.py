@@ -52,7 +52,8 @@ def _tomasked(array):
 
 
 def _read_reference_solution(weights):
-    if weights not in ('equal', 'latitude', 'area', 'area_multi', 'area_multi_mix'):
+    if weights not in ('equal', 'latitude', 'area', 'area_multi',
+                       'area_multi_mix'):
         raise ValueError("invalid weights: '{!s}'".format(weights))
     field_names = ['time',
                    'latitude',
@@ -67,7 +68,7 @@ def _read_reference_solution(weights):
                    'weights.{!s}'.format(weights),
                    'errors.{!s}'.format(weights),
                    'scaled_errors.{!s}'.format(weights),
-                   'rcon.{!s}'.format(weights),]
+                   'rcon.{!s}'.format(weights)]
     fields = {name.split('.')[0]: _tomasked(_retrieve_test_field(name))
               for name in field_names}
     fields['sst'] -= fields['sst'].mean(axis=0)
@@ -106,7 +107,7 @@ def reference_solution(container_type, weights):
             eof_dim = cdms2.createAxis(np.arange(1, neofs+1), id='eof')
             eof_dim.long_name = 'eof_number'
             solution['sst'] = cdms2.createVariable(
-                solution['sst'], 
+                solution['sst'],
                 axes=[time_dim, lat_dim, lon_dim],
                 id='sst')
             solution['eigenvalues'] = cdms2.createVariable(
@@ -163,55 +164,55 @@ def reference_solution(container_type, weights):
             lon_dim.guess_bounds()
             eof_dim = DimCoord(np.arange(1, neofs+1),
                                long_name='eof')
-            solution['sst']= Cube(
+            solution['sst'] = Cube(
                 solution['sst'],
-                dim_coords_and_dims=zip((time_dim, lat_dim, lon_dim),
-                                        range(3)),
+                dim_coords_and_dims=list(zip((time_dim, lat_dim, lon_dim),
+                                         list(range(3)))),
                 long_name='sst')
-            solution['eigenvalues']= Cube(
+            solution['eigenvalues'] = Cube(
                 solution['eigenvalues'],
-                dim_coords_and_dims=zip((eof_dim,),
-                                        range(1)),
+                dim_coords_and_dims=list(zip((eof_dim,),
+                                         list(range(1)))),
                 long_name='eigenvalues')
-            solution['eofs']= Cube(
+            solution['eofs'] = Cube(
                 solution['eofs'],
-                dim_coords_and_dims=zip((eof_dim, lat_dim, lon_dim),
-                                        range(3)),
+                dim_coords_and_dims=list(zip((eof_dim, lat_dim, lon_dim),
+                                         list(range(3)))),
                 long_name='eofs')
-            solution['pcs']= Cube(
+            solution['pcs'] = Cube(
                 solution['pcs'],
-                dim_coords_and_dims=zip((time_dim, eof_dim),
-                                        range(2)),
+                dim_coords_and_dims=list(zip((time_dim, eof_dim),
+                                         list(range(2)))),
                 long_name='pcs')
-            solution['variance']= Cube(
+            solution['variance'] = Cube(
                 solution['variance'],
-                dim_coords_and_dims=zip((eof_dim,),
-                                        range(1)),
+                dim_coords_and_dims=list(zip((eof_dim,),
+                                         list(range(1)))),
                 long_name='variance')
-            solution['eofscor']= Cube(
+            solution['eofscor'] = Cube(
                 solution['eofscor'],
-                dim_coords_and_dims=zip((eof_dim, lat_dim, lon_dim),
-                                        range(3)),
+                dim_coords_and_dims=list(zip((eof_dim, lat_dim, lon_dim),
+                                         list(range(3)))),
                 long_name='eofscor')
-            solution['eofscov']= Cube(
+            solution['eofscov'] = Cube(
                 solution['eofscov'],
-                dim_coords_and_dims=zip((eof_dim, lat_dim, lon_dim),
-                                        range(3)),
+                dim_coords_and_dims=list(zip((eof_dim, lat_dim, lon_dim),
+                                         list(range(3)))),
                 long_name='eofscov')
-            solution['errors']= Cube(
+            solution['errors'] = Cube(
                 solution['errors'],
-                dim_coords_and_dims=zip((eof_dim,),
-                                        range(1)),
+                dim_coords_and_dims=list(zip((eof_dim,),
+                                         list(range(1)))),
                 long_name='errors')
-            solution['scaled_errors']= Cube(
+            solution['scaled_errors'] = Cube(
                 solution['scaled_errors'],
-                dim_coords_and_dims=zip((eof_dim,),
-                                        range(1)),
+                dim_coords_and_dims=list(zip((eof_dim,),
+                                         list(range(1)))),
                 long_name='scaled_errors')
-            solution['rcon']= Cube(
+            solution['rcon'] = Cube(
                 solution['rcon'],
-                dim_coords_and_dims=zip((time_dim, lat_dim, lon_dim),
-                                        range(3)),
+                dim_coords_and_dims=list(zip((time_dim, lat_dim, lon_dim),
+                                         list(range(3)))),
                 long_name='reconstructed_sst')
         except NameError:
             raise ValueError("cannot use container 'iris' without the "
@@ -248,7 +249,8 @@ def reference_multivariate_solution(container_type, weights):
                 'weights',
                 'rcon',):
         try:
-            solution[var] = solution[var][..., slice1], solution[var][..., slice2]
+            solution[var] = (solution[var][..., slice1],
+                             solution[var][..., slice2])
         except TypeError:
             solution[var] = None, None
     return solution

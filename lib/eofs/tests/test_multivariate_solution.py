@@ -15,6 +15,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
+from __future__ import absolute_import
+
 from nose import SkipTest
 import numpy as np
 try:
@@ -77,10 +79,10 @@ class MVSolutionTest(EofsTest):
             yield self.check_eofs, eofscaling
 
     def check_eofs(self, eofscaling):
-        eofs = map(self._tomasked, self.solver.eofs(neofs=self.neofs,
-                                                    eofscaling=eofscaling))
-        reofs = map(lambda x: self._tomasked(x).copy(),
-                    self.solution['eofs'])
+        eofs = [self._tomasked(e)
+                for e in self.solver.eofs(neofs=self.neofs,
+                                          eofscaling=eofscaling)]
+        reofs = [self._tomasked(e).copy() for e in self.solution['eofs']]
         eofs = [e * sign_adjustments(e, r) for e, r in zip(eofs, reofs)]
         reigs = self._tomasked(self.solution['eigenvalues'])
         if eofscaling == 1:
@@ -93,9 +95,10 @@ class MVSolutionTest(EofsTest):
     def test_eofsAsCovariance(self):
         # EOFs as covariance between PCs and input field should match the
         # reference solution
-        eofs = map(self._tomasked,
-                   self.solver.eofsAsCovariance(neofs=self.neofs, pcscaling=1))
-        reofs = map(self._tomasked, self.solution['eofscov'])
+        eofs = [self._tomasked(e)
+                for e in self.solver.eofsAsCovariance(neofs=self.neofs,
+                                                      pcscaling=1)]
+        reofs = [self._tomasked(e) for e in self.solution['eofscov']]
         eofs = [e * sign_adjustments(e, r) for e, r in zip(eofs, reofs)]
         for e, r in zip(eofs, reofs):
             self.assert_array_almost_equal(e, r)
@@ -103,9 +106,9 @@ class MVSolutionTest(EofsTest):
     def test_eofsAsCorrelation(self):
         # EOFs as correlation between PCs and input field should match the
         # reference solution
-        eofs = map(self._tomasked,
-                   self.solver.eofsAsCorrelation(neofs=self.neofs))
-        reofs = map(self._tomasked, self.solution['eofscor'])
+        eofs = [self._tomasked(e)
+                for e in self.solver.eofsAsCorrelation(neofs=self.neofs)]
+        reofs = [self._tomasked(e) for e in self.solution['eofscor']]
         eofs = [e * sign_adjustments(e, r) for e, r in zip(eofs, reofs)]
         for e, r in zip(eofs, reofs):
             self.assert_array_almost_equal(e, r)
@@ -113,8 +116,8 @@ class MVSolutionTest(EofsTest):
     def test_eofsAsCorrelation_range(self):
         # EOFs as correlation between PCs and input field should have values
         # in the range [-1, 1]
-        eofs = map(self._tomasked,
-                   self.solver.eofsAsCorrelation(neofs=self.neofs))
+        eofs = [self._tomasked(e)
+                for e in self.solver.eofsAsCorrelation(neofs=self.neofs)]
         for e in eofs:
             self.assert_true(np.abs(e).max() < 1.000000001)
 
@@ -217,7 +220,8 @@ class MVSolutionTest(EofsTest):
         # projecting a temporal subset of the original input onto the EOFs
         # should match the same subset of the reference PCs
         pcs = self._tomasked(
-            self.solver.projectField(map(lambda x: x[:5], self.solution['sst']),                                                           neofs=self.neofs))
+            self.solver.projectField([x[:5] for x in self.solution['sst']],
+                                     neofs=self.neofs))
         rpcs = self._tomasked(self.solution['pcs'])[:5]
         pcs *= sign_adjustments(pcs.transpose(), rpcs.transpose()).transpose()
         self.assert_array_almost_equal(pcs, rpcs)
@@ -226,7 +230,7 @@ class MVSolutionTest(EofsTest):
         # projecting the first time of the original input onto the EOFs should
         # match the first time of the reference PCs
         pcs = self._tomasked(
-            self.solver.projectField(map(lambda x: x[0], self.solution['sst']),
+            self.solver.projectField([x[0] for x in self.solution['sst']],
                                      neofs=self.neofs))
         rpcs = self._tomasked(self.solution['pcs'])[0]
         pcs *= sign_adjustments(pcs.transpose(), rpcs.transpose()).transpose()
