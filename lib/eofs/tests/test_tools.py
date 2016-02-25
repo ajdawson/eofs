@@ -20,6 +20,7 @@ from __future__ import absolute_import
 from nose import SkipTest
 from nose.tools import raises
 import numpy as np
+import numpy.ma as ma
 try:
     from iris.cube import Cube
 except ImportError:
@@ -43,6 +44,11 @@ except AttributeError:
 try:
     tools['iris'] = eofs.tools.iris
     solvers['iris'] = eofs.iris.Eof
+except AttributeError:
+    pass
+try:
+    tools['xarray'] = eofs.tools.xarray
+    solvers['xarray'] = eofs.xarray.Eof
 except AttributeError:
     pass
 
@@ -174,3 +180,19 @@ class TestToolsIris(ToolsTest):
         if type(value) is not Cube:
             return value
         return value.data
+
+
+# ----------------------------------------------------------------------------
+# Tests for the xarray interface
+
+
+class TestToolsXarray(ToolsTest):
+    """Test the xarray interface tools."""
+    interface = 'xarray'
+    weights = 'equal'
+
+    def _tomasked(self, value):
+        try:
+            return ma.masked_invalid(value.values)
+        except:
+            return ma.masked_invalid(value)

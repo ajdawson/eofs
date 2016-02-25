@@ -1,5 +1,5 @@
 """Supplementary tools useful for multiple interfaces."""
-# (c) Copyright 2013 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2013-2016 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -29,5 +29,5 @@ def covcor_dimensions(pc_dims, field_dims):
         pc_dim = pc_dims[1]
     except IndexError:
         pc_dim = None
-    covcor_dims = [d for d in [pc_dim] + spatial_dims if d]
+    covcor_dims = [d for d in [pc_dim] + spatial_dims if d is not None]
     return covcor_dims
