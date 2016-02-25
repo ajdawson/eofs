@@ -17,9 +17,13 @@ the cdms interface solver class::
 
     from eofs.cdms import Eof
  
-and the iris interface solver class::
+the iris interface solver class::
 
     from eofs.iris import Eof
+
+and the xarray interface solver class::
+
+    from eofs.xarray import Eof
 
 
 Creating a solver
