@@ -40,10 +40,10 @@ install:
     # iris for Python 3:
     - if [[ "$TRAVIS_PYTHON_VERSION" == 2* ]] && [[ "$TEST_MODE" == "complete" ]]; then
         conda config --add channels SciTools;
-        conda install setuptools nose coverage pep8 numpy cdat-lite iris;
+        conda install setuptools nose coverage pep8 numpy cdat-lite iris xarray;
       elif [[ "$TRAVIS_PYTHON_VERSION" == 3* ]] && [[ "$TEST_MODE" == "complete" ]]; then
         conda config --add channels SciTools;
-        conda install setuptools nose coverage pep8 numpy iris;
+        conda install setuptools nose coverage pep8 numpy iris xarray;
       else
         conda install setuptools nose coverage pep8 numpy;
       fi
