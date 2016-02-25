@@ -1,6 +1,6 @@
 """EOF analysis for data in `numpy` arrays."""
 # (c) Copyright 2000 Jon Saenz, Jesus Fernandez and Juan Zubillaga.
-# (c) Copyright 2010-2015 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2010-2016 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -147,7 +147,7 @@ class Eof(object):
         if not self._valid_nan(self._data):
             raise ValueError('missing values detected in different '
                              'locations at different times')
-        nonMissingIndex = np.where(np.isnan(self._data[0]) == False)[0]
+        nonMissingIndex = np.where(np.logical_not(np.isnan(self._data[0])))[0]
         # Remove missing values from the design matrix.
         dataNoMissing = self._data[:, nonMissingIndex]
         # Compute the singular value decomposition of the design matrix.
@@ -302,7 +302,6 @@ class Eof(object):
             # No modification. A copy needs to be returned in case it is
             # modified. If no copy is made the internally stored eigenvectors
             # could be modified unintentionally.
-            #rval = self._flatE[slicer].copy()
             rval = flat_eofs
         elif eofscaling == 1:
             # Divide by the square-root of the eigenvalues.
@@ -722,11 +721,12 @@ class Eof(object):
         if not self._valid_nan(field_flat):
             raise ValueError('missing values detected in different '
                              'locations at different times')
-        nonMissingIndex = np.where(np.isnan(field_flat[0]) == False)[0]
+        nonMissingIndex = np.where(np.logical_not(np.isnan(field_flat[0])))[0]
         field_flat = field_flat[:, nonMissingIndex]
         # Locate the non-missing values in the EOFs and check they match those
         # in the data set, then isolate the non-missing values.
-        eofNonMissingIndex = np.where(np.isnan(self._flatE[0]) == False)[0]
+        eofNonMissingIndex = np.where(
+            np.logical_not(np.isnan(self._flatE[0])))[0]
         if eofNonMissingIndex.shape != nonMissingIndex.shape or \
                 (eofNonMissingIndex != nonMissingIndex).any():
             raise ValueError('field and EOFs have different '

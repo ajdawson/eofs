@@ -1,5 +1,5 @@
 """Test `eofs.multivariate` computations against reference solutions."""
-# (c) Copyright 2013-2015 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2013-2016 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -86,9 +86,11 @@ class MVSolutionTest(EofsTest):
         eofs = [e * sign_adjustments(e, r) for e, r in zip(eofs, reofs)]
         reigs = self._tomasked(self.solution['eigenvalues'])
         if eofscaling == 1:
-            reofs = [r / np.sqrt(reigs)[:, np.newaxis, np.newaxis] for r in reofs]
+            reofs = [r / np.sqrt(reigs)[:, np.newaxis, np.newaxis]
+                     for r in reofs]
         elif eofscaling == 2:
-            reofs = [r * np.sqrt(reigs)[:, np.newaxis, np.newaxis] for r in reofs]
+            reofs = [r * np.sqrt(reigs)[:, np.newaxis, np.newaxis]
+                     for r in reofs]
         for e, r in zip(eofs, reofs):
             self.assert_array_almost_equal(e, r)
 
@@ -237,7 +239,7 @@ class MVSolutionTest(EofsTest):
         self.assert_array_almost_equal(pcs, rpcs)
 
 
-#-----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Tests for the standard interface
 
 
@@ -264,7 +266,7 @@ class TestStandardMixedWeights(StandardMVSolutionTest):
     weights = 'none_area'
 
 
-#-----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Tests for the cdms interface
 
 
@@ -297,8 +299,8 @@ class TestCDMSMixedWeights(CDMSMVSolutionTest):
     alternate_weights_arg = (None, 'area')
 
 
-##-----------------------------------------------------------------------------
-## Tests for the iris interface
+# ----------------------------------------------------------------------------
+# Tests for the iris interface
 
 
 class IrisMVSolutionTest(MVSolutionTest):

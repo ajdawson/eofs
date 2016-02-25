@@ -1,5 +1,5 @@
 """Utilities for testing the `eofs` package."""
-# (c) Copyright 2013-2014 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2013-2016 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -56,9 +56,9 @@ def __tomasked(*args):
 
 def error(a, b):
     """Compute the error between two arrays.
-    
+
     Computes the RMSD normalized by the range of the second input.
-    
+
     """
     a, b = __tomasked(a, b)
     return np.sqrt((a - b)**2).mean() / (np.max(b) - np.min(b))
@@ -66,20 +66,20 @@ def error(a, b):
 
 def sign_adjustments(eofset, refeofset):
     """Sign adjustments for EOFs/PCs.
-    
+
     Create a matrix of sign weights used for adjusting the sign of a set
     of EOFs or PCs to the sign of a reference set.
-    
+
     The first dimension is assumed to be modes.
-    
+
     **Arguments:**
-    
+
     *eofset*
         Set of EOFs.
-    
+
     *refeofset*
         Reference set of EOFs.
-    
+
     """
     if eofset.shape != refeofset.shape:
         raise ValueError('input set has different shape from reference set')
@@ -93,13 +93,14 @@ def sign_adjustments(eofset, refeofset):
     for mode in range(nmodes):
         i = 0
         try:
-            while _close(eofset[mode,i], 0.) or _close(refeofset[mode,i], 0.) \
-                    or np.ma.is_masked(eofset[mode, i]) or \
-                    np.ma.is_masked(refeofset[mode, i]):
+            while _close(eofset[mode, i], 0.) or \
+                  _close(refeofset[mode, i], 0.) \
+                  or np.ma.is_masked(eofset[mode, i]) or \
+                  np.ma.is_masked(refeofset[mode, i]):
                 i += 1
         except IndexError:
             i = 0
-        if np.sign(eofset[mode,i]) != np.sign(refeofset[mode,i]):
+        if np.sign(eofset[mode, i]) != np.sign(refeofset[mode, i]):
             signs[mode] = -1
     return signs.reshape(shape)
 

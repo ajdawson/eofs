@@ -5,7 +5,7 @@ The package comes with a comprehensive set of tests to make sure it is working c
 The tests can be run against an installed version of `eofs` or against the current source tree.
 Testing against the source tree is handy during development when quick iteration is required, but for most other cases testing against the installed version is more suitable.
 
-Running the test suite requires nose_ to be installed.
+Running the test suite requires nose_ and pep8_ to be installed.
 The test suite will function as long as the minimum dependencies for the package are installed, but some tests will be skipped if they require optional dependencies that are not present.
 To run the full test suite you need to have the optional dependencies `cdms2` (from UV-CDAT_) and iris_ installed.
 
@@ -39,6 +39,8 @@ Then create a directory somewhere else without any Python code in it and run ``n
 This will run the tests on the version of `eofs` you just installed.
 
 .. _nose: https://nose.readthedocs.org/en/latest/
+
+.. _pep8: https://pypi.python.org/pypi/pep8
 
 .. _UV-CDAT: http://uv-cdat.llnl.gov
 

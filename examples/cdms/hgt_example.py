@@ -47,4 +47,3 @@ ax.contourf(lons, lats, eof1(squeeze=True), transform=ccrs.PlateCarree(),
 plt.title('EOF1 expressed as covariance', fontsize=16)
 
 plt.show()
-
