@@ -29,5 +29,5 @@ def covcor_dimensions(pc_dims, field_dims):
         pc_dim = pc_dims[1]
     except IndexError:
         pc_dim = None
-    covcor_dims = filter(None, [pc_dim] + spatial_dims)
+    covcor_dims = [d for d in [pc_dim] + spatial_dims if d]
     return covcor_dims

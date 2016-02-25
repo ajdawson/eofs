@@ -162,8 +162,8 @@ class MultivariateEof(object):
         #: Number of EOFs in the solution.
         self.neofs = self._solver.neofs
         # Names of the input variables.
-        self._dataset_names = map(lambda v: cdms2_name(v).replace(' ', '_'),
-                                  datasets)
+        self._dataset_names = [cdms2_name(v).replace(' ', '_')
+                               for v in datasets]
         self._dataset_ids = [dataset.id for dataset in datasets]
 
     def pcs(self, pcscaling=0, npcs=None):
@@ -203,7 +203,7 @@ class MultivariateEof(object):
 
         """
         pcs = self._solver.pcs(pcscaling, npcs)
-        pcsax = cdms2.createAxis(range(pcs.shape[1]), id='pc')
+        pcsax = cdms2.createAxis(list(range(pcs.shape[1])), id='pc')
         pcsax.long_name = 'pc_number'
         axlist = [self._timeax, pcsax]
         pcs = cdms2.createVariable(pcs, id='pcs', axes=axlist)
@@ -249,9 +249,9 @@ class MultivariateEof(object):
         """
         eofset = self._solver.eofs(eofscaling, neofs)
         neofs = eofset[0].shape[0]
-        eofax = cdms2.createAxis(range(neofs), id='eof')
+        eofax = cdms2.createAxis(list(range(neofs)), id='eof')
         eofax.long_name = 'eof_number'
-        for iset in xrange(self._ndata):
+        for iset in range(self._ndata):
             axlist = [eofax] + self._multichannels[iset]
             eofset[iset].fill_value = self._multimissing[iset]
             eofset[iset] = cdms2.createVariable(
@@ -299,9 +299,9 @@ class MultivariateEof(object):
         """
         eofset = self._solver.eofsAsCorrelation(neofs)
         neofs = eofset[0].shape[0]
-        eofax = cdms2.createAxis(range(neofs), id='eof')
+        eofax = cdms2.createAxis(list(range(neofs)), id='eof')
         eofax.long_name = 'eof_number'
-        for iset in xrange(self._ndata):
+        for iset in range(self._ndata):
             axlist = [eofax] + self._multichannels[iset]
             eofset[iset].fill_value = self._multimissing[iset]
             eofset[iset] = cdms2.createVariable(
@@ -359,9 +359,9 @@ class MultivariateEof(object):
         """
         eofset = self._solver.eofsAsCovariance(neofs)
         neofs = eofset[0].shape[0]
-        eofax = cdms2.createAxis(range(neofs), id='eof')
+        eofax = cdms2.createAxis(list(range(neofs)), id='eof')
         eofax.long_name = 'eof_number'
-        for iset in xrange(self._ndata):
+        for iset in range(self._ndata):
             axlist = [eofax] + self._multichannels[iset]
             eofset[iset].fill_value = self._multimissing[iset]
             eofset[iset] = cdms2.createVariable(
@@ -404,7 +404,7 @@ class MultivariateEof(object):
 
         """
         lambdas = self._solver.eigenvalues(neigs=neigs)
-        eofax = cdms2.createAxis(range(len(lambdas)), id='eigenvalue')
+        eofax = cdms2.createAxis(list(range(len(lambdas))), id='eigenvalue')
         eofax.long_name = 'eigenvalue_number'
         axlist = [eofax]
         lambdas = cdms2.createVariable(lambdas, id='eigenvalues', axes=axlist)
@@ -443,7 +443,7 @@ class MultivariateEof(object):
 
         """
         vfrac = self._solver.varianceFraction(neigs=neigs)
-        eofax = cdms2.createAxis(range(len(vfrac)), id='eigenvalue')
+        eofax = cdms2.createAxis(list(range(len(vfrac))), id='eigenvalue')
         axlist = [eofax]
         vfrac = cdms2.createVariable(vfrac, id='variance_fraction',
                                      axes=axlist)
@@ -517,7 +517,7 @@ class MultivariateEof(object):
 
         """
         typerrs = self._solver.northTest(neigs=neigs, vfscaled=vfscaled)
-        eofax = cdms2.createAxis(range(len(typerrs)), id='eigenvalue')
+        eofax = cdms2.createAxis(list(range(len(typerrs))), id='eigenvalue')
         eofax.long_name = 'eof_number'
         axlist = [eofax]
         typerrs = cdms2.createVariable(typerrs,
@@ -568,7 +568,7 @@ class MultivariateEof(object):
             name_part = 'EOFs_{}'.format('_'.join([str(e) for e in neofs]))
         else:
             name_part = '{:d}_EOFs'.format(neofs)
-        for iset in xrange(self._ndata):
+        for iset in range(self._ndata):
             axlist = [self._multitimeaxes[iset]] + self._multichannels[iset]
             rfset[iset].fill_value = self._multimissing[iset]
             rfset[iset] = cdms2.createVariable(
@@ -661,12 +661,12 @@ class MultivariateEof(object):
         # axis was present in the input field.
         if pcs.ndim == 2:
             # Time dimension present:
-            pcsax = cdms2.createAxis(range(pcs.shape[1]), id='pc')
+            pcsax = cdms2.createAxis(list(range(pcs.shape[1])), id='pc')
             pcsax.long_name = 'pc_number'
             axlist = [fields[0].getAxis(0), pcsax]
         else:
             # A PC axis and a leading time axis.
-            pcsax = cdms2.createAxis(range(pcs.shape[0]), id='pc')
+            pcsax = cdms2.createAxis(list(range(pcs.shape[0])), id='pc')
             pcsax.long_name = 'pc_number'
             axlist = [pcsax]
         # Apply meta data to the projected PCs.

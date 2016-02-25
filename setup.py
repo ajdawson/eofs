@@ -46,5 +46,4 @@ data sets, aimed at meteorology, oceanography and climate sciences
           packages=packages,
           package_dir={'':'lib'},
           package_data=package_data,
-          install_requires=['numpy'],
-          use_2to3=True,)
+          install_requires=['numpy'])

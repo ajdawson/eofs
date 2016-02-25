@@ -15,6 +15,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
+from __future__ import absolute_import
+
 import numpy as np
 try:
     from iris.cube import Cube
@@ -88,7 +90,7 @@ def sign_adjustments(eofset, refeofset):
     shape[0] = nmodes
     eofset = eofset.reshape([nmodes, np.prod(eofset.shape[1:])])
     refeofset = refeofset.reshape([nmodes, np.prod(refeofset.shape[1:])])
-    for mode in xrange(nmodes):
+    for mode in range(nmodes):
         i = 0
         try:
             while _close(eofset[mode,i], 0.) or _close(refeofset[mode,i], 0.) \

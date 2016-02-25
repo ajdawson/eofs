@@ -17,6 +17,7 @@
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
 from __future__ import absolute_import
 from copy import copy
+from functools import reduce
 import warnings
 
 import numpy as np
@@ -105,7 +106,7 @@ def coord_and_dim(cube, coord, multiple=False):
         A 2-tuple of (coordinate_dimension, dimension_number).
 
     """
-    coords = filter(lambda c: coord in c.name(), cube.dim_coords)
+    coords = [c for c in cube.dim_coords if coord in c.name()]
     if len(coords) > 1:
         raise ValueError('multiple {} coordinates are not '
                          'allowed'.format(coord))
@@ -165,7 +166,7 @@ def common_items(item_set):
     """
     Given an iterable of lists, constructs a list of every item that is
     present in all of the lists.
-    
+
     **Arguments:**
 
     *item_set*
@@ -255,7 +256,7 @@ def correlation_map(pcs, field):
         # There are no output dimensions, return a scalar.
         return cor
     # Otherwise return an Iris cube.
-    cor = Cube(cor, dim_coords_and_dims=zip(dims, range(cor.ndim)))
+    cor = Cube(cor, dim_coords_and_dims=list(zip(dims, range(cor.ndim))))
     cor.long_name = 'pc_correlation'
     return cor
 
@@ -310,6 +311,6 @@ def covariance_map(pcs, field, ddof=1):
         # There are no output dimensions, return a scalar.
         return cov
     # Otherwise return an Iris cube.
-    cov = Cube(cov, dim_coords_and_dims=zip(dims, range(cov.ndim)))
+    cov = Cube(cov, dim_coords_and_dims=list(zip(dims, range(cov.ndim))))
     cov.long_name = 'pc_covariance'
     return cov

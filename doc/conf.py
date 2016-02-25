@@ -47,8 +47,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'eofs'
-copyright = u'2013-{} Andrew Dawson'.format(time.localtime().tm_year)
+project = 'eofs'
+copyright = '2013-{} Andrew Dawson'.format(time.localtime().tm_year)
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -200,8 +200,8 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('userguide', 'userguide.tex', u'eofs User Guide',
-   u'Andrew Dawson', 'manual'),
+  ('userguide', 'userguide.tex', 'eofs User Guide',
+   'Andrew Dawson', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -230,8 +230,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'eofs', u'eofs Documentation',
-     [u'Andrew Dawson'], 1)
+    ('index', 'eofs', 'eofs Documentation',
+     ['Andrew Dawson'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -244,8 +244,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'eofs', u'eofs Documentation',
-   u'Andrew Dawson', 'eofs', 'EOF analysis in Python.',
+  ('index', 'eofs', 'eofs Documentation',
+   'Andrew Dawson', 'eofs', 'EOF analysis in Python.',
    'Miscellaneous'),
 ]
 
