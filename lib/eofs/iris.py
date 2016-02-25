@@ -600,7 +600,7 @@ class Eof(object):
         **Argument:**
 
         *field*
-            A `cdms2` variable containing the field to project onto the
+            An `iris.cube.Cube` containing the field to project onto the
             EOFs. It must have the same corresponding spatial dimensions
             (including missing values in the same places) as the `Eof`
             input *dataset*. It may have a different length time
