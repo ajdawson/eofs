@@ -1,7 +1,7 @@
 eofs - EOF analysis in Python
 =============================
 
-[![Build Status](https://travis-ci.org/ajdawson/eofs.png)](https://travis-ci.org/ajdawson/eofs)
+[![Build Status](https://api.travis-ci.org/repositories/ajdawson/eofs.svg?branch=master)](https://travis-ci.org/ajdawson.eofs)
 
 
 Overview
@@ -14,7 +14,7 @@ Some of the key features are listed below:
 
 * Suitable for large data sets: computationally efficient for the large data sets typical of modern climate model output.
 * Transparent handling of missing values: missing values are removed automatically when computing EOFs and re-inserted into output fields.
-* Meta-data preserving interfaces (optional): works with both the cdms2 module (from UV-CDAT) and the iris data analysis package to carry meta-data over from input fields to output.
+* Meta-data preserving interfaces (optional): works with the iris data analysis package, xarray, or the cdms2 module (from UV-CDAT) to carry meta-data over from input fields to output.
 * No Fortran dependencies: written in Python using the power of NumPy, no compilers required.
 
 
@@ -22,7 +22,7 @@ Requirements
 ------------
 
 eofs only requires the NumPy package (and setuptools to install).
-In order to use the meta-data preserving interfaces one (or both) of cdms2 (part of [UV-CDAT](http://uvcdat.llnl.gov/)) or [iris](http://scitools.org.uk/iris) is needed.
+In order to use the meta-data preserving interfaces one (or more) of cdms2 (part of [UV-CDAT](http://uvcdat.llnl.gov/)), [iris](http://scitools.org.uk/iris), or [xarray](http://xarray.pydata.org) is needed.
 
 
 Documentation
@@ -35,9 +35,9 @@ The package docstrings are also very complete and can be used as a source of ref
 Frequently asked questions
 --------------------------
 
-* **Do I need UV-CDAT/cdms2 or iris to use eofs?**
+* **Do I need UV-CDAT/cdms2, iris or xarray to use eofs?**
   No. All the computation code uses NumPy only.
-  The cdms2 module or iris are only required for the meta-data preserving interfaces.
+  The cdms2 module, iris and xarray are only required for the meta-data preserving interfaces.
 
 
 Installation

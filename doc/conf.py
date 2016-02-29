@@ -181,6 +181,7 @@ intersphinx_mapping = {
         'eof2': ('http://ajdawson.github.com/eof2', None),
         'iris': ('http://scitools.org.uk/iris/docs/latest', None),
         'numpy': ('http://docs.scipy.org/doc/numpy', None),
+        'xarray': ('http://xarray.pydata.org/en/stable', None),
 }
 
 # -- Options for LaTeX output --------------------------------------------------

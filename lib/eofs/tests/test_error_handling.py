@@ -41,6 +41,10 @@ try:
     solvers['iris'] = eofs.iris.Eof
 except AttributeError:
     pass
+try:
+    solvers['xarray'] = eofs.xarray.Eof
+except AttributeError:
+    pass
 
 
 class ErrorHandlersTest(EofsTest):
@@ -141,6 +145,38 @@ class TestErrorHandlersIris(ErrorHandlersTest):
         data = solution['sst']
         mask = data.data.mask
         mask[0] = True
+        pcs = self.solver.projectField(data)
+
+    @raises(ValueError)
+    def test_projectField_invalid_dimension_order(self):
+        # projecting a field with the time dimension not at the front
+        solution = reference_solution(self.interface, self.weights)
+        data = solution['sst']
+        data.transpose((2, 1, 0))
+        pcs = self.solver.projectField(data)
+
+
+# ----------------------------------------------------------------------------
+# Error Handler tests for the xarray interface
+
+
+class TestErrorHandlersXarray(ErrorHandlersTest):
+    """Test error handling in the xarray interface."""
+    interface = 'xarray'
+    weights = 'equal'
+
+    @raises(TypeError)
+    def test_projectField_invalid_type(self):
+        # projecting a field of the wrong type
+        solution = reference_solution('standard', 'equal')
+        pcs = self.solver.projectField(solution['sst'])
+
+    @raises(ValueError)
+    def test_projectField_different_missing_values(self):
+        # projecting a field with different missing values
+        solution = reference_solution(self.interface, self.weights)
+        data = solution['sst']
+        data.values[0] = np.nan
         pcs = self.solver.projectField(data)
 
     @raises(ValueError)
@@ -360,4 +396,64 @@ class TestConstructorIris(EofsTest):
         data = solution['sst']
         lon = data.coord('longitude')
         lon.rename('time')
+        solver = self.solver_class(data)
+
+
+# ----------------------------------------------------------------------------
+# Constructor tests for the xarray interface
+
+
+class TestConstructorXarray(EofsTest):
+    """Test the error handling in the xarray interface constructor."""
+
+    @classmethod
+    def setup_class(cls):
+        try:
+            cls.solver_class = solvers['xarray']
+        except KeyError:
+            raise SkipTest('library component not available '
+                           'for iris interface')
+
+    @raises(TypeError)
+    def test_wrong_input_type(self):
+        # input of the wrong type
+        solution = reference_solution('standard', 'equal')
+        data = solution['sst']
+        solver = self.solver_class(data)
+
+    @raises(ValueError)
+    def test_input_without_time_dimension(self):
+        # no time dimension in the input
+        solution = reference_solution('xarray', 'equal')
+        data = solution['sst'][0]
+        solver = self.solver_class(data)
+
+    @raises(ValueError)
+    def test_input_time_dimension_not_first(self):
+        # time not the first dimension in the input
+        solution = reference_solution('xarray', 'equal')
+        data = solution['sst']
+        data.transpose((2, 1, 0))
+        solver = self.solver_class(data)
+
+    @raises(ValueError)
+    def test_input_no_spatial_dimensions(self):
+        # not enough dimensions in the input
+        solution = reference_solution('xarray', 'equal')
+        data = solution['sst'][:, 0, 0]
+        solver = self.solver_class(data)
+
+    @raises(ValueError)
+    def test_invalid_builtin_weights_value(self):
+        # invalid weighting scheme name
+        solution = reference_solution('xarray', 'equal')
+        data = solution['sst']
+        solver = self.solver_class(data, weights='invalid')
+
+    @raises(ValueError)
+    def test_multiple_time_dimensions(self):
+        # multiple dimensions representing time
+        solution = reference_solution('xarray', 'equal')
+        data = solution['sst']
+        data.coords['longitude'].attrs['axis'] = 'T'
         solver = self.solver_class(data)

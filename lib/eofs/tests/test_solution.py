@@ -19,6 +19,7 @@ from __future__ import absolute_import
 
 from nose import SkipTest
 import numpy as np
+import numpy.ma as ma
 try:
     from iris.cube import Cube
 except:
@@ -40,6 +41,10 @@ except AttributeError:
 try:
     solvers['iris'] = eofs.iris.Eof
 except AttributeError:
+    pass
+try:
+    solvers['xarray'] = eofs.xarray.Eof
+except:
     pass
 
 
@@ -294,7 +299,25 @@ class TestStandardMissingValuesAsNaN(StandardSolutionTest):
                 pass
 
     def _tomasked(self, value):
-        return np.ma.MaskedArray(value, mask=np.isnan(value))
+        return ma.MaskedArray(value, mask=np.isnan(value))
+
+
+# ----------------------------------------------------------------------------
+# Tests for the xarray interface
+
+
+class XarraySolutionTest(SolutionTest):
+    interface = 'xarray'
+
+    def _tomasked(self, value):
+        try:
+            return ma.masked_invalid(value.values)
+        except:
+            return ma.masked_invalid(value)
+
+
+class TestXarrayEqualWeights(XarraySolutionTest):
+    weights = 'equal'
 
 
 # ----------------------------------------------------------------------------
