@@ -1,6 +1,8 @@
 eofs - EOF analysis in Python
 =============================
 
+[![Build Status](https://api.travis-ci.org/repositories/ajdawson/eofs.svg?branch=master)](https://travis-ci.org/ajdawson.eofs)
+
 
 Overview
 --------
