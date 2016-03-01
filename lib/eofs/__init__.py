@@ -25,7 +25,7 @@ from . import tools
 __all__ = ['standard', 'tools']
 
 # Package version number.
-__version__ = '1.1.x'
+__version__ = '1.2.dev0'
 
 try:
     from . import cdms
