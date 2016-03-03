@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>eofs.multivariate.iris &mdash; eofs 1.0.0 documentation</title>
+    <title>eofs.multivariate.iris &mdash; eofs 1.1.0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '1.0.0',
+        VERSION:     '1.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 1.0.0 documentation" href="../../../index.html" />
+    <link rel="top" title="eofs 1.1.0 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
           rel='stylesheet' type='text/css' />
@@ -86,7 +86,7 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v1.0.0</h2>
+    <h2>eofs v1.1.0</h2>
     <h3>Table of Contents</h3>
     <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../userguide/index.html">User Guide</a></li>
@@ -119,23 +119,23 @@
           <div class="body" role="main">
             
   <h1>Source code for eofs.multivariate.iris</h1><div class="highlight"><pre>
-<span class="sd">&quot;&quot;&quot;Multivariate EOF analysis for `iris` cubes.&quot;&quot;&quot;</span>
-<span class="c"># (c) Copyright 2013-2015 Andrew Dawson. All Rights Reserved.</span>
-<span class="c">#</span>
-<span class="c"># This file is part of eofs.</span>
-<span class="c">#</span>
-<span class="c"># eofs is free software: you can redistribute it and/or modify</span>
-<span class="c"># it under the terms of the GNU General Public License as published by</span>
-<span class="c"># the Free Software Foundation, either version 3 of the License, or</span>
-<span class="c"># (at your option) any later version.</span>
-<span class="c">#</span>
-<span class="c"># eofs is distributed in the hope that it will be useful, but WITHOUT</span>
-<span class="c"># ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span>
-<span class="c"># FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License</span>
-<span class="c"># for more details.</span>
-<span class="c">#</span>
-<span class="c"># You should have received a copy of the GNU General Public License</span>
-<span class="c"># along with eofs.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span></span><span class="sd">&quot;&quot;&quot;Multivariate EOF analysis for `iris` cubes.&quot;&quot;&quot;</span>
+<span class="c1"># (c) Copyright 2013-2016 Andrew Dawson. All Rights Reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of eofs.</span>
+<span class="c1">#</span>
+<span class="c1"># eofs is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># eofs is distributed in the hope that it will be useful, but WITHOUT</span>
+<span class="c1"># ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span>
+<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License</span>
+<span class="c1"># for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with eofs.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">import</span> <span class="nn">collections</span>
@@ -228,16 +228,16 @@
 <span class="sd">            solver = MultivariateEof(cube1, cube2, weights=&#39;area&#39;)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c"># Record the number of input cubes.</span>
+        <span class="c1"># Record the number of input cubes.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_ncubes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cubes</span><span class="p">)</span>
-        <span class="c"># Check that the weights argument is valid and refactor it if there</span>
-        <span class="c"># is only one option provided.</span>
-        <span class="k">if</span> <span class="n">weights</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">&#39;area&#39;</span><span class="p">,</span> <span class="s">&#39;coslat&#39;</span><span class="p">):</span>
+        <span class="c1"># Check that the weights argument is valid and refactor it if there</span>
+        <span class="c1"># is only one option provided.</span>
+        <span class="k">if</span> <span class="n">weights</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;area&#39;</span><span class="p">,</span> <span class="s1">&#39;coslat&#39;</span><span class="p">):</span>
             <span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="n">weights</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ncubes</span>
         <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ncubes</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;number of weights and cubes must match&#39;</span><span class="p">)</span>
-        <span class="c"># Process each input cube recording its time dimension coordinate,</span>
-        <span class="c"># other dimension coordinates, and defining its weight array.</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;number of weights and cubes must match&#39;</span><span class="p">)</span>
+        <span class="c1"># Process each input cube recording its time dimension coordinate,</span>
+        <span class="c1"># other dimension coordinates, and defining its weight array.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_time</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_coords</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_time_aux_coords</span> <span class="o">=</span> <span class="p">[]</span>
@@ -246,28 +246,28 @@
         <span class="n">passweights</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">cube</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">cubes</span><span class="p">,</span> <span class="n">weights</span><span class="p">):</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cube</span><span class="p">,</span> <span class="n">Cube</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;input is not an iris cube&#39;</span><span class="p">)</span>
-            <span class="c"># Record the time dimension and it&#39;s position. If its position is</span>
-            <span class="c"># not 0 then raise an error.</span>
-            <span class="n">time</span><span class="p">,</span> <span class="n">time_dim</span> <span class="o">=</span> <span class="n">coord_and_dim</span><span class="p">(</span><span class="n">cube</span><span class="p">,</span> <span class="s">&#39;time&#39;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;input is not an iris cube&#39;</span><span class="p">)</span>
+            <span class="c1"># Record the time dimension and it&#39;s position. If its position is</span>
+            <span class="c1"># not 0 then raise an error.</span>
+            <span class="n">time</span><span class="p">,</span> <span class="n">time_dim</span> <span class="o">=</span> <span class="n">coord_and_dim</span><span class="p">(</span><span class="n">cube</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">time_dim</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;time must be the first dimension, &#39;</span>
-                                 <span class="s">&#39;consider using the transpose() method&#39;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;time must be the first dimension, &#39;</span>
+                                 <span class="s1">&#39;consider using the transpose() method&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_time</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">copy</span><span class="p">(</span><span class="n">time</span><span class="p">))</span>
-            <span class="c"># Make a list of the cube&#39;s other dimension coordinates.</span>
+            <span class="c1"># Make a list of the cube&#39;s other dimension coordinates.</span>
             <span class="n">coords</span> <span class="o">=</span> <span class="p">[</span><span class="n">copy</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span> <span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">cube</span><span class="o">.</span><span class="n">dim_coords</span><span class="p">]</span>
             <span class="n">coords</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">coords</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;one or more non-time &#39;</span>
-                                 <span class="s">&#39;dimensions are required&#39;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;one or more non-time &#39;</span>
+                                 <span class="s1">&#39;dimensions are required&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_coords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
-            <span class="c"># Make a lists of the AuxCoords on the current cube and store</span>
-            <span class="c"># them for reapplication later.</span>
+            <span class="c1"># Make a lists of the AuxCoords on the current cube and store</span>
+            <span class="c1"># them for reapplication later.</span>
             <span class="n">_t</span><span class="p">,</span> <span class="n">_s</span><span class="p">,</span> <span class="n">_ts</span> <span class="o">=</span> <span class="n">classified_aux_coords</span><span class="p">(</span><span class="n">cube</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_time_aux_coords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_t</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_space_aux_coords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_s</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_time_space_aux_coords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_ts</span><span class="p">)</span>
-            <span class="c"># Determine the weighting option for the cube.</span>
+            <span class="c1"># Determine the weighting option for the cube.</span>
             <span class="k">if</span> <span class="n">weight</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="n">wtarray</span> <span class="o">=</span> <span class="bp">None</span>
             <span class="k">else</span><span class="p">:</span>
@@ -281,20 +281,20 @@
             <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
                 <span class="k">pass</span>
             <span class="n">passweights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">wtarray</span><span class="p">)</span>
-        <span class="c"># Get a list of all the auxiliary coordinates that span just time</span>
-        <span class="c"># and are present on every input cube.</span>
+        <span class="c1"># Get a list of all the auxiliary coordinates that span just time</span>
+        <span class="c1"># and are present on every input cube.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_common_time_aux_coords</span> <span class="o">=</span> <span class="n">common_items</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_time_aux_coords</span><span class="p">)</span>
-        <span class="c"># Create a solver.</span>
+        <span class="c1"># Create a solver.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span> <span class="o">=</span> <span class="n">standard</span><span class="o">.</span><span class="n">MultivariateEof</span><span class="p">(</span>
             <span class="p">[</span><span class="n">cube</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">cube</span> <span class="ow">in</span> <span class="n">cubes</span><span class="p">],</span>
             <span class="n">weights</span><span class="o">=</span><span class="n">passweights</span><span class="p">,</span>
             <span class="n">center</span><span class="o">=</span><span class="n">center</span><span class="p">,</span>
             <span class="n">ddof</span><span class="o">=</span><span class="n">ddof</span><span class="p">)</span>
-        <span class="c">#: Number of EOFs in the solution.</span>
+        <span class="c1">#: Number of EOFs in the solution.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">neofs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">neofs</span>
-        <span class="c"># Names of the cubes.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cube_names</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span>
-            <span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;dataset&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">,</span> <span class="s">&#39;_&#39;</span><span class="p">),</span> <span class="n">cubes</span><span class="p">)</span>
+        <span class="c1"># Names of the cubes.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cube_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s1">&#39;dataset&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span>
+                            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cubes</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cube_var_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">cube</span><span class="o">.</span><span class="n">var_name</span> <span class="k">for</span> <span class="n">cube</span> <span class="ow">in</span> <span class="n">cubes</span><span class="p">]</span>
 
 <div class="viewcode-block" id="MultivariateEof.pcs"><a class="viewcode-back" href="../../../api/eofs.multivariate.iris.html#eofs.multivariate.iris.MultivariateEof.pcs">[docs]</a>    <span class="k">def</span> <span class="nf">pcs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pcscaling</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">npcs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
@@ -334,16 +334,17 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">pcs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">pcs</span><span class="p">(</span><span class="n">pcscaling</span><span class="p">,</span> <span class="n">npcs</span><span class="p">)</span>
-        <span class="n">pcdim</span> <span class="o">=</span> <span class="n">DimCoord</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
-                         <span class="n">var_name</span><span class="o">=</span><span class="s">&#39;pc&#39;</span><span class="p">,</span>
-                         <span class="n">long_name</span><span class="o">=</span><span class="s">&#39;pc_number&#39;</span><span class="p">)</span>
+        <span class="n">pcdim</span> <span class="o">=</span> <span class="n">DimCoord</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])),</span>
+                         <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;pc&#39;</span><span class="p">,</span>
+                         <span class="n">long_name</span><span class="o">=</span><span class="s1">&#39;pc_number&#39;</span><span class="p">)</span>
         <span class="n">coords</span> <span class="o">=</span> <span class="p">[</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_time</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">pcdim</span><span class="p">]</span>
-        <span class="n">pcs</span> <span class="o">=</span> <span class="n">Cube</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span>
-                   <span class="n">dim_coords_and_dims</span><span class="o">=</span><span class="nb">zip</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">ndim</span><span class="p">)),</span>
-                   <span class="n">var_name</span><span class="o">=</span><span class="s">&#39;pcs&#39;</span><span class="p">,</span>
-                   <span class="n">long_name</span><span class="o">=</span><span class="s">&#39;principal_components&#39;</span><span class="p">)</span>
-        <span class="c"># Add any AuxCoords that described the time dimension of all the input</span>
-        <span class="c"># cubes.</span>
+        <span class="n">pcs</span> <span class="o">=</span> <span class="n">Cube</span><span class="p">(</span>
+            <span class="n">pcs</span><span class="p">,</span>
+            <span class="n">dim_coords_and_dims</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">ndim</span><span class="p">)))),</span>
+            <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;pcs&#39;</span><span class="p">,</span>
+            <span class="n">long_name</span><span class="o">=</span><span class="s1">&#39;principal_components&#39;</span><span class="p">)</span>
+        <span class="c1"># Add any AuxCoords that described the time dimension of all the input</span>
+        <span class="c1"># cubes.</span>
         <span class="k">for</span> <span class="n">coord</span><span class="p">,</span> <span class="n">dims</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_common_time_aux_coords</span><span class="p">:</span>
             <span class="n">pcs</span><span class="o">.</span><span class="n">add_aux_coord</span><span class="p">(</span><span class="n">copy</span><span class="p">(</span><span class="n">coord</span><span class="p">),</span> <span class="n">dims</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">pcs</span>
@@ -387,16 +388,17 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">eofset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">eofs</span><span class="p">(</span><span class="n">eofscaling</span><span class="o">=</span><span class="n">eofscaling</span><span class="p">,</span> <span class="n">neofs</span><span class="o">=</span><span class="n">neofs</span><span class="p">)</span>
         <span class="n">neofs</span> <span class="o">=</span> <span class="n">eofset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">eofdim</span> <span class="o">=</span> <span class="n">DimCoord</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">neofs</span><span class="p">),</span>
-                          <span class="n">var_name</span><span class="o">=</span><span class="s">&#39;eof&#39;</span><span class="p">,</span>
-                          <span class="n">long_name</span><span class="o">=</span><span class="s">&#39;eof_number&#39;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">iset</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ncubes</span><span class="p">):</span>
+        <span class="n">eofdim</span> <span class="o">=</span> <span class="n">DimCoord</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">neofs</span><span class="p">)),</span>
+                          <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;eof&#39;</span><span class="p">,</span>
+                          <span class="n">long_name</span><span class="o">=</span><span class="s1">&#39;eof_number&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">iset</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ncubes</span><span class="p">):</span>
             <span class="n">coords</span> <span class="o">=</span> <span class="p">[</span><span class="n">eofdim</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">copy</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span> <span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coords</span><span class="p">[</span><span class="n">iset</span><span class="p">]]</span>
             <span class="n">eofset</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span> <span class="o">=</span> <span class="n">Cube</span><span class="p">(</span>
                 <span class="n">eofset</span><span class="p">[</span><span class="n">iset</span><span class="p">],</span>
-                <span class="n">dim_coords_and_dims</span><span class="o">=</span><span class="nb">zip</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="n">eofset</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span><span class="o">.</span><span class="n">ndim</span><span class="p">)),</span>
-                <span class="n">var_name</span><span class="o">=</span><span class="s">&#39;eofs&#39;</span><span class="p">,</span>
-                <span class="n">long_name</span><span class="o">=</span><span class="s">&#39;empirical_orthogonal_functions&#39;</span><span class="p">)</span>
+                <span class="n">dim_coords_and_dims</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span>
+                                             <span class="nb">range</span><span class="p">(</span><span class="n">eofset</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span><span class="o">.</span><span class="n">ndim</span><span class="p">))),</span>
+                <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;eofs&#39;</span><span class="p">,</span>
+                <span class="n">long_name</span><span class="o">=</span><span class="s1">&#39;empirical_orthogonal_functions&#39;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">coord</span><span class="p">,</span> <span class="n">dims</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_space_aux_coords</span><span class="p">[</span><span class="n">iset</span><span class="p">]:</span>
                 <span class="n">eofset</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span><span class="o">.</span><span class="n">add_aux_coord</span><span class="p">(</span><span class="n">copy</span><span class="p">(</span><span class="n">coord</span><span class="p">),</span> <span class="n">dims</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">eofset</span>
@@ -438,16 +440,17 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">eofset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">eofsAsCorrelation</span><span class="p">(</span><span class="n">neofs</span><span class="o">=</span><span class="n">neofs</span><span class="p">)</span>
         <span class="n">neofs</span> <span class="o">=</span> <span class="n">eofset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">eofdim</span> <span class="o">=</span> <span class="n">DimCoord</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">neofs</span><span class="p">),</span>
-                          <span class="n">var_name</span><span class="o">=</span><span class="s">&#39;eof&#39;</span><span class="p">,</span>
-                          <span class="n">long_name</span><span class="o">=</span><span class="s">&#39;eof_number&#39;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">iset</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ncubes</span><span class="p">):</span>
+        <span class="n">eofdim</span> <span class="o">=</span> <span class="n">DimCoord</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">neofs</span><span class="p">)),</span>
+                          <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;eof&#39;</span><span class="p">,</span>
+                          <span class="n">long_name</span><span class="o">=</span><span class="s1">&#39;eof_number&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">iset</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ncubes</span><span class="p">):</span>
             <span class="n">coords</span> <span class="o">=</span> <span class="p">[</span><span class="n">eofdim</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">copy</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span> <span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coords</span><span class="p">[</span><span class="n">iset</span><span class="p">]]</span>
             <span class="n">eofset</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span> <span class="o">=</span> <span class="n">Cube</span><span class="p">(</span>
                 <span class="n">eofset</span><span class="p">[</span><span class="n">iset</span><span class="p">],</span>
-                <span class="n">dim_coords_and_dims</span><span class="o">=</span><span class="nb">zip</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="n">eofset</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span><span class="o">.</span><span class="n">ndim</span><span class="p">)),</span>
-                <span class="n">var_name</span><span class="o">=</span><span class="s">&#39;eofs&#39;</span><span class="p">,</span>
-                <span class="n">long_name</span><span class="o">=</span><span class="s">&#39;correlation_between_pcs_and_{:s}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">dim_coords_and_dims</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span>
+                                             <span class="nb">range</span><span class="p">(</span><span class="n">eofset</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span><span class="o">.</span><span class="n">ndim</span><span class="p">))),</span>
+                <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;eofs&#39;</span><span class="p">,</span>
+                <span class="n">long_name</span><span class="o">=</span><span class="s1">&#39;correlation_between_pcs_and_{:s}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                           <span class="bp">self</span><span class="o">.</span><span class="n">_cube_names</span><span class="p">[</span><span class="n">iset</span><span class="p">]))</span>
             <span class="k">for</span> <span class="n">coord</span><span class="p">,</span> <span class="n">dims</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_space_aux_coords</span><span class="p">[</span><span class="n">iset</span><span class="p">]:</span>
                 <span class="n">eofset</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span><span class="o">.</span><span class="n">add_aux_coord</span><span class="p">(</span><span class="n">copy</span><span class="p">(</span><span class="n">coord</span><span class="p">),</span> <span class="n">dims</span><span class="p">)</span>
@@ -499,16 +502,17 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">eofset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">eofsAsCovariance</span><span class="p">(</span><span class="n">neofs</span><span class="o">=</span><span class="n">neofs</span><span class="p">)</span>
         <span class="n">neofs</span> <span class="o">=</span> <span class="n">eofset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">eofdim</span> <span class="o">=</span> <span class="n">DimCoord</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">neofs</span><span class="p">),</span>
-                          <span class="n">var_name</span><span class="o">=</span><span class="s">&#39;eof&#39;</span><span class="p">,</span>
-                          <span class="n">long_name</span><span class="o">=</span><span class="s">&#39;eof_number&#39;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">iset</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ncubes</span><span class="p">):</span>
+        <span class="n">eofdim</span> <span class="o">=</span> <span class="n">DimCoord</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">neofs</span><span class="p">)),</span>
+                          <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;eof&#39;</span><span class="p">,</span>
+                          <span class="n">long_name</span><span class="o">=</span><span class="s1">&#39;eof_number&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">iset</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ncubes</span><span class="p">):</span>
             <span class="n">coords</span> <span class="o">=</span> <span class="p">[</span><span class="n">eofdim</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">copy</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span> <span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coords</span><span class="p">[</span><span class="n">iset</span><span class="p">]]</span>
             <span class="n">eofset</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span> <span class="o">=</span> <span class="n">Cube</span><span class="p">(</span>
                 <span class="n">eofset</span><span class="p">[</span><span class="n">iset</span><span class="p">],</span>
-                <span class="n">dim_coords_and_dims</span><span class="o">=</span><span class="nb">zip</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="n">eofset</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span><span class="o">.</span><span class="n">ndim</span><span class="p">)),</span>
-                <span class="n">var_name</span><span class="o">=</span><span class="s">&#39;eofs&#39;</span><span class="p">,</span>
-                <span class="n">long_name</span><span class="o">=</span><span class="s">&#39;covariance_between_pcs_and_{:s}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">dim_coords_and_dims</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span>
+                                             <span class="nb">range</span><span class="p">(</span><span class="n">eofset</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span><span class="o">.</span><span class="n">ndim</span><span class="p">))),</span>
+                <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;eofs&#39;</span><span class="p">,</span>
+                <span class="n">long_name</span><span class="o">=</span><span class="s1">&#39;covariance_between_pcs_and_{:s}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                           <span class="bp">self</span><span class="o">.</span><span class="n">_cube_names</span><span class="p">[</span><span class="n">iset</span><span class="p">]))</span>
             <span class="k">for</span> <span class="n">coord</span><span class="p">,</span> <span class="n">dims</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_space_aux_coords</span><span class="p">[</span><span class="n">iset</span><span class="p">]:</span>
                 <span class="n">eofset</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span><span class="o">.</span><span class="n">add_aux_coord</span><span class="p">(</span><span class="n">copy</span><span class="p">(</span><span class="n">coord</span><span class="p">),</span> <span class="n">dims</span><span class="p">)</span>
@@ -545,14 +549,15 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">lambdas</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">(</span><span class="n">neigs</span><span class="o">=</span><span class="n">neigs</span><span class="p">)</span>
-        <span class="n">eofdim</span> <span class="o">=</span> <span class="n">DimCoord</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">lambdas</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
-                          <span class="n">var_name</span><span class="o">=</span><span class="s">&#39;eigenvalue&#39;</span><span class="p">,</span>
-                          <span class="n">long_name</span><span class="o">=</span><span class="s">&#39;eigenvalue_number&#39;</span><span class="p">)</span>
+        <span class="n">eofdim</span> <span class="o">=</span> <span class="n">DimCoord</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">lambdas</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span>
+                          <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;eigenvalue&#39;</span><span class="p">,</span>
+                          <span class="n">long_name</span><span class="o">=</span><span class="s1">&#39;eigenvalue_number&#39;</span><span class="p">)</span>
         <span class="n">coords</span> <span class="o">=</span> <span class="p">[</span><span class="n">eofdim</span><span class="p">]</span>
-        <span class="n">lambdas</span> <span class="o">=</span> <span class="n">Cube</span><span class="p">(</span><span class="n">lambdas</span><span class="p">,</span>
-                       <span class="n">dim_coords_and_dims</span><span class="o">=</span><span class="nb">zip</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="n">lambdas</span><span class="o">.</span><span class="n">ndim</span><span class="p">)),</span>
-                       <span class="n">var_name</span><span class="o">=</span><span class="s">&#39;eigenvalues&#39;</span><span class="p">,</span>
-                       <span class="n">long_name</span><span class="o">=</span><span class="s">&#39;eigenvalues&#39;</span><span class="p">)</span>
+        <span class="n">lambdas</span> <span class="o">=</span> <span class="n">Cube</span><span class="p">(</span>
+            <span class="n">lambdas</span><span class="p">,</span>
+            <span class="n">dim_coords_and_dims</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="n">lambdas</span><span class="o">.</span><span class="n">ndim</span><span class="p">))),</span>
+            <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;eigenvalues&#39;</span><span class="p">,</span>
+            <span class="n">long_name</span><span class="o">=</span><span class="s1">&#39;eigenvalues&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">lambdas</span>
 </div>
 <div class="viewcode-block" id="MultivariateEof.varianceFraction"><a class="viewcode-back" href="../../../api/eofs.multivariate.iris.html#eofs.multivariate.iris.MultivariateEof.varianceFraction">[docs]</a>    <span class="k">def</span> <span class="nf">varianceFraction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">neigs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
@@ -584,14 +589,15 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">vfrac</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">varianceFraction</span><span class="p">(</span><span class="n">neigs</span><span class="o">=</span><span class="n">neigs</span><span class="p">)</span>
-        <span class="n">eofdim</span> <span class="o">=</span> <span class="n">DimCoord</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">vfrac</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
-                          <span class="n">var_name</span><span class="o">=</span><span class="s">&#39;eigenvalue&#39;</span><span class="p">,</span>
-                          <span class="n">long_name</span><span class="o">=</span><span class="s">&#39;eigenvalue_number&#39;</span><span class="p">)</span>
+        <span class="n">eofdim</span> <span class="o">=</span> <span class="n">DimCoord</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">vfrac</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span>
+                          <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;eigenvalue&#39;</span><span class="p">,</span>
+                          <span class="n">long_name</span><span class="o">=</span><span class="s1">&#39;eigenvalue_number&#39;</span><span class="p">)</span>
         <span class="n">coords</span> <span class="o">=</span> <span class="p">[</span><span class="n">eofdim</span><span class="p">]</span>
-        <span class="n">vfrac</span> <span class="o">=</span> <span class="n">Cube</span><span class="p">(</span><span class="n">vfrac</span><span class="p">,</span>
-                     <span class="n">dim_coords_and_dims</span><span class="o">=</span><span class="nb">zip</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="n">vfrac</span><span class="o">.</span><span class="n">ndim</span><span class="p">)),</span>
-                     <span class="n">var_name</span><span class="o">=</span><span class="s">&#39;variance_fraction&#39;</span><span class="p">,</span>
-                     <span class="n">long_name</span><span class="o">=</span><span class="s">&#39;variance_fraction&#39;</span><span class="p">)</span>
+        <span class="n">vfrac</span> <span class="o">=</span> <span class="n">Cube</span><span class="p">(</span>
+            <span class="n">vfrac</span><span class="p">,</span>
+            <span class="n">dim_coords_and_dims</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="n">vfrac</span><span class="o">.</span><span class="n">ndim</span><span class="p">))),</span>
+            <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;variance_fraction&#39;</span><span class="p">,</span>
+            <span class="n">long_name</span><span class="o">=</span><span class="s1">&#39;variance_fraction&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">vfrac</span>
 </div>
 <div class="viewcode-block" id="MultivariateEof.totalAnomalyVariance"><a class="viewcode-back" href="../../../api/eofs.multivariate.iris.html#eofs.multivariate.iris.MultivariateEof.totalAnomalyVariance">[docs]</a>    <span class="k">def</span> <span class="nf">totalAnomalyVariance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -661,14 +667,15 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">typerrs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">northTest</span><span class="p">(</span><span class="n">neigs</span><span class="o">=</span><span class="n">neigs</span><span class="p">,</span> <span class="n">vfscaled</span><span class="o">=</span><span class="n">vfscaled</span><span class="p">)</span>
-        <span class="n">eofdim</span> <span class="o">=</span> <span class="n">DimCoord</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">typerrs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
-                          <span class="n">var_name</span><span class="o">=</span><span class="s">&#39;eigenvalue&#39;</span><span class="p">,</span>
-                          <span class="n">long_name</span><span class="o">=</span><span class="s">&#39;eigenvalue_number&#39;</span><span class="p">)</span>
+        <span class="n">eofdim</span> <span class="o">=</span> <span class="n">DimCoord</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">typerrs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span>
+                          <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;eigenvalue&#39;</span><span class="p">,</span>
+                          <span class="n">long_name</span><span class="o">=</span><span class="s1">&#39;eigenvalue_number&#39;</span><span class="p">)</span>
         <span class="n">coords</span> <span class="o">=</span> <span class="p">[</span><span class="n">eofdim</span><span class="p">]</span>
-        <span class="n">typerrs</span> <span class="o">=</span> <span class="n">Cube</span><span class="p">(</span><span class="n">typerrs</span><span class="p">,</span>
-                       <span class="n">dim_coords_and_dims</span><span class="o">=</span><span class="nb">zip</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="n">typerrs</span><span class="o">.</span><span class="n">ndim</span><span class="p">)),</span>
-                       <span class="n">var_name</span><span class="o">=</span><span class="s">&#39;typical_errors&#39;</span><span class="p">,</span>
-                       <span class="n">long_name</span><span class="o">=</span><span class="s">&#39;typical_errors&#39;</span><span class="p">)</span>
+        <span class="n">typerrs</span> <span class="o">=</span> <span class="n">Cube</span><span class="p">(</span>
+            <span class="n">typerrs</span><span class="p">,</span>
+            <span class="n">dim_coords_and_dims</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="n">typerrs</span><span class="o">.</span><span class="n">ndim</span><span class="p">))),</span>
+            <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;typical_errors&#39;</span><span class="p">,</span>
+            <span class="n">long_name</span><span class="o">=</span><span class="s1">&#39;typical_errors&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">typerrs</span>
 </div>
 <div class="viewcode-block" id="MultivariateEof.reconstructedField"><a class="viewcode-back" href="../../../api/eofs.multivariate.iris.html#eofs.multivariate.iris.MultivariateEof.reconstructedField">[docs]</a>    <span class="k">def</span> <span class="nf">reconstructedField</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">neofs</span><span class="p">):</span>
@@ -710,20 +717,20 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">rfset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">reconstructedField</span><span class="p">(</span><span class="n">neofs</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">neofs</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">):</span>
-            <span class="n">name_part</span> <span class="o">=</span> <span class="s">&#39;EOFs_{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">neofs</span><span class="p">]))</span>
+            <span class="n">name_part</span> <span class="o">=</span> <span class="s1">&#39;EOFs_{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">neofs</span><span class="p">]))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">name_part</span> <span class="o">=</span> <span class="s">&#39;{:d}_EOFs&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">neofs</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">iset</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ncubes</span><span class="p">):</span>
+            <span class="n">name_part</span> <span class="o">=</span> <span class="s1">&#39;{:d}_EOFs&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">neofs</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">iset</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ncubes</span><span class="p">):</span>
             <span class="n">coords</span> <span class="o">=</span> <span class="p">[</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_time</span><span class="p">[</span><span class="n">iset</span><span class="p">])]</span> <span class="o">+</span> \
                      <span class="p">[</span><span class="n">copy</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span> <span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coords</span><span class="p">[</span><span class="n">iset</span><span class="p">]]</span>
             <span class="n">rfset</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span> <span class="o">=</span> <span class="n">Cube</span><span class="p">(</span>
                 <span class="n">rfset</span><span class="p">[</span><span class="n">iset</span><span class="p">],</span>
-                <span class="n">dim_coords_and_dims</span><span class="o">=</span><span class="nb">zip</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="n">rfset</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span><span class="o">.</span><span class="n">ndim</span><span class="p">)),</span>
-                <span class="n">var_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_cube_var_names</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span> <span class="ow">or</span> <span class="s">&#39;dataset_{:d}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">dim_coords_and_dims</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="n">rfset</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span><span class="o">.</span><span class="n">ndim</span><span class="p">))),</span>
+                <span class="n">var_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_cube_var_names</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span> <span class="ow">or</span> <span class="s1">&#39;dataset_{:d}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                     <span class="n">iset</span><span class="p">),</span>
-                <span class="n">long_name</span><span class="o">=</span><span class="s">&#39;{:s}_reconstructed_with_{:s}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">long_name</span><span class="o">=</span><span class="s1">&#39;{:s}_reconstructed_with_{:s}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_cube_names</span><span class="p">[</span><span class="n">iset</span><span class="p">],</span> <span class="n">name_part</span><span class="p">))</span>
-            <span class="n">rfset</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s">&#39;neofs&#39;</span><span class="p">:</span> <span class="n">neofs</span><span class="p">})</span>
+            <span class="n">rfset</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;neofs&#39;</span><span class="p">:</span> <span class="n">neofs</span><span class="p">})</span>
             <span class="k">for</span> <span class="n">coord</span><span class="p">,</span> <span class="n">dims</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_time_aux_coords</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span> <span class="o">+</span>
                                 <span class="bp">self</span><span class="o">.</span><span class="n">_space_aux_coords</span><span class="p">[</span><span class="n">iset</span><span class="p">]</span> <span class="o">+</span>
                                 <span class="bp">self</span><span class="o">.</span><span class="n">_time_space_aux_coords</span><span class="p">[</span><span class="n">iset</span><span class="p">]):</span>
@@ -791,53 +798,53 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">cube</span> <span class="ow">in</span> <span class="n">cubes</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cube</span><span class="p">,</span> <span class="n">Cube</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;input is not an iris cube&#39;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;input is not an iris cube&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cubes</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ncubes</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;number of cubes is incorrect, expecting {:d} &#39;</span>
-                             <span class="s">&#39;but got {:d}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ncubes</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cubes</span><span class="p">)))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;number of cubes is incorrect, expecting {:d} &#39;</span>
+                             <span class="s1">&#39;but got {:d}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ncubes</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cubes</span><span class="p">)))</span>
         <span class="n">_all_time_aux_coords</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">cube</span> <span class="ow">in</span> <span class="n">cubes</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="c"># Time dimension must be first.</span>
+                <span class="c1"># Time dimension must be first.</span>
                 <span class="n">raise_error</span> <span class="o">=</span> <span class="bp">False</span>
-                <span class="n">time</span><span class="p">,</span> <span class="n">time_coord</span> <span class="o">=</span> <span class="n">coord_and_dim</span><span class="p">(</span><span class="n">cube</span><span class="p">,</span> <span class="s">&#39;time&#39;</span><span class="p">)</span>
+                <span class="n">time</span><span class="p">,</span> <span class="n">time_coord</span> <span class="o">=</span> <span class="n">coord_and_dim</span><span class="p">(</span><span class="n">cube</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">time_coord</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="n">raise_error</span> <span class="o">=</span> <span class="bp">True</span>
             <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-                <span class="c"># Not having a time dimension is also acceptable.</span>
+                <span class="c1"># Not having a time dimension is also acceptable.</span>
                 <span class="k">pass</span>
             <span class="k">if</span> <span class="n">raise_error</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;time must be the first dimension, &#39;</span>
-                                 <span class="s">&#39;consider using the transpose() method&#39;</span><span class="p">)</span>
-            <span class="c"># Store any AuxCoords describing the time dimension.</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;time must be the first dimension, &#39;</span>
+                                 <span class="s1">&#39;consider using the transpose() method&#39;</span><span class="p">)</span>
+            <span class="c1"># Store any AuxCoords describing the time dimension.</span>
             <span class="n">_t</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">classified_aux_coords</span><span class="p">(</span><span class="n">cube</span><span class="p">)</span>
             <span class="n">_all_time_aux_coords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_t</span><span class="p">)</span>
-        <span class="c"># Retain AuxCoords that describe the time dimension of *every* input</span>
-        <span class="c"># cube.</span>
+        <span class="c1"># Retain AuxCoords that describe the time dimension of *every* input</span>
+        <span class="c1"># cube.</span>
         <span class="n">_common_time_aux_coords</span> <span class="o">=</span> <span class="n">common_items</span><span class="p">(</span><span class="n">_all_time_aux_coords</span><span class="p">)</span>
-        <span class="c"># Compute the PCs.</span>
+        <span class="c1"># Compute the PCs.</span>
         <span class="n">pcs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">projectField</span><span class="p">([</span><span class="n">cube</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">cube</span> <span class="ow">in</span> <span class="n">cubes</span><span class="p">],</span>
-                                         <span class="n">neofs</span><span class="o">=</span><span class="n">neofs</span><span class="p">,</span>
-                                         <span class="n">eofscaling</span><span class="o">=</span><span class="n">eofscaling</span><span class="p">,</span>
-                                         <span class="n">weighted</span><span class="o">=</span><span class="n">weighted</span><span class="p">)</span>
-        <span class="n">pcs</span> <span class="o">=</span> <span class="n">Cube</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="n">var_name</span><span class="o">=</span><span class="s">&#39;pseudo_pcs&#39;</span><span class="p">,</span> <span class="n">long_name</span><span class="o">=</span><span class="s">&#39;pseudo_pcs&#39;</span><span class="p">)</span>
-        <span class="c"># Construct the required dimensions.</span>
+                                        <span class="n">neofs</span><span class="o">=</span><span class="n">neofs</span><span class="p">,</span>
+                                        <span class="n">eofscaling</span><span class="o">=</span><span class="n">eofscaling</span><span class="p">,</span>
+                                        <span class="n">weighted</span><span class="o">=</span><span class="n">weighted</span><span class="p">)</span>
+        <span class="n">pcs</span> <span class="o">=</span> <span class="n">Cube</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;pseudo_pcs&#39;</span><span class="p">,</span> <span class="n">long_name</span><span class="o">=</span><span class="s1">&#39;pseudo_pcs&#39;</span><span class="p">)</span>
+        <span class="c1"># Construct the required dimensions.</span>
         <span class="k">if</span> <span class="n">pcs</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="c"># 2D PCs require a time axis and a PC axis.</span>
-            <span class="n">pcdim</span> <span class="o">=</span> <span class="n">DimCoord</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
-                             <span class="n">var_name</span><span class="o">=</span><span class="s">&#39;pc&#39;</span><span class="p">,</span>
-                             <span class="n">long_name</span><span class="o">=</span><span class="s">&#39;pc_number&#39;</span><span class="p">)</span>
-            <span class="n">time</span><span class="p">,</span> <span class="n">time_dim</span> <span class="o">=</span> <span class="n">coord_and_dim</span><span class="p">(</span><span class="n">cubes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s">&#39;time&#39;</span><span class="p">)</span>
+            <span class="c1"># 2D PCs require a time axis and a PC axis.</span>
+            <span class="n">pcdim</span> <span class="o">=</span> <span class="n">DimCoord</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])),</span>
+                             <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;pc&#39;</span><span class="p">,</span>
+                             <span class="n">long_name</span><span class="o">=</span><span class="s1">&#39;pc_number&#39;</span><span class="p">)</span>
+            <span class="n">time</span><span class="p">,</span> <span class="n">time_dim</span> <span class="o">=</span> <span class="n">coord_and_dim</span><span class="p">(</span><span class="n">cubes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;time&#39;</span><span class="p">)</span>
             <span class="n">pcs</span><span class="o">.</span><span class="n">add_dim_coord</span><span class="p">(</span><span class="n">copy</span><span class="p">(</span><span class="n">time</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
             <span class="n">pcs</span><span class="o">.</span><span class="n">add_dim_coord</span><span class="p">(</span><span class="n">pcdim</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-            <span class="c"># Add any auxiliary coordinates for the time dimension.</span>
+            <span class="c1"># Add any auxiliary coordinates for the time dimension.</span>
             <span class="k">for</span> <span class="n">coord</span><span class="p">,</span> <span class="n">dims</span> <span class="ow">in</span> <span class="n">_common_time_aux_coords</span><span class="p">:</span>
                 <span class="n">pcs</span><span class="o">.</span><span class="n">add_aux_coord</span><span class="p">(</span><span class="n">copy</span><span class="p">(</span><span class="n">coord</span><span class="p">),</span> <span class="n">dims</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="c"># 1D PCs require only a PC axis.</span>
-            <span class="n">pcdim</span> <span class="o">=</span> <span class="n">DimCoord</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
-                             <span class="n">var_name</span><span class="o">=</span><span class="s">&#39;pc&#39;</span><span class="p">,</span>
-                             <span class="n">long_name</span><span class="o">=</span><span class="s">&#39;pc_number&#39;</span><span class="p">)</span>
+            <span class="c1"># 1D PCs require only a PC axis.</span>
+            <span class="n">pcdim</span> <span class="o">=</span> <span class="n">DimCoord</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span>
+                             <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;pc&#39;</span><span class="p">,</span>
+                             <span class="n">long_name</span><span class="o">=</span><span class="s1">&#39;pc_number&#39;</span><span class="p">)</span>
             <span class="n">pcs</span><span class="o">.</span><span class="n">add_dim_coord</span><span class="p">(</span><span class="n">pcdim</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">pcs</span>
 </div>

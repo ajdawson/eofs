@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Development workflow &mdash; eofs 1.0.0 documentation</title>
+    <title>Development workflow &mdash; eofs 1.1.0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '1.0.0',
+        VERSION:     '1.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 1.0.0 documentation" href="../../index.html" />
+    <link rel="top" title="eofs 1.1.0 documentation" href="../../index.html" />
     <link rel="up" title="Git for development" href="git_development.html" />
     <link rel="next" title="Maintainer workflow" href="maintainer_workflow.html" />
     <link rel="prev" title="Configure git" href="configure_git.html" />
@@ -96,7 +96,7 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v1.0.0</h2>
+    <h2>eofs v1.1.0</h2>
     <h3>Table of Contents</h3>
     <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../userguide/index.html">User Guide</a></li>
@@ -182,7 +182,7 @@ details.</p>
 <span id="update-mirror-trunk"></span><h2>Update the mirror of trunk<a class="headerlink" href="#update-the-mirror-of-trunk" title="Permalink to this headline">¶</a></h2>
 <p>First make sure you have done <a class="reference internal" href="set_up_fork.html#linking-to-upstream"><span>Linking your repository to the upstream repo</span></a>.</p>
 <p>From time to time you should fetch the upstream (trunk) changes from github:</p>
-<div class="highlight-python"><div class="highlight"><pre>git fetch upstream
+<div class="highlight-python"><div class="highlight"><pre><span></span>git fetch upstream
 </pre></div>
 </div>
 <p>This will pull down any commits you don&#8217;t have, and set the remote branches to
@@ -200,7 +200,7 @@ someone reviewing your branch to see what you are doing.</p>
 <p>Choose an informative name for the branch to remind yourself and the rest of us
 what the changes in the branch are for.  For example <code class="docutils literal"><span class="pre">add-ability-to-fly</span></code>, or
 <code class="docutils literal"><span class="pre">buxfix-for-issue-42</span></code>.</p>
-<div class="highlight-python"><div class="highlight"><pre># Update the mirror of trunk
+<div class="highlight-python"><div class="highlight"><pre><span></span># Update the mirror of trunk
 git fetch upstream
 # Make new feature branch starting at current trunk
 git branch my-new-feature upstream/master
@@ -212,12 +212,12 @@ fork of <a class="reference external" href="http://ajdawson.github.io/eofs">eofs
 github repo.  Generally (if you followed the instructions in these pages, and by
 default), git will have a link to your github repo, called <code class="docutils literal"><span class="pre">origin</span></code>.  You push
 up to your own repo on github with:</p>
-<div class="highlight-python"><div class="highlight"><pre>git push origin my-new-feature
+<div class="highlight-python"><div class="highlight"><pre><span></span>git push origin my-new-feature
 </pre></div>
 </div>
 <p>In git &gt;= 1.7 you can ensure that the link is correctly set by using the
 <code class="docutils literal"><span class="pre">--set-upstream</span></code> option:</p>
-<div class="highlight-python"><div class="highlight"><pre>git push --set-upstream origin my-new-feature
+<div class="highlight-python"><div class="highlight"><pre><span></span>git push --set-upstream origin my-new-feature
 </pre></div>
 </div>
 <p>From now on git will know that <code class="docutils literal"><span class="pre">my-new-feature</span></code> is related to the
@@ -227,7 +227,7 @@ up to your own repo on github with:</p>
 <span id="edit-flow"></span><h2>The editing workflow<a class="headerlink" href="#the-editing-workflow" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="overview">
 <h3>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre># hack hack
+<div class="highlight-python"><div class="highlight"><pre><span></span># hack hack
 git add my_new_file
 git commit -am &#39;NF - some message&#39;
 git push
@@ -241,7 +241,7 @@ git push
 </li>
 <li><p class="first">See which files have changed with <code class="docutils literal"><span class="pre">git</span> <span class="pre">status</span></code> (see <a class="reference external" href="http://schacon.github.com/git/git-status.html">git status</a>).
 You&#8217;ll see a listing like this one:</p>
-<div class="highlight-python"><div class="highlight"><pre># On branch ny-new-feature
+<div class="highlight-python"><div class="highlight"><pre><span></span># On branch ny-new-feature
 # Changed but not updated:
 #   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
 #   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
@@ -301,7 +301,7 @@ code review.</p>
 <h2>Some other things you might want to do<a class="headerlink" href="#some-other-things-you-might-want-to-do" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="delete-a-branch-on-github">
 <h3>Delete a branch on github<a class="headerlink" href="#delete-a-branch-on-github" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre>git checkout master
+<div class="highlight-python"><div class="highlight"><pre><span></span>git checkout master
 # delete branch locally
 git branch -D my-unwanted-branch
 # delete branch on github
@@ -325,14 +325,14 @@ collaborator:</p>
 <div><img alt="../../_images/pull_button.png" src="../../_images/pull_button.png" />
 </div></blockquote>
 <p>Now all those people can do:</p>
-<div class="highlight-python"><div class="highlight"><pre>git clone git@githhub.com:your-user-name/eofs.git
+<div class="highlight-python"><div class="highlight"><pre><span></span>git clone git@githhub.com:your-user-name/eofs.git
 </pre></div>
 </div>
 <p>Remember that links starting with <code class="docutils literal"><span class="pre">git&#64;</span></code> use the ssh protocol and are
 read-write; links starting with <code class="docutils literal"><span class="pre">git://</span></code> are read-only.</p>
 <p>Your collaborators can then commit directly into that repo with the
 usual:</p>
-<div class="highlight-python"><div class="highlight"><pre>git commit -am &#39;ENH - much better code&#39;
+<div class="highlight-python"><div class="highlight"><pre><span></span>git commit -am &#39;ENH - much better code&#39;
 git push origin master # pushes directly into your repo
 </pre></div>
 </div>
@@ -341,11 +341,11 @@ git push origin master # pushes directly into your repo
 <h3>Explore your repository<a class="headerlink" href="#explore-your-repository" title="Permalink to this headline">¶</a></h3>
 <p>To see a graphical representation of the repository branches and
 commits:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">gitk</span> <span class="o">--</span><span class="nb">all</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">gitk</span> <span class="o">--</span><span class="nb">all</span>
 </pre></div>
 </div>
 <p>To see a linear list of commits for this branch:</p>
-<div class="highlight-python"><div class="highlight"><pre>git log
+<div class="highlight-python"><div class="highlight"><pre><span></span>git log
 </pre></div>
 </div>
 <p>You can also look at the <a class="reference external" href="http://github.com/blog/39-say-hello-to-the-network-graph-visualizer">network graph visualizer</a> for your github
@@ -361,7 +361,7 @@ graph of the repository.</p>
 you make some new commits on your <code class="docutils literal"><span class="pre">cool-feature</span></code> branch, let&#8217;s call them A, B,
 C.  Maybe your changes take a while, or you come back to them after a while.  In
 the meantime, trunk has progressed from commit E to commit (say) G:</p>
-<div class="highlight-python"><div class="highlight"><pre>      A---B---C cool-feature
+<div class="highlight-python"><div class="highlight"><pre><span></span>      A---B---C cool-feature
      /
 D---E---F---G trunk
 </pre></div>
@@ -376,14 +376,14 @@ you may prefer to do a rebase.</p>
 the current state of <code class="docutils literal"><span class="pre">trunk</span></code>.  In other words, in this case, it takes the
 changes represented by A, B, C and replays them on top of G. After the rebase,
 your history will look like this:</p>
-<div class="highlight-python"><div class="highlight"><pre>              A&#39;--B&#39;--C&#39; cool-feature
+<div class="highlight-python"><div class="highlight"><pre><span></span>              A&#39;--B&#39;--C&#39; cool-feature
              /
 D---E---F---G trunk
 </pre></div>
 </div>
 <p>See <a class="reference external" href="http://matthew-brett.github.com/pydagogue/rebase_without_tears.html">rebase without tears</a> for more detail.</p>
 <p>To do a rebase on trunk:</p>
-<div class="highlight-python"><div class="highlight"><pre># Update the mirror of trunk
+<div class="highlight-python"><div class="highlight"><pre><span></span># Update the mirror of trunk
 git fetch upstream
 # go to the feature branch
 git checkout cool-feature
@@ -395,11 +395,11 @@ git rebase --onto upstream/master upstream/master cool-feature
 </div>
 <p>In this situation, where you are already on branch <code class="docutils literal"><span class="pre">cool-feature</span></code>, the last
 command can be written more succinctly as:</p>
-<div class="highlight-python"><div class="highlight"><pre>git rebase upstream/master
+<div class="highlight-python"><div class="highlight"><pre><span></span>git rebase upstream/master
 </pre></div>
 </div>
 <p>When all looks good you can delete your backup branch:</p>
-<div class="highlight-python"><div class="highlight"><pre>git branch -D tmp
+<div class="highlight-python"><div class="highlight"><pre><span></span>git branch -D tmp
 </pre></div>
 </div>
 <p>If it doesn&#8217;t look good you may need to have a look at
@@ -414,16 +414,16 @@ some related help on merging in the git user manual - see <a class="reference ex
 <p>Sometimes, you mess up merges or rebases. Luckily, in git it is
 relatively straightforward to recover from such mistakes.</p>
 <p>If you mess up during a rebase:</p>
-<div class="highlight-python"><div class="highlight"><pre>git rebase --abort
+<div class="highlight-python"><div class="highlight"><pre><span></span>git rebase --abort
 </pre></div>
 </div>
 <p>If you notice you messed up after the rebase:</p>
-<div class="highlight-python"><div class="highlight"><pre># reset branch back to the saved point
+<div class="highlight-python"><div class="highlight"><pre><span></span># reset branch back to the saved point
 git reset --hard tmp
 </pre></div>
 </div>
 <p>If you forgot to make a backup branch:</p>
-<div class="highlight-python"><div class="highlight"><pre># look at the reflog of the branch
+<div class="highlight-python"><div class="highlight"><pre><span></span># look at the reflog of the branch
 git reflog show cool-feature
 
 8630830 cool-feature@{0}: commit: BUG: io: close file handles immediately
@@ -446,7 +446,7 @@ git reset --hard cool-feature@{2}
 made several false starts you would like the posterity not to see.</p>
 <p>This can be done via <em>interactive rebasing</em>.</p>
 <p>Suppose that the commit history looks like this:</p>
-<div class="highlight-python"><div class="highlight"><pre>git log --oneline
+<div class="highlight-python"><div class="highlight"><pre><span></span>git log --oneline
 eadc391 Fix some remaining bugs
 a815645 Modify it so that it works
 2dec1ac Fix a few bugs + disable
@@ -463,14 +463,14 @@ want to make the following changes:</p>
 <li>Combine the commits <code class="docutils literal"><span class="pre">2dec1ac</span></code>, <code class="docutils literal"><span class="pre">a815645</span></code>, <code class="docutils literal"><span class="pre">eadc391</span></code> into a single one.</li>
 </ul>
 <p>We do as follows:</p>
-<div class="highlight-python"><div class="highlight"><pre># make a backup of the current state
+<div class="highlight-python"><div class="highlight"><pre><span></span># make a backup of the current state
 git branch tmp HEAD
 # interactive rebase
 git rebase -i 6ad92e5
 </pre></div>
 </div>
 <p>This will open an editor with the following text in it:</p>
-<div class="highlight-python"><div class="highlight"><pre>pick 13d7934 First implementation
+<div class="highlight-python"><div class="highlight"><pre><span></span>pick 13d7934 First implementation
 pick 2dec1ac Fix a few bugs + disable
 pick a815645 Modify it so that it works
 pick eadc391 Fix some remaining bugs
@@ -490,7 +490,7 @@ pick eadc391 Fix some remaining bugs
 </pre></div>
 </div>
 <p>To achieve what we want, we will make the following changes to it:</p>
-<div class="highlight-python"><div class="highlight"><pre>r 13d7934 First implementation
+<div class="highlight-python"><div class="highlight"><pre><span></span>r 13d7934 First implementation
 pick 2dec1ac Fix a few bugs + disable
 f a815645 Modify it so that it works
 f eadc391 Fix some remaining bugs
@@ -501,7 +501,7 @@ f eadc391 Fix some remaining bugs
 save and quit the editor.</p>
 <p>Git will then immediately bring up an editor for editing the commit
 message. After revising it, we get the output:</p>
-<div class="highlight-python"><div class="highlight"><pre>[detached HEAD 721fc64] FOO: First implementation
+<div class="highlight-python"><div class="highlight"><pre><span></span>[detached HEAD 721fc64] FOO: First implementation
  2 files changed, 199 insertions(+), 66 deletions(-)
 [detached HEAD 0f22701] Fix a few bugs + disable
  1 files changed, 79 insertions(+), 61 deletions(-)
@@ -509,7 +509,7 @@ Successfully rebased and updated refs/heads/my-feature-branch.
 </pre></div>
 </div>
 <p>and the history looks now like this:</p>
-<div class="highlight-python"><div class="highlight"><pre>0f22701 Fix a few bugs + disable
+<div class="highlight-python"><div class="highlight"><pre><span></span>0f22701 Fix a few bugs + disable
 721fc64 ENH: Sophisticated feature
 6ad92e5 * masked is now an instance of a new object, MaskedConstant
 </pre></div>

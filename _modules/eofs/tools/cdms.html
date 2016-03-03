@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>eofs.tools.cdms &mdash; eofs 1.0.0 documentation</title>
+    <title>eofs.tools.cdms &mdash; eofs 1.1.0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '1.0.0',
+        VERSION:     '1.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 1.0.0 documentation" href="../../../index.html" />
+    <link rel="top" title="eofs 1.1.0 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
           rel='stylesheet' type='text/css' />
@@ -86,7 +86,7 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v1.0.0</h2>
+    <h2>eofs v1.1.0</h2>
     <h3>Table of Contents</h3>
     <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../userguide/index.html">User Guide</a></li>
@@ -119,23 +119,23 @@
           <div class="body" role="main">
             
   <h1>Source code for eofs.tools.cdms</h1><div class="highlight"><pre>
-<span class="sd">&quot;&quot;&quot;Supplementary tools for the `cdms` EOF analysis interface.&quot;&quot;&quot;</span>
-<span class="c"># (c) Copyright 2010-2013 Andrew Dawson. All Rights Reserved.</span>
-<span class="c">#</span>
-<span class="c"># This file is part of eofs.</span>
-<span class="c">#</span>
-<span class="c"># eofs is free software: you can redistribute it and/or modify</span>
-<span class="c"># it under the terms of the GNU General Public License as published by</span>
-<span class="c"># the Free Software Foundation, either version 3 of the License, or</span>
-<span class="c"># (at your option) any later version.</span>
-<span class="c">#</span>
-<span class="c"># eofs is distributed in the hope that it will be useful, but WITHOUT</span>
-<span class="c"># ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span>
-<span class="c"># FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License</span>
-<span class="c"># for more details.</span>
-<span class="c">#</span>
-<span class="c"># You should have received a copy of the GNU General Public License</span>
-<span class="c"># along with eofs.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span></span><span class="sd">&quot;&quot;&quot;Supplementary tools for the `cdms` EOF analysis interface.&quot;&quot;&quot;</span>
+<span class="c1"># (c) Copyright 2010-2013 Andrew Dawson. All Rights Reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of eofs.</span>
+<span class="c1">#</span>
+<span class="c1"># eofs is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># eofs is distributed in the hope that it will be useful, but WITHOUT</span>
+<span class="c1"># ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span>
+<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License</span>
+<span class="c1"># for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with eofs.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">import</span> <span class="nn">cdms2</span>
@@ -171,7 +171,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">latw</span><span class="p">,</span> <span class="n">lonw</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">getWeights</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">gridorder</span> <span class="o">==</span> <span class="s">&quot;xy&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">gridorder</span> <span class="o">==</span> <span class="s2">&quot;xy&quot;</span><span class="p">:</span>
         <span class="n">wtarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">lonw</span><span class="p">,</span> <span class="n">latw</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">wtarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">latw</span><span class="p">,</span> <span class="n">lonw</span><span class="p">)</span>
@@ -215,43 +215,43 @@
 <span class="sd">        weights = weights_array(var, scheme=&#39;coslat&#39;)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c"># A re-usable generic error message for the function. When raising an</span>
-    <span class="c"># exception just fill in what is required.</span>
-    <span class="n">errstr</span> <span class="o">=</span> <span class="s">&quot;weighting scheme &#39;{!s}&#39; requires {{!s}}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">scheme</span><span class="p">)</span>
-    <span class="c"># Always use lower-case for the scheme, allowing the user to use</span>
-    <span class="c"># upper-case in their calling code without an error.</span>
+    <span class="c1"># A re-usable generic error message for the function. When raising an</span>
+    <span class="c1"># exception just fill in what is required.</span>
+    <span class="n">errstr</span> <span class="o">=</span> <span class="s2">&quot;weighting scheme &#39;{!s}&#39; requires {{!s}}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">scheme</span><span class="p">)</span>
+    <span class="c1"># Always use lower-case for the scheme, allowing the user to use</span>
+    <span class="c1"># upper-case in their calling code without an error.</span>
     <span class="n">scheme</span> <span class="o">=</span> <span class="n">scheme</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">scheme</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;area&#39;</span><span class="p">):</span>
-        <span class="c"># Handle area weighting.</span>
+    <span class="k">if</span> <span class="n">scheme</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;area&#39;</span><span class="p">):</span>
+        <span class="c1"># Handle area weighting.</span>
         <span class="n">grid</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">getGrid</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">grid</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">errstr</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">&#39;a grid&#39;</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">errstr</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;a grid&#39;</span><span class="p">))</span>
         <span class="n">order</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">getOrder</span><span class="p">()</span>
-        <span class="k">if</span> <span class="s">&#39;xy&#39;</span> <span class="ow">in</span> <span class="n">order</span><span class="p">:</span>
-            <span class="n">gridorder</span> <span class="o">=</span> <span class="s">&#39;xy&#39;</span>
+        <span class="k">if</span> <span class="s1">&#39;xy&#39;</span> <span class="ow">in</span> <span class="n">order</span><span class="p">:</span>
+            <span class="n">gridorder</span> <span class="o">=</span> <span class="s1">&#39;xy&#39;</span>
             <span class="n">dimtoindex</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">getLatitude</span><span class="p">()</span>
-        <span class="k">elif</span> <span class="s">&#39;yx&#39;</span> <span class="ow">in</span> <span class="n">order</span><span class="p">:</span>
-            <span class="n">gridorder</span> <span class="o">=</span> <span class="s">&#39;yx&#39;</span>
+        <span class="k">elif</span> <span class="s1">&#39;yx&#39;</span> <span class="ow">in</span> <span class="n">order</span><span class="p">:</span>
+            <span class="n">gridorder</span> <span class="o">=</span> <span class="s1">&#39;yx&#39;</span>
             <span class="n">dimtoindex</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">getLongitude</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="n">errstr</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">&#39;adjacent latitude and longitude dimensions&#39;</span><span class="p">))</span>
-        <span class="c"># Retrieve area weights for the specified grid.</span>
+                <span class="n">errstr</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;adjacent latitude and longitude dimensions&#39;</span><span class="p">))</span>
+        <span class="c1"># Retrieve area weights for the specified grid.</span>
         <span class="n">weights</span> <span class="o">=</span> <span class="n">_area_weights</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">gridorder</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">scheme</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;coslat&#39;</span><span class="p">,</span> <span class="s">&#39;cos_lat&#39;</span><span class="p">):</span>
-        <span class="c"># Handle square-root of cosine of latitude weighting.</span>
+    <span class="k">elif</span> <span class="n">scheme</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;coslat&#39;</span><span class="p">,</span> <span class="s1">&#39;cos_lat&#39;</span><span class="p">):</span>
+        <span class="c1"># Handle square-root of cosine of latitude weighting.</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">latdim</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">getLatitude</span><span class="p">()[:]</span>
             <span class="n">dimtoindex</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">getLatitude</span><span class="p">()</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">errstr</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">&#39;a latitude dimension&#39;</span><span class="p">))</span>
-        <span class="c"># Retrieve latitude weights.</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">errstr</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;a latitude dimension&#39;</span><span class="p">))</span>
+        <span class="c1"># Retrieve latitude weights.</span>
         <span class="n">weights</span> <span class="o">=</span> <span class="n">_rootcoslat_weights</span><span class="p">(</span><span class="n">latdim</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;invalid weighting scheme: &#39;{!s}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">scheme</span><span class="p">))</span>
-    <span class="c"># Re-shape the retrieved weights so that they are broadcastable to the</span>
-    <span class="c"># shape of the input arrays. This just involves adding any additional</span>
-    <span class="c"># singleton dimensions to the right of the last weights dimension.</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid weighting scheme: &#39;{!s}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">scheme</span><span class="p">))</span>
+    <span class="c1"># Re-shape the retrieved weights so that they are broadcastable to the</span>
+    <span class="c1"># shape of the input arrays. This just involves adding any additional</span>
+    <span class="c1"># singleton dimensions to the right of the last weights dimension.</span>
     <span class="n">rightdims</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">-</span> <span class="n">dataset</span><span class="o">.</span><span class="n">getAxisIndex</span><span class="p">(</span><span class="n">dimtoindex</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="n">weights</span> <span class="o">=</span> <span class="n">weights</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">shape</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="p">,)</span> <span class="o">*</span> <span class="n">rightdims</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">weights</span>
@@ -263,13 +263,13 @@
 <span class="sd">    First it tries &#39;standard_name&#39;, then &#39;long_name&#39; then &#39;id&#39;.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="nb">getattr</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="s">&#39;standard_name&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
-             <span class="nb">getattr</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="s">&#39;long_name&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
-             <span class="nb">getattr</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="s">&#39;id&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)]</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="nb">getattr</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="s1">&#39;standard_name&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+             <span class="nb">getattr</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="s1">&#39;long_name&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+             <span class="nb">getattr</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)]</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">filter</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">names</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s">&#39;dataset&#39;</span>
+        <span class="k">return</span> <span class="s1">&#39;dataset&#39;</span>
 
 </div>
 <div class="viewcode-block" id="correlation_map"><a class="viewcode-back" href="../../../api/eofs.tools.html#eofs.tools.cdms.correlation_map">[docs]</a><span class="k">def</span> <span class="nf">correlation_map</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
@@ -307,11 +307,11 @@
     <span class="n">cor</span> <span class="o">=</span> <span class="n">standard_cormap</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">asma</span><span class="p">(),</span> <span class="n">field</span><span class="o">.</span><span class="n">asma</span><span class="p">())</span>
     <span class="n">outdims</span> <span class="o">=</span> <span class="n">covcor_dimensions</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">getAxisList</span><span class="p">(),</span> <span class="n">field</span><span class="o">.</span><span class="n">getAxisList</span><span class="p">())</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">outdims</span><span class="p">:</span>
-        <span class="c"># There are no output dimensions, return a scalar.</span>
+        <span class="c1"># There are no output dimensions, return a scalar.</span>
         <span class="k">return</span> <span class="n">cor</span>
-    <span class="c"># Otherwise return a cdms2 variable with the appropriate dimensions.</span>
-    <span class="n">cor</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">cor</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">outdims</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;pccor&#39;</span><span class="p">)</span>
-    <span class="n">cor</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&quot;pc_correlation&quot;</span>
+    <span class="c1"># Otherwise return a cdms2 variable with the appropriate dimensions.</span>
+    <span class="n">cor</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">cor</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">outdims</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;pccor&#39;</span><span class="p">)</span>
+    <span class="n">cor</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s2">&quot;pc_correlation&quot;</span>
     <span class="k">return</span> <span class="n">cor</span>
 
 </div>
@@ -357,11 +357,11 @@
     <span class="n">cov</span> <span class="o">=</span> <span class="n">standard_covmap</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">asma</span><span class="p">(),</span> <span class="n">field</span><span class="o">.</span><span class="n">asma</span><span class="p">(),</span> <span class="n">ddof</span><span class="o">=</span><span class="n">ddof</span><span class="p">)</span>
     <span class="n">outdims</span> <span class="o">=</span> <span class="n">covcor_dimensions</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">getAxisList</span><span class="p">(),</span> <span class="n">field</span><span class="o">.</span><span class="n">getAxisList</span><span class="p">())</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">outdims</span><span class="p">:</span>
-        <span class="c"># There are no output dimensions, return a scalar.</span>
+        <span class="c1"># There are no output dimensions, return a scalar.</span>
         <span class="k">return</span> <span class="n">cov</span>
-    <span class="c"># Otherwise return a cdms2 variable with the appropriate dimensions.</span>
-    <span class="n">cov</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">cov</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">outdims</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;pccov&#39;</span><span class="p">)</span>
-    <span class="n">cov</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;pc_covariance&#39;</span>
+    <span class="c1"># Otherwise return a cdms2 variable with the appropriate dimensions.</span>
+    <span class="n">cov</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">cov</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">outdims</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;pccov&#39;</span><span class="p">)</span>
+    <span class="n">cov</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s1">&#39;pc_covariance&#39;</span>
     <span class="k">return</span> <span class="n">cov</span></div>
 </pre></div>
 

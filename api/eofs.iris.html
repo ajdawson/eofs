@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>eofs.iris &mdash; eofs 1.0.0 documentation</title>
+    <title>eofs.iris &mdash; eofs 1.1.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '1.0.0',
+        VERSION:     '1.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,9 +24,9 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 1.0.0 documentation" href="../index.html" />
+    <link rel="top" title="eofs 1.1.0 documentation" href="../index.html" />
     <link rel="up" title="API references" href="index.html" />
-    <link rel="next" title="eofs.tools" href="eofs.tools.html" />
+    <link rel="next" title="eofs.xarray" href="eofs.xarray.html" />
     <link rel="prev" title="eofs.cdms" href="eofs.cdms.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
           rel='stylesheet' type='text/css' />
@@ -81,7 +81,7 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="eofs.tools.html" title="eofs.tools"
+          <a href="eofs.xarray.html" title="eofs.xarray"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="eofs.cdms.html" title="eofs.cdms"
@@ -94,7 +94,7 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v1.0.0</h2>
+    <h2>eofs v1.1.0</h2>
     <h3>Table of Contents</h3>
     <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userguide/index.html">User Guide</a></li>
@@ -113,8 +113,8 @@
   <p class="topless"><a href="eofs.cdms.html"
                         title="previous chapter"><code class="docutils literal"><span class="pre">eofs.cdms</span></code></a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="eofs.tools.html"
-                        title="next chapter"><code class="docutils literal"><span class="pre">eofs.tools</span></code></a></p>
+  <p class="topless"><a href="eofs.xarray.html"
+                        title="next chapter"><code class="docutils literal"><span class="pre">eofs.xarray</span></code></a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -209,8 +209,8 @@ number of samples. Defaults to <em>1</em>.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
 <p>EOF analysis with grid-cell-area weighting for the input field:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">eofs.iris</span> <span class="kn">import</span> <span class="n">Eof</span>
-<span class="n">solver</span> <span class="o">=</span> <span class="n">Eof</span><span class="p">(</span><span class="n">cube</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="s">&#39;area&#39;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eofs.iris</span> <span class="kn">import</span> <span class="n">Eof</span>
+<span class="n">solver</span> <span class="o">=</span> <span class="n">Eof</span><span class="p">(</span><span class="n">cube</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="s1">&#39;area&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="attribute">
@@ -249,11 +249,11 @@ numbered from 0 to <em>npcs</em> - 1.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
 <p>All un-scaled PCs:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">pcs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">pcs</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pcs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">pcs</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>First 3 PCs scaled to unit variance:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">pcs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">pcs</span><span class="p">(</span><span class="n">npcs</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">pcscaling</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pcs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">pcs</span><span class="p">(</span><span class="n">npcs</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">pcscaling</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -288,11 +288,11 @@ numbered from 0 to <em>neofs</em> - 1.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
 <p>All EOFs with no scaling:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">eofs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofs</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">eofs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofs</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>First 3 EOFs with scaling applied:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">eofs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofs</span><span class="p">(</span><span class="n">neofs</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">eofscaling</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">eofs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofs</span><span class="p">(</span><span class="n">neofs</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">eofscaling</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -324,11 +324,11 @@ numbered from 0 to <em>neofs</em> - 1.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
 <p>All EOFs:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">eofs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofsAsCorrelation</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">eofs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofsAsCorrelation</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>The leading EOF:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">eof1</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofsAsCorrelation</span><span class="p">(</span><span class="n">neofs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">eof1</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofsAsCorrelation</span><span class="p">(</span><span class="n">neofs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -369,15 +369,15 @@ numbered from 0 to <em>neofs</em> - 1.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
 <p>All EOFs:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">eofs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofsAsCovariance</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">eofs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofsAsCovariance</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>The leading EOF:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">eof1</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofsAsCovariance</span><span class="p">(</span><span class="n">neofs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">eof1</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofsAsCovariance</span><span class="p">(</span><span class="n">neofs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The leading EOF using un-scaled PCs:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">eof1</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofsAsCovariance</span><span class="p">(</span><span class="n">neofs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">pcscaling</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">eof1</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofsAsCovariance</span><span class="p">(</span><span class="n">neofs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">pcscaling</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -403,11 +403,11 @@ largest to smallest. The eigenvalues are numbered from 0 to
 </dl>
 <p><strong>Examples:</strong></p>
 <p>All eigenvalues:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">eigenvalues</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">eigenvalues</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>The first eigenvalue:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">eigenvalue1</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">(</span><span class="n">neigs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">eigenvalue1</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">(</span><span class="n">neigs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -436,11 +436,11 @@ each eigenvalue. The eigenvalues are numbered from 0 to
 </dl>
 <p><strong>Examples:</strong></p>
 <p>The fractional variance represented by each eigenvalue:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">variance_fractions</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">varianceFraction</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">variance_fractions</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">varianceFraction</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>The fractional variance represented by the first 3 eigenvalues:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">variance_fractions</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">VarianceFraction</span><span class="p">(</span><span class="n">neigs</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">variance_fractions</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">VarianceFraction</span><span class="p">(</span><span class="n">neigs</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -457,7 +457,7 @@ of the eigenvalues).</p>
 </dl>
 <p><strong>Example:</strong></p>
 <p>Get the total variance:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">total_variance</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">totalAnomalyVariance</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">total_variance</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">totalAnomalyVariance</span><span class="p">()</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -495,12 +495,12 @@ Sampling errors in the estimation of empirical orthogonal
 functions. <em>Mon. Weather. Rev.</em>, <strong>110</strong>, pp 669-706.</p>
 <p><strong>Examples:</strong></p>
 <p>Typical errors for all eigenvalues:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">errors</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">northTest</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">errors</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">northTest</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Typical errors for the first 3 eigenvalues scaled by the sum of
 the eigenvalues:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">errors</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">northTest</span><span class="p">(</span><span class="n">neigs</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">vfscaled</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">errors</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">northTest</span><span class="p">(</span><span class="n">neigs</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">vfscaled</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -530,11 +530,11 @@ reconstruction with arbitrary modes.</dd>
 </dl>
 <p><strong>Example:</strong></p>
 <p>Reconstruct the input field using 3 EOFs:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">reconstruction</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">reconstructedField</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">reconstruction</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">reconstructedField</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Reconstruct the input field using EOFs 1, 2 and 5:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">reconstruction</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">reconstuctedField</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">reconstruction</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">reconstuctedField</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -548,7 +548,7 @@ corresponding set of pseudo-PCs.</p>
 <p><strong>Argument:</strong></p>
 <dl class="docutils">
 <dt><em>field</em></dt>
-<dd>A <code class="xref py py-obj docutils literal"><span class="pre">cdms2</span></code> variable containing the field to project onto the
+<dd>An <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris/cube.html#iris.cube.Cube" title="(in Iris v1.9)"><code class="xref py py-obj docutils literal"><span class="pre">iris.cube.Cube</span></code></a> containing the field to project onto the
 EOFs. It must have the same corresponding spatial dimensions
 (including missing values in the same places) as the <a class="reference internal" href="#eofs.iris.Eof" title="eofs.iris.Eof"><code class="xref py py-obj docutils literal"><span class="pre">Eof</span></code></a>
 input <em>dataset</em>. It may have a different length time
@@ -588,11 +588,11 @@ numbered from 0 to <em>neofs</em> - 1.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
 <p>Project a field onto all EOFs:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">pseudo_pcs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">projectField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pseudo_pcs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">projectField</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Project fields onto the three leading EOFs:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">pseudo_pcs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">projectField</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">neofs</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pseudo_pcs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">projectField</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">neofs</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -609,7 +609,7 @@ numbered from 0 to <em>neofs</em> - 1.</dd>
 </dl>
 <p><strong>Example:</strong></p>
 <p>The weights used for the analysis:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">weights</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">getWeights</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">weights</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">getWeights</span><span class="p">()</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -631,7 +631,7 @@ numbered from 0 to <em>neofs</em> - 1.</dd>
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="eofs.tools.html" title="eofs.tools"
+          <a href="eofs.xarray.html" title="eofs.xarray"
              >next</a> |</li>
         <li class="right" >
           <a href="eofs.cdms.html" title="eofs.cdms"

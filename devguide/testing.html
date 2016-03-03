@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Running the test suite &mdash; eofs 1.0.0 documentation</title>
+    <title>Running the test suite &mdash; eofs 1.1.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '1.0.0',
+        VERSION:     '1.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 1.0.0 documentation" href="../index.html" />
+    <link rel="top" title="eofs 1.1.0 documentation" href="../index.html" />
     <link rel="up" title="Developer Guide" href="index.html" />
     <link rel="prev" title="git resources" href="gitwash/git_resources.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
@@ -90,7 +90,7 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v1.0.0</h2>
+    <h2>eofs v1.1.0</h2>
     <h3>Table of Contents</h3>
     <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userguide/index.html">User Guide</a></li>
@@ -141,30 +141,26 @@
 <p>The package comes with a comprehensive set of tests to make sure it is working correctly.
 The tests can be run against an installed version of <cite>eofs</cite> or against the current source tree.
 Testing against the source tree is handy during development when quick iteration is required, but for most other cases testing against the installed version is more suitable.</p>
-<p>Running the test suite requires <a class="reference external" href="https://nose.readthedocs.org/en/latest/">nose</a> to be installed.
+<p>Running the test suite requires <a class="reference external" href="https://nose.readthedocs.org/en/latest/">nose</a> and <a class="reference external" href="https://pypi.python.org/pypi/pep8">pep8</a> to be installed.
 The test suite will function as long as the minimum dependencies for the package are installed, but some tests will be skipped if they require optional dependencies that are not present.
-To run the full test suite you need to have the optional dependencies <cite>cdms2</cite> (from <a class="reference external" href="http://uv-cdat.llnl.gov">UV-CDAT</a>) and <a class="reference external" href="http://scitools.org.uk/iris">iris</a> installed.</p>
+To run the full test suite you need to have the optional dependencies <cite>cdms2</cite> (from <a class="reference external" href="http://uv-cdat.llnl.gov">UV-CDAT</a>), <a class="reference external" href="http://scitools.org.uk/iris">iris</a>, and <a class="reference external" href="http://xarray.pydata.org">xarray</a> installed.</p>
 <div class="section" id="testing-against-the-current-source-tree">
 <h2>Testing against the current source tree<a class="headerlink" href="#testing-against-the-current-source-tree" title="Permalink to this headline">¶</a></h2>
 <p>Testing the current source is straightforward, from the source directory run:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">nosetests</span> <span class="o">-</span><span class="n">sv</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">nosetests</span> <span class="o">-</span><span class="n">sv</span>
 </pre></div>
 </div>
 <p>This will perform verbose testing of the current source tree and print a summary at the end.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Support for Python 3 in <cite>eofs</cite> is implemented via <code class="docutils literal"><span class="pre">2to3</span></code> which converts the source code to be compatible with Python 3 at <em>build</em> time. This means that testing against the source tree for Python 3 is not advised or supported at the current time.</p>
-</div>
 </div>
 <div class="section" id="testing-an-installed-version">
 <h2>Testing an installed version<a class="headerlink" href="#testing-an-installed-version" title="Permalink to this headline">¶</a></h2>
 <p>First you need to install <cite>eofs</cite> into your current Python environment:</p>
-<div class="highlight-python"><div class="highlight"><pre>cd eofs/
+<div class="highlight-python"><div class="highlight"><pre><span></span>cd eofs/
 python setup.py install
 </pre></div>
 </div>
 <p>Then create a directory somewhere else without any Python code in it and run <code class="docutils literal"><span class="pre">nosetests</span></code> from there giving the package name <code class="docutils literal"><span class="pre">eofs</span></code> as a positional argument:</p>
-<div class="highlight-python"><div class="highlight"><pre>mkdir $HOME/eofs-test-dir &amp;&amp; cd $HOME/eofs-test-dir
+<div class="highlight-python"><div class="highlight"><pre><span></span>mkdir $HOME/eofs-test-dir &amp;&amp; cd $HOME/eofs-test-dir
 nosetests -sv eofs
 </pre></div>
 </div>

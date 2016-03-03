@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>eofs.multivariate.standard &mdash; eofs 1.0.0 documentation</title>
+    <title>eofs.multivariate.standard &mdash; eofs 1.1.0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '1.0.0',
+        VERSION:     '1.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 1.0.0 documentation" href="../../../index.html" />
+    <link rel="top" title="eofs 1.1.0 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
           rel='stylesheet' type='text/css' />
@@ -86,7 +86,7 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v1.0.0</h2>
+    <h2>eofs v1.1.0</h2>
     <h3>Table of Contents</h3>
     <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../userguide/index.html">User Guide</a></li>
@@ -119,23 +119,23 @@
           <div class="body" role="main">
             
   <h1>Source code for eofs.multivariate.standard</h1><div class="highlight"><pre>
-<span class="sd">&quot;&quot;&quot;Multivariate EOF analysis for `numpy` array data.&quot;&quot;&quot;</span>
-<span class="c"># (c) Copyright 2013-2015 Andrew Dawson. All Rights Reserved.</span>
-<span class="c">#</span>
-<span class="c"># This file is part of eofs.</span>
-<span class="c">#</span>
-<span class="c"># eofs is free software: you can redistribute it and/or modify</span>
-<span class="c"># it under the terms of the GNU General Public License as published by</span>
-<span class="c"># the Free Software Foundation, either version 3 of the License, or</span>
-<span class="c"># (at your option) any later version.</span>
-<span class="c">#</span>
-<span class="c"># eofs is distributed in the hope that it will be useful, but WITHOUT</span>
-<span class="c"># ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span>
-<span class="c"># FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License</span>
-<span class="c"># for more details.</span>
-<span class="c">#</span>
-<span class="c"># You should have received a copy of the GNU General Public License</span>
-<span class="c"># along with eofs.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span></span><span class="sd">&quot;&quot;&quot;Multivariate EOF analysis for `numpy` array data.&quot;&quot;&quot;</span>
+<span class="c1"># (c) Copyright 2013-2016 Andrew Dawson. All Rights Reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of eofs.</span>
+<span class="c1">#</span>
+<span class="c1"># eofs is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># eofs is distributed in the hope that it will be useful, but WITHOUT</span>
+<span class="c1"># ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span>
+<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License</span>
+<span class="c1"># for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with eofs.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -227,14 +227,14 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_ndata</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">datasets</span><span class="p">)</span>
         <span class="n">data</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_merge_fields</span><span class="p">(</span><span class="n">datasets</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_shapes</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s">&#39;shapes&#39;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_slicers</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s">&#39;slicers&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_shapes</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;shapes&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_slicers</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;slicers&#39;</span><span class="p">]</span>
         <span class="n">weight_option</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_merge_weights</span><span class="p">(</span><span class="n">datasets</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span> <span class="o">=</span> <span class="n">standard</span><span class="o">.</span><span class="n">Eof</span><span class="p">(</span><span class="n">data</span><span class="p">,</span>
                                     <span class="n">weights</span><span class="o">=</span><span class="n">weight_option</span><span class="p">,</span>
                                     <span class="n">center</span><span class="o">=</span><span class="n">center</span><span class="p">,</span>
                                     <span class="n">ddof</span><span class="o">=</span><span class="n">ddof</span><span class="p">)</span>
-        <span class="c">#: Number of EOFs in the solution.</span>
+        <span class="c1">#: Number of EOFs in the solution.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">neofs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">neofs</span>
 
     <span class="k">def</span> <span class="nf">_merge_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fields</span><span class="p">):</span>
@@ -249,19 +249,19 @@
 <span class="sd">        array.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">info</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;shapes&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s">&#39;slicers&#39;</span><span class="p">:</span> <span class="p">[]}</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;shapes&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;slicers&#39;</span><span class="p">:</span> <span class="p">[]}</span>
         <span class="n">islice</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
-            <span class="n">info</span><span class="p">[</span><span class="s">&#39;shapes&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+            <span class="n">info</span><span class="p">[</span><span class="s1">&#39;shapes&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
             <span class="n">channels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
-            <span class="n">info</span><span class="p">[</span><span class="s">&#39;slicers&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="n">islice</span><span class="p">,</span> <span class="n">islice</span> <span class="o">+</span> <span class="n">channels</span><span class="p">))</span>
+            <span class="n">info</span><span class="p">[</span><span class="s1">&#39;slicers&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="n">islice</span><span class="p">,</span> <span class="n">islice</span> <span class="o">+</span> <span class="n">channels</span><span class="p">))</span>
             <span class="n">islice</span> <span class="o">+=</span> <span class="n">channels</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">merged</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
                 <span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="n">field</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])])</span>
                  <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;all fields must have the same first dimension&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;all fields must have the same first dimension&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">merged</span><span class="p">,</span> <span class="n">info</span>
 
     <span class="k">def</span> <span class="nf">_merge_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fields</span><span class="p">,</span> <span class="n">weights</span><span class="p">):</span>
@@ -271,12 +271,12 @@
         <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">None</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">fields</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;number of weights is incorrect, &#39;</span>
-                             <span class="s">&#39;expecting {:d} but got {:d}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;number of weights is incorrect, &#39;</span>
+                             <span class="s1">&#39;expecting {:d} but got {:d}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                                  <span class="bp">self</span><span class="o">.</span><span class="n">_ndata</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)))</span>
         <span class="k">if</span> <span class="nb">all</span><span class="p">([</span><span class="n">w</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">weights</span><span class="p">]):</span>
-            <span class="c"># If all the entries are None, then just use the single value</span>
-            <span class="c"># None to indicate no weights are required.</span>
+            <span class="c1"># If all the entries are None, then just use the single value</span>
+            <span class="c1"># None to indicate no weights are required.</span>
             <span class="k">return</span> <span class="bp">None</span>
 
         <span class="k">def</span> <span class="nf">_broadcast_weights</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">weight</span><span class="p">):</span>
@@ -288,23 +288,23 @@
             <span class="n">shape</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
             <span class="k">if</span> <span class="n">weight</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="p">])</span>
-            <span class="c"># Broadcast the weights to the full shape of the field.</span>
+            <span class="c1"># Broadcast the weights to the full shape of the field.</span>
             <span class="n">bcast</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">broadcast_arrays</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">weight</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-            <span class="c"># Return weights with the same shape as the field except for the</span>
-            <span class="c"># leading dimension which is singleton. This dimension is removed</span>
-            <span class="c"># by the EOF solver anyway.</span>
+            <span class="c1"># Return weights with the same shape as the field except for the</span>
+            <span class="c1"># leading dimension which is singleton. This dimension is removed</span>
+            <span class="c1"># by the EOF solver anyway.</span>
             <span class="k">return</span> <span class="n">bcast</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="p">])</span>
 
         <span class="k">try</span><span class="p">:</span>
-            <span class="c"># If at least one weight is an array then all weights should be</span>
-            <span class="c"># converted to arrays (by using arrays of 1.0 for unweighted</span>
-            <span class="c"># fields) of full spatial shape and concatenate them.</span>
+            <span class="c1"># If at least one weight is an array then all weights should be</span>
+            <span class="c1"># converted to arrays (by using arrays of 1.0 for unweighted</span>
+            <span class="c1"># fields) of full spatial shape and concatenate them.</span>
             <span class="n">weight_option</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">_broadcast_weights</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
                                             <span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="n">weights</span><span class="p">)],</span>
                                            <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;one or more weights arrays have &#39;</span>
-                             <span class="s">&#39;incompatible shapes&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;one or more weights arrays have &#39;</span>
+                             <span class="s1">&#39;incompatible shapes&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">weight_option</span>
 
     <span class="k">def</span> <span class="nf">_unwrap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">modes</span><span class="p">):</span>
@@ -714,30 +714,32 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ndata</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;number of fields is incorrect, expecting {:d} &#39;</span>
-                             <span class="s">&#39;but got {:d}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ndata</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">fields</span><span class="p">)))</span>
-        <span class="c"># Make sure the input fields have valid shapes/dimensionalities.</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;number of fields is incorrect, expecting {:d} &#39;</span>
+                             <span class="s1">&#39;but got {:d}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ndata</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">fields</span><span class="p">)))</span>
+        <span class="c1"># Make sure the input fields have valid shapes/dimensionalities.</span>
         <span class="k">for</span> <span class="n">field</span><span class="p">,</span> <span class="n">shape</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shapes</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">_verify_projection_shape</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">shape</span><span class="p">)</span>
-        <span class="c"># Check for a time dimension in each field.</span>
-        <span class="n">time_check</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">f</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">f</span><span class="o">.</span><span class="n">ndim</span>
+
+        <span class="c1"># Check for a time dimension in each field.</span>
+        <span class="k">def</span> <span class="nf">time_check</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">shape</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">field</span><span class="o">.</span><span class="n">ndim</span>
         <span class="n">has_time</span> <span class="o">=</span> <span class="p">[</span><span class="n">time_check</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shapes</span><span class="p">)]</span>
-        <span class="k">if</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span> <span class="o">!=</span> <span class="n">has_time</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">has_time</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;detected a mixture of fields with and without &#39;</span>
-                             <span class="s">&#39;time dimensions, this is not allowed&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">has_time</span> <span class="k">if</span> <span class="n">t</span> <span class="o">!=</span> <span class="n">has_time</span><span class="p">[</span><span class="mi">0</span><span class="p">]]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;detected a mixture of fields with and without &#39;</span>
+                             <span class="s1">&#39;time dimensions, this is not allowed&#39;</span><span class="p">)</span>
         <span class="n">has_time</span> <span class="o">=</span> <span class="n">has_time</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">has_time</span><span class="p">:</span>
             <span class="n">data</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_merge_fields</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">data</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_merge_fields</span><span class="p">([</span><span class="n">f</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,)</span> <span class="o">+</span> <span class="n">f</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
                                             <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">])</span>
-        <span class="c"># Do the projection.</span>
+        <span class="c1"># Do the projection.</span>
         <span class="n">pcs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">projectField</span><span class="p">(</span><span class="n">data</span><span class="p">,</span>
                                         <span class="n">neofs</span><span class="o">=</span><span class="n">neofs</span><span class="p">,</span>
                                         <span class="n">eofscaling</span><span class="o">=</span><span class="n">eofscaling</span><span class="p">,</span>
                                         <span class="n">weighted</span><span class="o">=</span><span class="n">weighted</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">has_time</span><span class="p">:</span>
-            <span class="c"># Eliminate the time dimension if it was added artificially.</span>
+            <span class="c1"># Eliminate the time dimension if it was added artificially.</span>
             <span class="n">pcs</span> <span class="o">=</span> <span class="n">pcs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">pcs</span>
 </div>

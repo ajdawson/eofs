@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>North Atlantic Oscillation &mdash; eofs 1.0.0 documentation</title>
+    <title>North Atlantic Oscillation &mdash; eofs 1.1.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '1.0.0',
+        VERSION:     '1.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 1.0.0 documentation" href="../index.html" />
+    <link rel="top" title="eofs 1.1.0 documentation" href="../index.html" />
     <link rel="up" title="Iris interface examples" href="iris_examples_index.html" />
     <link rel="next" title="El Niño" href="elnino_iris.html" />
     <link rel="prev" title="Iris interface examples" href="iris_examples_index.html" />
@@ -95,7 +95,7 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v1.0.0</h2>
+    <h2>eofs v1.1.0</h2>
     <h3>Table of Contents</h3>
     <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userguide/index.html">User Guide</a></li>
@@ -103,6 +103,7 @@
 <li class="toctree-l2"><a class="reference internal" href="standard_examples_index.html">Standard interface examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cdms_examples_index.html">cdms interface examples</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="iris_examples_index.html">Iris interface examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xarray_examples_index.html">xarray interface examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api/index.html">API references</a></li>
@@ -151,7 +152,7 @@
 <div class="figure">
 <img alt="../_images/hgt_example1.png" src="../_images/hgt_example1.png" />
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Compute and plot the leading EOF of geopotential height on the 500 hPa</span>
 <span class="sd">pressure surface over the European/Atlantic sector during winter time.</span>
 
@@ -164,39 +165,41 @@
 <span class="kn">import</span> <span class="nn">iris.plot</span> <span class="kn">as</span> <span class="nn">iplt</span>
 <span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="kn">as</span> <span class="nn">ccrs</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
 <span class="kn">from</span> <span class="nn">eofs.iris</span> <span class="kn">import</span> <span class="n">Eof</span>
 <span class="kn">from</span> <span class="nn">eofs.examples</span> <span class="kn">import</span> <span class="n">example_data_path</span>
 
 
-<span class="c"># Read geopotential height data using the iris module. The file contains</span>
-<span class="c"># December-February averages of geopotential height at 500 hPa for the</span>
-<span class="c"># European/Atlantic domain (80W-40E, 20-90N).</span>
-<span class="n">filename</span> <span class="o">=</span> <span class="n">example_data_path</span><span class="p">(</span><span class="s">&#39;hgt_djf.nc&#39;</span><span class="p">)</span>
+<span class="c1"># Read geopotential height data using the iris module. The file contains</span>
+<span class="c1"># December-February averages of geopotential height at 500 hPa for the</span>
+<span class="c1"># European/Atlantic domain (80W-40E, 20-90N).</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="n">example_data_path</span><span class="p">(</span><span class="s1">&#39;hgt_djf.nc&#39;</span><span class="p">)</span>
 <span class="n">z_djf</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">load_cube</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 
-<span class="c"># Compute anomalies by removing the time-mean.</span>
+<span class="c1"># Compute anomalies by removing the time-mean.</span>
 <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
-    <span class="c"># Iris emits a warning due to the non-contiguous time dimension.</span>
-    <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s">&#39;ignore&#39;</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">)</span>
-    <span class="n">z_djf_mean</span> <span class="o">=</span> <span class="n">z_djf</span><span class="o">.</span><span class="n">collapsed</span><span class="p">(</span><span class="s">&#39;time&#39;</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">MEAN</span><span class="p">)</span>
-<span class="n">z_djf</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">z_djf</span><span class="o">.</span><span class="n">data</span> <span class="o">-</span> <span class="n">z_djf_mean</span><span class="o">.</span><span class="n">data</span>
+    <span class="c1"># Iris emits a warning due to the non-contiguous time dimension.</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">)</span>
+    <span class="n">z_djf_mean</span> <span class="o">=</span> <span class="n">z_djf</span><span class="o">.</span><span class="n">collapsed</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">MEAN</span><span class="p">)</span>
+<span class="n">z_djf</span> <span class="o">=</span> <span class="n">z_djf</span> <span class="o">-</span> <span class="n">z_djf_mean</span>
 
-<span class="c"># Create an EOF solver to do the EOF analysis. Square-root of cosine of</span>
-<span class="c"># latitude weights are applied before the computation of EOFs.</span>
-<span class="n">solver</span> <span class="o">=</span> <span class="n">Eof</span><span class="p">(</span><span class="n">z_djf</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="s">&#39;coslat&#39;</span><span class="p">)</span>
+<span class="c1"># Create an EOF solver to do the EOF analysis. Square-root of cosine of</span>
+<span class="c1"># latitude weights are applied before the computation of EOFs.</span>
+<span class="n">solver</span> <span class="o">=</span> <span class="n">Eof</span><span class="p">(</span><span class="n">z_djf</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="s1">&#39;coslat&#39;</span><span class="p">)</span>
 
-<span class="c"># Retrieve the leading EOF, expressed as the covariance between the leading PC</span>
-<span class="c"># time series and the input SLP anomalies at each grid point.</span>
+<span class="c1"># Retrieve the leading EOF, expressed as the covariance between the leading PC</span>
+<span class="c1"># time series and the input SLP anomalies at each grid point.</span>
 <span class="n">eof1</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofsAsCovariance</span><span class="p">(</span><span class="n">neofs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="c"># Plot the leading EOF expressed as covariance in the European/Atlantic domain.</span>
+<span class="c1"># Plot the leading EOF expressed as covariance in the European/Atlantic domain.</span>
+<span class="n">clevs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">75</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
 <span class="n">proj</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Orthographic</span><span class="p">(</span><span class="n">central_longitude</span><span class="o">=-</span><span class="mi">20</span><span class="p">,</span> <span class="n">central_latitude</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">proj</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_global</span><span class="p">()</span>
-<span class="n">iplt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">eof1</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">RdBu_r</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s">&#39;EOF1 expressed as covariance&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">iplt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">eof1</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">levels</span><span class="o">=</span><span class="n">clevs</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">RdBu_r</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;EOF1 expressed as covariance&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>

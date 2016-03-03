@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Speeding up the solvers &mdash; eofs 1.0.0 documentation</title>
+    <title>Speeding up the solvers &mdash; eofs 1.1.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '1.0.0',
+        VERSION:     '1.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 1.0.0 documentation" href="../index.html" />
+    <link rel="top" title="eofs 1.1.0 documentation" href="../index.html" />
     <link rel="up" title="User Guide" href="index.html" />
     <link rel="next" title="Examples" href="../examples/index.html" />
     <link rel="prev" title="Method of solution" href="method.html" />
@@ -94,7 +94,7 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v1.0.0</h2>
+    <h2>eofs v1.1.0</h2>
     <h3>Table of Contents</h3>
     <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">User Guide</a><ul class="current">
@@ -173,7 +173,7 @@ The following instructions worked for me:</p>
 <li><p class="first">download a stable version fo the numpy source code from <a class="reference external" href="http://sourceforge.net/projects/numpy/files/NumPy/">http://sourceforge.net/projects/numpy/files/NumPy/</a> or the latest code from <a class="reference external" href="https://github.com/numpy/numpy">https://github.com/numpy/numpy</a></p>
 </li>
 <li><p class="first">create a site.cfg in the numpy source tree (copy site.cfg.example) and add:</p>
-<div class="highlight-python"><div class="highlight"><pre>[blas]
+<div class="highlight-python"><div class="highlight"><pre><span></span>[blas]
 blas_libs = cblas, acml
 library_dirs = /path-to-acml-and-cblas/lib
 include_dirs = /path-to-acml-and-cblas/include
@@ -194,7 +194,7 @@ include_dirs = /path-to-acml-and-cblas/include
 <h2>Pre-built options<a class="headerlink" href="#pre-built-options" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="anaconda">
 <h3>Anaconda<a class="headerlink" href="#anaconda" title="Permalink to this headline">¶</a></h3>
-<p>Continuum IO&#8217;s Anaconda product has the option of using MKL optimised components, normally this is an add-on that you pay for, but for academic users there is the option of a free academic license which includes the use of the optimized packages.</p>
+<p>Continuum IO&#8217;s Anaconda product has the option of using MKL optimised components.</p>
 </div>
 <div class="section" id="canopy-express">
 <h3>Canopy (Express)<a class="headerlink" href="#canopy-express" title="Permalink to this headline">¶</a></h3>

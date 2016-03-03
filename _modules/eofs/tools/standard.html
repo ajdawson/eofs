@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>eofs.tools.standard &mdash; eofs 1.0.0 documentation</title>
+    <title>eofs.tools.standard &mdash; eofs 1.1.0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '1.0.0',
+        VERSION:     '1.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 1.0.0 documentation" href="../../../index.html" />
+    <link rel="top" title="eofs 1.1.0 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
           rel='stylesheet' type='text/css' />
@@ -86,7 +86,7 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v1.0.0</h2>
+    <h2>eofs v1.1.0</h2>
     <h3>Table of Contents</h3>
     <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../userguide/index.html">User Guide</a></li>
@@ -119,23 +119,23 @@
           <div class="body" role="main">
             
   <h1>Source code for eofs.tools.standard</h1><div class="highlight"><pre>
-<span class="sd">&quot;&quot;&quot;Supplementary tools for the `numpy` EOF analysis interface.&quot;&quot;&quot;</span>
-<span class="c"># (c) Copyright 2010-2015 Andrew Dawson. All Rights Reserved.</span>
-<span class="c">#</span>
-<span class="c"># This file is part of eofs.</span>
-<span class="c">#</span>
-<span class="c"># eofs is free software: you can redistribute it and/or modify</span>
-<span class="c"># it under the terms of the GNU General Public License as published by</span>
-<span class="c"># the Free Software Foundation, either version 3 of the License, or</span>
-<span class="c"># (at your option) any later version.</span>
-<span class="c">#</span>
-<span class="c"># eofs is distributed in the hope that it will be useful, but WITHOUT</span>
-<span class="c"># ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span>
-<span class="c"># FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License</span>
-<span class="c"># for more details.</span>
-<span class="c">#</span>
-<span class="c"># You should have received a copy of the GNU General Public License</span>
-<span class="c"># along with eofs.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span></span><span class="sd">&quot;&quot;&quot;Supplementary tools for the `numpy` EOF analysis interface.&quot;&quot;&quot;</span>
+<span class="c1"># (c) Copyright 2010-2015 Andrew Dawson. All Rights Reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of eofs.</span>
+<span class="c1">#</span>
+<span class="c1"># eofs is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># eofs is distributed in the hope that it will be useful, but WITHOUT</span>
+<span class="c1"># ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span>
+<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License</span>
+<span class="c1"># for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with eofs.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -151,35 +151,35 @@
 <span class="sd">    calculations.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c"># Get the number of times in the field.</span>
+    <span class="c1"># Get the number of times in the field.</span>
     <span class="n">records</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">records</span> <span class="o">!=</span> <span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-        <span class="c"># Raise an error if the field has a different number of times to the</span>
-        <span class="c"># PCs provided.</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;PCs and field must have the same first dimension&quot;</span><span class="p">)</span>
+        <span class="c1"># Raise an error if the field has a different number of times to the</span>
+        <span class="c1"># PCs provided.</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;PCs and field must have the same first dimension&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="c"># Raise an error if the PCs are more than 2D.</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;PCs must be 1D or 2D&quot;</span><span class="p">)</span>
-    <span class="c"># Check if the field is 1D.</span>
+        <span class="c1"># Raise an error if the PCs are more than 2D.</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;PCs must be 1D or 2D&quot;</span><span class="p">)</span>
+    <span class="c1"># Check if the field is 1D.</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">originalshape</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">()</span>
         <span class="n">channels</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="c"># Record the shape of the field and the number of spatial elements.</span>
+        <span class="c1"># Record the shape of the field and the number of spatial elements.</span>
         <span class="n">originalshape</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
         <span class="n">channels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">originalshape</span><span class="p">)</span>
-    <span class="c"># Record the number of PCs.</span>
+    <span class="c1"># Record the number of PCs.</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">npcs</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="n">npcs_out</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">()</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">npcs</span> <span class="o">=</span> <span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">npcs_out</span> <span class="o">=</span> <span class="p">(</span><span class="n">npcs</span><span class="p">,)</span>
-    <span class="c"># Create a flattened field so iterating over space is simple. Also do this</span>
-    <span class="c"># for the PCs to ensure they are 2D.</span>
+    <span class="c1"># Create a flattened field so iterating over space is simple. Also do this</span>
+    <span class="c1"># for the PCs to ensure they are 2D.</span>
     <span class="n">field_flat</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="n">records</span><span class="p">,</span> <span class="n">channels</span><span class="p">])</span>
     <span class="n">pcs_flat</span> <span class="o">=</span> <span class="n">pcs</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="n">records</span><span class="p">,</span> <span class="n">npcs</span><span class="p">])</span>
-    <span class="c"># Centre both the field and PCs in the time dimension.</span>
+    <span class="c1"># Centre both the field and PCs in the time dimension.</span>
     <span class="n">field_flat</span> <span class="o">=</span> <span class="n">field_flat</span> <span class="o">-</span> <span class="n">field_flat</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">pcs_flat</span> <span class="o">=</span> <span class="n">pcs_flat</span> <span class="o">-</span> <span class="n">pcs_flat</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">pcs_flat</span><span class="p">,</span> <span class="n">field_flat</span><span class="p">,</span> <span class="n">npcs_out</span> <span class="o">+</span> <span class="n">originalshape</span>
@@ -218,20 +218,20 @@
 <span class="sd">        correlation_maps = correlation_maps(pcs, field)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c"># Check PCs and fields for validity, flatten the arrays ready for the</span>
-    <span class="c"># computation and remove the mean along the leading dimension.</span>
+    <span class="c1"># Check PCs and fields for validity, flatten the arrays ready for the</span>
+    <span class="c1"># computation and remove the mean along the leading dimension.</span>
     <span class="n">pcs_cent</span><span class="p">,</span> <span class="n">field_cent</span><span class="p">,</span> <span class="n">out_shape</span> <span class="o">=</span> <span class="n">_check_flat_center</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="n">field</span><span class="p">)</span>
-    <span class="c"># Compute the standard deviation of the PCs and the fields along the time</span>
-    <span class="c"># dimension (the leading dimension).</span>
+    <span class="c1"># Compute the standard deviation of the PCs and the fields along the time</span>
+    <span class="c1"># dimension (the leading dimension).</span>
     <span class="n">pcs_std</span> <span class="o">=</span> <span class="n">pcs_cent</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">field_std</span> <span class="o">=</span> <span class="n">field_cent</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="c"># Set the divisor.</span>
+    <span class="c1"># Set the divisor.</span>
     <span class="n">div</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">(</span><span class="n">pcs_cent</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="c"># Compute the correlation map.</span>
+    <span class="c1"># Compute the correlation map.</span>
     <span class="n">cor</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">field_cent</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">pcs_cent</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">/</span> <span class="n">div</span>
     <span class="n">cor</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">cor</span><span class="p">)</span>
     <span class="n">cor</span> <span class="o">/=</span> <span class="n">ma</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">pcs_std</span><span class="p">,</span> <span class="n">field_std</span><span class="p">)</span>
-    <span class="c"># Return the correlation with the appropriate shape.</span>
+    <span class="c1"># Return the correlation with the appropriate shape.</span>
     <span class="k">return</span> <span class="n">cor</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">out_shape</span><span class="p">)</span>
 
 </div>
@@ -275,12 +275,12 @@
 <span class="sd">        covariance_maps = covariance_maps(pcs, field)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c"># Check PCs and fields for validity, flatten the arrays ready for the</span>
-    <span class="c"># computation and remove the mean along the leading dimension.</span>
+    <span class="c1"># Check PCs and fields for validity, flatten the arrays ready for the</span>
+    <span class="c1"># computation and remove the mean along the leading dimension.</span>
     <span class="n">pcs_cent</span><span class="p">,</span> <span class="n">field_cent</span><span class="p">,</span> <span class="n">out_shape</span> <span class="o">=</span> <span class="n">_check_flat_center</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="n">field</span><span class="p">)</span>
-    <span class="c"># Set the divisor according to the specified delta-degrees of freedom.</span>
+    <span class="c1"># Set the divisor according to the specified delta-degrees of freedom.</span>
     <span class="n">div</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">(</span><span class="n">pcs_cent</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">ddof</span><span class="p">)</span>
-    <span class="c"># Compute the covariance map, making sure it has the appropriate shape.</span>
+    <span class="c1"># Compute the covariance map, making sure it has the appropriate shape.</span>
     <span class="n">cov</span> <span class="o">=</span> <span class="p">(</span><span class="n">ma</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">field_cent</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">pcs_cent</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">/</span> <span class="n">div</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">out_shape</span><span class="p">)</span>
     <span class="n">cov</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">cov</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">cov</span></div>

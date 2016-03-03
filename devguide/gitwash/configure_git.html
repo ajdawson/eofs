@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Configure git &mdash; eofs 1.0.0 documentation</title>
+    <title>Configure git &mdash; eofs 1.1.0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '1.0.0',
+        VERSION:     '1.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 1.0.0 documentation" href="../../index.html" />
+    <link rel="top" title="eofs 1.1.0 documentation" href="../../index.html" />
     <link rel="up" title="Git for development" href="git_development.html" />
     <link rel="next" title="Development workflow" href="development_workflow.html" />
     <link rel="prev" title="Set up your fork" href="set_up_fork.html" />
@@ -96,7 +96,7 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v1.0.0</h2>
+    <h2>eofs v1.1.0</h2>
     <h3>Table of Contents</h3>
     <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../userguide/index.html">User Guide</a></li>
@@ -152,7 +152,7 @@
 <p>Your personal git configurations are saved in the <code class="docutils literal"><span class="pre">.gitconfig</span></code> file in
 your home directory.</p>
 <p>Here is an example <code class="docutils literal"><span class="pre">.gitconfig</span></code> file:</p>
-<div class="highlight-python"><div class="highlight"><pre>[user]
+<div class="highlight-python"><div class="highlight"><pre><span></span>[user]
         name = Your Name
         email = you@yourdomain.example.com
 
@@ -173,7 +173,7 @@ your home directory.</p>
 </div>
 <p>You can edit this file directly or you can use the <code class="docutils literal"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span></code>
 command:</p>
-<div class="highlight-python"><div class="highlight"><pre>git config --global user.name &quot;Your Name&quot;
+<div class="highlight-python"><div class="highlight"><pre><span></span>git config --global user.name &quot;Your Name&quot;
 git config --global user.email you@yourdomain.example.com
 git config --global alias.ci &quot;commit -a&quot;
 git config --global alias.co checkout
@@ -195,13 +195,13 @@ or run the commands above.</p>
 <p>It is good practice to tell <a class="reference external" href="http://git-scm.com/">git</a> who you are, for labeling any changes
 you make to the code.  The simplest way to do this is from the command
 line:</p>
-<div class="highlight-python"><div class="highlight"><pre>git config --global user.name &quot;Your Name&quot;
+<div class="highlight-python"><div class="highlight"><pre><span></span>git config --global user.name &quot;Your Name&quot;
 git config --global user.email you@yourdomain.example.com
 </pre></div>
 </div>
 <p>This will write the settings into your git configuration file,  which
 should now contain a user section with your name and email:</p>
-<div class="highlight-python"><div class="highlight"><pre>[user]
+<div class="highlight-python"><div class="highlight"><pre><span></span>[user]
       name = Your Name
       email = you@yourdomain.example.com
 </pre></div>
@@ -216,7 +216,7 @@ with your actual name and email address.</p>
 to <code class="docutils literal"><span class="pre">git</span> <span class="pre">co</span></code>.  Or you may want to alias <code class="docutils literal"><span class="pre">git</span> <span class="pre">diff</span> <span class="pre">--color-words</span></code>
 (which gives a nicely formatted output of the diff) to <code class="docutils literal"><span class="pre">git</span> <span class="pre">wdiff</span></code></p>
 <p>The following <code class="docutils literal"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span></code> commands:</p>
-<div class="highlight-python"><div class="highlight"><pre>git config --global alias.ci &quot;commit -a&quot;
+<div class="highlight-python"><div class="highlight"><pre><span></span>git config --global alias.ci &quot;commit -a&quot;
 git config --global alias.co checkout
 git config --global alias.st &quot;status -a&quot;
 git config --global alias.stat &quot;status -a&quot;
@@ -226,7 +226,7 @@ git config --global alias.wdiff &quot;diff --color-words&quot;
 </div>
 <p>will create an <code class="docutils literal"><span class="pre">alias</span></code> section in your <code class="docutils literal"><span class="pre">.gitconfig</span></code> file with contents
 like this:</p>
-<div class="highlight-python"><div class="highlight"><pre>[alias]
+<div class="highlight-python"><div class="highlight"><pre><span></span>[alias]
         ci = commit -a
         co = checkout
         st = status -a
@@ -239,19 +239,19 @@ like this:</p>
 <div class="section" id="editor">
 <h3>Editor<a class="headerlink" href="#editor" title="Permalink to this headline">¶</a></h3>
 <p>You may also want to make sure that your editor of choice is used</p>
-<div class="highlight-python"><div class="highlight"><pre>git config --global core.editor vim
+<div class="highlight-python"><div class="highlight"><pre><span></span>git config --global core.editor vim
 </pre></div>
 </div>
 </div>
 <div class="section" id="merging">
 <h3>Merging<a class="headerlink" href="#merging" title="Permalink to this headline">¶</a></h3>
 <p>To enforce summaries when doing merges (<code class="docutils literal"><span class="pre">~/.gitconfig</span></code> file again):</p>
-<div class="highlight-python"><div class="highlight"><pre>[merge]
+<div class="highlight-python"><div class="highlight"><pre><span></span>[merge]
    log = true
 </pre></div>
 </div>
 <p>Or from the command line:</p>
-<div class="highlight-python"><div class="highlight"><pre>git config --global merge.log true
+<div class="highlight-python"><div class="highlight"><pre><span></span>git config --global merge.log true
 </pre></div>
 </div>
 </div>
@@ -259,15 +259,15 @@ like this:</p>
 <span id="fancy-log"></span><h3>Fancy log output<a class="headerlink" href="#fancy-log-output" title="Permalink to this headline">¶</a></h3>
 <p>This is a very nice alias to get a fancy log output; it should go in the
 <code class="docutils literal"><span class="pre">alias</span></code> section of your <code class="docutils literal"><span class="pre">.gitconfig</span></code> file:</p>
-<div class="highlight-python"><div class="highlight"><pre>lg = log --graph --pretty=format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)[%an]%Creset&#39; --abbrev-commit --date=relative
+<div class="highlight-python"><div class="highlight"><pre><span></span>lg = log --graph --pretty=format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)[%an]%Creset&#39; --abbrev-commit --date=relative
 </pre></div>
 </div>
 <p>You use the alias with:</p>
-<div class="highlight-python"><div class="highlight"><pre>git lg
+<div class="highlight-python"><div class="highlight"><pre><span></span>git lg
 </pre></div>
 </div>
 <p>and it gives graph / text output something like this (but with color!):</p>
-<div class="highlight-python"><div class="highlight"><pre>* 6d8e1ee - (HEAD, origin/my-fancy-feature, my-fancy-feature) NF - a fancy file (45 minutes ago) [Matthew Brett]
+<div class="highlight-python"><div class="highlight"><pre><span></span>* 6d8e1ee - (HEAD, origin/my-fancy-feature, my-fancy-feature) NF - a fancy file (45 minutes ago) [Matthew Brett]
 *   d304a73 - (origin/placeholder, placeholder) Merge pull request #48 from hhuuggoo/master (2 weeks ago) [Jonathan Terhorst]
 |\
 | * 4aff2a8 - fixed bug 35, and added a test in test_bugfixes (2 weeks ago) [Hugo]

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>eofs.cdms &mdash; eofs 1.0.0 documentation</title>
+    <title>eofs.cdms &mdash; eofs 1.1.0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '1.0.0',
+        VERSION:     '1.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 1.0.0 documentation" href="../../index.html" />
+    <link rel="top" title="eofs 1.1.0 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
           rel='stylesheet' type='text/css' />
@@ -86,7 +86,7 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v1.0.0</h2>
+    <h2>eofs v1.1.0</h2>
     <h3>Table of Contents</h3>
     <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../userguide/index.html">User Guide</a></li>
@@ -119,23 +119,23 @@
           <div class="body" role="main">
             
   <h1>Source code for eofs.cdms</h1><div class="highlight"><pre>
-<span class="sd">&quot;&quot;&quot;Meta-data preserving EOF analysis for `cdms2`.&quot;&quot;&quot;</span>
-<span class="c"># (c) Copyright 2010-2015 Andrew Dawson. All Rights Reserved.</span>
-<span class="c">#</span>
-<span class="c"># This file is part of eofs.</span>
-<span class="c">#</span>
-<span class="c"># eofs is free software: you can redistribute it and/or modify</span>
-<span class="c"># it under the terms of the GNU General Public License as published by</span>
-<span class="c"># the Free Software Foundation, either version 3 of the License, or</span>
-<span class="c"># (at your option) any later version.</span>
-<span class="c">#</span>
-<span class="c"># eofs is distributed in the hope that it will be useful, but WITHOUT</span>
-<span class="c"># ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span>
-<span class="c"># FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License</span>
-<span class="c"># for more details.</span>
-<span class="c">#</span>
-<span class="c"># You should have received a copy of the GNU General Public License</span>
-<span class="c"># along with eofs.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span></span><span class="sd">&quot;&quot;&quot;Meta-data preserving EOF analysis for `cdms2`.&quot;&quot;&quot;</span>
+<span class="c1"># (c) Copyright 2010-2015 Andrew Dawson. All Rights Reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of eofs.</span>
+<span class="c1">#</span>
+<span class="c1"># eofs is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># eofs is distributed in the hope that it will be useful, but WITHOUT</span>
+<span class="c1"># ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span>
+<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License</span>
+<span class="c1"># for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with eofs.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">import</span> <span class="nn">collections</span>
@@ -219,71 +219,71 @@
 <span class="sd">            solver = Eof(dataset, weights=&#39;area&#39;)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c"># Check that dataset is recognised by cdms2 as a variable.</span>
+        <span class="c1"># Check that dataset is recognised by cdms2 as a variable.</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">isVariable</span><span class="p">(</span><span class="n">dataset</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;the input data must be a cdms2 variable&#39;</span><span class="p">)</span>
-        <span class="c"># Store the time axis as an instance variable.</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;the input data must be a cdms2 variable&#39;</span><span class="p">)</span>
+        <span class="c1"># Store the time axis as an instance variable.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_timeax</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">getTime</span><span class="p">()</span>
-        <span class="c"># Verify that a time axis was found, getTime returns None when a</span>
-        <span class="c"># time axis is not found.</span>
+        <span class="c1"># Verify that a time axis was found, getTime returns None when a</span>
+        <span class="c1"># time axis is not found.</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_timeax</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;time axis not found&#39;</span><span class="p">)</span>
-        <span class="c"># Check the dimension order of the input, time must be the first</span>
-        <span class="c"># dimension.</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;time axis not found&#39;</span><span class="p">)</span>
+        <span class="c1"># Check the dimension order of the input, time must be the first</span>
+        <span class="c1"># dimension.</span>
         <span class="n">order</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">getOrder</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">order</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&#39;t&#39;</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;time must be the first dimension, &#39;</span>
-                             <span class="s">&#39;consider using the reorder() method&#39;</span><span class="p">)</span>
-        <span class="c"># Verify the presence of at least one spatial dimension. The</span>
-        <span class="c"># instance variable channels will also be used as a partial axis</span>
-        <span class="c"># list when constructing meta-data. It contains the spatial</span>
-        <span class="c"># dimensions.</span>
+        <span class="k">if</span> <span class="n">order</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;t&#39;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;time must be the first dimension, &#39;</span>
+                             <span class="s1">&#39;consider using the reorder() method&#39;</span><span class="p">)</span>
+        <span class="c1"># Verify the presence of at least one spatial dimension. The</span>
+        <span class="c1"># instance variable channels will also be used as a partial axis</span>
+        <span class="c1"># list when constructing meta-data. It contains the spatial</span>
+        <span class="c1"># dimensions.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">getAxisList</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_timeax</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;one or more spatial dimensions are required&#39;</span><span class="p">)</span>
-        <span class="c"># Store the missing value attribute of the data set in an</span>
-        <span class="c"># instance variable so that it is recoverable later.</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;one or more spatial dimensions are required&#39;</span><span class="p">)</span>
+        <span class="c1"># Store the missing value attribute of the data set in an</span>
+        <span class="c1"># instance variable so that it is recoverable later.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_missing_value</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">getMissing</span><span class="p">()</span>
-        <span class="c"># Generate an appropriate set of weights for the input dataset. There</span>
-        <span class="c"># are several weighting schemes. The &#39;area&#39; weighting scheme requires</span>
-        <span class="c"># a latitude-longitude grid to be present, the &#39;cos_lat&#39; scheme only</span>
-        <span class="c"># requires a latitude dimension.</span>
-        <span class="k">if</span> <span class="n">weights</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;none&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">):</span>
-            <span class="c"># No weights requested, set the weight array to None.</span>
+        <span class="c1"># Generate an appropriate set of weights for the input dataset. There</span>
+        <span class="c1"># are several weighting schemes. The &#39;area&#39; weighting scheme requires</span>
+        <span class="c1"># a latitude-longitude grid to be present, the &#39;cos_lat&#39; scheme only</span>
+        <span class="c1"># requires a latitude dimension.</span>
+        <span class="k">if</span> <span class="n">weights</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">):</span>
+            <span class="c1"># No weights requested, set the weight array to None.</span>
             <span class="n">wtarray</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="c"># Generate a weights array of the appropriate kind, with a</span>
-                <span class="c"># shape compatible with the data set.</span>
+                <span class="c1"># Generate a weights array of the appropriate kind, with a</span>
+                <span class="c1"># shape compatible with the data set.</span>
                 <span class="n">scheme</span> <span class="o">=</span> <span class="n">weights</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
                 <span class="n">wtarray</span> <span class="o">=</span> <span class="n">weights_array</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="n">scheme</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-                <span class="c"># Weights is not a string, assume it is an array.</span>
+                <span class="c1"># Weights is not a string, assume it is an array.</span>
                 <span class="n">wtarray</span> <span class="o">=</span> <span class="n">weights</span>
-            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">,</span> <span class="n">err</span><span class="p">:</span>
-                <span class="c"># Weights is not recognized, raise an error.</span>
+            <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+                <span class="c1"># Weights is not recognized, raise an error.</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
-        <span class="c"># Cast the wtarray to the same type as the dataset. This prevents the</span>
-        <span class="c"># promotion of 32-bit input to 64-bit on multiplication with the</span>
-        <span class="c"># weight array when not required. This will fail with a AttributeError</span>
-        <span class="c"># exception if the weights array is None, which it may be if no</span>
-        <span class="c"># weighting was requested.</span>
+        <span class="c1"># Cast the wtarray to the same type as the dataset. This prevents the</span>
+        <span class="c1"># promotion of 32-bit input to 64-bit on multiplication with the</span>
+        <span class="c1"># weight array when not required. This will fail with a AttributeError</span>
+        <span class="c1"># exception if the weights array is None, which it may be if no</span>
+        <span class="c1"># weighting was requested.</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">wtarray</span> <span class="o">=</span> <span class="n">wtarray</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
             <span class="k">pass</span>
-        <span class="c"># Create an EofSolver object using appropriate arguments for this</span>
-        <span class="c"># data set. The object will be used for the decomposition and</span>
-        <span class="c"># for returning the results.</span>
+        <span class="c1"># Create an EofSolver object using appropriate arguments for this</span>
+        <span class="c1"># data set. The object will be used for the decomposition and</span>
+        <span class="c1"># for returning the results.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span> <span class="o">=</span> <span class="n">standard</span><span class="o">.</span><span class="n">Eof</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">asma</span><span class="p">(),</span>
                                     <span class="n">weights</span><span class="o">=</span><span class="n">wtarray</span><span class="p">,</span>
                                     <span class="n">center</span><span class="o">=</span><span class="n">center</span><span class="p">,</span>
                                     <span class="n">ddof</span><span class="o">=</span><span class="n">ddof</span><span class="p">)</span>
-        <span class="c">#: Number of EOFs in the solution.</span>
+        <span class="c1">#: Number of EOFs in the solution.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">neofs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">neofs</span>
-        <span class="c"># name for the dataset.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_dataset_name</span> <span class="o">=</span> <span class="n">cdms2_name</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">,</span> <span class="s">&#39;_&#39;</span><span class="p">)</span>
+        <span class="c1"># name for the dataset.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dataset_name</span> <span class="o">=</span> <span class="n">cdms2_name</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_dataset_id</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">id</span>
 
 <div class="viewcode-block" id="Eof.pcs"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof.pcs">[docs]</a>    <span class="k">def</span> <span class="nf">pcs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pcscaling</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">npcs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
@@ -324,11 +324,11 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">pcs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">pcs</span><span class="p">(</span><span class="n">pcscaling</span><span class="p">,</span> <span class="n">npcs</span><span class="p">)</span>
-        <span class="n">pcsax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;pc&#39;</span><span class="p">)</span>
-        <span class="n">pcsax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;pc_number&#39;</span>
+        <span class="n">pcsax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])),</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;pc&#39;</span><span class="p">)</span>
+        <span class="n">pcsax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s1">&#39;pc_number&#39;</span>
         <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_timeax</span><span class="p">,</span> <span class="n">pcsax</span><span class="p">]</span>
-        <span class="n">pcs</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;pcs&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">)</span>
-        <span class="n">pcs</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;principal_components&#39;</span>
+        <span class="n">pcs</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;pcs&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">)</span>
+        <span class="n">pcs</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s1">&#39;principal_components&#39;</span>
         <span class="k">return</span> <span class="n">pcs</span>
 </div>
 <div class="viewcode-block" id="Eof.eofs"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof.eofs">[docs]</a>    <span class="k">def</span> <span class="nf">eofs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eofscaling</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">neofs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
@@ -370,14 +370,14 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">eofs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">eofs</span><span class="p">(</span><span class="n">eofscaling</span><span class="p">,</span> <span class="n">neofs</span><span class="p">)</span>
         <span class="n">eofs</span><span class="o">.</span><span class="n">fill_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_missing_value</span>
-        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">eofs</span><span class="p">)),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eof&#39;</span><span class="p">)</span>
-        <span class="n">eofax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;eof_number&#39;</span>
+        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">eofs</span><span class="p">))),</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;eof&#39;</span><span class="p">)</span>
+        <span class="n">eofax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s1">&#39;eof_number&#39;</span>
         <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">eofax</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span>
         <span class="n">eofs</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">eofs</span><span class="p">,</span>
-                                    <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eofs&#39;</span><span class="p">,</span>
+                                    <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;eofs&#39;</span><span class="p">,</span>
                                     <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">,</span>
                                     <span class="n">fill_value</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_missing_value</span><span class="p">)</span>
-        <span class="n">eofs</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;empirical_orthogonal_functions&#39;</span>
+        <span class="n">eofs</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s1">&#39;empirical_orthogonal_functions&#39;</span>
         <span class="k">return</span> <span class="n">eofs</span>
 </div>
 <div class="viewcode-block" id="Eof.eofsAsCorrelation"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof.eofsAsCorrelation">[docs]</a>    <span class="k">def</span> <span class="nf">eofsAsCorrelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">neofs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
@@ -418,14 +418,14 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">eofs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">eofsAsCorrelation</span><span class="p">(</span><span class="n">neofs</span><span class="p">)</span>
         <span class="n">eofs</span><span class="o">.</span><span class="n">fill_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_missing_value</span>
-        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">eofs</span><span class="p">)),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eof&#39;</span><span class="p">)</span>
-        <span class="n">eofax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;eof_number&#39;</span>
+        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">eofs</span><span class="p">))),</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;eof&#39;</span><span class="p">)</span>
+        <span class="n">eofax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s1">&#39;eof_number&#39;</span>
         <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">eofax</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span>
         <span class="n">eofs</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">eofs</span><span class="p">,</span>
-                                    <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eofs&#39;</span><span class="p">,</span>
+                                    <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;eofs&#39;</span><span class="p">,</span>
                                     <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">,</span>
                                     <span class="n">fill_value</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_missing_value</span><span class="p">)</span>
-        <span class="n">eofs</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;correlation_between_pcs_and_{:s}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">eofs</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s1">&#39;correlation_between_pcs_and_{:s}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_dataset_name</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">eofs</span>
 </div>
@@ -480,13 +480,13 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">eofs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">eofsAsCovariance</span><span class="p">(</span><span class="n">neofs</span><span class="p">,</span> <span class="n">pcscaling</span><span class="p">)</span>
         <span class="n">eofs</span><span class="o">.</span><span class="n">fill_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_missing_value</span>
-        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">eofs</span><span class="p">)),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eof&#39;</span><span class="p">)</span>
+        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">eofs</span><span class="p">))),</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;eof&#39;</span><span class="p">)</span>
         <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">eofax</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span>
         <span class="n">eofs</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">eofs</span><span class="p">,</span>
-                                    <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eofs_cov&#39;</span><span class="p">,</span>
+                                    <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;eofs_cov&#39;</span><span class="p">,</span>
                                     <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">,</span>
                                     <span class="n">fill_value</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_missing_value</span><span class="p">)</span>
-        <span class="n">eofs</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;covariance_between_pcs_and_{:s}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">eofs</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s1">&#39;covariance_between_pcs_and_{:s}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_dataset_name</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">eofs</span>
 </div>
@@ -519,11 +519,11 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">lambdas</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">(</span><span class="n">neigs</span><span class="o">=</span><span class="n">neigs</span><span class="p">)</span>
-        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lambdas</span><span class="p">)),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eigenvalue&#39;</span><span class="p">)</span>
-        <span class="n">eofax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;eigenvalue_number&#39;</span>
+        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lambdas</span><span class="p">))),</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;eigenvalue&#39;</span><span class="p">)</span>
+        <span class="n">eofax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s1">&#39;eigenvalue_number&#39;</span>
         <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">eofax</span><span class="p">]</span>
-        <span class="n">lambdas</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">lambdas</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eigenvalues&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">)</span>
-        <span class="n">lambdas</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;eigenvalues&#39;</span>
+        <span class="n">lambdas</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">lambdas</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;eigenvalues&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">)</span>
+        <span class="n">lambdas</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s1">&#39;eigenvalues&#39;</span>
         <span class="k">return</span> <span class="n">lambdas</span>
 </div>
 <div class="viewcode-block" id="Eof.varianceFraction"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof.varianceFraction">[docs]</a>    <span class="k">def</span> <span class="nf">varianceFraction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">neigs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
@@ -560,12 +560,12 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">vfrac</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">varianceFraction</span><span class="p">(</span><span class="n">neigs</span><span class="o">=</span><span class="n">neigs</span><span class="p">)</span>
-        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vfrac</span><span class="p">)),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eigenvalue&#39;</span><span class="p">)</span>
-        <span class="n">eofax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;eigenvalue_number&#39;</span>
+        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vfrac</span><span class="p">))),</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;eigenvalue&#39;</span><span class="p">)</span>
+        <span class="n">eofax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s1">&#39;eigenvalue_number&#39;</span>
         <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">eofax</span><span class="p">]</span>
-        <span class="n">vfrac</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">vfrac</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;variance_fractions&#39;</span><span class="p">,</span>
+        <span class="n">vfrac</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">vfrac</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;variance_fractions&#39;</span><span class="p">,</span>
                                      <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">)</span>
-        <span class="n">vfrac</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;variance_fractions&#39;</span>
+        <span class="n">vfrac</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s1">&#39;variance_fractions&#39;</span>
         <span class="k">return</span> <span class="n">vfrac</span>
 </div>
 <div class="viewcode-block" id="Eof.totalAnomalyVariance"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof.totalAnomalyVariance">[docs]</a>    <span class="k">def</span> <span class="nf">totalAnomalyVariance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -634,13 +634,13 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">typerrs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">northTest</span><span class="p">(</span><span class="n">neigs</span><span class="o">=</span><span class="n">neigs</span><span class="p">,</span> <span class="n">vfscaled</span><span class="o">=</span><span class="n">vfscaled</span><span class="p">)</span>
-        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">typerrs</span><span class="p">)),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;eigenvalue&#39;</span><span class="p">)</span>
-        <span class="n">eofax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;eigenvalue_number&#39;</span>
+        <span class="n">eofax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">typerrs</span><span class="p">))),</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;eigenvalue&#39;</span><span class="p">)</span>
+        <span class="n">eofax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s1">&#39;eigenvalue_number&#39;</span>
         <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">eofax</span><span class="p">]</span>
         <span class="n">typerrs</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">typerrs</span><span class="p">,</span>
-                                       <span class="nb">id</span><span class="o">=</span><span class="s">&#39;typical_errors&#39;</span><span class="p">,</span>
+                                       <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;typical_errors&#39;</span><span class="p">,</span>
                                        <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">)</span>
-        <span class="n">typerrs</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;typical_errors&#39;</span>
+        <span class="n">typerrs</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s1">&#39;typical_errors&#39;</span>
         <span class="k">return</span> <span class="n">typerrs</span>
 </div>
 <div class="viewcode-block" id="Eof.reconstructedField"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof.reconstructedField">[docs]</a>    <span class="k">def</span> <span class="nf">reconstructedField</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">neofs</span><span class="p">):</span>
@@ -684,10 +684,10 @@
                                       <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">,</span>
                                       <span class="n">fill_value</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_missing_value</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">neofs</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">):</span>
-            <span class="n">name_part</span> <span class="o">=</span> <span class="s">&#39;EOFs_{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">neofs</span><span class="p">]))</span>
+            <span class="n">name_part</span> <span class="o">=</span> <span class="s1">&#39;EOFs_{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">neofs</span><span class="p">]))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">name_part</span> <span class="o">=</span> <span class="s">&#39;{:d}_EOFs&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">neofs</span><span class="p">)</span>
-        <span class="n">rfield</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;{:s}_reconstructed_with_{:s}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">name_part</span> <span class="o">=</span> <span class="s1">&#39;{:d}_EOFs&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">neofs</span><span class="p">)</span>
+        <span class="n">rfield</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s1">&#39;{:s}_reconstructed_with_{:s}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_dataset_name</span><span class="p">,</span> <span class="n">name_part</span><span class="p">)</span>
         <span class="n">rfield</span><span class="o">.</span><span class="n">neofs</span> <span class="o">=</span> <span class="n">neofs</span>
         <span class="k">return</span> <span class="n">rfield</span>
@@ -750,30 +750,30 @@
 <span class="sd">            pseudo_pcs = solver.projectField(field, neofs=3)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c"># Check that field is recognised by cdms2 as a variable.</span>
+        <span class="c1"># Check that field is recognised by cdms2 as a variable.</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">isVariable</span><span class="p">(</span><span class="n">field</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;the input field must be a cdms2 variable&#39;</span><span class="p">)</span>
-        <span class="n">dataset_name</span> <span class="o">=</span> <span class="n">cdms2_name</span><span class="p">(</span><span class="n">field</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">,</span> <span class="s">&#39;_&#39;</span><span class="p">)</span>
-        <span class="c"># Compute the projected PCs.</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;the input field must be a cdms2 variable&#39;</span><span class="p">)</span>
+        <span class="n">dataset_name</span> <span class="o">=</span> <span class="n">cdms2_name</span><span class="p">(</span><span class="n">field</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span>
+        <span class="c1"># Compute the projected PCs.</span>
         <span class="n">pcs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">projectField</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">asma</span><span class="p">(),</span>
                                         <span class="n">neofs</span><span class="o">=</span><span class="n">neofs</span><span class="p">,</span>
                                         <span class="n">eofscaling</span><span class="o">=</span><span class="n">eofscaling</span><span class="p">,</span>
                                         <span class="n">weighted</span><span class="o">=</span><span class="n">weighted</span><span class="p">)</span>
-        <span class="c"># Construct the required axes.</span>
+        <span class="c1"># Construct the required axes.</span>
         <span class="k">if</span> <span class="n">pcs</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="c"># 2D PCs require a time axis and a PC axis.</span>
-            <span class="n">pcsax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;pc&#39;</span><span class="p">)</span>
-            <span class="n">pcsax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;pc_number&#39;</span>
-            <span class="n">timeax</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">getAxis</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c"># time is assumed to be first anyway</span>
+            <span class="c1"># 2D PCs require a time axis and a PC axis.</span>
+            <span class="n">pcsax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])),</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;pc&#39;</span><span class="p">)</span>
+            <span class="n">pcsax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s1">&#39;pc_number&#39;</span>
+            <span class="n">timeax</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">getAxis</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># time is assumed to be first anyway</span>
             <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">timeax</span><span class="p">,</span> <span class="n">pcsax</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="c"># 1D PCs require only a PC axis.</span>
-            <span class="n">pcsax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;pc&#39;</span><span class="p">)</span>
-            <span class="n">pcsax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;pc_number&#39;</span>
+            <span class="c1"># 1D PCs require only a PC axis.</span>
+            <span class="n">pcsax</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createAxis</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;pc&#39;</span><span class="p">)</span>
+            <span class="n">pcsax</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s1">&#39;pc_number&#39;</span>
             <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">pcsax</span><span class="p">]</span>
-        <span class="c"># Apply meta data to the projected PCs.</span>
-        <span class="n">pcs</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;pseudo_pcs&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">)</span>
-        <span class="n">pcs</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">&#39;{:s}_pseudo_pcs&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">)</span>
+        <span class="c1"># Apply meta data to the projected PCs.</span>
+        <span class="n">pcs</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;pseudo_pcs&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">)</span>
+        <span class="n">pcs</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s1">&#39;{:s}_pseudo_pcs&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">pcs</span>
 </div>
 <div class="viewcode-block" id="Eof.getWeights"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof.getWeights">[docs]</a>    <span class="k">def</span> <span class="nf">getWeights</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

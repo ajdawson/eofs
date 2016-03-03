@@ -8,6 +8,7 @@ Examples
    standard_examples_index
    cdms_examples_index
    iris_examples_index
+   xarray_examples_index
 
 .. note::
 

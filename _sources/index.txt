@@ -20,7 +20,7 @@ Some of the key features of `eofs` are:
 
 * **Suitable for large data sets:** computationally efficient for the large output data sets of modern climate models.
 * **Transparent handling of missing values:** missing values are removed automatically during computations and placed back into output fields.
-* **Automatic metadata:** metadata from input fields is used to construct metadata for output fields (requires the `cdms2` module from UV-CDAT_ or the iris_ data analysis package).
+* **Automatic metadata:** metadata from input fields is used to construct metadata for output fields.
 * **No Compiler required:** a fast implementation written in pure Python using the power of numpy_, no Fortran or C dependencies.
 
 
@@ -28,7 +28,7 @@ Download and installation
 -------------------------
 
 The core of the package runs on Python 2 or 3, on Linux, Windows or OSX; basically anywhere Python+NumPy are available.
-The :ref:`cdms <cdms-interface>` and :ref:`iris <iris-interface>` interfaces are available on all platforms where their respective supporting packages UV-CDAT_ and iris_ can be installed.
+The :ref:`cdms <cdms-interface>`, :ref:`iris <iris-interface>`, and :ref:`xarray <xarray-interface>` interfaces are available on all platforms where their respective supporting packages UV-CDAT_, iris_, and xarray_ can be installed.
 
 `eofs` can be installed for all platforms using conda_::
 
@@ -50,7 +50,7 @@ You can also check out the source code for the development version from the `git
 Getting started
 ---------------
 
-`eofs` provides three interfaces for EOF analysis: one for analysing data contained in `numpy` arrays or masked arrays, suitable for any data set; and two for meta-data aware EOF analysis, suitable for analysing data read from self-describing files, using either the `cdms2` or `iris` packages.
+`eofs` provides three interfaces for EOF analysis: one for analysing data contained in `numpy` arrays or masked arrays, suitable for any data set; and two for meta-data aware EOF analysis, suitable for analysing data read from self-describing files, using either the `cdms2`, `iris`, or `xarray` packages.
 All the interfaces support the same set of operations.
 
 Regardless of which interface you use, the basic usage is the same.
@@ -83,6 +83,7 @@ This package requires as a minimum that you have numpy_ available, and requires 
 The `eofs.cdms` meta-data enabled interface can only be used if the `cdms2` module is available.
 This module is distributed as part of the UV-CDAT_ project.
 The `eofs.iris` meta-data enabled interface can only be used if the iris_ package is available at version 1.2 or higher.
+The `eofs.xarray` meta-data enabled interface can only be used if the xarray_ package (or earlier xray package) is installed.
 
 
 Developing and contributing
@@ -96,6 +97,8 @@ If you would like to contribute code or documentation please see the :doc:`devgu
 .. _UV-CDAT: http://uv-cdat.llnl.gov
 
 .. _iris: http://scitools.org.uk/iris
+
+.. _xarray: http://xarray.pydata.org
 
 .. _numpy: http://www.numpy.org
 

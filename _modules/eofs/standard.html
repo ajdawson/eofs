@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>eofs.standard &mdash; eofs 1.0.0 documentation</title>
+    <title>eofs.standard &mdash; eofs 1.1.0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '1.0.0',
+        VERSION:     '1.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 1.0.0 documentation" href="../../index.html" />
+    <link rel="top" title="eofs 1.1.0 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
           rel='stylesheet' type='text/css' />
@@ -86,7 +86,7 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v1.0.0</h2>
+    <h2>eofs v1.1.0</h2>
     <h3>Table of Contents</h3>
     <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../userguide/index.html">User Guide</a></li>
@@ -119,24 +119,24 @@
           <div class="body" role="main">
             
   <h1>Source code for eofs.standard</h1><div class="highlight"><pre>
-<span class="sd">&quot;&quot;&quot;EOF analysis for data in `numpy` arrays.&quot;&quot;&quot;</span>
-<span class="c"># (c) Copyright 2000 Jon Saenz, Jesus Fernandez and Juan Zubillaga.</span>
-<span class="c"># (c) Copyright 2010-2015 Andrew Dawson. All Rights Reserved.</span>
-<span class="c">#</span>
-<span class="c"># This file is part of eofs.</span>
-<span class="c">#</span>
-<span class="c"># eofs is free software: you can redistribute it and/or modify</span>
-<span class="c"># it under the terms of the GNU General Public License as published by</span>
-<span class="c"># the Free Software Foundation, either version 3 of the License, or</span>
-<span class="c"># (at your option) any later version.</span>
-<span class="c">#</span>
-<span class="c"># eofs is distributed in the hope that it will be useful, but WITHOUT</span>
-<span class="c"># ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span>
-<span class="c"># FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License</span>
-<span class="c"># for more details.</span>
-<span class="c">#</span>
-<span class="c"># You should have received a copy of the GNU General Public License</span>
-<span class="c"># along with eofs.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span></span><span class="sd">&quot;&quot;&quot;EOF analysis for data in `numpy` arrays.&quot;&quot;&quot;</span>
+<span class="c1"># (c) Copyright 2000 Jon Saenz, Jesus Fernandez and Juan Zubillaga.</span>
+<span class="c1"># (c) Copyright 2010-2016 Andrew Dawson. All Rights Reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of eofs.</span>
+<span class="c1">#</span>
+<span class="c1"># eofs is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># eofs is distributed in the hope that it will be useful, but WITHOUT</span>
+<span class="c1"># ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span>
+<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License</span>
+<span class="c1"># for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with eofs.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 <span class="kn">import</span> <span class="nn">collections</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
@@ -222,92 +222,92 @@
 <span class="sd">            solver = Eof(data, weights=weight_array)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c"># Store the input data in an instance variable.</span>
+        <span class="c1"># Store the input data in an instance variable.</span>
         <span class="k">if</span> <span class="n">dataset</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;the input data set must be &#39;</span>
-                             <span class="s">&#39;at least two dimensional&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;the input data set must be &#39;</span>
+                             <span class="s1">&#39;at least two dimensional&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="c"># Check if the input is a masked array. If so fill it with NaN.</span>
+        <span class="c1"># Check if the input is a masked array. If so fill it with NaN.</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">filled</span><span class="p">(</span><span class="n">fill_value</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_filled</span> <span class="o">=</span> <span class="bp">True</span>
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_filled</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="c"># Store information about the shape/size of the input data.</span>
+        <span class="c1"># Store information about the shape/size of the input data.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_records</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_originalshape</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
         <span class="n">channels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_originalshape</span><span class="p">)</span>
-        <span class="c"># Weight the data set according to weighting argument.</span>
+        <span class="c1"># Weight the data set according to weighting argument.</span>
         <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="c"># The broadcast_arrays call returns a list, so the second index</span>
-                <span class="c"># is retained, but also we want to remove the time dimension</span>
-                <span class="c"># from the weights so the the first index from the broadcast</span>
-                <span class="c"># array is taken.</span>
+                <span class="c1"># The broadcast_arrays call returns a list, so the second index</span>
+                <span class="c1"># is retained, but also we want to remove the time dimension</span>
+                <span class="c1"># from the weights so the the first index from the broadcast</span>
+                <span class="c1"># array is taken.</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">broadcast_arrays</span><span class="p">(</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">],</span> <span class="n">weights</span><span class="p">)[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span>
             <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;weight array dimensions are incompatible&#39;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;weight array dimensions are incompatible&#39;</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;weights are not a valid type&#39;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;weights are not a valid type&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="c"># Remove the time mean of the input data unless explicitly told</span>
-        <span class="c"># not to by the &quot;center&quot; argument.</span>
+        <span class="c1"># Remove the time mean of the input data unless explicitly told</span>
+        <span class="c1"># not to by the &quot;center&quot; argument.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_centered</span> <span class="o">=</span> <span class="n">center</span>
         <span class="k">if</span> <span class="n">center</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_center</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">)</span>
-        <span class="c"># Reshape to two dimensions (time, space) creating the design matrix.</span>
+        <span class="c1"># Reshape to two dimensions (time, space) creating the design matrix.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">_records</span><span class="p">,</span> <span class="n">channels</span><span class="p">])</span>
-        <span class="c"># Find the indices of values that are not missing in one row. All the</span>
-        <span class="c"># rows will have missing values in the same places provided the</span>
-        <span class="c"># array was centered. If it wasn&#39;t then it is possible that some</span>
-        <span class="c"># missing values will be missed and the singular value decomposition</span>
-        <span class="c"># will produce not a number for everything.</span>
+        <span class="c1"># Find the indices of values that are not missing in one row. All the</span>
+        <span class="c1"># rows will have missing values in the same places provided the</span>
+        <span class="c1"># array was centered. If it wasn&#39;t then it is possible that some</span>
+        <span class="c1"># missing values will be missed and the singular value decomposition</span>
+        <span class="c1"># will produce not a number for everything.</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_valid_nan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;missing values detected in different &#39;</span>
-                             <span class="s">&#39;locations at different times&#39;</span><span class="p">)</span>
-        <span class="n">nonMissingIndex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="bp">False</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="c"># Remove missing values from the design matrix.</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;missing values detected in different &#39;</span>
+                             <span class="s1">&#39;locations at different times&#39;</span><span class="p">)</span>
+        <span class="n">nonMissingIndex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">])))[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># Remove missing values from the design matrix.</span>
         <span class="n">dataNoMissing</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[:,</span> <span class="n">nonMissingIndex</span><span class="p">]</span>
-        <span class="c"># Compute the singular value decomposition of the design matrix.</span>
+        <span class="c1"># Compute the singular value decomposition of the design matrix.</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">A</span><span class="p">,</span> <span class="n">Lh</span><span class="p">,</span> <span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">dataNoMissing</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
         <span class="k">except</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;error encountered in SVD, check that missing &#39;</span>
-                             <span class="s">&#39;values are in the same places at each time and &#39;</span>
-                             <span class="s">&#39;that all the values are not missing&#39;</span><span class="p">)</span>
-        <span class="c"># Singular values are the square-root of the eigenvalues of the</span>
-        <span class="c"># covariance matrix. Construct the eigenvalues appropriately and</span>
-        <span class="c"># normalize by N-ddof where N is the number of observations. This</span>
-        <span class="c"># corresponds to the eigenvalues of the normalized covariance matrix.</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;error encountered in SVD, check that missing &#39;</span>
+                             <span class="s1">&#39;values are in the same places at each time and &#39;</span>
+                             <span class="s1">&#39;that all the values are not missing&#39;</span><span class="p">)</span>
+        <span class="c1"># Singular values are the square-root of the eigenvalues of the</span>
+        <span class="c1"># covariance matrix. Construct the eigenvalues appropriately and</span>
+        <span class="c1"># normalize by N-ddof where N is the number of observations. This</span>
+        <span class="c1"># corresponds to the eigenvalues of the normalized covariance matrix.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_ddof</span> <span class="o">=</span> <span class="n">ddof</span>
         <span class="n">normfactor</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_records</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ddof</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_L</span> <span class="o">=</span> <span class="n">Lh</span> <span class="o">*</span> <span class="n">Lh</span> <span class="o">/</span> <span class="n">normfactor</span>
-        <span class="c"># Store the number of eigenvalues (and hence EOFs) that were actually</span>
-        <span class="c"># computed.</span>
+        <span class="c1"># Store the number of eigenvalues (and hence EOFs) that were actually</span>
+        <span class="c1"># computed.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">neofs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_L</span><span class="p">)</span>
-        <span class="c"># Re-introduce missing values into the eigenvectors in the same places</span>
-        <span class="c"># as they exist in the input maps. Create an array of not-a-numbers</span>
-        <span class="c"># and then introduce data values where required. We have to use the</span>
-        <span class="c"># astype method to ensure the eigenvectors are the same type as the</span>
-        <span class="c"># input dataset since multiplication by np.NaN will promote to 64-bit.</span>
+        <span class="c1"># Re-introduce missing values into the eigenvectors in the same places</span>
+        <span class="c1"># as they exist in the input maps. Create an array of not-a-numbers</span>
+        <span class="c1"># and then introduce data values where required. We have to use the</span>
+        <span class="c1"># astype method to ensure the eigenvectors are the same type as the</span>
+        <span class="c1"># input dataset since multiplication by np.NaN will promote to 64-bit.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_flatE</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">neofs</span><span class="p">,</span> <span class="n">channels</span><span class="p">],</span>
                               <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">NaN</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_flatE</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flatE</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_flatE</span><span class="p">[:,</span> <span class="n">nonMissingIndex</span><span class="p">]</span> <span class="o">=</span> <span class="n">E</span>
-        <span class="c"># Remove the scaling on the principal component time-series that is</span>
-        <span class="c"># implicitily introduced by using SVD instead of eigen-decomposition.</span>
-        <span class="c"># The PCs may be re-scaled later if required.</span>
+        <span class="c1"># Remove the scaling on the principal component time-series that is</span>
+        <span class="c1"># implicitily introduced by using SVD instead of eigen-decomposition.</span>
+        <span class="c1"># The PCs may be re-scaled later if required.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_P</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="n">Lh</span>
 
     <span class="k">def</span> <span class="nf">_center</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_array</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Remove the mean of an array along the first dimension.&quot;&quot;&quot;</span>
-        <span class="c"># Compute the mean along the first dimension.</span>
+        <span class="c1"># Compute the mean along the first dimension.</span>
         <span class="n">mean</span> <span class="o">=</span> <span class="n">in_array</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-        <span class="c"># Return the input array with its mean along the first dimension</span>
-        <span class="c"># removed.</span>
+        <span class="c1"># Return the input array with its mean along the first dimension</span>
+        <span class="c1"># removed.</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">in_array</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_valid_nan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_array</span><span class="p">):</span>
@@ -318,15 +318,15 @@
         <span class="sd">&quot;&quot;&quot;Verify that a field can be projected onto another&quot;&quot;&quot;</span>
         <span class="n">eof_ndim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">proj_space_shape</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="k">if</span> <span class="n">eof_ndim</span> <span class="o">-</span> <span class="n">proj_field</span><span class="o">.</span><span class="n">ndim</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;field has the wrong number of dimensions &#39;</span>
-                             <span class="s">&#39;to be projected onto EOFs&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;field has the wrong number of dimensions &#39;</span>
+                             <span class="s1">&#39;to be projected onto EOFs&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">proj_field</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="n">eof_ndim</span><span class="p">:</span>
             <span class="n">check_shape</span> <span class="o">=</span> <span class="n">proj_field</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">check_shape</span> <span class="o">=</span> <span class="n">proj_field</span><span class="o">.</span><span class="n">shape</span>
         <span class="k">if</span> <span class="n">check_shape</span> <span class="o">!=</span> <span class="n">proj_space_shape</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;field has the wrong shape to be projected &#39;</span>
-                             <span class="s">&#39; onto the EOFs&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;field has the wrong shape to be projected &#39;</span>
+                             <span class="s1">&#39; onto the EOFs&#39;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Eof.pcs"><a class="viewcode-back" href="../../api/eofs.standard.html#eofs.standard.Eof.pcs">[docs]</a>    <span class="k">def</span> <span class="nf">pcs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pcscaling</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">npcs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Principal component time series (PCs).</span>
@@ -366,17 +366,17 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">slicer</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">npcs</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">pcscaling</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="c"># Do not scale.</span>
+            <span class="c1"># Do not scale.</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_P</span><span class="p">[:,</span> <span class="n">slicer</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="k">elif</span> <span class="n">pcscaling</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="c"># Divide by the square-root of the eigenvalue.</span>
+            <span class="c1"># Divide by the square-root of the eigenvalue.</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_P</span><span class="p">[:,</span> <span class="n">slicer</span><span class="p">]</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_L</span><span class="p">[</span><span class="n">slicer</span><span class="p">])</span>
         <span class="k">elif</span> <span class="n">pcscaling</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="c"># Multiply by the square root of the eigenvalue.</span>
+            <span class="c1"># Multiply by the square root of the eigenvalue.</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_P</span><span class="p">[:,</span> <span class="n">slicer</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_L</span><span class="p">[</span><span class="n">slicer</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;invalid PC scaling option: &#39;</span>
-                             <span class="s">&#39;{!s}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pcscaling</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;invalid PC scaling option: &#39;</span>
+                             <span class="s1">&#39;{!s}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pcscaling</span><span class="p">))</span>
 </div>
 <div class="viewcode-block" id="Eof.eofs"><a class="viewcode-back" href="../../api/eofs.standard.html#eofs.standard.Eof.eofs">[docs]</a>    <span class="k">def</span> <span class="nf">eofs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eofscaling</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">neofs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Empirical orthogonal functions (EOFs).</span>
@@ -420,20 +420,19 @@
         <span class="n">neofs</span> <span class="o">=</span> <span class="n">neofs</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">neofs</span>
         <span class="n">flat_eofs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flatE</span><span class="p">[</span><span class="n">slicer</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">eofscaling</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="c"># No modification. A copy needs to be returned in case it is</span>
-            <span class="c"># modified. If no copy is made the internally stored eigenvectors</span>
-            <span class="c"># could be modified unintentionally.</span>
-            <span class="c">#rval = self._flatE[slicer].copy()</span>
+            <span class="c1"># No modification. A copy needs to be returned in case it is</span>
+            <span class="c1"># modified. If no copy is made the internally stored eigenvectors</span>
+            <span class="c1"># could be modified unintentionally.</span>
             <span class="n">rval</span> <span class="o">=</span> <span class="n">flat_eofs</span>
         <span class="k">elif</span> <span class="n">eofscaling</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="c"># Divide by the square-root of the eigenvalues.</span>
+            <span class="c1"># Divide by the square-root of the eigenvalues.</span>
             <span class="n">rval</span> <span class="o">=</span> <span class="n">flat_eofs</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_L</span><span class="p">[</span><span class="n">slicer</span><span class="p">])[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
         <span class="k">elif</span> <span class="n">eofscaling</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="c"># Multiply by the square-root of the eigenvalues.</span>
+            <span class="c1"># Multiply by the square-root of the eigenvalues.</span>
             <span class="n">rval</span> <span class="o">=</span> <span class="n">flat_eofs</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_L</span><span class="p">[</span><span class="n">slicer</span><span class="p">])[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;invalid eof scaling option: &#39;</span>
-                             <span class="s">&#39;{!s}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">eofscaling</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;invalid eof scaling option: &#39;</span>
+                             <span class="s1">&#39;{!s}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">eofscaling</span><span class="p">))</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filled</span><span class="p">:</span>
             <span class="n">rval</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rval</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">rval</span><span class="p">),</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">rval</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">neofs</span><span class="p">,)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_originalshape</span><span class="p">)</span>
@@ -474,15 +473,15 @@
 <span class="sd">            eof1 = solver.eofsAsCorrelation(neofs=1)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c"># Retrieve the specified number of PCs.</span>
+        <span class="c1"># Retrieve the specified number of PCs.</span>
         <span class="n">pcs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pcs</span><span class="p">(</span><span class="n">npcs</span><span class="o">=</span><span class="n">neofs</span><span class="p">,</span> <span class="n">pcscaling</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="c"># Compute the correlation of the PCs with the input field.</span>
+        <span class="c1"># Compute the correlation of the PCs with the input field.</span>
         <span class="n">c</span> <span class="o">=</span> <span class="n">correlation_map</span><span class="p">(</span>
             <span class="n">pcs</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_records</span><span class="p">,)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_originalshape</span><span class="p">))</span>
-        <span class="c"># The results of the correlation_map function will be a masked array.</span>
-        <span class="c"># For consistency with other return values, this is converted to a</span>
-        <span class="c"># numpy array filled with numpy.nan.</span>
+        <span class="c1"># The results of the correlation_map function will be a masked array.</span>
+        <span class="c1"># For consistency with other return values, this is converted to a</span>
+        <span class="c1"># numpy array filled with numpy.nan.</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filled</span><span class="p">:</span>
             <span class="n">c</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">filled</span><span class="p">(</span><span class="n">fill_value</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">c</span>
@@ -537,17 +536,17 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">pcs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pcs</span><span class="p">(</span><span class="n">npcs</span><span class="o">=</span><span class="n">neofs</span><span class="p">,</span> <span class="n">pcscaling</span><span class="o">=</span><span class="n">pcscaling</span><span class="p">)</span>
-        <span class="c"># Divide the input data by the weighting (if any) before computing</span>
-        <span class="c"># the covariance maps.</span>
+        <span class="c1"># Divide the input data by the weighting (if any) before computing</span>
+        <span class="c1"># the covariance maps.</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_records</span><span class="p">,)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_originalshape</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
-                <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s">&#39;ignore&#39;</span><span class="p">,</span> <span class="ne">RuntimeWarning</span><span class="p">)</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="ne">RuntimeWarning</span><span class="p">)</span>
                 <span class="n">data</span> <span class="o">/=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span>
         <span class="n">c</span> <span class="o">=</span> <span class="n">covariance_map</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_ddof</span><span class="p">)</span>
-        <span class="c"># The results of the covariance_map function will be a masked array.</span>
-        <span class="c"># For consitsency with other return values, this is converted to a</span>
-        <span class="c"># numpy array filled with numpy.nan.</span>
+        <span class="c1"># The results of the covariance_map function will be a masked array.</span>
+        <span class="c1"># For consitsency with other return values, this is converted to a</span>
+        <span class="c1"># numpy array filled with numpy.nan.</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filled</span><span class="p">:</span>
             <span class="n">c</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">filled</span><span class="p">(</span><span class="n">fill_value</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">c</span>
@@ -580,10 +579,10 @@
 <span class="sd">            eigenvalue1 = solver.eigenvalues(neigs=1)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c"># Create a slicer and use it on the eigenvalue array. A copy must be</span>
-        <span class="c"># returned in case the slicer takes all elements, in which case a</span>
-        <span class="c"># reference to the eigenvalue array is returned. If this is modified</span>
-        <span class="c"># then the internal eigenvalues array would then be modified as well.</span>
+        <span class="c1"># Create a slicer and use it on the eigenvalue array. A copy must be</span>
+        <span class="c1"># returned in case the slicer takes all elements, in which case a</span>
+        <span class="c1"># reference to the eigenvalue array is returned. If this is modified</span>
+        <span class="c1"># then the internal eigenvalues array would then be modified as well.</span>
         <span class="n">slicer</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">neigs</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_L</span><span class="p">[</span><span class="n">slicer</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 </div>
@@ -618,8 +617,8 @@
 <span class="sd">            variance_fraction_mode_1 = solver.VarianceFraction(neigs=1)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c"># Return the array of eigenvalues divided by the sum of the</span>
-        <span class="c"># eigenvalues.</span>
+        <span class="c1"># Return the array of eigenvalues divided by the sum of the</span>
+        <span class="c1"># eigenvalues.</span>
         <span class="n">slicer</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">neigs</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_L</span><span class="p">[</span><span class="n">slicer</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_L</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </div>
@@ -640,7 +639,7 @@
 <span class="sd">            total_variance = solver.totalAnomalyVariance()</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c"># Return the sum of the eigenvalues.</span>
+        <span class="c1"># Return the sum of the eigenvalues.</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_L</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </div>
 <div class="viewcode-block" id="Eof.northTest"><a class="viewcode-back" href="../../api/eofs.standard.html#eofs.standard.Eof.northTest">[docs]</a>    <span class="k">def</span> <span class="nf">northTest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">neigs</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">vfscaled</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
@@ -691,14 +690,14 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">slicer</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">neigs</span><span class="p">)</span>
-        <span class="c"># Compute the factor that multiplies the eigenvalues. The number of</span>
-        <span class="c"># records is assumed to be the number of realizations of the field.</span>
+        <span class="c1"># Compute the factor that multiplies the eigenvalues. The number of</span>
+        <span class="c1"># records is assumed to be the number of realizations of the field.</span>
         <span class="n">factor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_records</span><span class="p">)</span>
-        <span class="c"># If requested, allow for scaling of the eigenvalues by the total</span>
-        <span class="c"># variance (sum of the eigenvalues).</span>
+        <span class="c1"># If requested, allow for scaling of the eigenvalues by the total</span>
+        <span class="c1"># variance (sum of the eigenvalues).</span>
         <span class="k">if</span> <span class="n">vfscaled</span><span class="p">:</span>
             <span class="n">factor</span> <span class="o">/=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_L</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-        <span class="c"># Return the typical errors.</span>
+        <span class="c1"># Return the typical errors.</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_L</span><span class="p">[</span><span class="n">slicer</span><span class="p">]</span> <span class="o">*</span> <span class="n">factor</span>
 </div>
 <div class="viewcode-block" id="Eof.reconstructedField"><a class="viewcode-back" href="../../api/eofs.standard.html#eofs.standard.Eof.reconstructedField">[docs]</a>    <span class="k">def</span> <span class="nf">reconstructedField</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">neofs</span><span class="p">):</span>
@@ -736,22 +735,22 @@
 <span class="sd">            reconstruction = solver.reconstuctedField([1, 2, 5])</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c"># Determine how the PCs and EOFs will be selected.</span>
+        <span class="c1"># Determine how the PCs and EOFs will be selected.</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">neofs</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">):</span>
             <span class="n">modes</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">neofs</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">modes</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">neofs</span><span class="p">)</span>
-        <span class="c"># Project principal components onto the EOFs to compute the</span>
-        <span class="c"># reconstructed field.</span>
+        <span class="c1"># Project principal components onto the EOFs to compute the</span>
+        <span class="c1"># reconstructed field.</span>
         <span class="n">rval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_P</span><span class="p">[:,</span> <span class="n">modes</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flatE</span><span class="p">[</span><span class="n">modes</span><span class="p">])</span>
-        <span class="c"># Reshape the reconstructed field so it has the same shape as the</span>
-        <span class="c"># input data set.</span>
+        <span class="c1"># Reshape the reconstructed field so it has the same shape as the</span>
+        <span class="c1"># input data set.</span>
         <span class="n">rval</span> <span class="o">=</span> <span class="n">rval</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_records</span><span class="p">,)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_originalshape</span><span class="p">)</span>
-        <span class="c"># Un-weight the reconstructed field if weighting was performed on</span>
-        <span class="c"># the input data set.</span>
+        <span class="c1"># Un-weight the reconstructed field if weighting was performed on</span>
+        <span class="c1"># the input data set.</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">rval</span> <span class="o">=</span> <span class="n">rval</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span>
-        <span class="c"># Return the reconstructed field.</span>
+        <span class="c1"># Return the reconstructed field.</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filled</span><span class="p">:</span>
             <span class="n">rval</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rval</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">rval</span><span class="p">),</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">rval</span>
@@ -814,54 +813,55 @@
 <span class="sd">            pseudo_pcs = solver.projectField(data, neofs=4)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c"># Check that the shape/dimension of the data set is compatible with</span>
-        <span class="c"># the EOFs.</span>
+        <span class="c1"># Check that the shape/dimension of the data set is compatible with</span>
+        <span class="c1"># the EOFs.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_verify_projection_shape</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_originalshape</span><span class="p">)</span>
         <span class="n">input_ndim</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">ndim</span>
         <span class="n">eof_ndim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_originalshape</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="c"># Create a slice object for truncating the EOFs.</span>
+        <span class="c1"># Create a slice object for truncating the EOFs.</span>
         <span class="n">slicer</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">neofs</span><span class="p">)</span>
-        <span class="c"># If required, weight the data set with the same weighting that was</span>
-        <span class="c"># used to compute the EOFs.</span>
+        <span class="c1"># If required, weight the data set with the same weighting that was</span>
+        <span class="c1"># used to compute the EOFs.</span>
         <span class="n">field</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">weighted</span><span class="p">:</span>
             <span class="n">wts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getWeights</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">wts</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="n">field</span> <span class="o">=</span> <span class="n">field</span> <span class="o">*</span> <span class="n">wts</span>
-        <span class="c"># Fill missing values with NaN if this is a masked array.</span>
+        <span class="c1"># Fill missing values with NaN if this is a masked array.</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">field</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">filled</span><span class="p">(</span><span class="n">fill_value</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
             <span class="k">pass</span>
-        <span class="c"># Flatten the data set into [time, space] dimensionality.</span>
+        <span class="c1"># Flatten the data set into [time, space] dimensionality.</span>
         <span class="k">if</span> <span class="n">eof_ndim</span> <span class="o">&gt;</span> <span class="n">input_ndim</span><span class="p">:</span>
             <span class="n">field</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,)</span> <span class="o">+</span> <span class="n">field</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
         <span class="n">records</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">channels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
         <span class="n">field_flat</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="n">records</span><span class="p">,</span> <span class="n">channels</span><span class="p">])</span>
-        <span class="c"># Locate the non-missing values and isolate them.</span>
+        <span class="c1"># Locate the non-missing values and isolate them.</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_valid_nan</span><span class="p">(</span><span class="n">field_flat</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;missing values detected in different &#39;</span>
-                             <span class="s">&#39;locations at different times&#39;</span><span class="p">)</span>
-        <span class="n">nonMissingIndex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">field_flat</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="bp">False</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;missing values detected in different &#39;</span>
+                             <span class="s1">&#39;locations at different times&#39;</span><span class="p">)</span>
+        <span class="n">nonMissingIndex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">field_flat</span><span class="p">[</span><span class="mi">0</span><span class="p">])))[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">field_flat</span> <span class="o">=</span> <span class="n">field_flat</span><span class="p">[:,</span> <span class="n">nonMissingIndex</span><span class="p">]</span>
-        <span class="c"># Locate the non-missing values in the EOFs and check they match those</span>
-        <span class="c"># in the data set, then isolate the non-missing values.</span>
-        <span class="n">eofNonMissingIndex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_flatE</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="bp">False</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># Locate the non-missing values in the EOFs and check they match those</span>
+        <span class="c1"># in the data set, then isolate the non-missing values.</span>
+        <span class="n">eofNonMissingIndex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_flatE</span><span class="p">[</span><span class="mi">0</span><span class="p">])))[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">eofNonMissingIndex</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">nonMissingIndex</span><span class="o">.</span><span class="n">shape</span> <span class="ow">or</span> \
                 <span class="p">(</span><span class="n">eofNonMissingIndex</span> <span class="o">!=</span> <span class="n">nonMissingIndex</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;field and EOFs have different &#39;</span>
-                             <span class="s">&#39;missing value locations&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;field and EOFs have different &#39;</span>
+                             <span class="s1">&#39;missing value locations&#39;</span><span class="p">)</span>
         <span class="n">eofs_flat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flatE</span><span class="p">[</span><span class="n">slicer</span><span class="p">,</span> <span class="n">eofNonMissingIndex</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">eofscaling</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">eofs_flat</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_L</span><span class="p">[</span><span class="n">slicer</span><span class="p">])[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
         <span class="k">elif</span> <span class="n">eofscaling</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
             <span class="n">eofs_flat</span> <span class="o">*=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_L</span><span class="p">[</span><span class="n">slicer</span><span class="p">])[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
-        <span class="c"># Project the data set onto the EOFs using a matrix multiplication.</span>
+        <span class="c1"># Project the data set onto the EOFs using a matrix multiplication.</span>
         <span class="n">projected_pcs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">field_flat</span><span class="p">,</span> <span class="n">eofs_flat</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">eof_ndim</span> <span class="o">&gt;</span> <span class="n">input_ndim</span><span class="p">:</span>
-            <span class="c"># If an extra dimension was introduced, remove it before returning</span>
-            <span class="c"># the projected PCs.</span>
+            <span class="c1"># If an extra dimension was introduced, remove it before returning</span>
+            <span class="c1"># the projected PCs.</span>
             <span class="n">projected_pcs</span> <span class="o">=</span> <span class="n">projected_pcs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">projected_pcs</span>
 </div>

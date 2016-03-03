@@ -34,6 +34,14 @@ Iris interface
 The iris interface works with `~iris.cube.Cube` objects, which are the data containers used by the iris_ data analysis package. The meta-data, including coordinate dimensions, associated with iris `~iris.cube.Cube` objects is understood by the `eofs.iris.Eofs` solver interface. The outputs of the `eofs.iris.Eof` solver are also contained in `~iris.cube.Cube` objects, meaning they can be used with tools in the iris package, and easily written to a file.
 
 
+.. _xarray-interface:
+
+xarray interface
+----------------
+
+The xarray interface works with `~xarray.DataArray` objects, which are the data containers used by the xarray_ package. The meta-data, including coordinate dimensions, associated with `~xarray.DataArray` objects is understood by the `eofs.xarray.Eofs` solver interface. The outputs of the `eofs.xarray.Eof` solver are also contained in `~xarray.DataArray` objects, allowing their use within other `xarray` tools including serialization to netCDF.
+
+
 .. _standard-interface:
 
 Standard interface
@@ -45,3 +53,6 @@ The standard interface works with `numpy` arrays, which makes the standard inter
 .. _iris: http://scitools.org.uk/iris
 
 .. _UV-CDAT: http://uv-cdat.llnl.gov
+
+.. _xarray: http://xarray.pydata.org
+
