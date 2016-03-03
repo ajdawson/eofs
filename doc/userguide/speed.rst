@@ -50,7 +50,7 @@ Pre-built options
 Anaconda
 ~~~~~~~~
 
-Continuum IO's Anaconda product has the option of using MKL optimised components, normally this is an add-on that you pay for, but for academic users there is the option of a free academic license which includes the use of the optimized packages.
+Continuum IO's Anaconda product has the option of using MKL optimised components.
 
 Canopy (Express)
 ~~~~~~~~~~~~~~~~

@@ -1,6 +1,19 @@
 Changelog
 =========
 
+.. default-role:: py:obj
+
+
+v1.1.x
+------
+
+:Release: v1.1.0
+:Date: 3 March 2016
+
+* Added an `xarray <http://xarray.pydata.org>`_ interface allowing use of `xarray.DataArray` objects with :py:mod:`eofs`.
+* Fix bug in setting `ddof` in `eofs.tools.iris.covariance_map`, previously it was always `1` regardless of the `ddof` keyword.
+* Better Python 2 and 3 support without relying on 2to3.
+
 
 v1.0.x
 ------
