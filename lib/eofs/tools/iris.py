@@ -24,7 +24,7 @@ import numpy as np
 from iris.cube import Cube
 from iris.analysis.cartography import area_weights
 from iris.analysis.cartography import cosine_latitude_weights
-from iris.exceptions import CoordinateMultiDimError
+from iris.exceptions import CoordinateMultiDimError, CoordinateNotFoundError
 
 from . import standard
 from .generic import covcor_dimensions
@@ -105,7 +105,16 @@ def coord_and_dim(cube, coord, multiple=False):
     *coord_tuple*
         A 2-tuple of (coordinate_dimension, dimension_number).
 
+    .. deprecated:: version 1.2
+
+       The function `get_time_coord` is used instead for finding time
+       coordinates. For other coordinates please use the iris built-in
+       functionality for locating required cooridnates.
+
     """
+    deprecation_message = ('coord_and_dim() is deprecated, please use '
+                           'get_time_coord() or built-in iris functionality')
+    warnings.warn(deprecation_message, DeprecationWarning)
     coords = [c for c in cube.dim_coords if coord in c.name()]
     if len(coords) > 1:
         raise ValueError('multiple {} coordinates are not '
@@ -118,6 +127,37 @@ def coord_and_dim(cube, coord, multiple=False):
     c_dim = cube.coord_dims(c)
     c_dim = c_dim[0] if c_dim else None
     return c, c_dim
+
+
+def get_time_coord(cube):
+    """
+    Retrieve the time coordinate dimension and its corresponding
+    position from a `~iris.cube.Cube` instance.
+
+    **Arguments:**
+
+    *cube*
+        An `~iris.cube.Cube` instance to retrieve the dimension from.
+
+    **Returns:**
+
+    *coord_tuple*
+        A 2-tuple of (coordinate_dimension, dimension_number).
+
+    """
+    time_coords = cube.coords(axis='T', dim_coords=True)
+    if not time_coords:
+        # If no coordinates were identified as time, relax the criteria and
+        # look for dimension coordinates with 'time' in the name:
+        time_coords = [coord for coord in cube.dim_coords
+                       if 'time' in coord.name()]
+        if not time_coords:
+            raise ValueError('cannot find a time dimension coordinate')
+    if len(time_coords) > 1:
+        raise ValueError('multiple time coordinates are not allowed')
+    time_coord = time_coords[0]
+    time_dim = cube.coord_dims(time_coord)[0]
+    return time_coord, time_dim
 
 
 def classified_aux_coords(cube):
@@ -144,7 +184,7 @@ def classified_aux_coords(cube):
 
     """
     try:
-        _, timedim = coord_and_dim(cube, 'time')
+        _, timedim = get_time_coord(cube)
     except ValueError:
         timedim = None
     time_only = []
@@ -187,7 +227,7 @@ def common_items(item_set):
 
 
 def _time_coord_info(cube):
-    time, time_dim = coord_and_dim(cube, 'time')
+    time, time_dim = get_time_coord(cube)
     coords = [copy(coord) for coord in cube.dim_coords]
     coords.remove(time)
     coords = [copy(time)] + coords
