@@ -23,7 +23,7 @@ from copy import copy
 from iris.cube import Cube
 from iris.coords import DimCoord
 
-from eofs.tools.iris import (coord_and_dim, weights_array,
+from eofs.tools.iris import (get_time_coord, weights_array,
                              classified_aux_coords, common_items)
 from . import standard
 
@@ -128,7 +128,7 @@ class MultivariateEof(object):
                 raise TypeError('input is not an iris cube')
             # Record the time dimension and it's position. If its position is
             # not 0 then raise an error.
-            time, time_dim = coord_and_dim(cube, 'time')
+            time, time_dim = get_time_coord(cube)
             if time_dim != 0:
                 raise ValueError('time must be the first dimension, '
                                  'consider using the transpose() method')
@@ -686,7 +686,7 @@ class MultivariateEof(object):
             try:
                 # Time dimension must be first.
                 raise_error = False
-                time, time_coord = coord_and_dim(cube, 'time')
+                time, time_coord = get_time_coord(cube)
                 if time_coord != 0:
                     raise_error = True
             except ValueError:
@@ -713,7 +713,7 @@ class MultivariateEof(object):
             pcdim = DimCoord(list(range(pcs.shape[1])),
                              var_name='pc',
                              long_name='pc_number')
-            time, time_dim = coord_and_dim(cubes[0], 'time')
+            time, time_dim = get_time_coord(cubes[0])
             pcs.add_dim_coord(copy(time), 0)
             pcs.add_dim_coord(pcdim, 1)
             # Add any auxiliary coordinates for the time dimension.

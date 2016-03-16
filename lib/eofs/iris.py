@@ -24,7 +24,7 @@ from iris.cube import Cube
 from iris.coords import DimCoord
 
 from . import standard
-from .tools.iris import coord_and_dim, weights_array, classified_aux_coords
+from .tools.iris import get_time_coord, weights_array, classified_aux_coords
 
 
 class Eof(object):
@@ -104,9 +104,9 @@ class Eof(object):
         if not isinstance(cube, Cube):
             raise TypeError('the input must be an iris cube')
         # Check for a time coordinate, raise an error if there isn't one.
-        # The coord_and_dim function will raise a ValuerError with a
+        # The get_time_coord function will raise a ValuerError with a
         # useful message so no need to handle it explicitly here.
-        _time, self._time_dim = coord_and_dim(cube, 'time')
+        _time, self._time_dim = get_time_coord(cube)
         self._time = copy(_time)
         if self._time_dim != 0:
             raise ValueError('time must be the first dimension, '
@@ -656,7 +656,7 @@ class Eof(object):
         has_time = False
         try:
             # A time dimension must be first.
-            time, time_dim = coord_and_dim(cube, 'time')
+            time, time_dim = get_time_coord(cube)
             has_time = True
         except ValueError:
             # No time dimension is also acceptable.

@@ -396,6 +396,7 @@ class TestConstructorIris(EofsTest):
         data = solution['sst']
         lon = data.coord('longitude')
         lon.rename('time')
+        lon.units = 'days since 1999-01-01 00:00:0.0'
         solver = self.solver_class(data)
 
 
