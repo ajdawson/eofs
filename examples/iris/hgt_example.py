@@ -4,6 +4,12 @@ pressure surface over the European/Atlantic sector during winter time.
 
 This example uses the metadata-retaining iris interface.
 
+Additional requirements for this example:
+
+    * iris (http://scitools.org.uk/iris/)
+    * matplotlib (http://matplotlib.org/)
+    * cartopy (http://scitools.org.uk/cartopy/)
+
 """
 import warnings
 
