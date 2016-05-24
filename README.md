@@ -32,12 +32,11 @@ Documentation is available [online](http://ajdawson.github.com/eofs).
 The package docstrings are also very complete and can be used as a source of reference when working interactively.
 
 
-Frequently asked questions
---------------------------
+Citation
+--------
 
-* **Do I need UV-CDAT/cdms2, iris or xarray to use eofs?**
-  No. All the computation code uses NumPy only.
-  The cdms2 module, iris and xarray are only required for the meta-data preserving interfaces.
+If you use eofs in published research, please cite it by referencing the [peer-reviewed paper](http://doi.org/10.5334/jors.122).
+You can additionally cite the [Zenodo DOI](http://dx.doi.org/10.5281/zenodo.46871) if you need to cite a particular version (but please also cite the paper, it helps me justify my time working on this and similar projects).
 
 
 Installation
@@ -55,3 +54,11 @@ or
 You can also install from the source distribution:
 
     python setup.py install
+
+
+Frequently asked questions
+--------------------------
+
+* **Do I need UV-CDAT/cdms2, iris or xarray to use eofs?**
+  No. All the computation code uses NumPy only.
+  The cdms2 module, iris and xarray are only required for the meta-data preserving interfaces.

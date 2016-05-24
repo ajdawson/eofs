@@ -86,6 +86,13 @@ The `eofs.iris` meta-data enabled interface can only be used if the iris_ packag
 The `eofs.xarray` meta-data enabled interface can only be used if the xarray_ package (or earlier xray package) is installed.
 
 
+Citation
+--------
+
+If you use eofs in published research, please cite it by referencing the `peer-reviewed paper <http://doi.org/10.5334/jors.122>`_.
+You can additionally cite the `Zenodo DOI <http://dx.doi.org/10.5281/zenodo.46871>`_ if you need to cite a particular version (but please also cite the paper, it helps me justify my time working on this and similar projects).
+
+
 Developing and contributing
 ---------------------------
 
