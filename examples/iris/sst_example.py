@@ -8,6 +8,12 @@ El Nino and La Nina events.
 
 This example uses the metadata-retaining iris interface.
 
+Additional requirements for this example:
+
+    * iris (http://scitools.org.uk/iris/)
+    * matplotlib (http://matplotlib.org/)
+    * cartopy (http://scitools.org.uk/cartopy/)
+
 """
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature

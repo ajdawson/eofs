@@ -8,6 +8,12 @@ El Nino and La Nina events.
 
 This example uses the metadata-retaining xarray interface.
 
+Additional requirements for this example:
+
+    * xarray (http://xarray.pydata.org)
+    * matplotlib (http://matplotlib.org/)
+    * cartopy (http://scitools.org.uk/cartopy/)
+
 """
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature

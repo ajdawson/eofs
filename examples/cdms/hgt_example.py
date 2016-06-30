@@ -4,6 +4,13 @@ pressure surface over the European/Atlantic sector during winter time.
 
 This example uses the metadata-retaining cdms2 interface.
 
+
+Additional requirements for this example:
+
+    * cdms2 (http://uvcdat.llnl.gov/)
+    * matplotlib (http://matplotlib.org/)
+    * cartopy (http://scitools.org.uk/cartopy/)
+
 """
 import cartopy.crs as ccrs
 import cdms2
