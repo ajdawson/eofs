@@ -126,7 +126,7 @@ def _wrap_iris(solution, neofs, time_units):
     try:
         from iris.cube import Cube
         from iris.coords import DimCoord
-        from iris.unit import Unit
+        from cf_units import Unit
     except ImportError:
         raise ValueError("cannot use container 'iris' without "
                          "the iris module")
