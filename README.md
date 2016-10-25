@@ -45,7 +45,7 @@ Installation
 eofs works on Python 2 or 3 on Linux, Windows or OSX.
 The easiest way to install eofs is by using [conda](http://conda.pydata.org/docs/) or pip:
 
-    conda install -c ajdawson eofs
+    conda install -c conda-forge eofs
 
 or
 

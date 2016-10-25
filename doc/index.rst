@@ -32,7 +32,7 @@ The :ref:`cdms <cdms-interface>`, :ref:`iris <iris-interface>`, and :ref:`xarray
 
 `eofs` can be installed for all platforms using conda_::
 
-    conda install -c ajdawson eofs
+    conda install -c conda-forge eofs
 
 or using pip::
 
