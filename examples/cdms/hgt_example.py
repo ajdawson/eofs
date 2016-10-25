@@ -50,7 +50,7 @@ proj = ccrs.Orthographic(central_longitude=-20, central_latitude=60)
 ax = plt.axes(projection=proj)
 ax.set_global()
 ax.coastlines()
-ax.contourf(lons, lats, eof1(squeeze=True), levels=clevs,
+ax.contourf(lons, lats, eof1(squeeze=True).data, levels=clevs,
             cmap=plt.cm.RdBu_r, transform=ccrs.PlateCarree())
 plt.title('EOF1 expressed as covariance', fontsize=16)
 
