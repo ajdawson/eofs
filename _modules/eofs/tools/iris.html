@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>eofs.tools.iris &mdash; eofs 1.1.0 documentation</title>
+    <title>eofs.tools.iris &mdash; eofs 1.2.0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '1.1.0',
+        VERSION:     '1.2.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 1.1.0 documentation" href="../../../index.html" />
+    <link rel="top" title="eofs 1.2.0 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
           rel='stylesheet' type='text/css' />
@@ -86,7 +86,7 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v1.1.0</h2>
+    <h2>eofs v1.2.0</h2>
     <h3>Table of Contents</h3>
     <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../userguide/index.html">User Guide</a></li>
@@ -145,7 +145,7 @@
 <span class="kn">from</span> <span class="nn">iris.cube</span> <span class="kn">import</span> <span class="n">Cube</span>
 <span class="kn">from</span> <span class="nn">iris.analysis.cartography</span> <span class="kn">import</span> <span class="n">area_weights</span>
 <span class="kn">from</span> <span class="nn">iris.analysis.cartography</span> <span class="kn">import</span> <span class="n">cosine_latitude_weights</span>
-<span class="kn">from</span> <span class="nn">iris.exceptions</span> <span class="kn">import</span> <span class="n">CoordinateMultiDimError</span>
+<span class="kn">from</span> <span class="nn">iris.exceptions</span> <span class="kn">import</span> <span class="n">CoordinateMultiDimError</span><span class="p">,</span> <span class="n">CoordinateNotFoundError</span>
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">standard</span>
 <span class="kn">from</span> <span class="nn">.generic</span> <span class="kn">import</span> <span class="n">covcor_dimensions</span>
@@ -226,7 +226,16 @@
 <span class="sd">    *coord_tuple*</span>
 <span class="sd">        A 2-tuple of (coordinate_dimension, dimension_number).</span>
 
+<span class="sd">    .. deprecated:: version 1.2</span>
+
+<span class="sd">       The function `get_time_coord` is used instead for finding time</span>
+<span class="sd">       coordinates. For other coordinates please use the iris built-in</span>
+<span class="sd">       functionality for locating required cooridnates.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">deprecation_message</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;coord_and_dim() is deprecated, please use &#39;</span>
+                           <span class="s1">&#39;get_time_coord() or built-in iris functionality&#39;</span><span class="p">)</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">deprecation_message</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
     <span class="n">coords</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cube</span><span class="o">.</span><span class="n">dim_coords</span> <span class="k">if</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">name</span><span class="p">()]</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;multiple {} coordinates are not &#39;</span>
@@ -239,6 +248,37 @@
     <span class="n">c_dim</span> <span class="o">=</span> <span class="n">cube</span><span class="o">.</span><span class="n">coord_dims</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
     <span class="n">c_dim</span> <span class="o">=</span> <span class="n">c_dim</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">c_dim</span> <span class="k">else</span> <span class="bp">None</span>
     <span class="k">return</span> <span class="n">c</span><span class="p">,</span> <span class="n">c_dim</span>
+
+</div>
+<div class="viewcode-block" id="get_time_coord"><a class="viewcode-back" href="../../../api/eofs.tools.html#eofs.tools.iris.get_time_coord">[docs]</a><span class="k">def</span> <span class="nf">get_time_coord</span><span class="p">(</span><span class="n">cube</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieve the time coordinate dimension and its corresponding</span>
+<span class="sd">    position from a `~iris.cube.Cube` instance.</span>
+
+<span class="sd">    **Arguments:**</span>
+
+<span class="sd">    *cube*</span>
+<span class="sd">        An `~iris.cube.Cube` instance to retrieve the dimension from.</span>
+
+<span class="sd">    **Returns:**</span>
+
+<span class="sd">    *coord_tuple*</span>
+<span class="sd">        A 2-tuple of (coordinate_dimension, dimension_number).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">time_coords</span> <span class="o">=</span> <span class="n">cube</span><span class="o">.</span><span class="n">coords</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="n">dim_coords</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">time_coords</span><span class="p">:</span>
+        <span class="c1"># If no coordinates were identified as time, relax the criteria and</span>
+        <span class="c1"># look for dimension coordinates with &#39;time&#39; in the name:</span>
+        <span class="n">time_coords</span> <span class="o">=</span> <span class="p">[</span><span class="n">coord</span> <span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">cube</span><span class="o">.</span><span class="n">dim_coords</span>
+                       <span class="k">if</span> <span class="s1">&#39;time&#39;</span> <span class="ow">in</span> <span class="n">coord</span><span class="o">.</span><span class="n">name</span><span class="p">()]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">time_coords</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;cannot find a time dimension coordinate&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">time_coords</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;multiple time coordinates are not allowed&#39;</span><span class="p">)</span>
+    <span class="n">time_coord</span> <span class="o">=</span> <span class="n">time_coords</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">time_dim</span> <span class="o">=</span> <span class="n">cube</span><span class="o">.</span><span class="n">coord_dims</span><span class="p">(</span><span class="n">time_coord</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">time_coord</span><span class="p">,</span> <span class="n">time_dim</span>
 
 </div>
 <div class="viewcode-block" id="classified_aux_coords"><a class="viewcode-back" href="../../../api/eofs.tools.html#eofs.tools.iris.classified_aux_coords">[docs]</a><span class="k">def</span> <span class="nf">classified_aux_coords</span><span class="p">(</span><span class="n">cube</span><span class="p">):</span>
@@ -265,7 +305,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">_</span><span class="p">,</span> <span class="n">timedim</span> <span class="o">=</span> <span class="n">coord_and_dim</span><span class="p">(</span><span class="n">cube</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">timedim</span> <span class="o">=</span> <span class="n">get_time_coord</span><span class="p">(</span><span class="n">cube</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
         <span class="n">timedim</span> <span class="o">=</span> <span class="bp">None</span>
     <span class="n">time_only</span> <span class="o">=</span> <span class="p">[]</span>
@@ -308,7 +348,7 @@
 
 </div>
 <span class="k">def</span> <span class="nf">_time_coord_info</span><span class="p">(</span><span class="n">cube</span><span class="p">):</span>
-    <span class="n">time</span><span class="p">,</span> <span class="n">time_dim</span> <span class="o">=</span> <span class="n">coord_and_dim</span><span class="p">(</span><span class="n">cube</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">)</span>
+    <span class="n">time</span><span class="p">,</span> <span class="n">time_dim</span> <span class="o">=</span> <span class="n">get_time_coord</span><span class="p">(</span><span class="n">cube</span><span class="p">)</span>
     <span class="n">coords</span> <span class="o">=</span> <span class="p">[</span><span class="n">copy</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span> <span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">cube</span><span class="o">.</span><span class="n">dim_coords</span><span class="p">]</span>
     <span class="n">coords</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
     <span class="n">coords</span> <span class="o">=</span> <span class="p">[</span><span class="n">copy</span><span class="p">(</span><span class="n">time</span><span class="p">)]</span> <span class="o">+</span> <span class="n">coords</span>

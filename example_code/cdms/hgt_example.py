@@ -4,6 +4,13 @@ pressure surface over the European/Atlantic sector during winter time.
 
 This example uses the metadata-retaining cdms2 interface.
 
+
+Additional requirements for this example:
+
+    * cdms2 (http://uvcdat.llnl.gov/)
+    * matplotlib (http://matplotlib.org/)
+    * cartopy (http://scitools.org.uk/cartopy/)
+
 """
 import cartopy.crs as ccrs
 import cdms2
@@ -43,7 +50,7 @@ proj = ccrs.Orthographic(central_longitude=-20, central_latitude=60)
 ax = plt.axes(projection=proj)
 ax.set_global()
 ax.coastlines()
-ax.contourf(lons, lats, eof1(squeeze=True), levels=clevs,
+ax.contourf(lons, lats, eof1(squeeze=True).data, levels=clevs,
             cmap=plt.cm.RdBu_r, transform=ccrs.PlateCarree())
 plt.title('EOF1 expressed as covariance', fontsize=16)
 

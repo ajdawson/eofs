@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>eofs.multivariate.standard &mdash; eofs 1.1.0 documentation</title>
+    <title>eofs.multivariate.standard &mdash; eofs 1.2.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '1.1.0',
+        VERSION:     '1.2.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 1.1.0 documentation" href="../index.html" />
+    <link rel="top" title="eofs 1.2.0 documentation" href="../index.html" />
     <link rel="up" title="API references" href="index.html" />
     <link rel="next" title="eofs.multivariate.cdms" href="eofs.multivariate.cdms.html" />
     <link rel="prev" title="eofs.tools" href="eofs.tools.html" />
@@ -94,7 +94,7 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v1.1.0</h2>
+    <h2>eofs v1.2.0</h2>
     <h3>Table of Contents</h3>
     <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userguide/index.html">User Guide</a></li>
@@ -145,19 +145,19 @@
             
   <div class="section" id="module-eofs.multivariate.standard">
 <span id="eofs-multivariate-standard"></span><h1><a class="reference internal" href="#module-eofs.multivariate.standard" title="eofs.multivariate.standard"><code class="xref py py-mod docutils literal"><span class="pre">eofs.multivariate.standard</span></code></a><a class="headerlink" href="#module-eofs.multivariate.standard" title="Permalink to this headline">¶</a></h1>
-<p>Multivariate EOF analysis for <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.10)"><code class="xref py py-obj docutils literal"><span class="pre">numpy</span></code></a> array data.</p>
+<p>Multivariate EOF analysis for <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.11)"><code class="xref py py-obj docutils literal"><span class="pre">numpy</span></code></a> array data.</p>
 <dl class="class">
 <dt id="eofs.multivariate.standard.MultivariateEof">
 <em class="property">class </em><code class="descclassname">eofs.multivariate.standard.</code><code class="descname">MultivariateEof</code><span class="sig-paren">(</span><em>datasets</em>, <em>weights=None</em>, <em>center=True</em>, <em>ddof=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof" title="Permalink to this definition">¶</a></dt>
-<dd><p>Multivariate EOF analysis (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.10)"><code class="xref py py-obj docutils literal"><span class="pre">numpy</span></code></a> interface)</p>
+<dd><p>Multivariate EOF analysis (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.11)"><code class="xref py py-obj docutils literal"><span class="pre">numpy</span></code></a> interface)</p>
 <p>Create a MultivariateEof instance.</p>
 <p>The EOF solution is computed at initialization time. Method
 calls are used to retrieve computed quantities.</p>
 <p><strong>Arguments:</strong></p>
 <dl class="docutils">
 <dt><em>datasets</em></dt>
-<dd>A list/tuple containing one or more <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ndarray</span></code></a> or
-<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/maskedarray.baseclass.html#numpy.ma.MaskedArray" title="(in NumPy v1.10)"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ma.MaskedArray</span></code></a> objects, each with two or more
+<dd>A list/tuple containing one or more <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.11)"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ndarray</span></code></a> or
+<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/maskedarray.baseclass.html#numpy.ma.MaskedArray" title="(in NumPy v1.11)"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ma.MaskedArray</span></code></a> objects, each with two or more
 dimensions, containing the data to be analysed. The first
 dimension of each array is assumed to represent time.
 Missing values are permitted, either in the
@@ -553,8 +553,8 @@ generate a corresponding set of pseudo-PCs.</p>
 <p><strong>Argument:</strong></p>
 <dl class="docutils">
 <dt><em>fields</em></dt>
-<dd>A list/tuple containing one or more <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ndarray</span></code></a> or
-<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/maskedarray.baseclass.html#numpy.ma.MaskedArray" title="(in NumPy v1.10)"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ma.MaskedArray</span></code></a> objects, each with two or more
+<dd>A list/tuple containing one or more <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.11)"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ndarray</span></code></a> or
+<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/maskedarray.baseclass.html#numpy.ma.MaskedArray" title="(in NumPy v1.11)"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ma.MaskedArray</span></code></a> objects, each with two or more
 dimensions, containing the fields to be projected onto the
 EOFs. Each field must have the same spatial dimensions
 (including missing values in the same places) as the

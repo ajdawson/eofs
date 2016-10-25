@@ -32,7 +32,7 @@ The :ref:`cdms <cdms-interface>`, :ref:`iris <iris-interface>`, and :ref:`xarray
 
 `eofs` can be installed for all platforms using conda_::
 
-    conda install -c ajdawson eofs
+    conda install -c conda-forge eofs
 
 or using pip::
 
@@ -84,6 +84,13 @@ The `eofs.cdms` meta-data enabled interface can only be used if the `cdms2` modu
 This module is distributed as part of the UV-CDAT_ project.
 The `eofs.iris` meta-data enabled interface can only be used if the iris_ package is available at version 1.2 or higher.
 The `eofs.xarray` meta-data enabled interface can only be used if the xarray_ package (or earlier xray package) is installed.
+
+
+Citation
+--------
+
+If you use eofs in published research, please cite it by referencing the `peer-reviewed paper <http://doi.org/10.5334/jors.122>`_.
+You can additionally cite the `Zenodo DOI <http://dx.doi.org/10.5281/zenodo.46871>`_ if you need to cite a particular version (but please also cite the paper, it helps me justify my time working on this and similar projects).
 
 
 Developing and contributing

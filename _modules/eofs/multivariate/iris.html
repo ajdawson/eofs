@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>eofs.multivariate.iris &mdash; eofs 1.1.0 documentation</title>
+    <title>eofs.multivariate.iris &mdash; eofs 1.2.0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '1.1.0',
+        VERSION:     '1.2.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 1.1.0 documentation" href="../../../index.html" />
+    <link rel="top" title="eofs 1.2.0 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
           rel='stylesheet' type='text/css' />
@@ -86,7 +86,7 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v1.1.0</h2>
+    <h2>eofs v1.2.0</h2>
     <h3>Table of Contents</h3>
     <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../userguide/index.html">User Guide</a></li>
@@ -144,7 +144,7 @@
 <span class="kn">from</span> <span class="nn">iris.cube</span> <span class="kn">import</span> <span class="n">Cube</span>
 <span class="kn">from</span> <span class="nn">iris.coords</span> <span class="kn">import</span> <span class="n">DimCoord</span>
 
-<span class="kn">from</span> <span class="nn">eofs.tools.iris</span> <span class="kn">import</span> <span class="p">(</span><span class="n">coord_and_dim</span><span class="p">,</span> <span class="n">weights_array</span><span class="p">,</span>
+<span class="kn">from</span> <span class="nn">eofs.tools.iris</span> <span class="kn">import</span> <span class="p">(</span><span class="n">get_time_coord</span><span class="p">,</span> <span class="n">weights_array</span><span class="p">,</span>
                              <span class="n">classified_aux_coords</span><span class="p">,</span> <span class="n">common_items</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">standard</span>
 
@@ -249,7 +249,7 @@
                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;input is not an iris cube&#39;</span><span class="p">)</span>
             <span class="c1"># Record the time dimension and it&#39;s position. If its position is</span>
             <span class="c1"># not 0 then raise an error.</span>
-            <span class="n">time</span><span class="p">,</span> <span class="n">time_dim</span> <span class="o">=</span> <span class="n">coord_and_dim</span><span class="p">(</span><span class="n">cube</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">)</span>
+            <span class="n">time</span><span class="p">,</span> <span class="n">time_dim</span> <span class="o">=</span> <span class="n">get_time_coord</span><span class="p">(</span><span class="n">cube</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">time_dim</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;time must be the first dimension, &#39;</span>
                                  <span class="s1">&#39;consider using the transpose() method&#39;</span><span class="p">)</span>
@@ -807,7 +807,7 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="c1"># Time dimension must be first.</span>
                 <span class="n">raise_error</span> <span class="o">=</span> <span class="bp">False</span>
-                <span class="n">time</span><span class="p">,</span> <span class="n">time_coord</span> <span class="o">=</span> <span class="n">coord_and_dim</span><span class="p">(</span><span class="n">cube</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">)</span>
+                <span class="n">time</span><span class="p">,</span> <span class="n">time_coord</span> <span class="o">=</span> <span class="n">get_time_coord</span><span class="p">(</span><span class="n">cube</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">time_coord</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="n">raise_error</span> <span class="o">=</span> <span class="bp">True</span>
             <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
@@ -834,7 +834,7 @@
             <span class="n">pcdim</span> <span class="o">=</span> <span class="n">DimCoord</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])),</span>
                              <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;pc&#39;</span><span class="p">,</span>
                              <span class="n">long_name</span><span class="o">=</span><span class="s1">&#39;pc_number&#39;</span><span class="p">)</span>
-            <span class="n">time</span><span class="p">,</span> <span class="n">time_dim</span> <span class="o">=</span> <span class="n">coord_and_dim</span><span class="p">(</span><span class="n">cubes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;time&#39;</span><span class="p">)</span>
+            <span class="n">time</span><span class="p">,</span> <span class="n">time_dim</span> <span class="o">=</span> <span class="n">get_time_coord</span><span class="p">(</span><span class="n">cubes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
             <span class="n">pcs</span><span class="o">.</span><span class="n">add_dim_coord</span><span class="p">(</span><span class="n">copy</span><span class="p">(</span><span class="n">time</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
             <span class="n">pcs</span><span class="o">.</span><span class="n">add_dim_coord</span><span class="p">(</span><span class="n">pcdim</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
             <span class="c1"># Add any auxiliary coordinates for the time dimension.</span>

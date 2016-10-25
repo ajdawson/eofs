@@ -4,6 +4,12 @@ pressure surface over the European/Atlantic sector during winter time.
 
 This example uses the metadata-retaining xarray interface.
 
+Additional requirements for this example:
+
+    * xarray (http://xarray.pydata.org)
+    * matplotlib (http://matplotlib.org/)
+    * cartopy (http://scitools.org.uk/cartopy/)
+
 """
 import cartopy.crs as ccrs
 import matplotlib.pyplot as plt

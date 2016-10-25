@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Package description &mdash; eofs 1.1.0 documentation</title>
+    <title>Package description &mdash; eofs 1.2.0 documentation</title>
     
     <link rel="stylesheet" href="_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '1.1.0',
+        VERSION:     '1.2.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 1.1.0 documentation" href="#" />
+    <link rel="top" title="eofs 1.2.0 documentation" href="#" />
     <link rel="next" title="User Guide" href="userguide/index.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
           rel='stylesheet' type='text/css' />
@@ -88,7 +88,7 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v1.1.0</h2>
+    <h2>eofs v1.2.0</h2>
     <h3>Table of Contents</h3>
     <ul>
 <li class="toctree-l1"><a class="reference internal" href="userguide/index.html">User Guide</a></li>
@@ -148,7 +148,7 @@ Some of the key features of <code class="xref py py-obj docutils literal"><span 
 <p>The core of the package runs on Python 2 or 3, on Linux, Windows or OSX; basically anywhere Python+NumPy are available.
 The <a class="reference internal" href="userguide/interfaces.html#cdms-interface"><span>cdms</span></a>, <a class="reference internal" href="userguide/interfaces.html#iris-interface"><span>iris</span></a>, and <a class="reference internal" href="userguide/interfaces.html#xarray-interface"><span>xarray</span></a> interfaces are available on all platforms where their respective supporting packages <a class="reference external" href="http://uv-cdat.llnl.gov">UV-CDAT</a>, <a class="reference external" href="http://scitools.org.uk/iris">iris</a>, and <a class="reference external" href="http://xarray.pydata.org">xarray</a> can be installed.</p>
 <p><code class="xref py py-obj docutils literal"><span class="pre">eofs</span></code> can be installed for all platforms using <a class="reference external" href="http://conda.pydata.org/docs/">conda</a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>conda install -c ajdawson eofs
+<div class="highlight-python"><div class="highlight"><pre><span></span>conda install -c conda-forge eofs
 </pre></div>
 </div>
 <p>or using pip:</p>
@@ -165,7 +165,7 @@ After downloading the source code archive, unzip it and change into the unzipped
 </div>
 <div class="section" id="getting-started">
 <h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
-<p><code class="xref py py-obj docutils literal"><span class="pre">eofs</span></code> provides three interfaces for EOF analysis: one for analysing data contained in <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.10)"><code class="xref py py-obj docutils literal"><span class="pre">numpy</span></code></a> arrays or masked arrays, suitable for any data set; and two for meta-data aware EOF analysis, suitable for analysing data read from self-describing files, using either the <code class="xref py py-obj docutils literal"><span class="pre">cdms2</span></code>, <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris.html#module-iris" title="(in Iris v1.9)"><code class="xref py py-obj docutils literal"><span class="pre">iris</span></code></a>, or <code class="xref py py-obj docutils literal"><span class="pre">xarray</span></code> packages.
+<p><code class="xref py py-obj docutils literal"><span class="pre">eofs</span></code> provides three interfaces for EOF analysis: one for analysing data contained in <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.11)"><code class="xref py py-obj docutils literal"><span class="pre">numpy</span></code></a> arrays or masked arrays, suitable for any data set; and two for meta-data aware EOF analysis, suitable for analysing data read from self-describing files, using either the <code class="xref py py-obj docutils literal"><span class="pre">cdms2</span></code>, <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris.html#module-iris" title="(in Iris v1.10)"><code class="xref py py-obj docutils literal"><span class="pre">iris</span></code></a>, or <code class="xref py py-obj docutils literal"><span class="pre">xarray</span></code> packages.
 All the interfaces support the same set of operations.</p>
 <p>Regardless of which interface you use, the basic usage is the same.
 The EOF analysis is handled by a solver class, and the EOF solution is computed when the solver class is created.
@@ -193,6 +193,11 @@ The <a class="reference internal" href="api/eofs.cdms.html#module-eofs.cdms" tit
 This module is distributed as part of the <a class="reference external" href="http://uv-cdat.llnl.gov">UV-CDAT</a> project.
 The <a class="reference internal" href="api/eofs.iris.html#module-eofs.iris" title="eofs.iris"><code class="xref py py-obj docutils literal"><span class="pre">eofs.iris</span></code></a> meta-data enabled interface can only be used if the <a class="reference external" href="http://scitools.org.uk/iris">iris</a> package is available at version 1.2 or higher.
 The <a class="reference internal" href="api/eofs.xarray.html#module-eofs.xarray" title="eofs.xarray"><code class="xref py py-obj docutils literal"><span class="pre">eofs.xarray</span></code></a> meta-data enabled interface can only be used if the <a class="reference external" href="http://xarray.pydata.org">xarray</a> package (or earlier xray package) is installed.</p>
+</div>
+<div class="section" id="citation">
+<h2>Citation<a class="headerlink" href="#citation" title="Permalink to this headline">¶</a></h2>
+<p>If you use eofs in published research, please cite it by referencing the <a class="reference external" href="http://doi.org/10.5334/jors.122">peer-reviewed paper</a>.
+You can additionally cite the <a class="reference external" href="http://dx.doi.org/10.5281/zenodo.46871">Zenodo DOI</a> if you need to cite a particular version (but please also cite the paper, it helps me justify my time working on this and similar projects).</p>
 </div>
 <div class="section" id="developing-and-contributing">
 <h2>Developing and contributing<a class="headerlink" href="#developing-and-contributing" title="Permalink to this headline">¶</a></h2>

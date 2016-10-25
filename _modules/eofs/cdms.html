@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>eofs.cdms &mdash; eofs 1.1.0 documentation</title>
+    <title>eofs.cdms &mdash; eofs 1.2.0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '1.1.0',
+        VERSION:     '1.2.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 1.1.0 documentation" href="../../index.html" />
+    <link rel="top" title="eofs 1.2.0 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
           rel='stylesheet' type='text/css' />
@@ -86,7 +86,7 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v1.1.0</h2>
+    <h2>eofs v1.2.0</h2>
     <h3>Table of Contents</h3>
     <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../userguide/index.html">User Guide</a></li>
@@ -249,7 +249,7 @@
         <span class="c1"># are several weighting schemes. The &#39;area&#39; weighting scheme requires</span>
         <span class="c1"># a latitude-longitude grid to be present, the &#39;cos_lat&#39; scheme only</span>
         <span class="c1"># requires a latitude dimension.</span>
-        <span class="k">if</span> <span class="n">weights</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">weights</span> <span class="o">==</span> <span class="s1">&#39;none&#39;</span><span class="p">:</span>
             <span class="c1"># No weights requested, set the weight array to None.</span>
             <span class="n">wtarray</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="k">else</span><span class="p">:</span>
