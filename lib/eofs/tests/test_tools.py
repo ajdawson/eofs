@@ -17,14 +17,13 @@
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
 from __future__ import absolute_import
 
-from nose import SkipTest
-from nose.tools import raises
 import numpy as np
 import numpy.ma as ma
 try:
     from iris.cube import Cube
 except ImportError:
     pass
+import pytest
 
 import eofs
 from eofs.tests import EofsTest
@@ -63,8 +62,8 @@ class ToolsTest(EofsTest):
         try:
             cls.solution = reference_solution(cls.interface, cls.weights)
         except ValueError:
-            raise SkipTest('library component not available '
-                           'for {!s} interface'.format(cls.interface))
+            pytest.skip('missing dependencies required to test '
+                        'the {!s} interface'.format(cls.interface))
         cls.neofs = cls.solution['eigenvalues'].shape[0]
         try:
             cls.solver = solvers[cls.interface](
@@ -72,8 +71,8 @@ class ToolsTest(EofsTest):
             cls.tools = {'covariance': tools[cls.interface].covariance_map,
                          'correlation': tools[cls.interface].correlation_map}
         except KeyError:
-            raise SkipTest('library component not available '
-                           'for {!s} interface'.format(cls.interface))
+            pytest.skip('missing dependencies required to test '
+                        'the {!s} interface'.format(cls.interface))
 
     def test_covariance_map(self):
         # covariance maps should match reference EOFs as covariance
@@ -119,11 +118,11 @@ class ToolsTest(EofsTest):
         for maptype in ('covariance', 'correlation'):
             yield self.check_covcor_map_invalid_time_dimension, maptype
 
-    @raises(ValueError)
     def check_covcor_map_invalid_time_dimension(self, maptype):
         # compute a map with an invalid time dimension in the input
         pcs = self.solver.pcs(npcs=self.neofs, pcscaling=1)[:-1]
-        covcor = self.tools[maptype](pcs, self.solution['sst'])
+        with pytest.raises(ValueError):
+            covcor = self.tools[maptype](pcs, self.solution['sst'])
 
     def test_covcor_map_invalid_pc_shape(self):
         # generate tests for covariance/correlation maps with input PCs with
@@ -131,11 +130,11 @@ class ToolsTest(EofsTest):
         for maptype in ('covariance', 'correlation'):
             yield self.check_covcor_map_invalid_pc_shape, maptype
 
-    @raises(ValueError)
     def check_covcor_map_invalid_pc_shape(self, maptype):
         # compute a map for PCs with invalid shape
-        covcor = self.tools[maptype](self.solution['sst'],
-                                     self.solution['sst'])
+        with pytest.raises(ValueError):
+            covcor = self.tools[maptype](self.solution['sst'],
+                                         self.solution['sst'])
 
 
 # ----------------------------------------------------------------------------

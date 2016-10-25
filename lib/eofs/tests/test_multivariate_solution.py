@@ -17,12 +17,12 @@
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
 from __future__ import absolute_import
 
-from nose import SkipTest
 import numpy as np
 try:
     from iris.cube import Cube
 except:
     pass
+import pytest
 
 import eofs.multivariate as multivariate
 from eofs.tests import EofsTest
@@ -55,8 +55,8 @@ class MVSolutionTest(EofsTest):
             cls.solution = reference_multivariate_solution(cls.interface,
                                                            cls.weights)
         except ValueError:
-            raise SkipTest('library component not available '
-                           'for {!s} interface'.format(cls.interface))
+            pytest.skip('missing dependencies required to test '
+                        'the {!s} interface'.format(cls.interface))
         cls.neofs = cls.solution['eigenvalues'].shape[0]
         if cls.alternate_weights_arg is not None:
             weights = cls.alternate_weights_arg
@@ -66,8 +66,8 @@ class MVSolutionTest(EofsTest):
             cls.solver = solvers[cls.interface](cls.solution['sst'],
                                                 weights=weights)
         except KeyError:
-            raise SkipTest('library component not available '
-                           'for {!s} interface'.format(cls.interface))
+            pytest.skip('missing dependencies required to test '
+                        'the {!s} interface'.format(cls.interface))
 
     def test_eigenvalues(self):
         self.assert_array_almost_equal(
