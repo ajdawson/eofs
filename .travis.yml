@@ -4,7 +4,7 @@ sudo: false
 
 env:
     global:
-        - PACKAGES_STANDARD="setuptools numpy nose pep8 coverage"
+        - PACKAGES_STANDARD="setuptools numpy pytest pycodestyle"
     matrix:
         - NAME="Python 2.7 (standard)"
           PYTHON_VERSION=2.7
@@ -59,7 +59,7 @@ script:
     # installed package rather than the source:
     - mkdir ../test_directory
     - cd ../test_directory
-    - nosetests eofs --verbosity=2 --with-coverage --cover-package=eofs
+    - pytest -vrsx --pyargs eofs
 
 notifications:
     email: false
