@@ -1,7 +1,7 @@
 eofs - EOF analysis in Python
 =============================
 
-[![Build Status](https://api.travis-ci.org/repositories/ajdawson/eofs.svg?branch=master)](https://travis-ci.org/ajdawson.eofs) [![DOI (paper)](https://img.shields.io/badge/DOI%20%28paper%29-10.5334%2Fjors.122-blue.svg)](http://doi.org/10.5334/jors.122) [![DOI (latest release)](https://zenodo.org/badge/20448/ajdawson/eofs.svg)](https://zenodo.org/badge/latestdoi/20448/ajdawson/eofs)
+[![Build Status](https://travis-ci.org/ajdawson/eofs.svg?branch=master)](https://travis-ci.org/ajdawson/eofs) [![DOI (paper)](https://img.shields.io/badge/DOI%20%28paper%29-10.5334%2Fjors.122-blue.svg)](http://doi.org/10.5334/jors.122) [![DOI (latest release)](https://zenodo.org/badge/20448/ajdawson/eofs.svg)](https://zenodo.org/badge/latestdoi/20448/ajdawson/eofs)
 
 
 Overview
