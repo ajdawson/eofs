@@ -12,9 +12,6 @@ env:
         - NAME="Python 2.7 (metadata)"
           PYTHON_VERSION=2.7
           PACKAGES="${PACKAGES_STANDARD} cdat-lite iris xarray"
-        - NAME="Python 3.3 (standard)"
-          PYTHON_VERSION=3.3
-          PACKAGES="${PACKAGES_STANDARD}"
         - NAME="Python 3.4 (standard)"
           PYTHON_VERSION=3.4
           PACKAGES="${PACKAGES_STANDARD}"
@@ -26,7 +23,13 @@ env:
           PACKAGES="${PACKAGES_STANDARD}"
         - NAME="Python 3.5 (metadata)"
           PYTHON_VERSION=3.5
-          PACKAGES="${PACKAGES_STANDARD} xarray"
+          PACKAGES="${PACKAGES_STANDARD} iris xarray"
+        - NAME="Python 3.6 (standard)"
+          PYTHON_VERSION=3.6
+          PACKAGES="${PACKAGES_STANDARD}"
+        - NAME="Python 3.6 (metadata)"
+          PYTHON_VERSION=3.6
+          PACKAGES="${PACKAGES_STANDARD} iris xarray"
 
 install:
     # Install Miniconda so we can use it to manage dependencies:
@@ -40,8 +43,7 @@ install:
     - hash -r
     # Setup conda to use extra channels for dependencies:
     - conda config --set always_yes yes --set changeps1 no
-    - conda config --add channels scitools
-    - conda config --add channels ajdawson
+    - conda config --add channels conda-forge
     - conda update conda
     - conda info -a
     # Create a conda environment with the required python version:
