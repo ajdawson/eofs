@@ -194,10 +194,10 @@ def _wrap_xarray(solution, neofs, time_units):
         except ImportError:
             raise ValueError("cannot use container 'xarray' without "
                              "the xarray/xray module")
-    time_dim = xr.Coordinate('time', solution['time'])
-    lat_dim = xr.Coordinate('latitude', solution['latitude'])
-    lon_dim = xr.Coordinate('longitude', solution['longitude'])
-    eof_dim = xr.Coordinate('eof', np.arange(1, neofs+1))
+    time_dim = xr.IndexVariable('time', solution['time'])
+    lat_dim = xr.IndexVariable('latitude', solution['latitude'])
+    lon_dim = xr.IndexVariable('longitude', solution['longitude'])
+    eof_dim = xr.IndexVariable('eof', np.arange(1, neofs+1))
     solution['sst'] = xr.DataArray(solution['sst'],
                                    coords=[time_dim, lat_dim, lon_dim])
     solution['eigenvalues'] = xr.DataArray(solution['eigenvalues'],
