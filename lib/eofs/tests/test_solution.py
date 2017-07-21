@@ -15,7 +15,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
-from __future__ import absolute_import
+from __future__ import (absolute_import, division, print_function)
 
 from nose import SkipTest
 import numpy as np
@@ -112,7 +112,7 @@ class SolutionTest(EofsTest):
         eofs = self._tomasked(self.solver.eofs(neofs=self.neofs,
                                                eofscaling=eofscaling))
         eofs = eofs.compressed()
-        ns = eofs.shape[0] / self.neofs
+        ns = eofs.shape[0] // self.neofs
         eofs = eofs.reshape([self.neofs, ns])
         dot = np.dot(eofs, eofs.T)
         residual = dot - np.diag(dot.diagonal())
