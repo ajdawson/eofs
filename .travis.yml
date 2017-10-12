@@ -11,7 +11,7 @@ env:
           PACKAGES="${PACKAGES_STANDARD}"
         - NAME="Python 2.7 (metadata)"
           PYTHON_VERSION=2.7
-          PACKAGES="${PACKAGES_STANDARD} cdat-lite iris xarray"
+          PACKAGES="${PACKAGES_STANDARD} cdms2 genutil iris xarray"
         - NAME="Python 3.4 (standard)"
           PYTHON_VERSION=3.4
           PACKAGES="${PACKAGES_STANDARD}"
@@ -59,6 +59,7 @@ script:
     # installed package rather than the source:
     - mkdir ../test_directory
     - cd ../test_directory
+    - export UVCDAT_ANONYMOUS_LOG=no
     - pytest -vrsx --pyargs eofs
 
 notifications:
