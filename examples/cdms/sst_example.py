@@ -46,7 +46,7 @@ pc1 = solver.pcs(npcs=1, pcscaling=1)
 lons, lats = eof1.getLongitude()[:], eof1.getLatitude()[:]
 clevs = np.linspace(-1, 1, 11)
 ax = plt.axes(projection=ccrs.PlateCarree(central_longitude=190))
-fill = ax.contourf(lons, lats, eof1(squeeze=True), clevs,
+fill = ax.contourf(lons, lats, eof1(squeeze=True).data, clevs,
                    transform=ccrs.PlateCarree(), cmap=plt.cm.RdBu_r)
 ax.add_feature(cfeature.LAND, facecolor='w', edgecolor='k')
 cb = plt.colorbar(fill, orientation='horizontal')
@@ -56,7 +56,7 @@ plt.title('EOF1 expressed as correlation', fontsize=16)
 # Plot the leading PC time series.
 plt.figure()
 years = range(1962, 2012)
-plt.plot(years, pc1, color='b', linewidth=2)
+plt.plot(years, pc1.data, color='b', linewidth=2)
 plt.axhline(0, color='k')
 plt.title('PC1 Time Series')
 plt.xlabel('Year')

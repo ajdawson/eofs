@@ -4,8 +4,17 @@ Changelog
 .. default-role:: py:obj
 
 
-v1.1.x
-------
+v1.2
+----
+
+:Release: v1.2.0
+:Date: 25 October 2016
+
+* Improved the detection of time axes in the iris interface [`#68 <https://github.com/ajdawson/eofs/issues/68>`_, `#69 <https://github.com/ajdawson/eofs/pull/69>`_].
+
+
+v1.1
+----
 
 :Release: v1.1.0
 :Date: 3 March 2016
@@ -15,8 +24,8 @@ v1.1.x
 * Better Python 2 and 3 support without relying on 2to3.
 
 
-v1.0.x
-------
+v1.0
+----
 
 :Release: v1.0.0
 :Date: 16 February 2016
@@ -26,8 +35,8 @@ v1.0.x
 * Improved documentation, including the addition of a developer guide.
 
 
-v0.5.x
-------
+v0.5
+----
 
 :Release: v0.5.1
 :Date: 10 December 2015
@@ -45,8 +54,8 @@ Existing users with unaffected numpy versions (<1.10.0, >=1.10.2) don't need to 
   Since neither cdms2 or `iris` are supported on Python 3 yet, only the standard interfaces have been tested on Python 3.
 
 
-v0.4.x
-------
+v0.4
+----
 
 :Release: v0.4.1
 :Date: 5 April 2013
