@@ -17,12 +17,12 @@
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
 from __future__ import (absolute_import, division, print_function)  # noqa
 
-from nose import SkipTest
 import numpy as np
 try:
     from iris.cube import Cube
-except:
+except ImportError:
     pass
+import pytest
 
 import eofs.multivariate as multivariate
 from eofs.tests import EofsTest
@@ -55,8 +55,8 @@ class MVSolutionTest(EofsTest):
             cls.solution = reference_multivariate_solution(cls.interface,
                                                            cls.weights)
         except ValueError:
-            raise SkipTest('library component not available '
-                           'for {!s} interface'.format(cls.interface))
+            pytest.skip('missing dependencies required to test '
+                        'the {!s} interface'.format(cls.interface))
         cls.neofs = cls.solution['eigenvalues'].shape[0]
         if cls.alternate_weights_arg is not None:
             weights = cls.alternate_weights_arg
@@ -66,19 +66,16 @@ class MVSolutionTest(EofsTest):
             cls.solver = solvers[cls.interface](cls.solution['sst'],
                                                 weights=weights)
         except KeyError:
-            raise SkipTest('library component not available '
-                           'for {!s} interface'.format(cls.interface))
+            pytest.skip('missing dependencies required to test '
+                        'the {!s} interface'.format(cls.interface))
 
     def test_eigenvalues(self):
         self.assert_array_almost_equal(
             self.solver.eigenvalues(neigs=self.neofs),
             self.solution['eigenvalues'])
 
-    def test_eofs(self):
-        for eofscaling in (0, 1, 2):
-            yield self.check_eofs, eofscaling
-
-    def check_eofs(self, eofscaling):
+    @pytest.mark.parametrize('eofscaling', (0, 1, 2))
+    def test_eofs(self, eofscaling):
         eofs = [self._tomasked(e)
                 for e in self.solver.eofs(neofs=self.neofs,
                                           eofscaling=eofscaling)]
@@ -123,12 +120,8 @@ class MVSolutionTest(EofsTest):
         for e in eofs:
             self.assert_true(np.abs(e).max() < 1.000000001)
 
-    def test_pcs(self):
-        # generate PCs tests for each value of the scaling parameter
-        for pcscaling in (0, 1, 2):
-            yield self.check_pcs, pcscaling
-
-    def check_pcs(self, pcscaling):
+    @pytest.mark.parametrize('pcscaling', (0, 1, 2))
+    def test_pcs(self, pcscaling):
         # PCs should match the (possibly scaled) reference solution
         pcs = self._tomasked(self.solver.pcs(npcs=self.neofs,
                                              pcscaling=pcscaling))
@@ -141,12 +134,8 @@ class MVSolutionTest(EofsTest):
             rpcs *= np.sqrt(reigs)
         self.assert_array_almost_equal(pcs, rpcs)
 
-    def test_pcs_uncorrelated(self):
-        # generate PC correlation tests for each value of the scaling parameter
-        for pcscaling in (0, 1, 2):
-            yield self.check_pcs_uncorrelated, pcscaling
-
-    def check_pcs_uncorrelated(self, pcscaling):
+    @pytest.mark.parametrize('pcscaling', (0, 1, 2))
+    def test_pcs_uncorrelated(self, pcscaling):
         # PCs should be uncorrelated in time
         pcs = self._tomasked(self.solver.pcs(npcs=self.neofs,
                                              pcscaling=pcscaling))
@@ -186,24 +175,15 @@ class MVSolutionTest(EofsTest):
                 if weight is not None:
                     self.assert_array_almost_equal(weight, ref)
 
-    def test_northTest(self):
-        # generate tests for typical errors in the scaled and non-scaled cases
-        for vfscaled in (True, False):
-            yield self.check_northTest, vfscaled
-
-    def check_northTest(self, vfscaled):
+    @pytest.mark.parametrize('vfscaled', (True, False))
+    def test_northTest(self, vfscaled):
         # typical errors should match the reference solution
         errs = self.solver.northTest(neigs=self.neofs, vfscaled=vfscaled)
         error_name = 'scaled_errors' if vfscaled else 'errors'
         self.assert_array_almost_equal(errs, self.solution[error_name])
 
-    def test_projectField(self):
-        # generate tests for projecting a field onto the EOFs using each value
-        # of the scaling parameter
-        for eofscaling in (0, 1, 2):
-            yield self.check_projectField, eofscaling
-
-    def check_projectField(self, eofscaling):
+    @pytest.mark.parametrize('eofscaling', (0, 1, 2))
+    def test_projectField(self, eofscaling):
         # original input projected onto the EOFs should match the reference
         # solution PCs
         pcs = self._tomasked(self.solver.projectField(self.solution['sst'],
