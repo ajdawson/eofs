@@ -1,31 +1,29 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>eofs.cdms &mdash; eofs 1.2.0 documentation</title>
-    
+    <title>eofs.cdms &#8212; eofs 1.3.0 documentation</title>
     <link rel="stylesheet" href="../../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '1.2.0',
+        VERSION:     '1.3.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 1.2.0 documentation" href="../../index.html" />
-    <link rel="up" title="Module code" href="../index.html" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
           rel='stylesheet' type='text/css' />
      
@@ -63,7 +61,7 @@
         </script>
 
   </head>
-  <body role="document">
+  <body>
 <div class="pageheader">
   <div>
     <a href="../../index.html">
@@ -81,12 +79,12 @@
     <li><a href="../../index.html">home</a>|&nbsp;</li>
     <li><a href="../../search.html">search</a>|&nbsp;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v1.2.0</h2>
+    <h2>eofs v1.3.0</h2>
     <h3>Table of Contents</h3>
     <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../userguide/index.html">User Guide</a></li>
@@ -100,14 +98,11 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -136,7 +131,7 @@
 <span class="c1">#</span>
 <span class="c1"># You should have received a copy of the GNU General Public License</span>
 <span class="c1"># along with eofs.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">)</span>  <span class="c1"># noqa</span>
 
 <span class="kn">import</span> <span class="nn">collections</span>
 
@@ -149,7 +144,7 @@
 <div class="viewcode-block" id="Eof"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof">[docs]</a><span class="k">class</span> <span class="nc">Eof</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;EOF analysis (meta-data enabled `cdms2` interface)&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create an Eof object.</span>
 
 <span class="sd">        The EOF solution is computed at initialization time. Method</span>
@@ -329,8 +324,8 @@
         <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_timeax</span><span class="p">,</span> <span class="n">pcsax</span><span class="p">]</span>
         <span class="n">pcs</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;pcs&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">)</span>
         <span class="n">pcs</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s1">&#39;principal_components&#39;</span>
-        <span class="k">return</span> <span class="n">pcs</span>
-</div>
+        <span class="k">return</span> <span class="n">pcs</span></div>
+
 <div class="viewcode-block" id="Eof.eofs"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof.eofs">[docs]</a>    <span class="k">def</span> <span class="nf">eofs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eofscaling</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">neofs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Emipirical orthogonal functions (EOFs).</span>
 
@@ -378,8 +373,8 @@
                                     <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">,</span>
                                     <span class="n">fill_value</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_missing_value</span><span class="p">)</span>
         <span class="n">eofs</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s1">&#39;empirical_orthogonal_functions&#39;</span>
-        <span class="k">return</span> <span class="n">eofs</span>
-</div>
+        <span class="k">return</span> <span class="n">eofs</span></div>
+
 <div class="viewcode-block" id="Eof.eofsAsCorrelation"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof.eofsAsCorrelation">[docs]</a>    <span class="k">def</span> <span class="nf">eofsAsCorrelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">neofs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Empirical orthogonal functions (EOFs) expressed as the</span>
@@ -427,8 +422,8 @@
                                     <span class="n">fill_value</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_missing_value</span><span class="p">)</span>
         <span class="n">eofs</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s1">&#39;correlation_between_pcs_and_{:s}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_dataset_name</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">eofs</span>
-</div>
+        <span class="k">return</span> <span class="n">eofs</span></div>
+
 <div class="viewcode-block" id="Eof.eofsAsCovariance"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof.eofsAsCovariance">[docs]</a>    <span class="k">def</span> <span class="nf">eofsAsCovariance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">neofs</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">pcscaling</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Empirical orthogonal functions (EOFs) expressed as the</span>
@@ -488,8 +483,8 @@
                                     <span class="n">fill_value</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_missing_value</span><span class="p">)</span>
         <span class="n">eofs</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s1">&#39;covariance_between_pcs_and_{:s}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_dataset_name</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">eofs</span>
-</div>
+        <span class="k">return</span> <span class="n">eofs</span></div>
+
 <div class="viewcode-block" id="Eof.eigenvalues"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof.eigenvalues">[docs]</a>    <span class="k">def</span> <span class="nf">eigenvalues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">neigs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Eigenvalues (decreasing variances) associated with each EOF.</span>
 
@@ -524,8 +519,8 @@
         <span class="n">axlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">eofax</span><span class="p">]</span>
         <span class="n">lambdas</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">lambdas</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;eigenvalues&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">)</span>
         <span class="n">lambdas</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s1">&#39;eigenvalues&#39;</span>
-        <span class="k">return</span> <span class="n">lambdas</span>
-</div>
+        <span class="k">return</span> <span class="n">lambdas</span></div>
+
 <div class="viewcode-block" id="Eof.varianceFraction"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof.varianceFraction">[docs]</a>    <span class="k">def</span> <span class="nf">varianceFraction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">neigs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Fractional EOF variances.</span>
 
@@ -566,8 +561,8 @@
         <span class="n">vfrac</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">vfrac</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;variance_fractions&#39;</span><span class="p">,</span>
                                      <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">)</span>
         <span class="n">vfrac</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s1">&#39;variance_fractions&#39;</span>
-        <span class="k">return</span> <span class="n">vfrac</span>
-</div>
+        <span class="k">return</span> <span class="n">vfrac</span></div>
+
 <div class="viewcode-block" id="Eof.totalAnomalyVariance"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof.totalAnomalyVariance">[docs]</a>    <span class="k">def</span> <span class="nf">totalAnomalyVariance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Total variance associated with the field of anomalies (the sum</span>
@@ -585,8 +580,8 @@
 <span class="sd">            total_variance = solver.totalAnomalyVariance()</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">totalAnomalyVariance</span><span class="p">()</span>
-</div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">totalAnomalyVariance</span><span class="p">()</span></div>
+
 <div class="viewcode-block" id="Eof.northTest"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof.northTest">[docs]</a>    <span class="k">def</span> <span class="nf">northTest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">neigs</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">vfscaled</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Typical errors for eigenvalues.</span>
 
@@ -641,8 +636,8 @@
                                        <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;typical_errors&#39;</span><span class="p">,</span>
                                        <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">)</span>
         <span class="n">typerrs</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s1">&#39;typical_errors&#39;</span>
-        <span class="k">return</span> <span class="n">typerrs</span>
-</div>
+        <span class="k">return</span> <span class="n">typerrs</span></div>
+
 <div class="viewcode-block" id="Eof.reconstructedField"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof.reconstructedField">[docs]</a>    <span class="k">def</span> <span class="nf">reconstructedField</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">neofs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Reconstructed data field based on a subset of EOFs.</span>
 
@@ -690,8 +685,8 @@
         <span class="n">rfield</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s1">&#39;{:s}_reconstructed_with_{:s}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_dataset_name</span><span class="p">,</span> <span class="n">name_part</span><span class="p">)</span>
         <span class="n">rfield</span><span class="o">.</span><span class="n">neofs</span> <span class="o">=</span> <span class="n">neofs</span>
-        <span class="k">return</span> <span class="n">rfield</span>
-</div>
+        <span class="k">return</span> <span class="n">rfield</span></div>
+
 <div class="viewcode-block" id="Eof.projectField"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof.projectField">[docs]</a>    <span class="k">def</span> <span class="nf">projectField</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">neofs</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">eofscaling</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">weighted</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Project a field onto the EOFs.</span>
 
@@ -774,8 +769,8 @@
         <span class="c1"># Apply meta data to the projected PCs.</span>
         <span class="n">pcs</span> <span class="o">=</span> <span class="n">cdms2</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;pseudo_pcs&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">axlist</span><span class="p">)</span>
         <span class="n">pcs</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="s1">&#39;{:s}_pseudo_pcs&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">pcs</span>
-</div>
+        <span class="k">return</span> <span class="n">pcs</span></div>
+
 <div class="viewcode-block" id="Eof.getWeights"><a class="viewcode-back" href="../../api/eofs.cdms.html#eofs.cdms.Eof.getWeights">[docs]</a>    <span class="k">def</span> <span class="nf">getWeights</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Weights used for the analysis.</span>
 
@@ -809,12 +804,12 @@
     <li><a href="../../index.html">home</a>|&nbsp;</li>
     <li><a href="../../search.html">search</a>|&nbsp;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2013-2016 Andrew Dawson.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+        &#169; Copyright 2013-2017 Andrew Dawson.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.4.
     </div>
   </body>
 </html>

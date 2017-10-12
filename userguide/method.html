@@ -1,31 +1,29 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Method of solution &mdash; eofs 1.2.0 documentation</title>
-    
+    <title>Method of solution &#8212; eofs 1.3.0 documentation</title>
     <link rel="stylesheet" href="../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '1.2.0',
+        VERSION:     '1.3.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 1.2.0 documentation" href="../index.html" />
-    <link rel="up" title="User Guide" href="index.html" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Speeding up the solvers" href="speed.html" />
     <link rel="prev" title="Multivariate solvers" href="multivariate.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
@@ -65,7 +63,7 @@
         </script>
 
   </head>
-  <body role="document">
+  <body>
 <div class="pageheader">
   <div>
     <a href="../index.html">
@@ -89,12 +87,12 @@
     <li><a href="../index.html">home</a>|&nbsp;</li>
     <li><a href="../search.html">search</a>|&nbsp;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User Guide</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User Guide</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v1.2.0</h2>
+    <h2>eofs v1.3.0</h2>
     <h3>Table of Contents</h3>
     <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">User Guide</a><ul class="current">
@@ -102,7 +100,7 @@
 <li class="toctree-l2"><a class="reference internal" href="interfaces.html">Solver interfaces</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html">Basic usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="multivariate.html">Multivariate solvers</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">Method of solution</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Method of solution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="speed.html">Speeding up the solvers</a></li>
 </ul>
 </li>
@@ -122,21 +120,18 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/userguide/method.txt"
+      <li><a href="../_sources/userguide/method.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -165,20 +160,20 @@ The time-mean is then removed from of the <span class="math">\(M\)</span> time s
 \end{pmatrix}.\end{split}\]</div>
 <p>Typically one would then compute the covariance matrix <span class="math">\(\mathbf{R} = \mathbf{A}^\intercal \mathbf{A}\)</span> and solve the eigenvalue problem:</p>
 <div class="math" id="equation-eig">
-<span class="eqno">(1)</span>\[\mathbf{R C} = \mathbf{C} \Lambda,\]</div>
+<span class="eqno">(1)<a class="headerlink" href="#equation-eig" title="Permalink to this equation">¶</a></span>\[\mathbf{R C} = \mathbf{C} \Lambda,\]</div>
 <p>where the columns of <span class="math">\(\mathbf{C}\)</span> are the eigenvectors (EOFs) and the eigenvalues (EOF variances) are on the leading diagonal of <span class="math">\(\Lambda\)</span>. The PCs <span class="math">\(\mathbf{P}\)</span> can then be computed from the projection of <span class="math">\(\mathbf{A}\)</span> onto the EOFs:</p>
 <div class="math">
 \[\mathbf{P} = \mathbf{A C}.\]</div>
 <p>Since computing the covariance matrix can be an expensive operation, a different method is used in <cite>eofs</cite>. Instead of computing the covariance matrix, the SVD of <span class="math">\(\mathbf{A}\)</span> is computed:</p>
 <div class="math">
 \[\mathrm{SVD}\left(\mathbf{A}\right) = \mathbf{U} \Gamma \mathbf{V}^\intercal.\]</div>
-<p>The columns of <span class="math">\(\mathbf{U}\)</span> and <span class="math">\(\mathbf{V}\)</span> are the singular vectors and the singular values are on the leading diagonal of <span class="math">\(\Gamma\)</span>. To demonstrate the equivalence of this method and the covariance matrix method we write the covariance matrix in two ways, first a rearranged form of <a href="#equation-eig">(1)</a> <a class="footnote-reference" href="#id8" id="id4">[4]</a>:</p>
+<p>The columns of <span class="math">\(\mathbf{U}\)</span> and <span class="math">\(\mathbf{V}\)</span> are the singular vectors and the singular values are on the leading diagonal of <span class="math">\(\Gamma\)</span>. To demonstrate the equivalence of this method and the covariance matrix method we write the covariance matrix in two ways, first a rearranged form of <a class="reference internal" href="#equation-eig">(1)</a> <a class="footnote-reference" href="#id8" id="id4">[4]</a>:</p>
 <div class="math" id="equation-R1">
-<span class="eqno">(2)</span>\[\mathbf{R} = \mathbf{C} \Lambda \mathbf{C}^\intercal,\]</div>
+<span class="eqno">(2)<a class="headerlink" href="#equation-R1" title="Permalink to this equation">¶</a></span>\[\mathbf{R} = \mathbf{C} \Lambda \mathbf{C}^\intercal,\]</div>
 <p>and second the expression for the covariance matrix <span class="math">\(\mathbf{R}\)</span> after first taking the SVD of <span class="math">\(\mathbf{A}\)</span>:</p>
 <div class="math" id="equation-R2">
-<span class="eqno">(3)</span>\[\mathbf{R} = \mathbf{A}^\intercal \mathbf{A} = \left( \mathbf{U} \Gamma \mathbf{V}^\intercal \right)^\intercal \left( \mathbf{U} \Gamma \mathbf{V}^\intercal \right) = \mathbf{V} \Gamma^\intercal \mathbf{U}^\intercal \mathbf{U} \Gamma \mathbf{V}^\intercal = \mathbf{V} \Gamma^\intercal \Gamma \mathbf{V}^\intercal.\]</div>
-<p>Comparing <a href="#equation-R1">(2)</a> and <a href="#equation-R2">(3)</a> it is clear that <span class="math">\(\mathbf{C} = \mathbf{V}\)</span> and <span class="math">\(\Lambda = \Gamma^\intercal \Gamma\)</span>. A bonus of using the SVD method is that the singular vectors in <span class="math">\(\mathbf{U}\)</span> are the standardized PCs. This can be shown by first forming an expression for <span class="math">\(\mathbf{A}\)</span> in terms of the EOFs and the PCs:</p>
+<span class="eqno">(3)<a class="headerlink" href="#equation-R2" title="Permalink to this equation">¶</a></span>\[\mathbf{R} = \mathbf{A}^\intercal \mathbf{A} = \left( \mathbf{U} \Gamma \mathbf{V}^\intercal \right)^\intercal \left( \mathbf{U} \Gamma \mathbf{V}^\intercal \right) = \mathbf{V} \Gamma^\intercal \mathbf{U}^\intercal \mathbf{U} \Gamma \mathbf{V}^\intercal = \mathbf{V} \Gamma^\intercal \Gamma \mathbf{V}^\intercal.\]</div>
+<p>Comparing <a class="reference internal" href="#equation-R1">(2)</a> and <a class="reference internal" href="#equation-R2">(3)</a> it is clear that <span class="math">\(\mathbf{C} = \mathbf{V}\)</span> and <span class="math">\(\Lambda = \Gamma^\intercal \Gamma\)</span>. A bonus of using the SVD method is that the singular vectors in <span class="math">\(\mathbf{U}\)</span> are the standardized PCs. This can be shown by first forming an expression for <span class="math">\(\mathbf{A}\)</span> in terms of the EOFs and the PCs:</p>
 <div class="math">
 \[\mathbf{A} = \mathbf{P} \mathbf{C}^\intercal,\]</div>
 <p>which is the expression for reconstructing a field based on its EOFs and PCs. Defining a normalized PC <span class="math">\(\phi_j\)</span> as:</p>
@@ -237,12 +232,12 @@ The time-mean is then removed from of the <span class="math">\(M\)</span> time s
     <li><a href="../index.html">home</a>|&nbsp;</li>
     <li><a href="../search.html">search</a>|&nbsp;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >User Guide</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >User Guide</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2013-2016 Andrew Dawson.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+        &#169; Copyright 2013-2017 Andrew Dawson.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.4.
     </div>
   </body>
 </html>

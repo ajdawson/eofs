@@ -1,31 +1,29 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Set up your fork &mdash; eofs 1.2.0 documentation</title>
-    
+    <title>Set up your fork &#8212; eofs 1.3.0 documentation</title>
     <link rel="stylesheet" href="../../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '1.2.0',
+        VERSION:     '1.3.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 1.2.0 documentation" href="../../index.html" />
-    <link rel="up" title="Git for development" href="git_development.html" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Configure git" href="configure_git.html" />
     <link rel="prev" title="Making your own copy (fork) of eofs" href="forking_hell.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
@@ -65,7 +63,7 @@
         </script>
 
   </head>
-  <body role="document">
+  <body>
 <div class="pageheader">
   <div>
     <a href="../../index.html">
@@ -89,14 +87,14 @@
     <li><a href="../../index.html">home</a>|&nbsp;</li>
     <li><a href="../../search.html">search</a>|&nbsp;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" >Developer Guide</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" >Working with <em>eofs</em> source code</a> &raquo;</li>
-          <li class="nav-item nav-item-3"><a href="git_development.html" accesskey="U">Git for development</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Developer Guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" >Working with <em>eofs</em> source code</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="git_development.html" accesskey="U">Git for development</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v1.2.0</h2>
+    <h2>eofs v1.3.0</h2>
     <h3>Table of Contents</h3>
     <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../userguide/index.html">User Guide</a></li>
@@ -120,21 +118,18 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/devguide/gitwash/set_up_fork.txt"
+      <li><a href="../../_sources/devguide/gitwash/set_up_fork.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -147,12 +142,12 @@
             
   <div class="section" id="set-up-your-fork">
 <span id="set-up-fork"></span><h1>Set up your fork<a class="headerlink" href="#set-up-your-fork" title="Permalink to this headline">¶</a></h1>
-<p>First you follow the instructions for <a class="reference internal" href="forking_hell.html#forking"><span>Making your own copy (fork) of eofs</span></a>.</p>
+<p>First you follow the instructions for <a class="reference internal" href="forking_hell.html#forking"><span class="std std-ref">Making your own copy (fork) of eofs</span></a>.</p>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre><span></span>git clone git@github.com:your-user-name/eofs.git
-cd eofs
-git remote add upstream git://github.com/ajdawson/eofs.git
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@github.com</span><span class="p">:</span><span class="n">your</span><span class="o">-</span><span class="n">user</span><span class="o">-</span><span class="n">name</span><span class="o">/</span><span class="n">eofs</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">eofs</span>
+<span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">upstream</span> <span class="n">git</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ajdawson</span><span class="o">/</span><span class="n">eofs</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
 </div>
@@ -165,10 +160,10 @@ git remote add upstream git://github.com/ajdawson/eofs.git
 <span class="pre">git&#64;github.com:your-user-name/eofs.git</span></code></p>
 </li>
 <li><p class="first">Investigate.  Change directory to your new repo: <code class="docutils literal"><span class="pre">cd</span> <span class="pre">eofs</span></code>. Then
-<code class="docutils literal"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-a</span></code> to show you all branches.  You&#8217;ll get something
+<code class="docutils literal"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-a</span></code> to show you all branches.  You’ll get something
 like:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>* master
-remotes/origin/master
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="o">*</span> <span class="n">master</span>
+<span class="n">remotes</span><span class="o">/</span><span class="n">origin</span><span class="o">/</span><span class="n">master</span>
 </pre></div>
 </div>
 <p>This tells you that you are currently on the <code class="docutils literal"><span class="pre">master</span></code> branch, and
@@ -182,22 +177,22 @@ you can merge in changes from trunk.</p>
 </div>
 <div class="section" id="linking-your-repository-to-the-upstream-repo">
 <span id="linking-to-upstream"></span><h3>Linking your repository to the upstream repo<a class="headerlink" href="#linking-your-repository-to-the-upstream-repo" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre><span></span>cd eofs
-git remote add upstream git://github.com/ajdawson/eofs.git
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">eofs</span>
+<span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">upstream</span> <span class="n">git</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ajdawson</span><span class="o">/</span><span class="n">eofs</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
-<p><code class="docutils literal"><span class="pre">upstream</span></code> here is just the arbitrary name we&#8217;re using to refer to the
+<p><code class="docutils literal"><span class="pre">upstream</span></code> here is just the arbitrary name we’re using to refer to the
 main <a class="reference external" href="http://ajdawson.github.io/eofs">eofs</a> repository at <a class="reference external" href="http://github.com/ajdawson/eofs">eofs github</a>.</p>
-<p>Note that we&#8217;ve used <code class="docutils literal"><span class="pre">git://</span></code> for the URL rather than <code class="docutils literal"><span class="pre">git&#64;</span></code>.  The
-<code class="docutils literal"><span class="pre">git://</span></code> URL is read only.  This means we that we can&#8217;t accidentally
+<p>Note that we’ve used <code class="docutils literal"><span class="pre">git://</span></code> for the URL rather than <code class="docutils literal"><span class="pre">git&#64;</span></code>.  The
+<code class="docutils literal"><span class="pre">git://</span></code> URL is read only.  This means we that we can’t accidentally
 (or deliberately) write to the upstream repo, and we are only going to
 use it to merge into our own code.</p>
 <p>Just for your own satisfaction, show yourself that you now have a new
-&#8216;remote&#8217;, with <code class="docutils literal"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">-v</span> <span class="pre">show</span></code>, giving you something like:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>upstream     git://github.com/ajdawson/eofs.git (fetch)
-upstream     git://github.com/ajdawson/eofs.git (push)
-origin       git@github.com:your-user-name/eofs.git (fetch)
-origin       git@github.com:your-user-name/eofs.git (push)
+‘remote’, with <code class="docutils literal"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">-v</span> <span class="pre">show</span></code>, giving you something like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">upstream</span>     <span class="n">git</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ajdawson</span><span class="o">/</span><span class="n">eofs</span><span class="o">.</span><span class="n">git</span> <span class="p">(</span><span class="n">fetch</span><span class="p">)</span>
+<span class="n">upstream</span>     <span class="n">git</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ajdawson</span><span class="o">/</span><span class="n">eofs</span><span class="o">.</span><span class="n">git</span> <span class="p">(</span><span class="n">push</span><span class="p">)</span>
+<span class="n">origin</span>       <span class="n">git</span><span class="nd">@github.com</span><span class="p">:</span><span class="n">your</span><span class="o">-</span><span class="n">user</span><span class="o">-</span><span class="n">name</span><span class="o">/</span><span class="n">eofs</span><span class="o">.</span><span class="n">git</span> <span class="p">(</span><span class="n">fetch</span><span class="p">)</span>
+<span class="n">origin</span>       <span class="n">git</span><span class="nd">@github.com</span><span class="p">:</span><span class="n">your</span><span class="o">-</span><span class="n">user</span><span class="o">-</span><span class="n">name</span><span class="o">/</span><span class="n">eofs</span><span class="o">.</span><span class="n">git</span> <span class="p">(</span><span class="n">push</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -225,14 +220,14 @@ origin       git@github.com:your-user-name/eofs.git (push)
     <li><a href="../../index.html">home</a>|&nbsp;</li>
     <li><a href="../../search.html">search</a>|&nbsp;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" >Developer Guide</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" >Working with <em>eofs</em> source code</a> &raquo;</li>
-          <li class="nav-item nav-item-3"><a href="git_development.html" >Git for development</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Developer Guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" >Working with <em>eofs</em> source code</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="git_development.html" >Git for development</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2013-2016 Andrew Dawson.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+        &#169; Copyright 2013-2017 Andrew Dawson.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.4.
     </div>
   </body>
 </html>

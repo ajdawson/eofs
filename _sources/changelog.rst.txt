@@ -4,6 +4,16 @@ Changelog
 .. default-role:: py:obj
 
 
+v1.3
+----
+
+:Release: v1.3.0
+:Date: 12 October 2017
+
+* Minor change for xarray deprecations resulting in a different xarray version dependency (now >= 0.9) [`#87 <https://github.com/ajdawson/eofs/pull/87>`_].
+* Bug fixes for Python 3 [`#88 <https://github.com/ajdawson/eofs/pull/88>`_].
+
+
 v1.2
 ----
 

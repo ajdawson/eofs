@@ -1,31 +1,29 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Development workflow &mdash; eofs 1.2.0 documentation</title>
-    
+    <title>Development workflow &#8212; eofs 1.3.0 documentation</title>
     <link rel="stylesheet" href="../../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '1.2.0',
+        VERSION:     '1.3.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 1.2.0 documentation" href="../../index.html" />
-    <link rel="up" title="Git for development" href="git_development.html" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Maintainer workflow" href="maintainer_workflow.html" />
     <link rel="prev" title="Configure git" href="configure_git.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
@@ -65,7 +63,7 @@
         </script>
 
   </head>
-  <body role="document">
+  <body>
 <div class="pageheader">
   <div>
     <a href="../../index.html">
@@ -89,14 +87,14 @@
     <li><a href="../../index.html">home</a>|&nbsp;</li>
     <li><a href="../../search.html">search</a>|&nbsp;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" >Developer Guide</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" >Working with <em>eofs</em> source code</a> &raquo;</li>
-          <li class="nav-item nav-item-3"><a href="git_development.html" accesskey="U">Git for development</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Developer Guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" >Working with <em>eofs</em> source code</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="git_development.html" accesskey="U">Git for development</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v1.2.0</h2>
+    <h2>eofs v1.3.0</h2>
     <h3>Table of Contents</h3>
     <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../userguide/index.html">User Guide</a></li>
@@ -120,21 +118,18 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/devguide/gitwash/development_workflow.txt"
+      <li><a href="../../_sources/devguide/gitwash/development_workflow.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -148,28 +143,28 @@
   <div class="section" id="development-workflow">
 <span id="id1"></span><h1>Development workflow<a class="headerlink" href="#development-workflow" title="Permalink to this headline">¶</a></h1>
 <p>You already have your own forked copy of the <a class="reference external" href="http://ajdawson.github.io/eofs">eofs</a> repository, by
-following <a class="reference internal" href="forking_hell.html#forking"><span>Making your own copy (fork) of eofs</span></a>. You have <a class="reference internal" href="set_up_fork.html#set-up-fork"><span>Set up your fork</span></a>. You have configured
-git by following <a class="reference internal" href="configure_git.html#configure-git"><span>Configure git</span></a>.  Now you are ready for some real work.</p>
+following <a class="reference internal" href="forking_hell.html#forking"><span class="std std-ref">Making your own copy (fork) of eofs</span></a>. You have <a class="reference internal" href="set_up_fork.html#set-up-fork"><span class="std std-ref">Set up your fork</span></a>. You have configured
+git by following <a class="reference internal" href="configure_git.html#configure-git"><span class="std std-ref">Configure git</span></a>.  Now you are ready for some real work.</p>
 <div class="section" id="workflow-summary">
 <h2>Workflow summary<a class="headerlink" href="#workflow-summary" title="Permalink to this headline">¶</a></h2>
-<p>In what follows we&#8217;ll refer to the upstream eofs <code class="docutils literal"><span class="pre">master</span></code> branch, as
-&#8220;trunk&#8221;.</p>
+<p>In what follows we’ll refer to the upstream eofs <code class="docutils literal"><span class="pre">master</span></code> branch, as
+“trunk”.</p>
 <ul class="simple">
-<li>Don&#8217;t use your <code class="docutils literal"><span class="pre">master</span></code> branch for anything.  Consider deleting it.</li>
+<li>Don’t use your <code class="docutils literal"><span class="pre">master</span></code> branch for anything.  Consider deleting it.</li>
 <li>When you are starting a new set of changes, fetch any changes from trunk,
 and start a new <em>feature branch</em> from that.</li>
-<li>Make a new branch for each separable set of changes — &#8220;one task, one
-branch&#8221; (<a class="reference external" href="http://mail.scipy.org/pipermail/ipython-dev/2010-October/006746.html">ipython git workflow</a>).</li>
+<li>Make a new branch for each separable set of changes — “one task, one
+branch” (<a class="reference external" href="http://mail.scipy.org/pipermail/ipython-dev/2010-October/006746.html">ipython git workflow</a>).</li>
 <li>Name your branch for the purpose of the changes - e.g.
 <code class="docutils literal"><span class="pre">bugfix-for-issue-14</span></code> or <code class="docutils literal"><span class="pre">refactor-database-code</span></code>.</li>
 <li>If you can possibly avoid it, avoid merging trunk or any other branches into
 your feature branch while you are working.</li>
-<li>If you do find yourself merging from trunk, consider <a class="reference internal" href="#rebase-on-trunk"><span>Rebasing on trunk</span></a></li>
+<li>If you do find yourself merging from trunk, consider <a class="reference internal" href="#rebase-on-trunk"><span class="std std-ref">Rebasing on trunk</span></a></li>
 <li>Ask for code review!</li>
 </ul>
 <p>This way of working helps to keep work well organized, with readable history.
 This in turn makes it easier for project maintainers (that might be you) to see
-what you&#8217;ve done, and why you did it.</p>
+what you’ve done, and why you did it.</p>
 <p>See <a class="reference external" href="http://www.mail-archive.com/dri-devel&#64;lists.sourceforge.net/msg39091.html">linux git workflow</a> and <a class="reference external" href="http://mail.scipy.org/pipermail/ipython-dev/2010-October/006746.html">ipython git workflow</a> for some explanation.</p>
 </div>
 <div class="section" id="consider-deleting-your-master-branch">
@@ -180,13 +175,13 @@ details.</p>
 </div>
 <div class="section" id="update-the-mirror-of-trunk">
 <span id="update-mirror-trunk"></span><h2>Update the mirror of trunk<a class="headerlink" href="#update-the-mirror-of-trunk" title="Permalink to this headline">¶</a></h2>
-<p>First make sure you have done <a class="reference internal" href="set_up_fork.html#linking-to-upstream"><span>Linking your repository to the upstream repo</span></a>.</p>
+<p>First make sure you have done <a class="reference internal" href="set_up_fork.html#linking-to-upstream"><span class="std std-ref">Linking your repository to the upstream repo</span></a>.</p>
 <p>From time to time you should fetch the upstream (trunk) changes from github:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>git fetch upstream
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">fetch</span> <span class="n">upstream</span>
 </pre></div>
 </div>
-<p>This will pull down any commits you don&#8217;t have, and set the remote branches to
-point to the right commit.  For example, &#8216;trunk&#8217; is the branch referred to by
+<p>This will pull down any commits you don’t have, and set the remote branches to
+point to the right commit.  For example, ‘trunk’ is the branch referred to by
 (remote/branchname) <code class="docutils literal"><span class="pre">upstream/master</span></code> - and if there have been commits since
 you last checked, <code class="docutils literal"><span class="pre">upstream/master</span></code> will change after you do the fetch.</p>
 </div>
@@ -194,17 +189,17 @@ you last checked, <code class="docutils literal"><span class="pre">upstream/mast
 <span id="make-feature-branch"></span><h2>Make a new feature branch<a class="headerlink" href="#make-a-new-feature-branch" title="Permalink to this headline">¶</a></h2>
 <p>When you are ready to make some changes to the code, you should start a new
 branch.  Branches that are for a collection of related edits are often called
-&#8216;feature branches&#8217;.</p>
+‘feature branches’.</p>
 <p>Making an new branch for each set of related changes will make it easier for
 someone reviewing your branch to see what you are doing.</p>
 <p>Choose an informative name for the branch to remind yourself and the rest of us
 what the changes in the branch are for.  For example <code class="docutils literal"><span class="pre">add-ability-to-fly</span></code>, or
 <code class="docutils literal"><span class="pre">buxfix-for-issue-42</span></code>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span># Update the mirror of trunk
-git fetch upstream
-# Make new feature branch starting at current trunk
-git branch my-new-feature upstream/master
-git checkout my-new-feature
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Update the mirror of trunk</span>
+<span class="n">git</span> <span class="n">fetch</span> <span class="n">upstream</span>
+<span class="c1"># Make new feature branch starting at current trunk</span>
+<span class="n">git</span> <span class="n">branch</span> <span class="n">my</span><span class="o">-</span><span class="n">new</span><span class="o">-</span><span class="n">feature</span> <span class="n">upstream</span><span class="o">/</span><span class="n">master</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="n">my</span><span class="o">-</span><span class="n">new</span><span class="o">-</span><span class="n">feature</span>
 </pre></div>
 </div>
 <p>Generally, you will want to keep your feature branches on your public <a class="reference external" href="http://github.com">github</a>
@@ -212,12 +207,12 @@ fork of <a class="reference external" href="http://ajdawson.github.io/eofs">eofs
 github repo.  Generally (if you followed the instructions in these pages, and by
 default), git will have a link to your github repo, called <code class="docutils literal"><span class="pre">origin</span></code>.  You push
 up to your own repo on github with:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>git push origin my-new-feature
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">my</span><span class="o">-</span><span class="n">new</span><span class="o">-</span><span class="n">feature</span>
 </pre></div>
 </div>
 <p>In git &gt;= 1.7 you can ensure that the link is correctly set by using the
 <code class="docutils literal"><span class="pre">--set-upstream</span></code> option:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>git push --set-upstream origin my-new-feature
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="o">--</span><span class="nb">set</span><span class="o">-</span><span class="n">upstream</span> <span class="n">origin</span> <span class="n">my</span><span class="o">-</span><span class="n">new</span><span class="o">-</span><span class="n">feature</span>
 </pre></div>
 </div>
 <p>From now on git will know that <code class="docutils literal"><span class="pre">my-new-feature</span></code> is related to the
@@ -227,10 +222,10 @@ up to your own repo on github with:</p>
 <span id="edit-flow"></span><h2>The editing workflow<a class="headerlink" href="#the-editing-workflow" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="overview">
 <h3>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre><span></span># hack hack
-git add my_new_file
-git commit -am &#39;NF - some message&#39;
-git push
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># hack hack</span>
+<span class="n">git</span> <span class="n">add</span> <span class="n">my_new_file</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">am</span> <span class="s1">&#39;NF - some message&#39;</span>
+<span class="n">git</span> <span class="n">push</span>
 </pre></div>
 </div>
 </div>
@@ -240,19 +235,19 @@ git push
 <li><p class="first">Make some changes</p>
 </li>
 <li><p class="first">See which files have changed with <code class="docutils literal"><span class="pre">git</span> <span class="pre">status</span></code> (see <a class="reference external" href="http://schacon.github.com/git/git-status.html">git status</a>).
-You&#8217;ll see a listing like this one:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span># On branch ny-new-feature
-# Changed but not updated:
-#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
-#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
-#
-#  modified:   README
-#
-# Untracked files:
-#   (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
-#
-#  INSTALL
-no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+You’ll see a listing like this one:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># On branch ny-new-feature</span>
+<span class="c1"># Changed but not updated:</span>
+<span class="c1">#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span>
+<span class="c1">#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span>
+<span class="c1">#</span>
+<span class="c1">#  modified:   README</span>
+<span class="c1">#</span>
+<span class="c1"># Untracked files:</span>
+<span class="c1">#   (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</span>
+<span class="c1">#</span>
+<span class="c1">#  INSTALL</span>
+<span class="n">no</span> <span class="n">changes</span> <span class="n">added</span> <span class="n">to</span> <span class="n">commit</span> <span class="p">(</span><span class="n">use</span> <span class="s2">&quot;git add&quot;</span> <span class="ow">and</span><span class="o">/</span><span class="ow">or</span> <span class="s2">&quot;git commit -a&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
@@ -263,7 +258,7 @@ no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&q
 </li>
 <li><p class="first">To commit all modified files into the local copy of your repo,, do
 <code class="docutils literal"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-am</span> <span class="pre">'A</span> <span class="pre">commit</span> <span class="pre">message'</span></code>.  Note the <code class="docutils literal"><span class="pre">-am</span></code> options to
-<code class="docutils literal"><span class="pre">commit</span></code>. The <code class="docutils literal"><span class="pre">m</span></code> flag just signals that you&#8217;re going to type a
+<code class="docutils literal"><span class="pre">commit</span></code>. The <code class="docutils literal"><span class="pre">m</span></code> flag just signals that you’re going to type a
 message on the command line.  The <code class="docutils literal"><span class="pre">a</span></code> flag — you can just take on
 faith — or see <a class="reference external" href="http://www.gitready.com/beginner/2009/01/18/the-staging-area.html">why the -a flag?</a> — and the helpful use-case
 description in the <a class="reference external" href="http://tomayko.com/writings/the-thing-about-git">tangled working copy problem</a>. The <a class="reference external" href="http://schacon.github.com/git/git-commit.html">git commit</a> manual
@@ -282,16 +277,16 @@ page might also be useful.</p>
 <li><p class="first">Go to the URL of your forked repo, say
 <code class="docutils literal"><span class="pre">http://github.com/your-user-name/eofs</span></code>.</p>
 </li>
-<li><p class="first">Use the &#8216;Switch Branches&#8217; dropdown menu near the top left of the page to
+<li><p class="first">Use the ‘Switch Branches’ dropdown menu near the top left of the page to
 select the branch with your changes:</p>
 <img alt="../../_images/branch_dropdown.png" src="../../_images/branch_dropdown.png" />
 </li>
-<li><p class="first">Click on the &#8216;Pull request&#8217; button:</p>
+<li><p class="first">Click on the ‘Pull request’ button:</p>
 <img alt="../../_images/pull_button.png" src="../../_images/pull_button.png" />
-<p>Enter a title for the set of changes, and some explanation of what you&#8217;ve
-done.  Say if there is anything you&#8217;d like particular attention for - like a
+<p>Enter a title for the set of changes, and some explanation of what you’ve
+done.  Say if there is anything you’d like particular attention for - like a
 complicated change or some code you are not happy with.</p>
-<p>If you don&#8217;t think your request is ready to be merged, just say so in your
+<p>If you don’t think your request is ready to be merged, just say so in your
 pull request message.  This is still a good way of getting some preliminary
 code review.</p>
 </li>
@@ -301,11 +296,11 @@ code review.</p>
 <h2>Some other things you might want to do<a class="headerlink" href="#some-other-things-you-might-want-to-do" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="delete-a-branch-on-github">
 <h3>Delete a branch on github<a class="headerlink" href="#delete-a-branch-on-github" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre><span></span>git checkout master
-# delete branch locally
-git branch -D my-unwanted-branch
-# delete branch on github
-git push origin :my-unwanted-branch
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">checkout</span> <span class="n">master</span>
+<span class="c1"># delete branch locally</span>
+<span class="n">git</span> <span class="n">branch</span> <span class="o">-</span><span class="n">D</span> <span class="n">my</span><span class="o">-</span><span class="n">unwanted</span><span class="o">-</span><span class="n">branch</span>
+<span class="c1"># delete branch on github</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="p">:</span><span class="n">my</span><span class="o">-</span><span class="n">unwanted</span><span class="o">-</span><span class="n">branch</span>
 </pre></div>
 </div>
 <p>(Note the colon <code class="docutils literal"><span class="pre">:</span></code> before <code class="docutils literal"><span class="pre">test-branch</span></code>.  See also:
@@ -316,24 +311,24 @@ git push origin :my-unwanted-branch
 <p>If you want to work on some stuff with other people, where you are all
 committing into the same repository, or even the same branch, then just
 share it via github.</p>
-<p>First fork eofs into your account, as from <a class="reference internal" href="forking_hell.html#forking"><span>Making your own copy (fork) of eofs</span></a>.</p>
+<p>First fork eofs into your account, as from <a class="reference internal" href="forking_hell.html#forking"><span class="std std-ref">Making your own copy (fork) of eofs</span></a>.</p>
 <p>Then, go to your forked repository github page, say
 <code class="docutils literal"><span class="pre">http://github.com/your-user-name/eofs</span></code></p>
-<p>Click on the &#8216;Admin&#8217; button, and add anyone else to the repo as a
+<p>Click on the ‘Admin’ button, and add anyone else to the repo as a
 collaborator:</p>
 <blockquote>
 <div><img alt="../../_images/pull_button.png" src="../../_images/pull_button.png" />
 </div></blockquote>
 <p>Now all those people can do:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>git clone git@githhub.com:your-user-name/eofs.git
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@githhub.com</span><span class="p">:</span><span class="n">your</span><span class="o">-</span><span class="n">user</span><span class="o">-</span><span class="n">name</span><span class="o">/</span><span class="n">eofs</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
 <p>Remember that links starting with <code class="docutils literal"><span class="pre">git&#64;</span></code> use the ssh protocol and are
 read-write; links starting with <code class="docutils literal"><span class="pre">git://</span></code> are read-only.</p>
 <p>Your collaborators can then commit directly into that repo with the
 usual:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>git commit -am &#39;ENH - much better code&#39;
-git push origin master # pushes directly into your repo
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">am</span> <span class="s1">&#39;ENH - much better code&#39;</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">master</span> <span class="c1"># pushes directly into your repo</span>
 </pre></div>
 </div>
 </div>
@@ -345,25 +340,25 @@ commits:</p>
 </pre></div>
 </div>
 <p>To see a linear list of commits for this branch:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>git log
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">log</span>
 </pre></div>
 </div>
 <p>You can also look at the <a class="reference external" href="http://github.com/blog/39-say-hello-to-the-network-graph-visualizer">network graph visualizer</a> for your github
 repo.</p>
-<p>Finally the <a class="reference internal" href="configure_git.html#fancy-log"><span>Fancy log output</span></a> <code class="docutils literal"><span class="pre">lg</span></code> alias will give you a reasonable text-based
+<p>Finally the <a class="reference internal" href="configure_git.html#fancy-log"><span class="std std-ref">Fancy log output</span></a> <code class="docutils literal"><span class="pre">lg</span></code> alias will give you a reasonable text-based
 graph of the repository.</p>
 </div>
 <div class="section" id="rebasing-on-trunk">
 <span id="rebase-on-trunk"></span><h3>Rebasing on trunk<a class="headerlink" href="#rebasing-on-trunk" title="Permalink to this headline">¶</a></h3>
-<p>Let&#8217;s say you thought of some work you&#8217;d like to do. You
-<a class="reference internal" href="#update-mirror-trunk"><span>Update the mirror of trunk</span></a> and <a class="reference internal" href="#make-feature-branch"><span>Make a new feature branch</span></a> called
-<code class="docutils literal"><span class="pre">cool-feature</span></code>. At this stage trunk is at some commit, let&#8217;s call it E. Now
-you make some new commits on your <code class="docutils literal"><span class="pre">cool-feature</span></code> branch, let&#8217;s call them A, B,
+<p>Let’s say you thought of some work you’d like to do. You
+<a class="reference internal" href="#update-mirror-trunk"><span class="std std-ref">Update the mirror of trunk</span></a> and <a class="reference internal" href="#make-feature-branch"><span class="std std-ref">Make a new feature branch</span></a> called
+<code class="docutils literal"><span class="pre">cool-feature</span></code>. At this stage trunk is at some commit, let’s call it E. Now
+you make some new commits on your <code class="docutils literal"><span class="pre">cool-feature</span></code> branch, let’s call them A, B,
 C.  Maybe your changes take a while, or you come back to them after a while.  In
 the meantime, trunk has progressed from commit E to commit (say) G:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>      A---B---C cool-feature
-     /
-D---E---F---G trunk
+<div class="highlight-python"><div class="highlight"><pre><span></span>      <span class="n">A</span><span class="o">---</span><span class="n">B</span><span class="o">---</span><span class="n">C</span> <span class="n">cool</span><span class="o">-</span><span class="n">feature</span>
+     <span class="o">/</span>
+<span class="n">D</span><span class="o">---</span><span class="n">E</span><span class="o">---</span><span class="n">F</span><span class="o">---</span><span class="n">G</span> <span class="n">trunk</span>
 </pre></div>
 </div>
 <p>At this stage you consider merging trunk into your feature branch, and you
@@ -376,37 +371,37 @@ you may prefer to do a rebase.</p>
 the current state of <code class="docutils literal"><span class="pre">trunk</span></code>.  In other words, in this case, it takes the
 changes represented by A, B, C and replays them on top of G. After the rebase,
 your history will look like this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>              A&#39;--B&#39;--C&#39; cool-feature
-             /
-D---E---F---G trunk
+<div class="highlight-python"><div class="highlight"><pre><span></span>              <span class="n">A</span><span class="s1">&#39;--B&#39;</span><span class="o">--</span><span class="n">C</span><span class="s1">&#39; cool-feature</span>
+             <span class="o">/</span>
+<span class="n">D</span><span class="o">---</span><span class="n">E</span><span class="o">---</span><span class="n">F</span><span class="o">---</span><span class="n">G</span> <span class="n">trunk</span>
 </pre></div>
 </div>
 <p>See <a class="reference external" href="http://matthew-brett.github.com/pydagogue/rebase_without_tears.html">rebase without tears</a> for more detail.</p>
 <p>To do a rebase on trunk:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span># Update the mirror of trunk
-git fetch upstream
-# go to the feature branch
-git checkout cool-feature
-# make a backup in case you mess up
-git branch tmp cool-feature
-# rebase cool-feature onto trunk
-git rebase --onto upstream/master upstream/master cool-feature
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Update the mirror of trunk</span>
+<span class="n">git</span> <span class="n">fetch</span> <span class="n">upstream</span>
+<span class="c1"># go to the feature branch</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="n">cool</span><span class="o">-</span><span class="n">feature</span>
+<span class="c1"># make a backup in case you mess up</span>
+<span class="n">git</span> <span class="n">branch</span> <span class="n">tmp</span> <span class="n">cool</span><span class="o">-</span><span class="n">feature</span>
+<span class="c1"># rebase cool-feature onto trunk</span>
+<span class="n">git</span> <span class="n">rebase</span> <span class="o">--</span><span class="n">onto</span> <span class="n">upstream</span><span class="o">/</span><span class="n">master</span> <span class="n">upstream</span><span class="o">/</span><span class="n">master</span> <span class="n">cool</span><span class="o">-</span><span class="n">feature</span>
 </pre></div>
 </div>
 <p>In this situation, where you are already on branch <code class="docutils literal"><span class="pre">cool-feature</span></code>, the last
 command can be written more succinctly as:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>git rebase upstream/master
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">rebase</span> <span class="n">upstream</span><span class="o">/</span><span class="n">master</span>
 </pre></div>
 </div>
 <p>When all looks good you can delete your backup branch:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>git branch -D tmp
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">branch</span> <span class="o">-</span><span class="n">D</span> <span class="n">tmp</span>
 </pre></div>
 </div>
-<p>If it doesn&#8217;t look good you may need to have a look at
-<a class="reference internal" href="#recovering-from-mess-up"><span>Recovering from mess-ups</span></a>.</p>
+<p>If it doesn’t look good you may need to have a look at
+<a class="reference internal" href="#recovering-from-mess-up"><span class="std std-ref">Recovering from mess-ups</span></a>.</p>
 <p>If you have made changes to files that have also changed in trunk, this may
 generate merge conflicts that you need to resolve - see the <a class="reference external" href="http://schacon.github.com/git/git-rebase.html">git rebase</a> man
-page for some instructions at the end of the &#8220;Description&#8221; section. There is
+page for some instructions at the end of the “Description” section. There is
 some related help on merging in the git user manual - see <a class="reference external" href="http://schacon.github.com/git/user-manual.html#resolving-a-merge">resolving a merge</a>.</p>
 </div>
 <div class="section" id="recovering-from-mess-ups">
@@ -414,12 +409,12 @@ some related help on merging in the git user manual - see <a class="reference ex
 <p>Sometimes, you mess up merges or rebases. Luckily, in git it is
 relatively straightforward to recover from such mistakes.</p>
 <p>If you mess up during a rebase:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>git rebase --abort
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">rebase</span> <span class="o">--</span><span class="n">abort</span>
 </pre></div>
 </div>
 <p>If you notice you messed up after the rebase:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span># reset branch back to the saved point
-git reset --hard tmp
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># reset branch back to the saved point</span>
+<span class="n">git</span> <span class="n">reset</span> <span class="o">--</span><span class="n">hard</span> <span class="n">tmp</span>
 </pre></div>
 </div>
 <p>If you forgot to make a backup branch:</p>
@@ -442,18 +437,18 @@ git reset --hard cool-feature@{2}
 <p class="first admonition-title">Note</p>
 <p class="last">Do this only for your own feature branches.</p>
 </div>
-<p>There&#8217;s an embarrassing typo in a commit you made? Or perhaps the you
+<p>There’s an embarrassing typo in a commit you made? Or perhaps the you
 made several false starts you would like the posterity not to see.</p>
 <p>This can be done via <em>interactive rebasing</em>.</p>
 <p>Suppose that the commit history looks like this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>git log --oneline
-eadc391 Fix some remaining bugs
-a815645 Modify it so that it works
-2dec1ac Fix a few bugs + disable
-13d7934 First implementation
-6ad92e5 * masked is now an instance of a new object, MaskedConstant
-29001ed Add pre-nep for a copule of structured_array_extensions.
-...
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">log</span> <span class="o">--</span><span class="n">oneline</span>
+<span class="n">eadc391</span> <span class="n">Fix</span> <span class="n">some</span> <span class="n">remaining</span> <span class="n">bugs</span>
+<span class="n">a815645</span> <span class="n">Modify</span> <span class="n">it</span> <span class="n">so</span> <span class="n">that</span> <span class="n">it</span> <span class="n">works</span>
+<span class="mi">2</span><span class="n">dec1ac</span> <span class="n">Fix</span> <span class="n">a</span> <span class="n">few</span> <span class="n">bugs</span> <span class="o">+</span> <span class="n">disable</span>
+<span class="mi">13</span><span class="n">d7934</span> <span class="n">First</span> <span class="n">implementation</span>
+<span class="mi">6</span><span class="n">ad92e5</span> <span class="o">*</span> <span class="n">masked</span> <span class="ow">is</span> <span class="n">now</span> <span class="n">an</span> <span class="n">instance</span> <span class="n">of</span> <span class="n">a</span> <span class="n">new</span> <span class="nb">object</span><span class="p">,</span> <span class="n">MaskedConstant</span>
+<span class="mi">29001</span><span class="n">ed</span> <span class="n">Add</span> <span class="n">pre</span><span class="o">-</span><span class="n">nep</span> <span class="k">for</span> <span class="n">a</span> <span class="n">copule</span> <span class="n">of</span> <span class="n">structured_array_extensions</span><span class="o">.</span>
+<span class="o">...</span>
 </pre></div>
 </div>
 <p>and <code class="docutils literal"><span class="pre">6ad92e5</span></code> is the last commit in the <code class="docutils literal"><span class="pre">cool-feature</span></code> branch. Suppose we
@@ -463,37 +458,37 @@ want to make the following changes:</p>
 <li>Combine the commits <code class="docutils literal"><span class="pre">2dec1ac</span></code>, <code class="docutils literal"><span class="pre">a815645</span></code>, <code class="docutils literal"><span class="pre">eadc391</span></code> into a single one.</li>
 </ul>
 <p>We do as follows:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span># make a backup of the current state
-git branch tmp HEAD
-# interactive rebase
-git rebase -i 6ad92e5
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># make a backup of the current state</span>
+<span class="n">git</span> <span class="n">branch</span> <span class="n">tmp</span> <span class="n">HEAD</span>
+<span class="c1"># interactive rebase</span>
+<span class="n">git</span> <span class="n">rebase</span> <span class="o">-</span><span class="n">i</span> <span class="mi">6</span><span class="n">ad92e5</span>
 </pre></div>
 </div>
 <p>This will open an editor with the following text in it:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>pick 13d7934 First implementation
-pick 2dec1ac Fix a few bugs + disable
-pick a815645 Modify it so that it works
-pick eadc391 Fix some remaining bugs
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pick</span> <span class="mi">13</span><span class="n">d7934</span> <span class="n">First</span> <span class="n">implementation</span>
+<span class="n">pick</span> <span class="mi">2</span><span class="n">dec1ac</span> <span class="n">Fix</span> <span class="n">a</span> <span class="n">few</span> <span class="n">bugs</span> <span class="o">+</span> <span class="n">disable</span>
+<span class="n">pick</span> <span class="n">a815645</span> <span class="n">Modify</span> <span class="n">it</span> <span class="n">so</span> <span class="n">that</span> <span class="n">it</span> <span class="n">works</span>
+<span class="n">pick</span> <span class="n">eadc391</span> <span class="n">Fix</span> <span class="n">some</span> <span class="n">remaining</span> <span class="n">bugs</span>
 
-# Rebase 6ad92e5..eadc391 onto 6ad92e5
-#
-# Commands:
-#  p, pick = use commit
-#  r, reword = use commit, but edit the commit message
-#  e, edit = use commit, but stop for amending
-#  s, squash = use commit, but meld into previous commit
-#  f, fixup = like &quot;squash&quot;, but discard this commit&#39;s log message
-#
-# If you remove a line here THAT COMMIT WILL BE LOST.
-# However, if you remove everything, the rebase will be aborted.
-#
+<span class="c1"># Rebase 6ad92e5..eadc391 onto 6ad92e5</span>
+<span class="c1">#</span>
+<span class="c1"># Commands:</span>
+<span class="c1">#  p, pick = use commit</span>
+<span class="c1">#  r, reword = use commit, but edit the commit message</span>
+<span class="c1">#  e, edit = use commit, but stop for amending</span>
+<span class="c1">#  s, squash = use commit, but meld into previous commit</span>
+<span class="c1">#  f, fixup = like &quot;squash&quot;, but discard this commit&#39;s log message</span>
+<span class="c1">#</span>
+<span class="c1"># If you remove a line here THAT COMMIT WILL BE LOST.</span>
+<span class="c1"># However, if you remove everything, the rebase will be aborted.</span>
+<span class="c1">#</span>
 </pre></div>
 </div>
 <p>To achieve what we want, we will make the following changes to it:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>r 13d7934 First implementation
-pick 2dec1ac Fix a few bugs + disable
-f a815645 Modify it so that it works
-f eadc391 Fix some remaining bugs
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="mi">13</span><span class="n">d7934</span> <span class="n">First</span> <span class="n">implementation</span>
+<span class="n">pick</span> <span class="mi">2</span><span class="n">dec1ac</span> <span class="n">Fix</span> <span class="n">a</span> <span class="n">few</span> <span class="n">bugs</span> <span class="o">+</span> <span class="n">disable</span>
+<span class="n">f</span> <span class="n">a815645</span> <span class="n">Modify</span> <span class="n">it</span> <span class="n">so</span> <span class="n">that</span> <span class="n">it</span> <span class="n">works</span>
+<span class="n">f</span> <span class="n">eadc391</span> <span class="n">Fix</span> <span class="n">some</span> <span class="n">remaining</span> <span class="n">bugs</span>
 </pre></div>
 </div>
 <p>This means that (i) we want to edit the commit message for
@@ -501,20 +496,20 @@ f eadc391 Fix some remaining bugs
 save and quit the editor.</p>
 <p>Git will then immediately bring up an editor for editing the commit
 message. After revising it, we get the output:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>[detached HEAD 721fc64] FOO: First implementation
- 2 files changed, 199 insertions(+), 66 deletions(-)
-[detached HEAD 0f22701] Fix a few bugs + disable
- 1 files changed, 79 insertions(+), 61 deletions(-)
-Successfully rebased and updated refs/heads/my-feature-branch.
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">detached</span> <span class="n">HEAD</span> <span class="mi">721</span><span class="n">fc64</span><span class="p">]</span> <span class="n">FOO</span><span class="p">:</span> <span class="n">First</span> <span class="n">implementation</span>
+ <span class="mi">2</span> <span class="n">files</span> <span class="n">changed</span><span class="p">,</span> <span class="mi">199</span> <span class="n">insertions</span><span class="p">(</span><span class="o">+</span><span class="p">),</span> <span class="mi">66</span> <span class="n">deletions</span><span class="p">(</span><span class="o">-</span><span class="p">)</span>
+<span class="p">[</span><span class="n">detached</span> <span class="n">HEAD</span> <span class="mi">0</span><span class="n">f22701</span><span class="p">]</span> <span class="n">Fix</span> <span class="n">a</span> <span class="n">few</span> <span class="n">bugs</span> <span class="o">+</span> <span class="n">disable</span>
+ <span class="mi">1</span> <span class="n">files</span> <span class="n">changed</span><span class="p">,</span> <span class="mi">79</span> <span class="n">insertions</span><span class="p">(</span><span class="o">+</span><span class="p">),</span> <span class="mi">61</span> <span class="n">deletions</span><span class="p">(</span><span class="o">-</span><span class="p">)</span>
+<span class="n">Successfully</span> <span class="n">rebased</span> <span class="ow">and</span> <span class="n">updated</span> <span class="n">refs</span><span class="o">/</span><span class="n">heads</span><span class="o">/</span><span class="n">my</span><span class="o">-</span><span class="n">feature</span><span class="o">-</span><span class="n">branch</span><span class="o">.</span>
 </pre></div>
 </div>
 <p>and the history looks now like this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>0f22701 Fix a few bugs + disable
-721fc64 ENH: Sophisticated feature
-6ad92e5 * masked is now an instance of a new object, MaskedConstant
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mi">0</span><span class="n">f22701</span> <span class="n">Fix</span> <span class="n">a</span> <span class="n">few</span> <span class="n">bugs</span> <span class="o">+</span> <span class="n">disable</span>
+<span class="mi">721</span><span class="n">fc64</span> <span class="n">ENH</span><span class="p">:</span> <span class="n">Sophisticated</span> <span class="n">feature</span>
+<span class="mi">6</span><span class="n">ad92e5</span> <span class="o">*</span> <span class="n">masked</span> <span class="ow">is</span> <span class="n">now</span> <span class="n">an</span> <span class="n">instance</span> <span class="n">of</span> <span class="n">a</span> <span class="n">new</span> <span class="nb">object</span><span class="p">,</span> <span class="n">MaskedConstant</span>
 </pre></div>
 </div>
-<p>If it went wrong, recovery is again possible as explained <a class="reference internal" href="#recovering-from-mess-up"><span>above</span></a>.</p>
+<p>If it went wrong, recovery is again possible as explained <a class="reference internal" href="#recovering-from-mess-up"><span class="std std-ref">above</span></a>.</p>
 </div>
 </div>
 </div>
@@ -540,14 +535,14 @@ Successfully rebased and updated refs/heads/my-feature-branch.
     <li><a href="../../index.html">home</a>|&nbsp;</li>
     <li><a href="../../search.html">search</a>|&nbsp;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" >Developer Guide</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" >Working with <em>eofs</em> source code</a> &raquo;</li>
-          <li class="nav-item nav-item-3"><a href="git_development.html" >Git for development</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Developer Guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" >Working with <em>eofs</em> source code</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="git_development.html" >Git for development</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2013-2016 Andrew Dawson.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+        &#169; Copyright 2013-2017 Andrew Dawson.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.4.
     </div>
   </body>
 </html>

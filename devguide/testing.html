@@ -1,31 +1,29 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Running the test suite &mdash; eofs 1.2.0 documentation</title>
-    
+    <title>Running the test suite &#8212; eofs 1.3.0 documentation</title>
     <link rel="stylesheet" href="../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '1.2.0',
+        VERSION:     '1.3.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 1.2.0 documentation" href="../index.html" />
-    <link rel="up" title="Developer Guide" href="index.html" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="prev" title="git resources" href="gitwash/git_resources.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
           rel='stylesheet' type='text/css' />
@@ -64,7 +62,7 @@
         </script>
 
   </head>
-  <body role="document">
+  <body>
 <div class="pageheader">
   <div>
     <a href="../index.html">
@@ -85,12 +83,12 @@
     <li><a href="../index.html">home</a>|&nbsp;</li>
     <li><a href="../search.html">search</a>|&nbsp;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Developer Guide</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Developer Guide</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v1.2.0</h2>
+    <h2>eofs v1.3.0</h2>
     <h3>Table of Contents</h3>
     <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userguide/index.html">User Guide</a></li>
@@ -99,7 +97,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../downloads.html">Downloads</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Guide</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="gitwash/index.html">Working with <em>eofs</em> source code</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">Running the test suite</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Running the test suite</a></li>
 </ul>
 </li>
 </ul>
@@ -111,21 +109,18 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/devguide/testing.txt"
+      <li><a href="../_sources/devguide/testing.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -141,13 +136,13 @@
 <p>The package comes with a comprehensive set of tests to make sure it is working correctly.
 The tests can be run against an installed version of <cite>eofs</cite> or against the current source tree.
 Testing against the source tree is handy during development when quick iteration is required, but for most other cases testing against the installed version is more suitable.</p>
-<p>Running the test suite requires <a class="reference external" href="https://nose.readthedocs.org/en/latest/">nose</a> and <a class="reference external" href="https://pypi.python.org/pypi/pep8">pep8</a> to be installed.
+<p>Running the test suite requires <a class="reference external" href="https://docs.pytest.org/en/latest/">pytest</a> and <a class="reference external" href="https://pypi.python.org/pypi/pycodestyle">pycodestyle</a> to be installed.
 The test suite will function as long as the minimum dependencies for the package are installed, but some tests will be skipped if they require optional dependencies that are not present.
 To run the full test suite you need to have the optional dependencies <cite>cdms2</cite> (from <a class="reference external" href="http://uv-cdat.llnl.gov">UV-CDAT</a>), <a class="reference external" href="http://scitools.org.uk/iris">iris</a>, and <a class="reference external" href="http://xarray.pydata.org">xarray</a> installed.</p>
 <div class="section" id="testing-against-the-current-source-tree">
 <h2>Testing against the current source tree<a class="headerlink" href="#testing-against-the-current-source-tree" title="Permalink to this headline">¶</a></h2>
 <p>Testing the current source is straightforward, from the source directory run:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">nosetests</span> <span class="o">-</span><span class="n">sv</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pytest</span>
 </pre></div>
 </div>
 <p>This will perform verbose testing of the current source tree and print a summary at the end.</p>
@@ -155,13 +150,13 @@ To run the full test suite you need to have the optional dependencies <cite>cdms
 <div class="section" id="testing-an-installed-version">
 <h2>Testing an installed version<a class="headerlink" href="#testing-an-installed-version" title="Permalink to this headline">¶</a></h2>
 <p>First you need to install <cite>eofs</cite> into your current Python environment:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>cd eofs/
-python setup.py install
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">eofs</span><span class="o">/</span>
+<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
 </pre></div>
 </div>
-<p>Then create a directory somewhere else without any Python code in it and run <code class="docutils literal"><span class="pre">nosetests</span></code> from there giving the package name <code class="docutils literal"><span class="pre">eofs</span></code> as a positional argument:</p>
+<p>Then create a directory somewhere else without any Python code in it and run <code class="docutils literal"><span class="pre">pytest</span></code> from there:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span>mkdir $HOME/eofs-test-dir &amp;&amp; cd $HOME/eofs-test-dir
-nosetests -sv eofs
+pytest --pyargs eofs
 </pre></div>
 </div>
 <p>This will run the tests on the version of <cite>eofs</cite> you just installed.</p>
@@ -186,12 +181,12 @@ nosetests -sv eofs
     <li><a href="../index.html">home</a>|&nbsp;</li>
     <li><a href="../search.html">search</a>|&nbsp;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Developer Guide</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >Developer Guide</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2013-2016 Andrew Dawson.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+        &#169; Copyright 2013-2017 Andrew Dawson.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.4.
     </div>
   </body>
 </html>

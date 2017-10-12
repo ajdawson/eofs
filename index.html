@@ -1,30 +1,29 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Package description &mdash; eofs 1.2.0 documentation</title>
-    
+    <title>Package description &#8212; eofs 1.3.0 documentation</title>
     <link rel="stylesheet" href="_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '1.2.0',
+        VERSION:     '1.3.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 1.2.0 documentation" href="#" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="User Guide" href="userguide/index.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
           rel='stylesheet' type='text/css' />
@@ -63,7 +62,7 @@
         </script>
 
   </head>
-  <body role="document">
+  <body>
 <div class="pageheader">
   <div>
     <a href="#">
@@ -88,7 +87,7 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v1.2.0</h2>
+    <h2>eofs v1.3.0</h2>
     <h3>Table of Contents</h3>
     <ul>
 <li class="toctree-l1"><a class="reference internal" href="userguide/index.html">User Guide</a></li>
@@ -105,21 +104,18 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/index.txt"
+      <li><a href="_sources/index.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -146,26 +142,26 @@ Some of the key features of <code class="xref py py-obj docutils literal"><span 
 <div class="section" id="download-and-installation">
 <h2>Download and installation<a class="headerlink" href="#download-and-installation" title="Permalink to this headline">¶</a></h2>
 <p>The core of the package runs on Python 2 or 3, on Linux, Windows or OSX; basically anywhere Python+NumPy are available.
-The <a class="reference internal" href="userguide/interfaces.html#cdms-interface"><span>cdms</span></a>, <a class="reference internal" href="userguide/interfaces.html#iris-interface"><span>iris</span></a>, and <a class="reference internal" href="userguide/interfaces.html#xarray-interface"><span>xarray</span></a> interfaces are available on all platforms where their respective supporting packages <a class="reference external" href="http://uv-cdat.llnl.gov">UV-CDAT</a>, <a class="reference external" href="http://scitools.org.uk/iris">iris</a>, and <a class="reference external" href="http://xarray.pydata.org">xarray</a> can be installed.</p>
+The <a class="reference internal" href="userguide/interfaces.html#cdms-interface"><span class="std std-ref">cdms</span></a>, <a class="reference internal" href="userguide/interfaces.html#iris-interface"><span class="std std-ref">iris</span></a>, and <a class="reference internal" href="userguide/interfaces.html#xarray-interface"><span class="std std-ref">xarray</span></a> interfaces are available on all platforms where their respective supporting packages <a class="reference external" href="http://uv-cdat.llnl.gov">UV-CDAT</a>, <a class="reference external" href="http://scitools.org.uk/iris">iris</a>, and <a class="reference external" href="http://xarray.pydata.org">xarray</a> can be installed.</p>
 <p><code class="xref py py-obj docutils literal"><span class="pre">eofs</span></code> can be installed for all platforms using <a class="reference external" href="http://conda.pydata.org/docs/">conda</a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>conda install -c conda-forge eofs
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">eofs</span>
 </pre></div>
 </div>
 <p>or using pip:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>pip install eofs
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">eofs</span>
 </pre></div>
 </div>
-<p>The source code for released versions of <code class="xref py py-obj docutils literal"><span class="pre">eofs</span></code> can be downloaded from the <a class="reference internal" href="downloads.html"><em>Downloads</em></a> page.
+<p>The source code for released versions of <code class="xref py py-obj docutils literal"><span class="pre">eofs</span></code> can be downloaded from the <a class="reference internal" href="downloads.html"><span class="doc">Downloads</span></a> page.
 You must have <a class="reference external" href="https://pypi.python.org/pypi/setuptools">setuptools</a> installed in order to install <code class="xref py py-obj docutils literal"><span class="pre">eofs</span></code> from source.
-After downloading the source code archive, unzip it and change into the unzipped archive&#8217;s directory, then to install it:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>python setup.py install
+After downloading the source code archive, unzip it and change into the unzipped archive’s directory, then to install it:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
 </pre></div>
 </div>
 <p>You can also check out the source code for the development version from the <a class="reference external" href="https://github.com/ajdawson/eofs">github repository</a> to access features which are not yet in a release.</p>
 </div>
 <div class="section" id="getting-started">
 <h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
-<p><code class="xref py py-obj docutils literal"><span class="pre">eofs</span></code> provides three interfaces for EOF analysis: one for analysing data contained in <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.11)"><code class="xref py py-obj docutils literal"><span class="pre">numpy</span></code></a> arrays or masked arrays, suitable for any data set; and two for meta-data aware EOF analysis, suitable for analysing data read from self-describing files, using either the <code class="xref py py-obj docutils literal"><span class="pre">cdms2</span></code>, <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris.html#module-iris" title="(in Iris v1.10)"><code class="xref py py-obj docutils literal"><span class="pre">iris</span></code></a>, or <code class="xref py py-obj docutils literal"><span class="pre">xarray</span></code> packages.
+<p><code class="xref py py-obj docutils literal"><span class="pre">eofs</span></code> provides three interfaces for EOF analysis: one for analysing data contained in <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.13)"><code class="xref py py-obj docutils literal"><span class="pre">numpy</span></code></a> arrays or masked arrays, suitable for any data set; and two for meta-data aware EOF analysis, suitable for analysing data read from self-describing files, using either the <code class="xref py py-obj docutils literal"><span class="pre">cdms2</span></code>, <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris.html#module-iris" title="(in Iris v1.13)"><code class="xref py py-obj docutils literal"><span class="pre">iris</span></code></a>, or <code class="xref py py-obj docutils literal"><span class="pre">xarray</span></code> packages.
 All the interfaces support the same set of operations.</p>
 <p>Regardless of which interface you use, the basic usage is the same.
 The EOF analysis is handled by a solver class, and the EOF solution is computed when the solver class is created.
@@ -184,7 +180,7 @@ Method calls are then used to retrieve the quantities of interest from the solve
 <span class="n">eofs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofs</span><span class="p">(</span><span class="n">neofs</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>More detailed description of usage are found in the <a class="reference internal" href="userguide/index.html"><em>User Guide</em></a> or the <a class="reference internal" href="examples/index.html"><em>Examples</em></a>.</p>
+<p>More detailed description of usage are found in the <a class="reference internal" href="userguide/index.html"><span class="doc">User Guide</span></a> or the <a class="reference internal" href="examples/index.html"><span class="doc">Examples</span></a>.</p>
 </div>
 <div class="section" id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
@@ -203,7 +199,7 @@ You can additionally cite the <a class="reference external" href="http://dx.doi.
 <h2>Developing and contributing<a class="headerlink" href="#developing-and-contributing" title="Permalink to this headline">¶</a></h2>
 <p>Contributions big or small are welcomed from anyone with an interest in the project.
 Bug reports and feature requests can be filed using the Github <a class="reference external" href="http://github.com/ajdawson/eofs/issues">issues</a> system.
-If you would like to contribute code or documentation please see the <a class="reference internal" href="devguide/index.html"><em>Developer Guide</em></a>.</p>
+If you would like to contribute code or documentation please see the <a class="reference internal" href="devguide/index.html"><span class="doc">Developer Guide</span></a>.</p>
 </div>
 </div>
 
@@ -228,8 +224,8 @@ If you would like to contribute code or documentation please see the <a class="r
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2013-2016 Andrew Dawson.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+        &#169; Copyright 2013-2017 Andrew Dawson.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.4.
     </div>
   </body>
 </html>

@@ -1,31 +1,29 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Changelog &mdash; eofs 1.2.0 documentation</title>
-    
+    <title>Changelog &#8212; eofs 1.3.0 documentation</title>
     <link rel="stylesheet" href="_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '1.2.0',
+        VERSION:     '1.3.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="eofs 1.2.0 documentation" href="index.html" />
-    <link rel="up" title="Downloads" href="downloads.html" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Developer Guide" href="devguide/index.html" />
     <link rel="prev" title="Downloads" href="downloads.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
@@ -65,7 +63,7 @@
         </script>
 
   </head>
-  <body role="document">
+  <body>
 <div class="pageheader">
   <div>
     <a href="index.html">
@@ -89,19 +87,19 @@
     <li><a href="index.html">home</a>|&nbsp;</li>
     <li><a href="search.html">search</a>|&nbsp;</li>
 
-          <li class="nav-item nav-item-1"><a href="downloads.html" accesskey="U">Downloads</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="downloads.html" accesskey="U">Downloads</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v1.2.0</h2>
+    <h2>eofs v1.3.0</h2>
     <h3>Table of Contents</h3>
     <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="userguide/index.html">User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/index.html">API references</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="downloads.html">Downloads</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="">Changelog</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Changelog</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="devguide/index.html">Developer Guide</a></li>
@@ -117,21 +115,18 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/changelog.txt"
+      <li><a href="_sources/changelog.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -144,6 +139,23 @@
             
   <div class="section" id="changelog">
 <h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="v1-3">
+<h2>v1.3<a class="headerlink" href="#v1-3" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Release:</th><td class="field-body">v1.3.0</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Date:</th><td class="field-body">12 October 2017</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li>Minor change for xarray deprecations resulting in a different xarray version dependency (now &gt;= 0.9) [<a class="reference external" href="https://github.com/ajdawson/eofs/pull/87">#87</a>].</li>
+<li>Bug fixes for Python 3 [<a class="reference external" href="https://github.com/ajdawson/eofs/pull/88">#88</a>].</li>
+</ul>
+</div>
 <div class="section" id="v1-2">
 <h2>v1.2<a class="headerlink" href="#v1-2" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
@@ -173,7 +185,7 @@
 </tbody>
 </table>
 <ul class="simple">
-<li>Added an <a class="reference external" href="http://xarray.pydata.org">xarray</a> interface allowing use of <a class="reference external" href="http://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v0.8.2)"><code class="xref py py-obj docutils literal"><span class="pre">xarray.DataArray</span></code></a> objects with <code class="xref py py-mod docutils literal"><span class="pre">eofs</span></code>.</li>
+<li>Added an <a class="reference external" href="http://xarray.pydata.org">xarray</a> interface allowing use of <a class="reference external" href="http://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v0.9.6)"><code class="xref py py-obj docutils literal"><span class="pre">xarray.DataArray</span></code></a> objects with <code class="xref py py-mod docutils literal"><span class="pre">eofs</span></code>.</li>
 <li>Fix bug in setting <code class="xref py py-obj docutils literal"><span class="pre">ddof</span></code> in <a class="reference internal" href="api/eofs.tools.html#eofs.tools.iris.covariance_map" title="eofs.tools.iris.covariance_map"><code class="xref py py-obj docutils literal"><span class="pre">eofs.tools.iris.covariance_map</span></code></a>, previously it was always <code class="xref py py-obj docutils literal"><span class="pre">1</span></code> regardless of the <code class="xref py py-obj docutils literal"><span class="pre">ddof</span></code> keyword.</li>
 <li>Better Python 2 and 3 support without relying on 2to3.</li>
 </ul>
@@ -211,7 +223,7 @@
 <ul class="simple">
 <li>Include workaround for a regression in numpy versions 1.10.0 and 1.10.1. [<a class="reference external" href="https://github.com/ajdawson/eofs/issues/34">#34</a>]</li>
 </ul>
-<p>Existing users with unaffected numpy versions (&lt;1.10.0, &gt;=1.10.2) don&#8217;t need to upgrade.</p>
+<p>Existing users with unaffected numpy versions (&lt;1.10.0, &gt;=1.10.2) don’t need to upgrade.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -225,7 +237,7 @@
 <ul class="simple">
 <li>Switched to setuptools for installation.</li>
 <li>Support for Python 3.
-Since neither cdms2 or <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris.html#module-iris" title="(in Iris v1.10)"><code class="xref py py-obj docutils literal"><span class="pre">iris</span></code></a> are supported on Python 3 yet, only the standard interfaces have been tested on Python 3.</li>
+Since neither cdms2 or <a class="reference external" href="http://scitools.org.uk/iris/docs/latest/iris/iris.html#module-iris" title="(in Iris v1.13)"><code class="xref py py-obj docutils literal"><span class="pre">iris</span></code></a> are supported on Python 3 yet, only the standard interfaces have been tested on Python 3.</li>
 </ul>
 </div>
 <div class="section" id="v0-4">
@@ -280,12 +292,12 @@ Since neither cdms2 or <a class="reference external" href="http://scitools.org.u
     <li><a href="index.html">home</a>|&nbsp;</li>
     <li><a href="search.html">search</a>|&nbsp;</li>
 
-          <li class="nav-item nav-item-1"><a href="downloads.html" >Downloads</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="downloads.html" >Downloads</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2013-2016 Andrew Dawson.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+        &#169; Copyright 2013-2017 Andrew Dawson.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.4.
     </div>
   </body>
 </html>
