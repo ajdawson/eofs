@@ -18,7 +18,7 @@ import time
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-sys.path.append(os.path.abspath('sphinxext'))
+# sys.path.append(os.path.abspath('sphinxext'))
 
 # -- General configuration -----------------------------------------------------
 
@@ -32,7 +32,7 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.viewcode',
               'sphinx.ext.autosummary',
               'sphinx.ext.intersphinx',
-              'plot_directive',]
+              'matplotlib.sphinxext.plot_directive',]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -201,8 +201,12 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('userguide', 'userguide.tex', 'eofs User Guide',
-   'Andrew Dawson', 'manual'),
+  ('userguide/index', 'userguide.tex', 'eofs User Guide', 'Andrew Dawson',
+   'manual'),
+  ('examples/index', 'examples.tex', 'eofs Examples', 'Andrew Dawson',
+   'manual'),
+  ('api/index', 'api.tex', 'eofs API Reference', 'Andrew Dawson',
+   'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of

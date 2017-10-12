@@ -18,7 +18,7 @@
 
 import os
 
-import pep8
+import pycodestyle
 
 import eofs
 from eofs.tests import EofsTest
@@ -27,7 +27,7 @@ from eofs.tests import EofsTest
 class TestCodingStandards(EofsTest):
 
     def test_pep8(self):
-        pep8style = pep8.StyleGuide(quiet=False)
+        pep8style = pycodestyle.StyleGuide(quiet=False)
         base_paths = [os.path.dirname(eofs.__file__)]
         result = pep8style.check_files(base_paths)
         self.assert_equal(result.total_errors, 0, "Found PEP8 style issues.")
