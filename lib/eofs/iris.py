@@ -711,3 +711,147 @@ class Eof(object):
 
         """
         return self._solver.getWeights()
+        
+class EEof(object):
+    """EEOF analysis (meta-data enabled `iris` interface)"""
+
+    def __init__(self, cube, lag, weights=None, center=True, ddof=1):
+        """Create an Eof object.
+
+        The EEOF solution is computed at initialization time. Method
+        calls are used to retrieve computed quantities.
+
+        **Argument:**
+
+        *dataset*
+            A `~iris.cube.Cube` instance containing the data to be
+            analysed. Time must be the first dimension. Missing values
+            are allowed provided that they are constant with time (e.g.,
+            values of an oceanographic field over land).
+
+        *lag*
+            A no of lag window is used to reconstruct input matrix as 
+            extended input matrix to analysis Eof on it.
+            window = lag + 1, so lag must be greater or equal to zero.
+            zero lag will produced same result as Eof, instead of EEof.   
+            
+        **Optional arguments:**
+
+        *weights*
+            Sets the weighting method. The following pre-defined
+            weighting methods are available:
+
+            * *'area'* : Square-root of grid cell area normalized by
+              total grid area. Requires a latitude-longitude grid to be
+              present in the `~iris.cube.Cube` *dataset*. This is a
+              fairly standard weighting strategy. If you are unsure
+              which method to use and you have gridded data then this
+              should be your first choice.
+
+            * *'coslat'* : Square-root of cosine of latitude. Requires a
+              latitude dimension to be present in the `~iris.cube.Cube`
+              *dataset*.
+
+            * *None* : Equal weights for all grid points (*'none'* is
+              also accepted).
+
+             Alternatively an array of weights whose shape is compatible
+             with the `~iris.cube.Cube` *dataset* may be supplied instead
+             of specifying a weighting method.
+
+        *center*
+            If *True*, the mean along the first axis of *dataset* (the
+            time-mean) will be removed prior to analysis. If *False*,
+            the mean along the first axis will not be removed. Defaults
+            to *True* (mean is removed).
+
+            The covariance interpretation relies on the input data being
+            anomalies with a time-mean of 0. Therefore this option
+            should usually be set to *True*. Setting this option to
+            *True* has the useful side effect of propagating missing
+            values along the time dimension, ensuring that a solution
+            can be found even if missing values occur in different
+            locations at different times.
+
+        *ddof*
+            'Delta degrees of freedom'. The divisor used to normalize
+            the covariance matrix is *N - ddof* where *N* is the
+            number of samples. Defaults to *1*.
+
+        **Returns:**
+
+        *solver*
+            An `EEof` instance.
+
+        **Examples:**
+
+        EOF analysis with grid-cell-area weighting for the input field::
+
+            from eofs.iris import EEof
+            solver = EEof(cube, weights='area')
+
+        """
+        # Check that the input is an Iris cube.
+        if type(cube) is not Cube:
+            raise TypeError('the input must be an iris cube')
+        # Check for a time coordinate, raise an error if there isn't one.
+        # The coord_and_dim function will raise a ValuerError with a
+        # useful message so no need to handle it explicitly here.
+        self._time, self._time_dim = coord_and_dim(cube, 'time')
+        if self._time_dim != 0:
+            raise ValueError('time must be the first dimension, '
+                             'consider using the transpose() method')
+                             
+        self.window = lag + 1
+        if (lag < 0):
+            raise ValueError('lag window should not be less than 0')
+        elif (lag == 0):
+            print "lag is 0. So EEof result will be same as Eof"
+            self._lagtimeax = self._time
+        else:
+            # genearate lag time axis
+            # Remove last window length from original time axis
+            lag_time_axis = self._time[:-self.window+1]
+            
+            # TODO : Kindly write proper syntax to create time axis in iris
+            # Above lag_time_axis variable must be iris support time axis with 
+            # proper id, units, designateTime and all.
+            
+            self._lagtimeax = lag_time_axis         
+            
+             
+        # Get the cube coordinates and remove time, leaving just the other
+        # dimensions.
+        self._coords = list(copy(cube.dim_coords))
+        self._coords.remove(self._time)
+        if len(self._coords) < 1:
+            raise ValueError('one or more non-time dimensions are required')
+        # Define the weights array for the cube.
+        if weights is None:
+            wtarray = None
+        else:
+            try:
+                scheme = weights.lower()
+                wtarray = weights_array(cube, scheme=scheme)
+            except AttributeError:
+                wtarray = weights
+        try:
+            # Ensure weights are the same type as the cube data.
+            wtarray = wtarray.astype(cube.data.dtype)
+        except AttributeError:
+            pass
+        # Initialize a solver.
+        # Create an EEofSolver object using appropriate arguments for this
+        # data set. The object will be used for the decomposition and
+        # for returning the results.
+        self._solver = standard.EEof(cube.data,
+                                    lag=lag,
+                                    weights=wtarray,
+                                    center=center,
+                                    ddof=ddof)
+        #: Number of EOFs in the solution.
+        self.neeofs = self._solver.neeofs
+        # Get the name of the cube to refer to later.
+        self._cube_name = cube.name(default='dataset').replace(' ', '_')
+        self._cube_var_name = cube.var_name
+

@@ -672,3 +672,348 @@ class Eof(object):
 
         """
         return self._solver.getWeights()
+
+
+class EEof(object):
+    """EEOF analysis (meta-data enabled `cdms2` interface)"""
+
+    def __init__(self, dataset, lag, weights=None, center=True, ddof=1):
+        """Create an EEof object.
+
+        The EEOF solution is computed at initialization time. Method
+        calls are used to retrieve computed quantities.
+
+        **Argument:**
+
+        *dataset*
+            A `cdms2` variable containing the data to be analysed. Time
+            must be the first dimension. Missing values are allowed
+            provided that they are constant with time (e.g., values of
+            an oceanographic field over land).
+
+        *lag*
+            A no of lag window is used to reconstruct input matrix as 
+            extended input matrix to analysis Eof on it.
+            window = lag + 1, so lag must be greater or equal to zero.
+            zero lag will produced same result as Eof, instead of EEof.   
+        
+        **Optional arguments:**
+
+        *weights*
+            Sets the weighting method. The following pre-defined
+            weighting methods are available:
+
+            * *'area'* : Square-root of grid cell area normalized by
+              total grid area. Requires a latitude-longitude grid to be
+              present in the `cdms2` variable *dataset*. This is a
+              fairly standard weighting strategy. If you are unsure
+              which method to use and you have gridded data then this
+              should be your first choice.
+
+            * *'coslat'* : Square-root of cosine of latitude. Requires a
+              latitude dimension to be present in the `cdms2` variable
+              *dataset*.
+
+            * *None* : Equal weights for all grid points (*'none'* is
+              also accepted).
+
+             Alternatively an array of weights whose shape is compatible
+             with the `cdms2` variable *dataset* may be supplied instead
+             of specifying a weighting method.
+
+        *center*
+            If *True*, the mean along the first axis of *dataset* (the
+            time-mean) will be removed prior to analysis. If *False*,
+            the mean along the first axis will not be removed. Defaults
+            to *True* (mean is removed).
+
+            The covariance interpretation relies on the input data being
+            anomalies with a time-mean of 0. Therefore this option
+            should usually be set to *True*. Setting this option to
+            *True* has the useful side effect of propagating missing
+            values along the time dimension, ensuring that a solution
+            can be found even if missing values occur in different
+            locations at different times.
+
+        *ddof*
+            'Delta degrees of freedom'. The divisor used to normalize
+            the covariance matrix is *N - ddof* where *N* is the
+            number of samples. Defaults to *1*.
+
+        **Returns:**
+
+        *solver*
+            An `EEof` instance.
+
+        **Examples:**
+
+        EEOF analysis with grid-cell-area weighting for the input field::
+
+            from eofs.cdms import EEof
+            solver = EEof(dataset, weights='area')
+
+        Authors : Arulalan.T, Dileep.K
+
+        """
+        # Check that dataset is recognised by cdms2 as a variable.
+        if not cdms2.isVariable(dataset):
+            raise TypeError('the input data must be a cdms2 variable')
+        # Store the time axis as an instance variable.
+        self._timeax = dataset.getTime()
+
+        # Verify that a time axis was found, getTime returns None when a
+        # time axis is not found.
+        if self._timeax is None:
+            raise ValueError('time axis not found')
+
+        self.window = lag + 1
+        if (lag < 0):
+            raise ValueError('lag window should not be less than 0')
+        elif (lag == 0):
+            print "lag is 0. So EEof result will be same as Eof"
+            self._lagtimeax = self._timeax
+        else:
+            # genearate lag time axis
+            # Remove last window length from original time axis
+            lag_time_axis = self._timeax[:-self.window+1]
+            lag_time_axis = cdms2.createAxis(lag_time_axis)
+            lag_time_axis.units = self._timeax.units
+            lag_time_axis.id = self._timeax.id
+            lag_time_axis.designateTime()
+            self._lagtimeax = lag_time_axis
+
+        # Check the dimension order of the input, time must be the first
+        # dimension.
+        order = dataset.getOrder()
+        if order[0] != 't':
+            raise ValueError('time must be the first dimension, '
+                             'consider using the reorder() method')
+        # Verify the presence of at least one spatial dimension. The
+        # instance variable channels will also be used as a partial axis
+        # list when constructing meta-data. It contains the spatial
+        # dimensions.
+        self._channels = dataset.getAxisList()
+        self._channels.remove(self._timeax)
+        if len(self._channels) < 1:
+            raise ValueError('one or more spatial dimensions are required')
+        # Store the missing value attribute of the data set in an
+        # instance variable so that it is recoverable later.
+        self._missing_value = dataset.getMissing()
+        # Generate an appropriate set of weights for the input dataset. There
+        # are several weighting schemes. The 'area' weighting scheme requires
+        # a latitude-longitude grid to be present, the 'cos_lat' scheme only
+        # requires a latitude dimension.
+        if weights in ('none', None):
+            # No weights requested, set the weight array to None.
+            wtarray = None
+        else:
+            try:
+                # Generate a weights array of the appropriate kind, with a
+                # shape compatible with the data set.
+                scheme = weights.lower()
+                wtarray = weights_array(dataset, scheme=scheme)
+            except AttributeError:
+                # Weights is not a string, assume it is an array.
+                wtarray = weights
+            except ValueError, err:
+                # Weights is not recognized, raise an error.
+                raise ValueError(err)
+        # Cast the wtarray to the same type as the dataset. This prevents the
+        # promotion of 32-bit input to 64-bit on multiplication with the
+        # weight array when not required. This will fail with a AttributeError
+        # exception if the weights array is None, which it may be if no
+        # weighting was requested.
+        try:
+            wtarray = wtarray.astype(dataset.dtype)
+        except AttributeError:
+            pass
+        # Create an EEofSolver object using appropriate arguments for this
+        # data set. The object will be used for the decomposition and
+        # for returning the results.
+        self._solver = standard.EEof(dataset.asma(),
+                                    lag=lag,
+                                    weights=wtarray,
+                                    center=center,
+                                    ddof=ddof)
+        #: Number of EEOFs in the solution.
+        self.neeofs = self._solver.neeofs
+        # name for the dataset.
+        self._dataset_name = cdms2_name(dataset).replace(' ', '_')
+        self._dataset_id = dataset.id
+
+    def pcs(self, pcscaling=0, npcs=None):
+        """Principal component time series (PCs) of EEOF.
+
+        **Optional arguments:**
+
+        *pcscaling*
+            Set the scaling of the retrieved PCs. The following
+            values are accepted:
+
+            * *0* : Un-scaled principal components (default).
+            * *1* : Principal components are scaled to unit variance
+              (divided by the square-root of their eigenvalue).
+            * *2* : Principal components are multiplied by the
+              square-root of their eigenvalue.
+
+        *npcs*
+            Number of PCs to retrieve. Defaults to all the PCs. If the
+            number of requested PCs is more than the number that are
+            available, then all available PCs will be returned.
+
+        **Returns:**
+
+        *pcs*
+            A `cdms2` variable containing the ordered PCs. The PCs are
+            numbered from 0 to *npcs* - 1.
+
+        **Examples:**
+
+        All un-scaled PCs::
+
+            pcs = solver.pcs()
+
+        First 3 PCs scaled to unit variance::
+
+            pcs = solver.pcs(npcs=3, pcscaling=1)
+
+        """
+        pcs = self._solver.pcs(pcscaling, npcs)
+        pcsax = cdms2.createAxis(range(pcs.shape[1]), id='pc')
+        pcsax.long_name = 'pc_number'
+        axlist = [self._lagtimeax, pcsax]
+        pcs = cdms2.createVariable(pcs, id='pcs', axes=axlist)
+        pcs.long_name = 'extended_eof_principal_components'
+        return pcs
+
+    def eeofs(self, eeofscaling=0, neeofs=None):
+        """Extended Emipirical orthogonal functions (EEOFs).
+
+        **Optional arguments:**
+
+        *eofscaling*
+            Sets the scaling of the EEOFs. The following values are
+            accepted:
+
+            * *0* : Un-scaled EOFs (default).
+            * *1* : EEOFs are divided by the square-root of their
+              eigenvalues.
+            * *2* : EEOFs are multiplied by the square-root of their
+              eigenvalues.
+
+        *neeofs*
+            Number of EEOFs to return. Defaults to all EEOFs. If the
+            number of EEOFs requested is more than the number that are
+            available, then all available EEOFs will be returned.
+
+        **Returns:**
+
+        *eeofs*
+           A `cdms2` variable containing the ordered EEOFs. The EEOFs are
+           numbered from 0 to *neeofs* - 1.
+
+        **Examples:**
+
+        All EEOFs with no scaling::
+
+            eeofs = solver.eeofs()
+
+        First 3 EEOFs with scaling applied::
+
+            eeofs = solver.eeofs(neeofs=3, eeofscaling=1)
+
+        """
+        eeofs = self._solver.eeofs(eofscaling, neofs)
+        eeofs.fill_value = self._missing_value
+        eeofax = cdms2.createAxis(range(len(eeofs)), id='eeof')
+        eeofax.long_name = 'eeof_number'
+
+        lagax = cdms2.createAxis(range(self.window), id='lag')
+
+        axlist = [eeofax, lagax] + self._channels
+        eeofs = cdms2.createVariable(eeofs,
+                                    id='eeofs',
+                                    axes=axlist,
+                                    fill_value=self._missing_value)
+        eeofs.long_name = 'extended_empirical_orthogonal_functions'
+        return eeofs
+        
+    def eigenvalues(self, neigs=None):
+        """Eigenvalues (decreasing variances) associated with each EEOF.
+
+        **Optional argument:**
+
+        *neigs*
+            Number of eigenvalues to return. Defaults to all
+            eigenvalues.If the number of eigenvalues requested is more
+            than the number that are available, then all available
+            eigenvalues will be returned.
+
+        **Returns:**
+
+        *eigenvalues*
+            A `cdms2` variable containing the eigenvalues arranged
+            largest to smallest.
+
+        **Examples:**
+
+        All eigenvalues::
+
+            eigenvalues = solver.eigenvalues()
+
+        The first eigenvalue::
+
+            eigenvalue1 = solver.eigenvalues(neigs=1)
+
+        """
+        lambdas = self._solver.eigenvalues(neigs=neigs)
+        eofax = cdms2.createAxis(range(len(lambdas)), id='eigenvalue')
+        eofax.long_name = 'eigenvalue_number'
+        axlist = [eofax]
+        lambdas = cdms2.createVariable(lambdas, id='eigenvalues', axes=axlist)
+        lambdas.long_name = 'eigenvalues'
+        return lambdas
+        
+    def varianceFraction(self, neigs=None):
+        """Fractional EEOF variances.
+
+        The fraction of the total variance explained by each EOF mode,
+        values between 0 and 1 inclusive.
+
+        **Optional argument:**
+
+        *neigs*
+            Number of eigenvalues to return the fractional variance for.
+            Defaults to all eigenvalues. If the number of eigenvalues
+            requested is more than the number that are available, then
+            fractional variances for all available eigenvalues will be
+            returned.
+
+        **Returns:**
+
+        *variance_fractions*
+            A `cdms2` variable containing the fractional variances for
+            each eigenvalue. The eigenvalues are numbered from 0 to
+            *neigs* - 1.
+
+        **Examples:**
+
+        The fractional variance represented by each eigenvalue::
+
+            variance_fractions = solver.varianceFraction()
+
+        The fractional variance represented by the first 3 eigenvalues::
+
+            variance_fractions = solver.VarianceFraction(neigs=3)
+
+        """
+        vfrac = self._solver.varianceFraction(neigs=neigs)
+        eofax = cdms2.createAxis(range(len(vfrac)), id='eigenvalue')
+        eofax.long_name = 'eigenvalue_number'
+        axlist = [eofax]
+        vfrac = cdms2.createVariable(vfrac, id='variance_fractions',
+                                     axes=axlist)
+        vfrac.long_name = 'variance_fractions'
+        return vfrac
+        
+        
