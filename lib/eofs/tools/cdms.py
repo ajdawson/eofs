@@ -146,7 +146,7 @@ def cdms2_name(variable):
              getattr(variable, 'long_name', None),
              getattr(variable, 'id', None)]
     try:
-        return filter(None, names)[0]
+        return [name for name in names if name is not None][0]
     except IndexError:
         return 'dataset'
 
