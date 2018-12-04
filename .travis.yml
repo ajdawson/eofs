@@ -1,66 +1,47 @@
-language: python
-
-sudo: false
+language: minimal
 
 env:
-    global:
-        - PACKAGES_STANDARD="setuptools numpy pytest pycodestyle"
-    matrix:
-        - NAME="Python 2.7 (standard)"
-          PYTHON_VERSION=2.7
-          PACKAGES="${PACKAGES_STANDARD}"
-        - NAME="Python 2.7 (metadata)"
-          PYTHON_VERSION=2.7
-          PACKAGES="${PACKAGES_STANDARD} cdms2 genutil iris xarray"
-        - NAME="Python 3.4 (standard)"
-          PYTHON_VERSION=3.4
-          PACKAGES="${PACKAGES_STANDARD}"
-        - NAME="Python 3.4 (metadata)"
-          PYTHON_VERSION=3.4
-          PACKAGES="${PACKAGES_STANDARD} iris xarray"
-        - NAME="Python 3.5 (standard)"
-          PYTHON_VERSION=3.5
-          PACKAGES="${PACKAGES_STANDARD}"
-        - NAME="Python 3.5 (metadata)"
-          PYTHON_VERSION=3.5
-          PACKAGES="${PACKAGES_STANDARD} iris xarray"
-        - NAME="Python 3.6 (standard)"
-          PYTHON_VERSION=3.6
-          PACKAGES="${PACKAGES_STANDARD}"
-        - NAME="Python 3.6 (metadata)"
-          PYTHON_VERSION=3.6
-          PACKAGES="${PACKAGES_STANDARD} iris xarray"
+  global:
+    - PACKAGES_STANDARD="setuptools numpy pytest pycodestyle"
+    - PACKAGES_EXTRA="iris xarray cdms2 genutil"
+    - UVCDAT_ANONYMOUS_LOG=no
+  matrix:
+    - PYTHON_VERSION=2.7
+      SUITE_TYPE=test_standard
+    - PYTHON_VERSION=2.7
+      SUITE_TYPE=test_extras
+    - PYTHON_VERSION=3.6
+      SUITE_TYPE=test_standard
+    - PYTHON_VERSION=3.6
+      SUITE_TYPE=test_extras
+    - PYTHON_VERSION=3.7
+      SUITE_TYPE=test_standard
+    - PYTHON_VERSION=3.7
+      SUITE_TYPE=test_extras
+
+before_install:
+  - wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - export PATH="$HOME/miniconda/bin:$PATH"
+  - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda config --add channels conda-forge
+  - conda update conda
+  - conda info -a
 
 install:
-    # Install Miniconda so we can use it to manage dependencies:
-    - if [[ "$TRAVIS_PYTHON_VERSION" == 2* ]]; then
-        wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh;
-      else
-        wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
-      fi
-    - bash miniconda.sh -b -p $HOME/miniconda
-    - export PATH="$HOME/miniconda/bin:$PATH"
-    - hash -r
-    # Setup conda to use extra channels for dependencies:
-    - conda config --set always_yes yes --set changeps1 no
-    - conda config --add channels conda-forge
-    - conda update conda
-    - conda info -a
-    # Create a conda environment with the required python version:
-    - conda create -n test-environment python=$PYTHON_VERSION
-    - source activate test-environment
-    # Install required packages:
-    - conda install ${PACKAGES}
-    # Install the package:
-    - python setup.py install
+  - conda create -n test python=$PYTHON_VERSION
+  - source activate test
+  - if [[ $SUITE_TYPE = test_standard ]]; then
+      conda install $PACKAGES_STANDARD;
+    elif [[ $SUITE_TYPE = test_extras ]]; then
+      conda install $PACKAGES_STANDARD $PACKAGES_EXTRA;
+    fi
+  - python setup.py install
 
 script:
-    # Create an isolated test directory to make sure we test against the
-    # installed package rather than the source:
-    - mkdir ../test_directory
-    - cd ../test_directory
-    - export UVCDAT_ANONYMOUS_LOG=no
-    - pytest -vrsx --pyargs eofs
+  - set -e
+  - pytest -vrsx
 
 notifications:
     email: false
