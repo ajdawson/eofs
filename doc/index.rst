@@ -7,7 +7,7 @@
    userguide/index
    examples/index
    api/index
-   downloads
+   changelog
    devguide/index
 
 
@@ -38,7 +38,7 @@ or using pip::
 
     pip install eofs
 
-The source code for released versions of `eofs` can be downloaded from the :doc:`downloads` page.
+The source code for released versions of `eofs` can be downloaded from `Github <https://github.com/ajdawson/eofs/releases>`_.
 You must have setuptools_ installed in order to install `eofs` from source.
 After downloading the source code archive, unzip it and change into the unzipped archive's directory, then to install it::
 

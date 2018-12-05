@@ -32,6 +32,7 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.viewcode',
               'sphinx.ext.autosummary',
               'sphinx.ext.intersphinx',
+              'sphinx.ext.extlinks',
               'matplotlib.sphinxext.plot_directive',]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -95,6 +96,13 @@ highlight_language = 'python'
 
 # A list of ignored prefixes for module index sorting.
 #modindex_common_prefix = []
+
+
+# -- extlinks configuration ----------------------------------------------------
+
+# Allow e.g. :issue:`42` and :pr:`42` roles:
+extlinks = {'issue': ('https://github.com/ajdawson/eofs/issues/%s', '#'),
+            'pr': ('https://github.com/ajdawson/eofs/pull/%s', '#')}
 
 
 # -- Options for HTML output ---------------------------------------------------

@@ -3,15 +3,21 @@ Changelog
 
 .. default-role:: py:obj
 
+Source code downloads for released versions can be downloaded from `Github <https://github.com/ajdawson/eofs/releases>`_.
 
 v1.3
 ----
 
+:Release: v1.3.1
+:Date: 5 December 2018
+
+* Fix for the cdms interface on Python 3 [:issue:`101`, :pr:`102`]
+
 :Release: v1.3.0
 :Date: 12 October 2017
 
-* Minor change for xarray deprecations resulting in a different xarray version dependency (now >= 0.9) [`#87 <https://github.com/ajdawson/eofs/pull/87>`_].
-* Bug fixes for Python 3 [`#88 <https://github.com/ajdawson/eofs/pull/88>`_].
+* Minor change for xarray deprecations resulting in a different xarray version dependency (now >= 0.9) [:pr:`87`].
+* Bug fixes for Python 3 [:pr:`88`].
 
 
 v1.2
@@ -20,7 +26,7 @@ v1.2
 :Release: v1.2.0
 :Date: 25 October 2016
 
-* Improved the detection of time axes in the iris interface [`#68 <https://github.com/ajdawson/eofs/issues/68>`_, `#69 <https://github.com/ajdawson/eofs/pull/69>`_].
+* Improved the detection of time axes in the iris interface [:issue:`68`, :pr:`69`].
 
 
 v1.1
@@ -51,7 +57,7 @@ v0.5
 :Release: v0.5.1
 :Date: 10 December 2015
 
-* Include workaround for a regression in numpy versions 1.10.0 and 1.10.1. [`#34 <https://github.com/ajdawson/eofs/issues/34>`_]
+* Include workaround for a regression in numpy versions 1.10.0 and 1.10.1. [:issue:`34`]
 
 Existing users with unaffected numpy versions (<1.10.0, >=1.10.2) don't need to upgrade.
 
@@ -70,7 +76,7 @@ v0.4
 :Release: v0.4.1
 :Date: 5 April 2013
 
-* Fixed a serious bug that meant the package could not be imported if the iris module is not available. [`#1 <https://github.com/ajdawson/eofs/issues/1>`_]
+* Fixed a serious bug that meant the package could not be imported if the iris module is not available. [:issue:`1`]
 
 
 :Release: v0.4.0
