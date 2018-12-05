@@ -18,6 +18,8 @@ env:
       SUITE_TYPE=test_standard
     - PYTHON_VERSION=3.7
       SUITE_TYPE=test_extras
+    - PYTHON_VERSION=3.7
+      SUITE_TYPE=deploy
 
 before_install:
   - wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
@@ -36,8 +38,21 @@ install:
       conda install $PACKAGES_STANDARD;
     elif [[ $SUITE_TYPE = test_extras ]]; then
       conda install $PACKAGES_STANDARD $PACKAGES_EXTRA;
+    else
+      conda install $PACKAGES_STANDARD $PACKAGES_EXTRA;
     fi
   - python setup.py install
+
+deploy:
+  provider: pypi
+  user: ajdawson
+  password:
+    secure: "kPR7n+oFtdOi1SoEsg0hDu9bmgBwyNDELhIBs+FqmStszF+N3WVME35n4skrb6L1/NtjmACnV3BZZkJTCALGX7IX4tO08SCyS4IlPPOOGukgQ54/5hTYpxU4q2dON7AVFQ/VEe56mxPd5shR+sxkdLJ6tZRzQuc5eN9/Uu2p1Mk="
+  upload_docs: no
+  on:
+    repo: ajdawson/eofs
+    tags: true
+    condition: '$SUITE_TYPE == "deploy"'
 
 script:
   - set -e
