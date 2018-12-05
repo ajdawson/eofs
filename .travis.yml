@@ -47,7 +47,7 @@ deploy:
   provider: pypi
   user: ajdawson
   password:
-    secure: "kPR7n+oFtdOi1SoEsg0hDu9bmgBwyNDELhIBs+FqmStszF+N3WVME35n4skrb6L1/NtjmACnV3BZZkJTCALGX7IX4tO08SCyS4IlPPOOGukgQ54/5hTYpxU4q2dON7AVFQ/VEe56mxPd5shR+sxkdLJ6tZRzQuc5eN9/Uu2p1Mk="
+    secure: "Iu6CFvCOj8wxfbAoY8mWRZrmQ6bQJp7yxHMEOIwj6B/VlOONxttVGkWY0zdPl0glYPJel3gFDmsoJTEF+9uISuoW/p43HV3StrZpgUkLu63mKTidP/56rSctKDBKEgwTljC99/OrC7sP5oE5l/0NYipLd1HVccizzdBrdxy5jRE="
   upload_docs: no
   on:
     repo: ajdawson/eofs
