@@ -4,24 +4,16 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Configure git &#8212; eofs 1.3.0 documentation</title>
+    <title>Configure git &#8212; eofs 1.3.1 documentation</title>
     <link rel="stylesheet" href="../../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../',
-        VERSION:     '1.3.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Development workflow" href="development_workflow.html" />
@@ -62,8 +54,7 @@
             });
         </script>
 
-  </head>
-  <body>
+  </head><body>
 <div class="pageheader">
   <div>
     <a href="../../index.html">
@@ -94,13 +85,14 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v1.3.0</h2>
+
+    <h2>eofs v1.3.1</h2>
     <h3>Table of Contents</h3>
     <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../userguide/index.html">User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API references</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../downloads.html">Downloads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Developer Guide</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Working with <em>eofs</em> source code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../testing.html">Running the test suite</a></li>
@@ -124,12 +116,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -144,10 +138,10 @@
 <span id="id1"></span><h1>Configure git<a class="headerlink" href="#configure-git" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="overview">
 <span id="git-config-basic"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>Your personal git configurations are saved in the <code class="docutils literal"><span class="pre">.gitconfig</span></code> file in
+<p>Your personal git configurations are saved in the <code class="docutils literal notranslate"><span class="pre">.gitconfig</span></code> file in
 your home directory.</p>
-<p>Here is an example <code class="docutils literal"><span class="pre">.gitconfig</span></code> file:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">user</span><span class="p">]</span>
+<p>Here is an example <code class="docutils literal notranslate"><span class="pre">.gitconfig</span></code> file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">user</span><span class="p">]</span>
         <span class="n">name</span> <span class="o">=</span> <span class="n">Your</span> <span class="n">Name</span>
         <span class="n">email</span> <span class="o">=</span> <span class="n">you</span><span class="nd">@yourdomain.example.com</span>
 
@@ -166,9 +160,9 @@ your home directory.</p>
         <span class="n">summary</span> <span class="o">=</span> <span class="n">true</span>
 </pre></div>
 </div>
-<p>You can edit this file directly or you can use the <code class="docutils literal"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span></code>
+<p>You can edit this file directly or you can use the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span></code>
 command:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="s2">&quot;Your Name&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="s2">&quot;Your Name&quot;</span>
 <span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="n">you</span><span class="nd">@yourdomain.example.com</span>
 <span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">alias</span><span class="o">.</span><span class="n">ci</span> <span class="s2">&quot;commit -a&quot;</span>
 <span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">alias</span><span class="o">.</span><span class="n">co</span> <span class="n">checkout</span>
@@ -180,7 +174,7 @@ command:</p>
 <span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">merge</span><span class="o">.</span><span class="n">summary</span> <span class="n">true</span>
 </pre></div>
 </div>
-<p>To set up on another computer, you can copy your <code class="docutils literal"><span class="pre">~/.gitconfig</span></code> file,
+<p>To set up on another computer, you can copy your <code class="docutils literal notranslate"><span class="pre">~/.gitconfig</span></code> file,
 or run the commands above.</p>
 </div>
 <div class="section" id="in-detail">
@@ -190,28 +184,28 @@ or run the commands above.</p>
 <p>It is good practice to tell <a class="reference external" href="http://git-scm.com/">git</a> who you are, for labeling any changes
 you make to the code.  The simplest way to do this is from the command
 line:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="s2">&quot;Your Name&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="s2">&quot;Your Name&quot;</span>
 <span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="n">you</span><span class="nd">@yourdomain.example.com</span>
 </pre></div>
 </div>
 <p>This will write the settings into your git configuration file,  which
 should now contain a user section with your name and email:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">user</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">user</span><span class="p">]</span>
       <span class="n">name</span> <span class="o">=</span> <span class="n">Your</span> <span class="n">Name</span>
       <span class="n">email</span> <span class="o">=</span> <span class="n">you</span><span class="nd">@yourdomain.example.com</span>
 </pre></div>
 </div>
-<p>Of course you’ll need to replace <code class="docutils literal"><span class="pre">Your</span> <span class="pre">Name</span></code> and <code class="docutils literal"><span class="pre">you&#64;yourdomain.example.com</span></code>
+<p>Of course you’ll need to replace <code class="docutils literal notranslate"><span class="pre">Your</span> <span class="pre">Name</span></code> and <code class="docutils literal notranslate"><span class="pre">you&#64;yourdomain.example.com</span></code>
 with your actual name and email address.</p>
 </div>
 <div class="section" id="aliases">
 <h3>Aliases<a class="headerlink" href="#aliases" title="Permalink to this headline">¶</a></h3>
 <p>You might well benefit from some aliases to common commands.</p>
-<p>For example, you might well want to be able to shorten <code class="docutils literal"><span class="pre">git</span> <span class="pre">checkout</span></code>
-to <code class="docutils literal"><span class="pre">git</span> <span class="pre">co</span></code>.  Or you may want to alias <code class="docutils literal"><span class="pre">git</span> <span class="pre">diff</span> <span class="pre">--color-words</span></code>
-(which gives a nicely formatted output of the diff) to <code class="docutils literal"><span class="pre">git</span> <span class="pre">wdiff</span></code></p>
-<p>The following <code class="docutils literal"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span></code> commands:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">alias</span><span class="o">.</span><span class="n">ci</span> <span class="s2">&quot;commit -a&quot;</span>
+<p>For example, you might well want to be able to shorten <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span></code>
+to <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">co</span></code>.  Or you may want to alias <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span> <span class="pre">--color-words</span></code>
+(which gives a nicely formatted output of the diff) to <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">wdiff</span></code></p>
+<p>The following <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span></code> commands:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">alias</span><span class="o">.</span><span class="n">ci</span> <span class="s2">&quot;commit -a&quot;</span>
 <span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">alias</span><span class="o">.</span><span class="n">co</span> <span class="n">checkout</span>
 <span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">alias</span><span class="o">.</span><span class="n">st</span> <span class="s2">&quot;status -a&quot;</span>
 <span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">alias</span><span class="o">.</span><span class="n">stat</span> <span class="s2">&quot;status -a&quot;</span>
@@ -219,9 +213,9 @@ to <code class="docutils literal"><span class="pre">git</span> <span class="pre"
 <span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">alias</span><span class="o">.</span><span class="n">wdiff</span> <span class="s2">&quot;diff --color-words&quot;</span>
 </pre></div>
 </div>
-<p>will create an <code class="docutils literal"><span class="pre">alias</span></code> section in your <code class="docutils literal"><span class="pre">.gitconfig</span></code> file with contents
+<p>will create an <code class="docutils literal notranslate"><span class="pre">alias</span></code> section in your <code class="docutils literal notranslate"><span class="pre">.gitconfig</span></code> file with contents
 like this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">alias</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">alias</span><span class="p">]</span>
         <span class="n">ci</span> <span class="o">=</span> <span class="n">commit</span> <span class="o">-</span><span class="n">a</span>
         <span class="n">co</span> <span class="o">=</span> <span class="n">checkout</span>
         <span class="n">st</span> <span class="o">=</span> <span class="n">status</span> <span class="o">-</span><span class="n">a</span>
@@ -234,35 +228,35 @@ like this:</p>
 <div class="section" id="editor">
 <h3>Editor<a class="headerlink" href="#editor" title="Permalink to this headline">¶</a></h3>
 <p>You may also want to make sure that your editor of choice is used</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">core</span><span class="o">.</span><span class="n">editor</span> <span class="n">vim</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">core</span><span class="o">.</span><span class="n">editor</span> <span class="n">vim</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="merging">
 <h3>Merging<a class="headerlink" href="#merging" title="Permalink to this headline">¶</a></h3>
-<p>To enforce summaries when doing merges (<code class="docutils literal"><span class="pre">~/.gitconfig</span></code> file again):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">merge</span><span class="p">]</span>
+<p>To enforce summaries when doing merges (<code class="docutils literal notranslate"><span class="pre">~/.gitconfig</span></code> file again):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">merge</span><span class="p">]</span>
    <span class="n">log</span> <span class="o">=</span> <span class="n">true</span>
 </pre></div>
 </div>
 <p>Or from the command line:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">merge</span><span class="o">.</span><span class="n">log</span> <span class="n">true</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">merge</span><span class="o">.</span><span class="n">log</span> <span class="n">true</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="fancy-log-output">
 <span id="fancy-log"></span><h3>Fancy log output<a class="headerlink" href="#fancy-log-output" title="Permalink to this headline">¶</a></h3>
 <p>This is a very nice alias to get a fancy log output; it should go in the
-<code class="docutils literal"><span class="pre">alias</span></code> section of your <code class="docutils literal"><span class="pre">.gitconfig</span></code> file:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">lg</span> <span class="o">=</span> <span class="n">log</span> <span class="o">--</span><span class="n">graph</span> <span class="o">--</span><span class="n">pretty</span><span class="o">=</span><span class="n">format</span><span class="p">:</span><span class="s1">&#39;%Cred</span><span class="si">%h%</span><span class="s1">Creset -%C(yellow)</span><span class="si">%d</span><span class="s1">%Creset </span><span class="si">%s</span><span class="s1"> %Cgreen(</span><span class="si">%c</span><span class="s1">r) %C(bold blue)[%an]%Creset&#39;</span> <span class="o">--</span><span class="n">abbrev</span><span class="o">-</span><span class="n">commit</span> <span class="o">--</span><span class="n">date</span><span class="o">=</span><span class="n">relative</span>
+<code class="docutils literal notranslate"><span class="pre">alias</span></code> section of your <code class="docutils literal notranslate"><span class="pre">.gitconfig</span></code> file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lg</span> <span class="o">=</span> <span class="n">log</span> <span class="o">--</span><span class="n">graph</span> <span class="o">--</span><span class="n">pretty</span><span class="o">=</span><span class="n">format</span><span class="p">:</span><span class="s1">&#39;%Cred</span><span class="si">%h%</span><span class="s1">Creset -%C(yellow)</span><span class="si">%d</span><span class="s1">%Creset </span><span class="si">%s</span><span class="s1"> %Cgreen(</span><span class="si">%c</span><span class="s1">r) %C(bold blue)[%an]%Creset&#39;</span> <span class="o">--</span><span class="n">abbrev</span><span class="o">-</span><span class="n">commit</span> <span class="o">--</span><span class="n">date</span><span class="o">=</span><span class="n">relative</span>
 </pre></div>
 </div>
 <p>You use the alias with:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">lg</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">lg</span>
 </pre></div>
 </div>
 <p>and it gives graph / text output something like this (but with color!):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="o">*</span> <span class="mi">6</span><span class="n">d8e1ee</span> <span class="o">-</span> <span class="p">(</span><span class="n">HEAD</span><span class="p">,</span> <span class="n">origin</span><span class="o">/</span><span class="n">my</span><span class="o">-</span><span class="n">fancy</span><span class="o">-</span><span class="n">feature</span><span class="p">,</span> <span class="n">my</span><span class="o">-</span><span class="n">fancy</span><span class="o">-</span><span class="n">feature</span><span class="p">)</span> <span class="n">NF</span> <span class="o">-</span> <span class="n">a</span> <span class="n">fancy</span> <span class="nb">file</span> <span class="p">(</span><span class="mi">45</span> <span class="n">minutes</span> <span class="n">ago</span><span class="p">)</span> <span class="p">[</span><span class="n">Matthew</span> <span class="n">Brett</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">*</span> <span class="mi">6</span><span class="n">d8e1ee</span> <span class="o">-</span> <span class="p">(</span><span class="n">HEAD</span><span class="p">,</span> <span class="n">origin</span><span class="o">/</span><span class="n">my</span><span class="o">-</span><span class="n">fancy</span><span class="o">-</span><span class="n">feature</span><span class="p">,</span> <span class="n">my</span><span class="o">-</span><span class="n">fancy</span><span class="o">-</span><span class="n">feature</span><span class="p">)</span> <span class="n">NF</span> <span class="o">-</span> <span class="n">a</span> <span class="n">fancy</span> <span class="nb">file</span> <span class="p">(</span><span class="mi">45</span> <span class="n">minutes</span> <span class="n">ago</span><span class="p">)</span> <span class="p">[</span><span class="n">Matthew</span> <span class="n">Brett</span><span class="p">]</span>
 <span class="o">*</span>   <span class="n">d304a73</span> <span class="o">-</span> <span class="p">(</span><span class="n">origin</span><span class="o">/</span><span class="n">placeholder</span><span class="p">,</span> <span class="n">placeholder</span><span class="p">)</span> <span class="n">Merge</span> <span class="n">pull</span> <span class="n">request</span> <span class="c1">#48 from hhuuggoo/master (2 weeks ago) [Jonathan Terhorst]</span>
 <span class="o">|</span>\
 <span class="o">|</span> <span class="o">*</span> <span class="mi">4</span><span class="n">aff2a8</span> <span class="o">-</span> <span class="n">fixed</span> <span class="n">bug</span> <span class="mi">35</span><span class="p">,</span> <span class="ow">and</span> <span class="n">added</span> <span class="n">a</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">test_bugfixes</span> <span class="p">(</span><span class="mi">2</span> <span class="n">weeks</span> <span class="n">ago</span><span class="p">)</span> <span class="p">[</span><span class="n">Hugo</span><span class="p">]</span>
@@ -312,8 +306,8 @@ like this:</p>
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2013-2017 Andrew Dawson.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.4.
+        &#169; Copyright 2013-2018 Andrew Dawson.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.
     </div>
   </body>
 </html>

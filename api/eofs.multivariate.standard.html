@@ -4,24 +4,16 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>eofs.multivariate.standard &#8212; eofs 1.3.0 documentation</title>
+    <title>eofs.multivariate.standard &#8212; eofs 1.3.1 documentation</title>
     <link rel="stylesheet" href="../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '1.3.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="eofs.multivariate.cdms" href="eofs.multivariate.cdms.html" />
@@ -62,8 +54,7 @@
             });
         </script>
 
-  </head>
-  <body>
+  </head><body>
 <div class="pageheader">
   <div>
     <a href="../index.html">
@@ -92,7 +83,8 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v1.3.0</h2>
+
+    <h2>eofs v1.3.1</h2>
     <h3>Table of Contents</h3>
     <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userguide/index.html">User Guide</a></li>
@@ -102,17 +94,17 @@
 <li class="toctree-l2 current"><a class="reference internal" href="index.html#full-documentation">Full documentation</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../downloads.html">Downloads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../devguide/index.html">Developer Guide</a></li>
 </ul>
 
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="eofs.tools.html"
-                        title="previous chapter"><code class="docutils literal"><span class="pre">eofs.tools</span></code></a></p>
+                        title="previous chapter"><code class="docutils literal notranslate"><span class="pre">eofs.tools</span></code></a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="eofs.multivariate.cdms.html"
-                        title="next chapter"><code class="docutils literal"><span class="pre">eofs.multivariate.cdms</span></code></a></p>
+                        title="next chapter"><code class="docutils literal notranslate"><span class="pre">eofs.multivariate.cdms</span></code></a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -122,12 +114,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -139,24 +133,24 @@
           <div class="body" role="main">
             
   <div class="section" id="module-eofs.multivariate.standard">
-<span id="eofs-multivariate-standard"></span><h1><a class="reference internal" href="#module-eofs.multivariate.standard" title="eofs.multivariate.standard"><code class="xref py py-mod docutils literal"><span class="pre">eofs.multivariate.standard</span></code></a><a class="headerlink" href="#module-eofs.multivariate.standard" title="Permalink to this headline">¶</a></h1>
-<p>Multivariate EOF analysis for <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.13)"><code class="xref py py-obj docutils literal"><span class="pre">numpy</span></code></a> array data.</p>
+<span id="eofs-multivariate-standard"></span><h1><a class="reference internal" href="#module-eofs.multivariate.standard" title="eofs.multivariate.standard"><code class="xref py py-mod docutils literal notranslate"><span class="pre">eofs.multivariate.standard</span></code></a><a class="headerlink" href="#module-eofs.multivariate.standard" title="Permalink to this headline">¶</a></h1>
+<p>Multivariate EOF analysis for <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy</span></code></a> array data.</p>
 <dl class="class">
 <dt id="eofs.multivariate.standard.MultivariateEof">
 <em class="property">class </em><code class="descclassname">eofs.multivariate.standard.</code><code class="descname">MultivariateEof</code><span class="sig-paren">(</span><em>datasets</em>, <em>weights=None</em>, <em>center=True</em>, <em>ddof=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof" title="Permalink to this definition">¶</a></dt>
-<dd><p>Multivariate EOF analysis (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.13)"><code class="xref py py-obj docutils literal"><span class="pre">numpy</span></code></a> interface)</p>
+<dd><p>Multivariate EOF analysis (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy</span></code></a> interface)</p>
 <p>Create a MultivariateEof instance.</p>
 <p>The EOF solution is computed at initialization time. Method
 calls are used to retrieve computed quantities.</p>
 <p><strong>Arguments:</strong></p>
 <dl class="docutils">
 <dt><em>datasets</em></dt>
-<dd>A list/tuple containing one or more <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ndarray</span></code></a> or
-<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/maskedarray.baseclass.html#numpy.ma.MaskedArray" title="(in NumPy v1.13)"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ma.MaskedArray</span></code></a> objects, each with two or more
+<dd>A list/tuple containing one or more <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> or
+<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/maskedarray.baseclass.html#numpy.ma.MaskedArray" title="(in NumPy v1.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.ma.MaskedArray</span></code></a> objects, each with two or more
 dimensions, containing the data to be analysed. The first
 dimension of each array is assumed to represent time.
 Missing values are permitted, either in the
-form of masked arrays, or <code class="xref py py-obj docutils literal"><span class="pre">numpy.nan</span></code> values. Missing values
+form of masked arrays, or <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/constants.html#numpy.nan" title="(in NumPy v1.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.nan</span></code></a> values. Missing values
 must be constant with time in each field (e.g., values of an
 oceanographic field over land).</dd>
 </dl>
@@ -195,11 +189,11 @@ number of samples. Defaults to <em>1</em>.</dd>
 <p><strong>Returns:</strong></p>
 <dl class="docutils">
 <dt><em>solver</em></dt>
-<dd>An <a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><code class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></code></a> instance.</dd>
+<dd>An <a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultivariateEof</span></code></a> instance.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
 <p>EOF analysis of three variables with no weighting:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eofs.multivariate.standard</span> <span class="kn">import</span> <span class="n">MultivariateEof</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eofs.multivariate.standard</span> <span class="kn">import</span> <span class="n">MultivariateEof</span>
 <span class="n">solver</span> <span class="o">=</span> <span class="n">MultivariateEof</span><span class="p">([</span><span class="n">olr</span><span class="p">,</span> <span class="n">u200</span><span class="p">,</span> <span class="n">u850</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -208,7 +202,7 @@ with. In this example the data arrays are dimensioned
 (ntime, nlat, nlon), and in order for the latitude weights used
 for the second array to be broadcastable to this shape, an extra
 length-1 dimension is added to the end:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eofs.multivariate.standard</span> <span class="kn">import</span> <span class="n">MultivariateEof</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eofs.multivariate.standard</span> <span class="kn">import</span> <span class="n">MultivariateEof</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="n">latitude</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">73</span><span class="p">)</span>
 <span class="n">weights_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
@@ -248,11 +242,11 @@ eigenvalue.</li>
 </dl>
 <p><strong>Examples:</strong></p>
 <p>All un-scaled PCs:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pcs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">pcs</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pcs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">pcs</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>First 3 PCs scaled to unit variance:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pcs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">pcs</span><span class="p">(</span><span class="n">npcs</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">pcscaling</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pcs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">pcs</span><span class="p">(</span><span class="n">npcs</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">pcscaling</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -287,11 +281,11 @@ variable along the first dimension.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
 <p>All EOFs with no scaling:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">eofs_list</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofs</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">eofs_list</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofs</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>The leading EOF with scaling applied:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">eof1_list</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofs</span><span class="p">(</span><span class="n">neofs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">eofscaling</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">eof1_list</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofs</span><span class="p">(</span><span class="n">neofs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">eofscaling</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -301,7 +295,7 @@ variable along the first dimension.</dd>
 <code class="descname">eofsAsCorrelation</code><span class="sig-paren">(</span><em>neofs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof.eofsAsCorrelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof.eofsAsCorrelation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Empirical orthogonal functions (EOFs) expressed as the
 correlation between the principal component time series (PCs)
-and the each data set in the <a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><code class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></code></a> input <em>datasets</em>.</p>
+and the each data set in the <a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultivariateEof</span></code></a> input <em>datasets</em>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">These are not related to the EOFs computed from the
@@ -322,11 +316,11 @@ variable along the first dimension.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
 <p>All EOFs of each data set:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">eofs_list</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofsAsCorrelation</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">eofs_list</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofsAsCorrelation</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>The leading EOF of each data set:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">eof1_list</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofsAsCorrelation</span><span class="p">(</span><span class="n">neofs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">eof1_list</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofsAsCorrelation</span><span class="p">(</span><span class="n">neofs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -336,7 +330,7 @@ variable along the first dimension.</dd>
 <code class="descname">eofsAsCovariance</code><span class="sig-paren">(</span><em>neofs=None</em>, <em>pcscaling=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof.eofsAsCovariance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof.eofsAsCovariance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Empirical orthogonal functions (EOFs) expressed as the
 covariance between the principal component time series (PCs)
-and the each data set in the <a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><code class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></code></a> input <em>datasets</em>.</p>
+and the each data set in the <a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultivariateEof</span></code></a> input <em>datasets</em>.</p>
 <p><strong>Optional argument:</strong></p>
 <dl class="docutils">
 <dt><em>neofs</em></dt>
@@ -370,11 +364,11 @@ variable along the first dimension.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
 <p>All EOFs of each data set:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">eofs_list</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofsAsCovariance</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">eofs_list</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofsAsCovariance</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>The leading EOF of each data set:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">eof1_list</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofsAsCovariance</span><span class="p">(</span><span class="n">neofs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">eof1_list</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofsAsCovariance</span><span class="p">(</span><span class="n">neofs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -401,11 +395,11 @@ smallest.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
 <p>All eigenvalues:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">eigenvalues</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">eigenvalues</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>The first eigenvalue:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">eigenvalue1</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">(</span><span class="n">neigs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">eigenvalue1</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">(</span><span class="n">neigs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -432,11 +426,11 @@ returned.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
 <p>The fractional variance represented by each EOF mode:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">variance_fraction</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">varianceFraction</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">variance_fraction</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">varianceFraction</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>The fractional variance represented by the first EOF mode:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">variance_fraction_mode_1</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">VarianceFraction</span><span class="p">(</span><span class="n">neigs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">variance_fraction_mode_1</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">VarianceFraction</span><span class="p">(</span><span class="n">neigs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -453,7 +447,7 @@ of the eigenvalues).</p>
 </dl>
 <p><strong>Example:</strong></p>
 <p>Get the total variance:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">total_variance</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">totalAnomalyVariance</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">total_variance</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">totalAnomalyVariance</span><span class="p">()</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -478,7 +472,7 @@ eigenvalues will be returned.</dd>
 <dt><em>vfscaled</em></dt>
 <dd>If <em>True</em> scale the errors by the sum of the eigenvalues.
 This yields typical errors with the same scale as the values
-returned by <a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof.varianceFraction" title="eofs.multivariate.standard.MultivariateEof.varianceFraction"><code class="xref py py-obj docutils literal"><span class="pre">MultivariateEof.varianceFraction</span></code></a>. If <em>False</em>
+returned by <a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof.varianceFraction" title="eofs.multivariate.standard.MultivariateEof.varianceFraction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultivariateEof.varianceFraction</span></code></a>. If <em>False</em>
 then no scaling is done. Defaults to <em>False</em> (no scaling).</dd>
 </dl>
 <p><strong>Returns:</strong></p>
@@ -492,12 +486,12 @@ Sampling errors in the estimation of empirical orthogonal
 functions. <em>Mon. Weather. Rev.</em>, <strong>110</strong>, pp 669-706.</p>
 <p><strong>Examples:</strong></p>
 <p>Typical errors for all eigenvalues:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">errors</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">northTest</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">errors</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">northTest</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Typical errors for the first 5 eigenvalues scaled by the sum of
 the eigenvalues:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">errors</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">northTest</span><span class="p">(</span><span class="n">neigs</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">vfscaled</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">errors</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">northTest</span><span class="p">(</span><span class="n">neigs</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">vfscaled</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -506,11 +500,11 @@ the eigenvalues:</p>
 <dt id="eofs.multivariate.standard.MultivariateEof.reconstructedField">
 <code class="descname">reconstructedField</code><span class="sig-paren">(</span><em>neofs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eofs/multivariate/standard.html#MultivariateEof.reconstructedField"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eofs.multivariate.standard.MultivariateEof.reconstructedField" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reconstructed data sets based on a subset of EOFs.</p>
-<p>If weights were passed to the <a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><code class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></code></a> instance the
+<p>If weights were passed to the <a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultivariateEof</span></code></a> instance the
 returned reconstructed fields will automatically have this
 weighting removed. Otherwise each returned field will have the
 same weighting as the corresponding  array in the
-<a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><code class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></code></a> input <em>datasets</em>.</p>
+<a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultivariateEof</span></code></a> input <em>datasets</em>.</p>
 <p><strong>Argument:</strong></p>
 <dl class="docutils">
 <dt><em>neofs</em></dt>
@@ -525,16 +519,16 @@ order to facilitate reconstruction with arbitrary modes.</dd>
 <dl class="docutils">
 <dt><em>reconstruction_list</em></dt>
 <dd>A list of arrays with the same shapes as the arrays in the
-<a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><code class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></code></a> input <em>datasets</em> contaning the
+<a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultivariateEof</span></code></a> input <em>datasets</em> contaning the
 reconstructions using <em>neofs</em> EOFs.</dd>
 </dl>
 <p><strong>Example:</strong></p>
 <p>Reconstruct the input data sets using 3 EOFs:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">reconstruction_list</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">reconstructedField</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">reconstruction_list</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">reconstructedField</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Reconstruct the input field using EOFs 1, 2 and 5:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">reconstruction_list</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">reconstuctedField</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">reconstruction_list</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">reconstuctedField</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -548,14 +542,14 @@ generate a corresponding set of pseudo-PCs.</p>
 <p><strong>Argument:</strong></p>
 <dl class="docutils">
 <dt><em>fields</em></dt>
-<dd>A list/tuple containing one or more <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ndarray</span></code></a> or
-<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/maskedarray.baseclass.html#numpy.ma.MaskedArray" title="(in NumPy v1.13)"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ma.MaskedArray</span></code></a> objects, each with two or more
+<dd>A list/tuple containing one or more <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> or
+<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/maskedarray.baseclass.html#numpy.ma.MaskedArray" title="(in NumPy v1.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.ma.MaskedArray</span></code></a> objects, each with two or more
 dimensions, containing the fields to be projected onto the
 EOFs. Each field must have the same spatial dimensions
 (including missing values in the same places) as the
-corresponding data set in the <a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><code class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></code></a> input
+corresponding data set in the <a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultivariateEof</span></code></a> input
 <em>datasets</em>. The data sets may have different length time
-dimensions to the <a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><code class="xref py py-obj docutils literal"><span class="pre">MultivariateEof</span></code></a> inputs <em>datasets</em> or no
+dimensions to the <a class="reference internal" href="#eofs.multivariate.standard.MultivariateEof" title="eofs.multivariate.standard.MultivariateEof"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultivariateEof</span></code></a> inputs <em>datasets</em> or no
 time dimension at all, but this must be consistent for all
 fields.</dd>
 </dl>
@@ -591,11 +585,11 @@ should be used.</dd>
 </dl>
 <p><strong>Examples:</strong></p>
 <p>Project a data set onto all EOFs:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pseudo_pcs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">projectField</span><span class="p">([</span><span class="n">field1</span><span class="p">,</span> <span class="n">field2</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pseudo_pcs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">projectField</span><span class="p">([</span><span class="n">field1</span><span class="p">,</span> <span class="n">field2</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>Project a data set onto the four leading EOFs:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pseudo_pcs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">projectField</span><span class="p">([</span><span class="n">field1</span><span class="p">,</span> <span class="n">field2</span><span class="p">],</span> <span class="n">neofs</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pseudo_pcs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">projectField</span><span class="p">([</span><span class="n">field1</span><span class="p">,</span> <span class="n">field2</span><span class="p">],</span> <span class="n">neofs</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -612,7 +606,7 @@ variable.</dd>
 </dl>
 <p><strong>Example:</strong></p>
 <p>The weights used for the analysis:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">weights_list</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">getWeights</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">weights_list</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">getWeights</span><span class="p">()</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -646,8 +640,8 @@ variable.</dd>
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2013-2017 Andrew Dawson.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.4.
+        &#169; Copyright 2013-2018 Andrew Dawson.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.
     </div>
   </body>
 </html>

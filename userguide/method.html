@@ -4,24 +4,16 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Method of solution &#8212; eofs 1.3.0 documentation</title>
+    <title>Method of solution &#8212; eofs 1.3.1 documentation</title>
     <link rel="stylesheet" href="../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '1.3.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Speeding up the solvers" href="speed.html" />
@@ -62,8 +54,7 @@
             });
         </script>
 
-  </head>
-  <body>
+  </head><body>
 <div class="pageheader">
   <div>
     <a href="../index.html">
@@ -92,7 +83,8 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-    <h2>eofs v1.3.0</h2>
+
+    <h2>eofs v1.3.1</h2>
     <h3>Table of Contents</h3>
     <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">User Guide</a><ul class="current">
@@ -106,7 +98,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/index.html">API references</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../downloads.html">Downloads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../devguide/index.html">Developer Guide</a></li>
 </ul>
 
@@ -126,12 +118,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -149,40 +143,40 @@
 <p>Any missing values in the input array will be identified and removed <a class="footnote-reference" href="#id6" id="id2">[2]</a>, and the SVD of the array computed. The EOFs are the right singular vectors and the standardized PCs are the left singular vectors, while the singular values are proportional to the variances associated with each EOF mode. The SVD is computed in truncated form, where only singular vectors (EOFs/PCs) that correspond to non-zero singular values are returned. This is done to further reduce the computational cost of the analysis <a class="footnote-reference" href="#id7" id="id3">[3]</a>. Since a singular value is proportional to the variance explained by its associated EOF mode neglecting modes with a singular value of zero maintains a full solution.</p>
 <div class="section" id="mathematical-motivation-for-the-svd-method">
 <h2>Mathematical motivation for the SVD method<a class="headerlink" href="#mathematical-motivation-for-the-svd-method" title="Permalink to this headline">¶</a></h2>
-<p>Consider a data set that consists of observations of a single geophysical variable at multiple positions in space <span class="math">\(x_1, x_2, \ldots, x_M\)</span> and at multiple times <span class="math">\(t_1, t_2, \ldots, t_N,\)</span>. These observations are arranged in a matrix <span class="math">\(\mathbf{F}\)</span> with dimension <span class="math">\(N \times M\)</span> such that each row of <span class="math">\(\mathbf{F}\)</span> is a map of observations at all points in space at a particular time, and each column is a time-series of observations at a particular point at all times.
-The time-mean is then removed from of the <span class="math">\(M\)</span> time series to form the anomaly matrix <span class="math">\(\mathbf{A}\)</span> whose columns have zero-mean:</p>
-<div class="math">
+<p>Consider a data set that consists of observations of a single geophysical variable at multiple positions in space <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_M\)</span> and at multiple times <span class="math notranslate nohighlight">\(t_1, t_2, \ldots, t_N,\)</span>. These observations are arranged in a matrix <span class="math notranslate nohighlight">\(\mathbf{F}\)</span> with dimension <span class="math notranslate nohighlight">\(N \times M\)</span> such that each row of <span class="math notranslate nohighlight">\(\mathbf{F}\)</span> is a map of observations at all points in space at a particular time, and each column is a time-series of observations at a particular point at all times.
+The time-mean is then removed from of the <span class="math notranslate nohighlight">\(M\)</span> time series to form the anomaly matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> whose columns have zero-mean:</p>
+<div class="math notranslate nohighlight">
 \[\begin{split}\mathbf{A} = \begin{pmatrix}
     a_{1,1} &amp; a_{1,2} &amp; \cdots &amp; a_{1,M} \\
     a_{2,1} &amp; a_{2,2} &amp; \cdots &amp; a_{2,M} \\
     \vdots  &amp; \vdots  &amp; \ddots &amp; \vdots \\
     a_{N,1} &amp; a_{N,2} &amp; \cdots &amp; a_{N,M}
 \end{pmatrix}.\end{split}\]</div>
-<p>Typically one would then compute the covariance matrix <span class="math">\(\mathbf{R} = \mathbf{A}^\intercal \mathbf{A}\)</span> and solve the eigenvalue problem:</p>
-<div class="math" id="equation-eig">
+<p>Typically one would then compute the covariance matrix <span class="math notranslate nohighlight">\(\mathbf{R} = \mathbf{A}^\intercal \mathbf{A}\)</span> and solve the eigenvalue problem:</p>
+<div class="math notranslate nohighlight" id="equation-eig">
 <span class="eqno">(1)<a class="headerlink" href="#equation-eig" title="Permalink to this equation">¶</a></span>\[\mathbf{R C} = \mathbf{C} \Lambda,\]</div>
-<p>where the columns of <span class="math">\(\mathbf{C}\)</span> are the eigenvectors (EOFs) and the eigenvalues (EOF variances) are on the leading diagonal of <span class="math">\(\Lambda\)</span>. The PCs <span class="math">\(\mathbf{P}\)</span> can then be computed from the projection of <span class="math">\(\mathbf{A}\)</span> onto the EOFs:</p>
-<div class="math">
+<p>where the columns of <span class="math notranslate nohighlight">\(\mathbf{C}\)</span> are the eigenvectors (EOFs) and the eigenvalues (EOF variances) are on the leading diagonal of <span class="math notranslate nohighlight">\(\Lambda\)</span>. The PCs <span class="math notranslate nohighlight">\(\mathbf{P}\)</span> can then be computed from the projection of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> onto the EOFs:</p>
+<div class="math notranslate nohighlight">
 \[\mathbf{P} = \mathbf{A C}.\]</div>
-<p>Since computing the covariance matrix can be an expensive operation, a different method is used in <cite>eofs</cite>. Instead of computing the covariance matrix, the SVD of <span class="math">\(\mathbf{A}\)</span> is computed:</p>
-<div class="math">
+<p>Since computing the covariance matrix can be an expensive operation, a different method is used in <cite>eofs</cite>. Instead of computing the covariance matrix, the SVD of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is computed:</p>
+<div class="math notranslate nohighlight">
 \[\mathrm{SVD}\left(\mathbf{A}\right) = \mathbf{U} \Gamma \mathbf{V}^\intercal.\]</div>
-<p>The columns of <span class="math">\(\mathbf{U}\)</span> and <span class="math">\(\mathbf{V}\)</span> are the singular vectors and the singular values are on the leading diagonal of <span class="math">\(\Gamma\)</span>. To demonstrate the equivalence of this method and the covariance matrix method we write the covariance matrix in two ways, first a rearranged form of <a class="reference internal" href="#equation-eig">(1)</a> <a class="footnote-reference" href="#id8" id="id4">[4]</a>:</p>
-<div class="math" id="equation-R1">
-<span class="eqno">(2)<a class="headerlink" href="#equation-R1" title="Permalink to this equation">¶</a></span>\[\mathbf{R} = \mathbf{C} \Lambda \mathbf{C}^\intercal,\]</div>
-<p>and second the expression for the covariance matrix <span class="math">\(\mathbf{R}\)</span> after first taking the SVD of <span class="math">\(\mathbf{A}\)</span>:</p>
-<div class="math" id="equation-R2">
-<span class="eqno">(3)<a class="headerlink" href="#equation-R2" title="Permalink to this equation">¶</a></span>\[\mathbf{R} = \mathbf{A}^\intercal \mathbf{A} = \left( \mathbf{U} \Gamma \mathbf{V}^\intercal \right)^\intercal \left( \mathbf{U} \Gamma \mathbf{V}^\intercal \right) = \mathbf{V} \Gamma^\intercal \mathbf{U}^\intercal \mathbf{U} \Gamma \mathbf{V}^\intercal = \mathbf{V} \Gamma^\intercal \Gamma \mathbf{V}^\intercal.\]</div>
-<p>Comparing <a class="reference internal" href="#equation-R1">(2)</a> and <a class="reference internal" href="#equation-R2">(3)</a> it is clear that <span class="math">\(\mathbf{C} = \mathbf{V}\)</span> and <span class="math">\(\Lambda = \Gamma^\intercal \Gamma\)</span>. A bonus of using the SVD method is that the singular vectors in <span class="math">\(\mathbf{U}\)</span> are the standardized PCs. This can be shown by first forming an expression for <span class="math">\(\mathbf{A}\)</span> in terms of the EOFs and the PCs:</p>
-<div class="math">
+<p>The columns of <span class="math notranslate nohighlight">\(\mathbf{U}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{V}\)</span> are the singular vectors and the singular values are on the leading diagonal of <span class="math notranslate nohighlight">\(\Gamma\)</span>. To demonstrate the equivalence of this method and the covariance matrix method we write the covariance matrix in two ways, first a rearranged form of <a class="reference internal" href="#equation-eig">(1)</a> <a class="footnote-reference" href="#id8" id="id4">[4]</a>:</p>
+<div class="math notranslate nohighlight" id="equation-r1">
+<span class="eqno">(2)<a class="headerlink" href="#equation-r1" title="Permalink to this equation">¶</a></span>\[\mathbf{R} = \mathbf{C} \Lambda \mathbf{C}^\intercal,\]</div>
+<p>and second the expression for the covariance matrix <span class="math notranslate nohighlight">\(\mathbf{R}\)</span> after first taking the SVD of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-r2">
+<span class="eqno">(3)<a class="headerlink" href="#equation-r2" title="Permalink to this equation">¶</a></span>\[\mathbf{R} = \mathbf{A}^\intercal \mathbf{A} = \left( \mathbf{U} \Gamma \mathbf{V}^\intercal \right)^\intercal \left( \mathbf{U} \Gamma \mathbf{V}^\intercal \right) = \mathbf{V} \Gamma^\intercal \mathbf{U}^\intercal \mathbf{U} \Gamma \mathbf{V}^\intercal = \mathbf{V} \Gamma^\intercal \Gamma \mathbf{V}^\intercal.\]</div>
+<p>Comparing <a class="reference internal" href="#equation-r1">(2)</a> and <a class="reference internal" href="#equation-r2">(3)</a> it is clear that <span class="math notranslate nohighlight">\(\mathbf{C} = \mathbf{V}\)</span> and <span class="math notranslate nohighlight">\(\Lambda = \Gamma^\intercal \Gamma\)</span>. A bonus of using the SVD method is that the singular vectors in <span class="math notranslate nohighlight">\(\mathbf{U}\)</span> are the standardized PCs. This can be shown by first forming an expression for <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> in terms of the EOFs and the PCs:</p>
+<div class="math notranslate nohighlight">
 \[\mathbf{A} = \mathbf{P} \mathbf{C}^\intercal,\]</div>
-<p>which is the expression for reconstructing a field based on its EOFs and PCs. Defining a normalized PC <span class="math">\(\phi_j\)</span> as:</p>
-<div class="math">
+<p>which is the expression for reconstructing a field based on its EOFs and PCs. Defining a normalized PC <span class="math notranslate nohighlight">\(\phi_j\)</span> as:</p>
+<div class="math notranslate nohighlight">
 \[\phi_j = \dfrac{\mathbf{p}_j}{\sqrt{\lambda_j}},\]</div>
-<p>where <span class="math">\(\mathbf{p}_j\)</span> is a column of <span class="math">\(\mathbf{P}\)</span>, and a diagonal matrix <span class="math">\(\mathbf{D}\)</span> with <span class="math">\(\sqrt{\lambda}_j\)</span> on the leading diagonal, and a matrix <span class="math">\(\Phi\)</span> of the ordered <span class="math">\(\phi_j\)</span> as columns, we can write a new expression for <span class="math">\(\mathbf{A}\)</span>:</p>
-<div class="math">
+<p>where <span class="math notranslate nohighlight">\(\mathbf{p}_j\)</span> is a column of <span class="math notranslate nohighlight">\(\mathbf{P}\)</span>, and a diagonal matrix <span class="math notranslate nohighlight">\(\mathbf{D}\)</span> with <span class="math notranslate nohighlight">\(\sqrt{\lambda}_j\)</span> on the leading diagonal, and a matrix <span class="math notranslate nohighlight">\(\Phi\)</span> of the ordered <span class="math notranslate nohighlight">\(\phi_j\)</span> as columns, we can write a new expression for <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>:</p>
+<div class="math notranslate nohighlight">
 \[\mathbf{A} = \Phi \mathbf{D} \mathbf{C}^\intercal.\]</div>
-<p>This expression is exactly equivalent to the SVD of <span class="math">\(\mathbf{A}\)</span> and therefore the left singular vectors are the PCs scaled to unit variance.</p>
+<p>This expression is exactly equivalent to the SVD of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> and therefore the left singular vectors are the PCs scaled to unit variance.</p>
 <p class="rubric">Footnotes</p>
 <table class="docutils footnote" frame="void" id="id5" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
@@ -199,13 +193,13 @@ The time-mean is then removed from of the <span class="math">\(M\)</span> time s
 <table class="docutils footnote" frame="void" id="id7" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>For an <span class="math">\(N\)</span> by <span class="math">\(M\)</span> anomaly matrix the rank of the corresponding covariance matrix can be at most <span class="math">\(\mathrm{min} \left( m, n \right)\)</span>. The number of zero eigenvalues is therefore at least <span class="math">\(\left| m - n \right|\)</span>.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>For an <span class="math notranslate nohighlight">\(N\)</span> by <span class="math notranslate nohighlight">\(M\)</span> anomaly matrix the rank of the corresponding covariance matrix can be at most <span class="math notranslate nohighlight">\(\mathrm{min} \left( m, n \right)\)</span>. The number of zero eigenvalues is therefore at least <span class="math notranslate nohighlight">\(\left| m - n \right|\)</span>.</td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="id8" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id4">[4]</a></td><td>This rearrangement is possible since the column eigenvectors in <span class="math">\(\mathbf{C}\)</span> are mutually orthogonal and hence <span class="math">\(\mathbf{C} \mathbf{C}^\intercal = \mathbf{I}\)</span> where <span class="math">\(\mathbf{I}\)</span> is the identity matrix.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id4">[4]</a></td><td>This rearrangement is possible since the column eigenvectors in <span class="math notranslate nohighlight">\(\mathbf{C}\)</span> are mutually orthogonal and hence <span class="math notranslate nohighlight">\(\mathbf{C} \mathbf{C}^\intercal = \mathbf{I}\)</span> where <span class="math notranslate nohighlight">\(\mathbf{I}\)</span> is the identity matrix.</td></tr>
 </tbody>
 </table>
 </div>
@@ -236,8 +230,8 @@ The time-mean is then removed from of the <span class="math">\(M\)</span> time s
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2013-2017 Andrew Dawson.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.4.
+        &#169; Copyright 2013-2018 Andrew Dawson.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.
     </div>
   </body>
 </html>
