@@ -284,7 +284,10 @@ class TestStandardDask(StandardSolutionTest):
 
     @classmethod
     def modify_solution(cls):
+        # Skip this class if dask not available
+        pytest.importorskip('dask.array')
         import dask
+
         sst = cls.solution['sst']
         da = dask.array.from_array(sst, chunks=(1, -1, -1))
         dm = dask.array.from_array(sst.mask, chunks=(1, -1, -1))
@@ -327,6 +330,9 @@ class TestXarrayDask(XarraySolutionTest):
 
     @classmethod
     def modify_solution(cls):
+        # Skip this class if dask not available
+        pytest.importorskip('dask.array')
+
         cls.solution['sst'] = cls.solution['sst'].chunk({'time': 1})
 
     def test_source_is_dask(self):

@@ -162,14 +162,15 @@ class Eof(object):
                 # Use the parallel Dask algorithm
                 dsvd = dask.array.linalg.svd(dataNoMissing)
                 A, Lh, E = (x.compute() for x in dsvd)
+
+                # Trim the arrays (since Dask doesn't support
+                # 'full_matrices=False')
+                A = A[:, :len(Lh)]
+                E = E[:len(Lh), :]
             else:
                 # Basic numpy algorithm
-                A, Lh, E = np.linalg.svd(dataNoMissing)
+                A, Lh, E = np.linalg.svd(dataNoMissing, full_matrices=False)
 
-            # Trim the arrays (since Dask doesn't support
-            # 'full_matrices=False')
-            A = A[:, :len(Lh)]
-            E = E[:len(Lh), :]
         except (np.linalg.LinAlgError, ValueError):
             raise ValueError('error encountered in SVD, check that missing '
                              'values are in the same places at each time and '
