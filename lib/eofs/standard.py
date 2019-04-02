@@ -23,6 +23,12 @@ import warnings
 import numpy as np
 import numpy.ma as ma
 
+try:
+    import dask.array
+    has_dask = True
+except ImportError:
+    has_dask = False
+
 from .tools.standard import correlation_map, covariance_map
 
 
@@ -152,7 +158,18 @@ class Eof(object):
         dataNoMissing = self._data[:, nonMissingIndex]
         # Compute the singular value decomposition of the design matrix.
         try:
-            A, Lh, E = np.linalg.svd(dataNoMissing, full_matrices=False)
+            if has_dask and isinstance(dataNoMissing, dask.array.Array):
+                # Use the parallel Dask algorithm
+                dsvd = dask.array.linalg.svd(dataNoMissing)
+                A, Lh, E = (x.compute() for x in dsvd)
+            else:
+                # Basic numpy algorithm
+                A, Lh, E = np.linalg.svd(dataNoMissing)
+
+            # Trim the arrays (since Dask doesn't support
+            # 'full_matrices=False')
+            A = A[:, :len(Lh)]
+            E = E[:len(Lh), :]
         except (np.linalg.LinAlgError, ValueError):
             raise ValueError('error encountered in SVD, check that missing '
                              'values are in the same places at each time and '

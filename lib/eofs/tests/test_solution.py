@@ -276,6 +276,34 @@ class TestStandardMissingValuesAsNaN(StandardSolutionTest):
         return ma.MaskedArray(value, mask=np.isnan(value))
 
 
+class TestStandardDask(StandardSolutionTest):
+    weights = 'equal'
+
+    def _tomasked(self, value):
+        return ma.masked_invalid(value)
+
+    @classmethod
+    def modify_solution(cls):
+        import dask
+        sst = cls.solution['sst']
+        da = dask.array.from_array(sst, chunks=(1, -1, -1))
+        dm = dask.array.from_array(sst.mask, chunks=(1, -1, -1))
+        mda = dask.array.ma.masked_array(da, dm)
+
+        cls.solution['sst'] = mda
+
+    def test_source_is_dask(self):
+        # Source dataset should be a dask array
+        import dask
+        assert isinstance(self.solution['sst'], dask.array.Array)
+        assert isinstance(self.solution['sst'].compute(), ma.masked_array)
+
+    def test_solver_data_is_dask(self):
+        # The input to the SVD algorithm should be a dask array
+        import dask
+        assert isinstance(self.solver._data, dask.array.Array)
+
+
 # ----------------------------------------------------------------------------
 # Tests for the xarray interface
 
@@ -292,6 +320,24 @@ class XarraySolutionTest(SolutionTest):
 
 class TestXarrayEqualWeights(XarraySolutionTest):
     weights = 'equal'
+
+
+class TestXarrayDask(XarraySolutionTest):
+    weights = 'equal'
+
+    @classmethod
+    def modify_solution(cls):
+        cls.solution['sst'] = cls.solution['sst'].chunk({'time': 1})
+
+    def test_source_is_dask(self):
+        # Source dataset should be a dask array
+        import dask
+        assert isinstance(self.solution['sst'].data, dask.array.Array)
+
+    def test_solver_data_is_dask(self):
+        # The input to the SVD algorithm should be a dask array
+        import dask
+        assert isinstance(self.solver._solver._data, dask.array.Array)
 
 
 # ----------------------------------------------------------------------------
