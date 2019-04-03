@@ -156,6 +156,8 @@ class Eof(object):
         nonMissingIndex = np.where(np.logical_not(np.isnan(self._data[0])))[0]
         # Remove missing values from the design matrix.
         dataNoMissing = self._data[:, nonMissingIndex]
+        if dataNoMissing.size == 0:
+            raise ValueError('all input data is missing')
         # Compute the singular value decomposition of the design matrix.
         try:
             if has_dask and isinstance(dataNoMissing, dask.array.Array):

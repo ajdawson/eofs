@@ -285,7 +285,7 @@ class TestStandardDask(StandardSolutionTest):
     @classmethod
     def modify_solution(cls):
         # Skip this class if dask not available
-        pytest.importorskip('dask.array')
+        pytest.importorskip('dask.array', minversion='1.0')
         import dask
 
         sst = cls.solution['sst']
