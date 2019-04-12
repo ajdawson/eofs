@@ -32,6 +32,7 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.viewcode',
               'sphinx.ext.autosummary',
               'sphinx.ext.intersphinx',
+              'sphinx.ext.extlinks',
               'matplotlib.sphinxext.plot_directive',]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -97,6 +98,13 @@ highlight_language = 'python'
 #modindex_common_prefix = []
 
 
+# -- extlinks configuration ----------------------------------------------------
+
+# Allow e.g. :issue:`42` and :pr:`42` roles:
+extlinks = {'issue': ('https://github.com/ajdawson/eofs/issues/%s', '#'),
+            'pr': ('https://github.com/ajdawson/eofs/pull/%s', '#')}
+
+
 # -- Options for HTML output ---------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
@@ -141,7 +149,10 @@ html_static_path = ['_static']
 #html_use_smartypants = True
 
 # Custom sidebar templates, maps document names to template names.
-#html_sidebars = {}
+html_sidebars = {'**': ['sidebar_toc.html',
+                        'relations.html',
+                        'sourcelink.html',
+                        'searchbox.html']}
 
 # Additional templates that should be rendered to pages, maps page names to
 # template names.
