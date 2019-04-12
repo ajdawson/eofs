@@ -15,12 +15,11 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
+import os.path
+
 from setuptools import setup
+import versioneer
 
-
-for line in open('lib/eofs/__init__.py').readlines():
-    if line.startswith('__version__'):
-        exec(line.strip())
 
 packages = ['eofs',
             'eofs.tools',
@@ -31,18 +30,19 @@ packages = ['eofs',
 package_data = {'eofs.examples': ['example_data/*'],
                 'eofs.tests': ['data/*']}
 
+with open(os.path.join(os.path.dirname(__file__), 'README.md'), 'r') as f:
+    long_description = f.read()
 
 if __name__ == '__main__':
     setup(name='eofs',
-          version=__version__,
+          version=versioneer.get_version(),
+          cmdclass=versioneer.get_cmdclass(),
           description='EOF analysis in Python',
           author='Andrew Dawson',
           author_email='dawson@atm.ox.ac.uk',
           url='https://ajdawson.github.com/eofs',
-          long_description="""
-eofs is a package for performing EOF analysis on spatial-temporal
-data sets, aimed at meteorology, oceanography and climate sciences
-          """,
+          long_description=long_description,
+          long_description_content_type='text/markdown',
           packages=packages,
           package_dir={'': 'lib'},
           package_data=package_data,

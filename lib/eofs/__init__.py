@@ -20,12 +20,13 @@ from __future__ import (absolute_import, division, print_function)  # noqa
 from . import standard
 from . import tools
 
+from ._version import get_versions
+__version__ = get_versions()['version']
+del get_versions
+
 
 # Define the objects imported by imports of the form: from eofs import *
 __all__ = ['standard', 'tools']
-
-# Package version number.
-__version__ = '1.4.dev0'
 
 try:
     from . import cdms
