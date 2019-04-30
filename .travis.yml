@@ -2,6 +2,8 @@ language: minimal
 
 env:
   global:
+    # Doctr deploy key for ajdawson/eofs
+    - secure: "ewft/Mb7zDRH7peE5YD6rpgEiIy8NRHaz1lm2EbFPtzJfKV/vXh+WGeapaVpGWemVvfkRCO4nCXngYZWD5cQozTk0SOZL3m5tlm1RxK0KqdcKPS6BXgmWg/oRmDBEducWFTRydAELPU1rh8oN5TAx8K5ErTGxGSjprNfkItbM14="
     - PACKAGES_STANDARD="setuptools numpy pytest pycodestyle"
     - PACKAGES_EXTRA="iris xarray cdms2 genutil"
     - UVCDAT_ANONYMOUS_LOG=no
@@ -39,7 +41,7 @@ install:
     elif [[ $SUITE_TYPE = test_extras ]]; then
       conda install $PACKAGES_STANDARD $PACKAGES_EXTRA;
     else
-      conda install $PACKAGES_STANDARD $PACKAGES_EXTRA;
+      conda install $PACKAGES_STANDARD $PACKAGES_EXTRA sphinx doctr;
     fi
   - python setup.py install
 
@@ -55,8 +57,24 @@ deploy:
     condition: '$SUITE_TYPE == "deploy"'
 
 script:
+  # Fail on error to avoid building documentation when the tests don't pass
   - set -e
+
+  # Run the test suite
   - pytest -vrsx
+
+  # Deploy the documentation. By default doctr only works on the master
+  # branch. We also want to deploy when building a tag, which requires
+  # post-processing to update the "latest" symlink.
+  - if [[ $SUITE_TYPE = "deploy" ]]; then
+      cd doc && make html && cd ..;
+      doctr -V;
+      if [[ -n "$TRAVIS_TAG" ]]; then
+        doctr deploy --build-tags --command './update_links.py && git add latest' "${TRAVIS_TAG%.*}";
+      else
+        doctr deploy dev;
+      fi;
+    fi
 
 notifications:
     email: false
