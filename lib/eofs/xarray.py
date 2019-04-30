@@ -127,7 +127,7 @@ class Eof(object):
         except AttributeError:
             pass
         # Construct the EOF solver.
-        self._solver = standard.Eof(array.values,
+        self._solver = standard.Eof(array.data,
                                     weights=wtarray,
                                     center=center,
                                     ddof=ddof)
