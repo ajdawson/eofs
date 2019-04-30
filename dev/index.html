@@ -1,0 +1,222 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Package description &#8212; eofs 1.4.dev0 documentation</title>
+    <link rel="stylesheet" href="_static/sphinx13.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="User Guide" href="userguide/index.html" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
+          rel='stylesheet' type='text/css' />
+     
+        <style type="text/css">
+            table.right { float: right; margin-left: 20px; }
+            table.right td { border: 1px solid #ccc; }
+        </style>
+        <script type="text/javascript">
+            // intelligent scrolling of the sidebar content
+            $(window).scroll(function() {
+                var sb = $('.sphinxsidebarwrapper');
+                var win = $(window);
+                var sbh = sb.height();
+                var offset = $('.sphinxsidebar').position()['top'];
+                var wintop = win.scrollTop();
+                var winbot = wintop + win.innerHeight();
+                var curtop = sb.position()['top'];
+                var curbot = curtop + sbh;
+                // does sidebar fit in window?
+                if (sbh < win.innerHeight()) {
+                    // yes: easy case -- always keep at the top
+                    sb.css('top', $u.min([$u.max([0, wintop - offset - 10]),
+                                         $(document).height() - sbh - 200]));
+                } else {
+                    // no: only scroll if top/bottom edge of sidebar is at
+                    // top/bottom edge of window
+                    if (curtop > wintop && curbot > winbot) {
+                        sb.css('top', $u.max([wintop - offset - 10, 0]));
+                    } else if (curtop < wintop && curbot < winbot) {
+                        sb.css('top', $u.min([winbot - sbh - offset - 20,
+                                             $(document).height() - sbh - 200]));
+                    }
+                }
+            });
+        </script>
+
+  </head><body>
+<div class="pageheader">
+  <div>
+    <a href="#">
+      <img src="_static/eofsheader.png" alt="SPHINX" />
+    </a>
+  </div>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="userguide/index.html" title="User Guide"
+             accesskey="N">next</a> |</li>
+    <li><a href="#">home</a>|&nbsp;</li>
+    <li><a href="search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+    <h2>eofs v1.4.dev0</h2>
+    <h3>Table of Contents</h3>
+    <ul>
+<li class="toctree-l1"><a class="reference internal" href="userguide/index.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API references</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devguide/index.html">Developer Guide</a></li>
+</ul>
+
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="userguide/index.html"
+                        title="next chapter">User Guide</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="toctree-wrapper compound">
+</div>
+<div class="section" id="package-description">
+<h1>Package description<a class="headerlink" href="#package-description" title="Permalink to this headline">¶</a></h1>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">eofs</span></code> is a Python package for EOF analysis of spatial-temporal data.
+Using EOFs (empirical orthogonal functions) is a common technique to decompose a signal varying in time and space into a form that is easier to interpret in terms of spatial and temporal variance.
+Some of the key features of <code class="xref py py-obj docutils literal notranslate"><span class="pre">eofs</span></code> are:</p>
+<ul class="simple">
+<li><p><strong>Suitable for large data sets:</strong> computationally efficient for the large output data sets of modern climate models.</p></li>
+<li><p><strong>Transparent handling of missing values:</strong> missing values are removed automatically during computations and placed back into output fields.</p></li>
+<li><p><strong>Automatic metadata:</strong> metadata from input fields is used to construct metadata for output fields.</p></li>
+<li><p><strong>No Compiler required:</strong> a fast implementation written in pure Python using the power of <a class="reference external" href="http://www.numpy.org">numpy</a>, no Fortran or C dependencies.</p></li>
+</ul>
+<div class="section" id="download-and-installation">
+<h2>Download and installation<a class="headerlink" href="#download-and-installation" title="Permalink to this headline">¶</a></h2>
+<p>The core of the package runs on Python 2 or 3, on Linux, Windows or OSX; basically anywhere Python+NumPy are available.
+The <a class="reference internal" href="userguide/interfaces.html#cdms-interface"><span class="std std-ref">cdms</span></a>, <a class="reference internal" href="userguide/interfaces.html#iris-interface"><span class="std std-ref">iris</span></a>, and <a class="reference internal" href="userguide/interfaces.html#xarray-interface"><span class="std std-ref">xarray</span></a> interfaces are available on all platforms where their respective supporting packages <a class="reference external" href="http://uv-cdat.llnl.gov">UV-CDAT</a>, <a class="reference external" href="http://scitools.org.uk/iris">iris</a>, and <a class="reference external" href="http://xarray.pydata.org">xarray</a> can be installed.</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">eofs</span></code> can be installed for all platforms using <a class="reference external" href="http://conda.pydata.org/docs/">conda</a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">eofs</span>
+</pre></div>
+</div>
+<p>or using pip:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">eofs</span>
+</pre></div>
+</div>
+<p>The source code for released versions of <code class="xref py py-obj docutils literal notranslate"><span class="pre">eofs</span></code> can be downloaded from <a class="reference external" href="https://github.com/ajdawson/eofs/releases">Github</a>.
+You must have <a class="reference external" href="https://pypi.python.org/pypi/setuptools">setuptools</a> installed in order to install <code class="xref py py-obj docutils literal notranslate"><span class="pre">eofs</span></code> from source.
+After downloading the source code archive, unzip it and change into the unzipped archive’s directory, then to install it:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>You can also check out the source code for the development version from the <a class="reference external" href="https://github.com/ajdawson/eofs">github repository</a> to access features which are not yet in a release.</p>
+</div>
+<div class="section" id="getting-started">
+<h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">eofs</span></code> provides three interfaces for EOF analysis: one for analysing data contained in <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.16)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy</span></code></a> arrays or masked arrays, suitable for any data set; and two for meta-data aware EOF analysis, suitable for analysing data read from self-describing files, using either the <code class="xref py py-obj docutils literal notranslate"><span class="pre">cdms2</span></code>, <a class="reference external" href="https://scitools.org.uk/iris/docs/latest/iris/iris.html#module-iris" title="(in Iris v2.2)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iris</span></code></a>, or <code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray</span></code> packages.
+All the interfaces support the same set of operations.</p>
+<p>Regardless of which interface you use, the basic usage is the same.
+The EOF analysis is handled by a solver class, and the EOF solution is computed when the solver class is created.
+Method calls are then used to retrieve the quantities of interest from the solver class.</p>
+<p>The following is a very simple illustrative example which computes the leading 2 EOFs of a temporal spatial field using the <a class="reference internal" href="api/eofs.iris.html#module-eofs.iris" title="eofs.iris"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eofs.iris</span></code></a> interface:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">iris</span>
+<span class="kn">from</span> <span class="nn">eofs.iris</span> <span class="kn">import</span> <span class="n">Eof</span>
+
+<span class="c1"># read a spatial-temporal field, time must be the first dimension</span>
+<span class="n">sst</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">load_cube</span><span class="p">(</span><span class="s1">&#39;sst_monthly.nc&#39;</span><span class="p">)</span>
+
+<span class="c1"># create a solver class, taking advantage of built-in weighting</span>
+<span class="n">solver</span> <span class="o">=</span> <span class="n">Eof</span><span class="p">(</span><span class="n">sst</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="s1">&#39;coslat&#39;</span><span class="p">)</span>
+
+<span class="c1"># retrieve the first two EOFs from the solver class</span>
+<span class="n">eofs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">eofs</span><span class="p">(</span><span class="n">neofs</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>More detailed description of usage are found in the <a class="reference internal" href="userguide/index.html"><span class="doc">User Guide</span></a> or the <a class="reference internal" href="examples/index.html"><span class="doc">Examples</span></a>.</p>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p>This package requires as a minimum that you have <a class="reference external" href="http://www.numpy.org">numpy</a> available, and requires <a class="reference external" href="https://pypi.python.org/pypi/setuptools">setuptools</a> for installation.
+The <a class="reference internal" href="api/eofs.cdms.html#module-eofs.cdms" title="eofs.cdms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eofs.cdms</span></code></a> meta-data enabled interface can only be used if the <code class="xref py py-obj docutils literal notranslate"><span class="pre">cdms2</span></code> module is available.
+This module is distributed as part of the <a class="reference external" href="http://uv-cdat.llnl.gov">UV-CDAT</a> project.
+The <a class="reference internal" href="api/eofs.iris.html#module-eofs.iris" title="eofs.iris"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eofs.iris</span></code></a> meta-data enabled interface can only be used if the <a class="reference external" href="http://scitools.org.uk/iris">iris</a> package is available at version 1.2 or higher.
+The <a class="reference internal" href="api/eofs.xarray.html#module-eofs.xarray" title="eofs.xarray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eofs.xarray</span></code></a> meta-data enabled interface can only be used if the <a class="reference external" href="http://xarray.pydata.org">xarray</a> package (or earlier xray package) is installed.</p>
+</div>
+<div class="section" id="citation">
+<h2>Citation<a class="headerlink" href="#citation" title="Permalink to this headline">¶</a></h2>
+<p>If you use eofs in published research, please cite it by referencing the <a class="reference external" href="http://doi.org/10.5334/jors.122">peer-reviewed paper</a>.
+You can additionally cite the <a class="reference external" href="http://dx.doi.org/10.5281/zenodo.46871">Zenodo DOI</a> if you need to cite a particular version (but please also cite the paper, it helps me justify my time working on this and similar projects).</p>
+</div>
+<div class="section" id="developing-and-contributing">
+<h2>Developing and contributing<a class="headerlink" href="#developing-and-contributing" title="Permalink to this headline">¶</a></h2>
+<p>Contributions big or small are welcomed from anyone with an interest in the project.
+Bug reports and feature requests can be filed using the Github <a class="reference external" href="http://github.com/ajdawson/eofs/issues">issues</a> system.
+If you would like to contribute code or documentation please see the <a class="reference internal" href="devguide/index.html"><span class="doc">Developer Guide</span></a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="userguide/index.html" title="User Guide"
+             >next</a> |</li>
+    <li><a href="#">home</a>|&nbsp;</li>
+    <li><a href="search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2013-2019 Andrew Dawson.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>

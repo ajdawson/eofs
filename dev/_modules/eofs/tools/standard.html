@@ -1,0 +1,297 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>eofs.tools.standard &#8212; eofs 1.4.dev0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/sphinx13.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
+          rel='stylesheet' type='text/css' />
+     
+        <style type="text/css">
+            table.right { float: right; margin-left: 20px; }
+            table.right td { border: 1px solid #ccc; }
+        </style>
+        <script type="text/javascript">
+            // intelligent scrolling of the sidebar content
+            $(window).scroll(function() {
+                var sb = $('.sphinxsidebarwrapper');
+                var win = $(window);
+                var sbh = sb.height();
+                var offset = $('.sphinxsidebar').position()['top'];
+                var wintop = win.scrollTop();
+                var winbot = wintop + win.innerHeight();
+                var curtop = sb.position()['top'];
+                var curbot = curtop + sbh;
+                // does sidebar fit in window?
+                if (sbh < win.innerHeight()) {
+                    // yes: easy case -- always keep at the top
+                    sb.css('top', $u.min([$u.max([0, wintop - offset - 10]),
+                                         $(document).height() - sbh - 200]));
+                } else {
+                    // no: only scroll if top/bottom edge of sidebar is at
+                    // top/bottom edge of window
+                    if (curtop > wintop && curbot > winbot) {
+                        sb.css('top', $u.max([wintop - offset - 10, 0]));
+                    } else if (curtop < wintop && curbot < winbot) {
+                        sb.css('top', $u.min([winbot - sbh - offset - 20,
+                                             $(document).height() - sbh - 200]));
+                    }
+                }
+            });
+        </script>
+
+  </head><body>
+<div class="pageheader">
+  <div>
+    <a href="../../../index.html">
+      <img src="../../../_static/eofsheader.png" alt="SPHINX" />
+    </a>
+  </div>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+    <li><a href="../../../index.html">home</a>|&nbsp;</li>
+    <li><a href="../../../search.html">search</a>|&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+    <h2>eofs v1.4.dev0</h2>
+    <h3>Table of Contents</h3>
+    <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../userguide/index.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">API references</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devguide/index.html">Developer Guide</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for eofs.tools.standard</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Supplementary tools for the `numpy` EOF analysis interface.&quot;&quot;&quot;</span>
+<span class="c1"># (c) Copyright 2010-2015 Andrew Dawson. All Rights Reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of eofs.</span>
+<span class="c1">#</span>
+<span class="c1"># eofs is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># eofs is distributed in the hope that it will be useful, but WITHOUT</span>
+<span class="c1"># ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span>
+<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License</span>
+<span class="c1"># for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with eofs.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">)</span>  <span class="c1"># noqa</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy.ma</span> <span class="kn">as</span> <span class="nn">ma</span>
+
+
+<span class="k">def</span> <span class="nf">_check_flat_center</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check PCs and a field for shape compatibility, flatten both to 2D,</span>
+<span class="sd">    and center along the first dimension.</span>
+
+<span class="sd">    This set of operations is common to both covariance and correlation</span>
+<span class="sd">    calculations.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Get the number of times in the field.</span>
+    <span class="n">records</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">records</span> <span class="o">!=</span> <span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="c1"># Raise an error if the field has a different number of times to the</span>
+        <span class="c1"># PCs provided.</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;PCs and field must have the same first dimension&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="c1"># Raise an error if the PCs are more than 2D.</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;PCs must be 1D or 2D&quot;</span><span class="p">)</span>
+    <span class="c1"># Check if the field is 1D.</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">originalshape</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">()</span>
+        <span class="n">channels</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Record the shape of the field and the number of spatial elements.</span>
+        <span class="n">originalshape</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="n">channels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">originalshape</span><span class="p">)</span>
+    <span class="c1"># Record the number of PCs.</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">npcs</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">npcs_out</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">npcs</span> <span class="o">=</span> <span class="n">pcs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">npcs_out</span> <span class="o">=</span> <span class="p">(</span><span class="n">npcs</span><span class="p">,)</span>
+    <span class="c1"># Create a flattened field so iterating over space is simple. Also do this</span>
+    <span class="c1"># for the PCs to ensure they are 2D.</span>
+    <span class="n">field_flat</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="n">records</span><span class="p">,</span> <span class="n">channels</span><span class="p">])</span>
+    <span class="n">pcs_flat</span> <span class="o">=</span> <span class="n">pcs</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="n">records</span><span class="p">,</span> <span class="n">npcs</span><span class="p">])</span>
+    <span class="c1"># Centre both the field and PCs in the time dimension.</span>
+    <span class="n">field_flat</span> <span class="o">=</span> <span class="n">field_flat</span> <span class="o">-</span> <span class="n">field_flat</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">pcs_flat</span> <span class="o">=</span> <span class="n">pcs_flat</span> <span class="o">-</span> <span class="n">pcs_flat</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pcs_flat</span><span class="p">,</span> <span class="n">field_flat</span><span class="p">,</span> <span class="n">npcs_out</span> <span class="o">+</span> <span class="n">originalshape</span>
+
+
+<div class="viewcode-block" id="correlation_map"><a class="viewcode-back" href="../../../api/eofs.tools.html#eofs.tools.standard.correlation_map">[docs]</a><span class="k">def</span> <span class="nf">correlation_map</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Correlation maps for a set of PCs and a spatial-temporal field.</span>
+
+<span class="sd">    Given an array where the columns are PCs (e.g., as output from</span>
+<span class="sd">    `~eofs.standard.Eof.pcs`) and an array containing spatial-temporal</span>
+<span class="sd">    data where the first dimension represents time, one correlation map</span>
+<span class="sd">    per PC is computed.</span>
+
+<span class="sd">    The field must have the same temporal dimension as the PCs. Any</span>
+<span class="sd">    number of spatial dimensions (including zero) are allowed in the</span>
+<span class="sd">    field and there can be any number of PCs.</span>
+
+<span class="sd">    **Arguments:**</span>
+
+<span class="sd">    *pcs*</span>
+<span class="sd">        PCs as the columns of an array.</span>
+
+<span class="sd">    *field*</span>
+<span class="sd">        Spatial-temporal field with time as the first dimension.</span>
+
+<span class="sd">    **Returns:**</span>
+
+<span class="sd">    *correlation_maps*</span>
+<span class="sd">        An array with the correlation maps along the first dimension.</span>
+
+<span class="sd">    **Example:**</span>
+
+<span class="sd">    Compute correlation maps for each PC::</span>
+
+<span class="sd">        pcs = solver.pcs(pcscaling=1)</span>
+<span class="sd">        correlation_maps = correlation_maps(pcs, field)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check PCs and fields for validity, flatten the arrays ready for the</span>
+    <span class="c1"># computation and remove the mean along the leading dimension.</span>
+    <span class="n">pcs_cent</span><span class="p">,</span> <span class="n">field_cent</span><span class="p">,</span> <span class="n">out_shape</span> <span class="o">=</span> <span class="n">_check_flat_center</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="n">field</span><span class="p">)</span>
+    <span class="c1"># Compute the standard deviation of the PCs and the fields along the time</span>
+    <span class="c1"># dimension (the leading dimension).</span>
+    <span class="n">pcs_std</span> <span class="o">=</span> <span class="n">pcs_cent</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">field_std</span> <span class="o">=</span> <span class="n">field_cent</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># Set the divisor.</span>
+    <span class="n">div</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">(</span><span class="n">pcs_cent</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="c1"># Compute the correlation map.</span>
+    <span class="n">cor</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">field_cent</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">pcs_cent</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">/</span> <span class="n">div</span>
+    <span class="n">cor</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">cor</span><span class="p">)</span>
+    <span class="n">cor</span> <span class="o">/=</span> <span class="n">ma</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">pcs_std</span><span class="p">,</span> <span class="n">field_std</span><span class="p">)</span>
+    <span class="c1"># Return the correlation with the appropriate shape.</span>
+    <span class="k">return</span> <span class="n">cor</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">out_shape</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="covariance_map"><a class="viewcode-back" href="../../../api/eofs.tools.html#eofs.tools.standard.covariance_map">[docs]</a><span class="k">def</span> <span class="nf">covariance_map</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Covariance maps for a set of PCs and a spatial-temporal field.</span>
+
+<span class="sd">    Given an array where the columns are PCs (e.g., as output from</span>
+<span class="sd">    `eofs.standard.Eof.pcs`) and an array containing spatial-temporal</span>
+<span class="sd">    data where the first dimension represents time, one covariance map</span>
+<span class="sd">    per PC is computed.</span>
+
+<span class="sd">    The field must have the same temporal dimension as the PCs. Any</span>
+<span class="sd">    number of spatial dimensions (including zero) are allowed in the</span>
+<span class="sd">    field and there can be any number of PCs.</span>
+
+<span class="sd">    **Arguments:**</span>
+
+<span class="sd">    *pcs*</span>
+<span class="sd">        PCs as the columns of an array.</span>
+
+<span class="sd">    *field*</span>
+<span class="sd">        Spatial-temporal field with time as the first dimension.</span>
+
+<span class="sd">    **Optional arguments:**</span>
+
+<span class="sd">    *ddof*</span>
+<span class="sd">        &#39;Delta degrees of freedom&#39;. The divisor used to normalize</span>
+<span class="sd">        the covariance matrix is *N - ddof* where *N* is the</span>
+<span class="sd">        number of samples. Defaults to *1*.</span>
+
+<span class="sd">    **Returns:**</span>
+
+<span class="sd">    *covariance_maps*</span>
+<span class="sd">        An array with the covariance maps along the first dimension.</span>
+
+<span class="sd">    **Example:**</span>
+
+<span class="sd">    Compute covariance maps for each PC::</span>
+
+<span class="sd">        pcs = solver.pcs(pcscaling=1)</span>
+<span class="sd">        covariance_maps = covariance_maps(pcs, field)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check PCs and fields for validity, flatten the arrays ready for the</span>
+    <span class="c1"># computation and remove the mean along the leading dimension.</span>
+    <span class="n">pcs_cent</span><span class="p">,</span> <span class="n">field_cent</span><span class="p">,</span> <span class="n">out_shape</span> <span class="o">=</span> <span class="n">_check_flat_center</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="n">field</span><span class="p">)</span>
+    <span class="c1"># Set the divisor according to the specified delta-degrees of freedom.</span>
+    <span class="n">div</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">(</span><span class="n">pcs_cent</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">ddof</span><span class="p">)</span>
+    <span class="c1"># Compute the covariance map, making sure it has the appropriate shape.</span>
+    <span class="n">cov</span> <span class="o">=</span> <span class="p">(</span><span class="n">ma</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">field_cent</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">pcs_cent</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">/</span> <span class="n">div</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">out_shape</span><span class="p">)</span>
+    <span class="n">cov</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">cov</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cov</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+    <li><a href="../../../index.html">home</a>|&nbsp;</li>
+    <li><a href="../../../search.html">search</a>|&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2013-2019 Andrew Dawson.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>
