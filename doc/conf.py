@@ -193,6 +193,7 @@ intersphinx_mapping = {
         'iris': ('http://scitools.org.uk/iris/docs/latest', None),
         'numpy': ('http://docs.scipy.org/doc/numpy', None),
         'xarray': ('http://xarray.pydata.org/en/stable', None),
+        'dask': ('https://docs.dask.org/en/latest', None),
 }
 
 # -- Options for LaTeX output --------------------------------------------------
