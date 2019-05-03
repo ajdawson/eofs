@@ -44,10 +44,10 @@ class Eof(object):
         **Arguments:**
 
         *dataset*
-            A `numpy.ndarray` or `numpy.ma.MaskedArray` with two or more
-            dimensions containing the data to be analysed. The first
-            dimension is assumed to represent time. Missing values are
-            permitted, either in the form of a masked array, or
+            A `numpy.ndarray`, `numpy.ma.MaskedArray` or `dask.array.Array`
+            with two or more dimensions containing the data to be analysed.
+            The first dimension is assumed to represent time. Missing
+            values are permitted, either in the form of a masked array, or
             `numpy.nan` values. Missing values must be constant with time
             (e.g., values of an oceanographic field over land).
 
