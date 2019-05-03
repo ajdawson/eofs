@@ -1,1 +1,6 @@
 {% extends "!layout.html" %}
+
+{% block document %}
+  {{ super() }}
+  <script type=text/javascript src="/eofs/version_switch.js" async></script>
+{% endblock %}
