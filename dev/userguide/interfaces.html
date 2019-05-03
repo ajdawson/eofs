@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Solver interfaces &#8212; eofs 1.3.1+16.g402ab38 documentation</title>
+    <title>Solver interfaces &#8212; eofs 1.3.1+18.g2c537c0 documentation</title>
     <link rel="stylesheet" href="../_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -83,7 +83,7 @@
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 
-    <h2>eofs v1.3.1+16.g402ab38</h2>
+    <h2>eofs v1.3.1+18.g2c537c0</h2>
     <h3>Table of Contents</h3>
     <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">User Guide</a><ul class="current">
@@ -156,8 +156,12 @@ variable.</p></td>
 <td><p>Data read from a self-describing data format stored in an <a class="reference external" href="https://scitools.org.uk/iris/docs/latest/iris/iris.html#module-iris" title="(in Iris v2.2)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iris</span></code></a>
 cube.</p></td>
 </tr>
-<tr class="row-even"><td><p>standard</p></td>
-<td><p>Other data, stored in a <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.16)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> or a <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/maskedarray.baseclass.html#numpy.ma.MaskedArray" title="(in NumPy v1.16)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.ma.MaskedArray</span></code></a>.</p></td>
+<tr class="row-even"><td><p>xarray</p></td>
+<td><p>Data stored in an <a class="reference external" href="http://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v0.12.1)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>standard</p></td>
+<td><p>Other data, stored in a <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.16)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>, a <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/maskedarray.baseclass.html#numpy.ma.MaskedArray" title="(in NumPy v1.16)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.ma.MaskedArray</span></code></a>,
+or a <a class="reference external" href="https://docs.dask.org/en/latest/array-api.html#dask.array.Array" title="(in Dask v1.2.1+19.g44bdc7ce)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dask.array.Array</span></code></a>.</p></td>
 </tr>
 </tbody>
 </table>
@@ -175,7 +179,7 @@ cube.</p></td>
 </div>
 <div class="section" id="standard-interface">
 <span id="id4"></span><h2>Standard interface<a class="headerlink" href="#standard-interface" title="Permalink to this headline">¶</a></h2>
-<p>The standard interface works with <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.16)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy</span></code></a> arrays, which makes the standard interface the general purpose interface. Any data that can be stored in a <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.16)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> or <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/maskedarray.baseclass.html#numpy.ma.MaskedArray" title="(in NumPy v1.16)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.ma.MaskedArray</span></code></a> can be analysed with the <a class="reference internal" href="../api/eofs.standard.html#eofs.standard.Eof" title="eofs.standard.Eof"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eofs.standard.Eof</span></code></a> solver interface.</p>
+<p>The standard interface works with <a class="reference external" href="https://numpy.org">numpy</a> arrays or <a class="reference external" href="https://dask.org">dask</a> arrays, which makes the standard interface the general purpose interface. Any data that can be stored in a <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.16)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>, <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/maskedarray.baseclass.html#numpy.ma.MaskedArray" title="(in NumPy v1.16)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.ma.MaskedArray</span></code></a> or <a class="reference external" href="https://docs.dask.org/en/latest/array-api.html#dask.array.Array" title="(in Dask v1.2.1+19.g44bdc7ce)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dask.array.Array</span></code></a> can be analysed with the <a class="reference internal" href="../api/eofs.standard.html#eofs.standard.Eof" title="eofs.standard.Eof"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eofs.standard.Eof</span></code></a> solver interface.</p>
 </div>
 </div>
 

@@ -14,7 +14,9 @@ cdms      Data read from a self-describing data format stored in a `cdms2`
           variable.
 iris      Data read from a self-describing data format stored in an `iris`
           cube.
-standard  Other data, stored in a `numpy.ndarray` or a `numpy.ma.MaskedArray`.
+xarray    Data stored in an `xarray.DataArray`.
+standard  Other data, stored in a `numpy.ndarray`, a `numpy.ma.MaskedArray`,
+          or a `dask.array.Array`.
 ========= =====================================================================
 
 
@@ -47,7 +49,7 @@ The xarray interface works with `~xarray.DataArray` objects, which are the data 
 Standard interface
 ------------------
 
-The standard interface works with `numpy` arrays, which makes the standard interface the general purpose interface. Any data that can be stored in a `numpy.ndarray` or `numpy.ma.MaskedArray` can be analysed with the `eofs.standard.Eof` solver interface.
+The standard interface works with numpy_ arrays or dask_ arrays, which makes the standard interface the general purpose interface. Any data that can be stored in a `numpy.ndarray`, `numpy.ma.MaskedArray` or `dask.array.Array` can be analysed with the `eofs.standard.Eof` solver interface.
 
 
 .. _iris: http://scitools.org.uk/iris
@@ -56,3 +58,6 @@ The standard interface works with `numpy` arrays, which makes the standard inter
 
 .. _xarray: http://xarray.pydata.org
 
+.. _dask: https://dask.org
+
+.. _numpy: https://numpy.org

@@ -5,6 +5,15 @@ Changelog
 
 Source code downloads for released versions can be downloaded from `Github <https://github.com/ajdawson/eofs/releases>`_.
 
+v1.4
+----
+
+:Release: v1.4.0
+:Date: 2019
+
+* Add support for dask arrays [:issue:`107`, :pr:`109`], thanks to `@ScottWales <https://github.com/ScottWales>`_.
+
+
 v1.3
 ----
 

@@ -50,7 +50,7 @@ You can also check out the source code for the development version from the `git
 Getting started
 ---------------
 
-`eofs` provides three interfaces for EOF analysis: one for analysing data contained in `numpy` arrays or masked arrays, suitable for any data set; and two for meta-data aware EOF analysis, suitable for analysing data read from self-describing files, using either the `cdms2`, `iris`, or `xarray` packages.
+`eofs` provides various interfaces for EOF analysis: a *standard* interface for analysing data contained in either `numpy` arrays or `dask` arrays, suitable for any data set; and meta-data interfaces suitable for analysing data read from self-describing files, using the `cdms2`, `iris`, or `xarray` packages.
 All the interfaces support the same set of operations.
 
 Regardless of which interface you use, the basic usage is the same.
@@ -80,10 +80,11 @@ Requirements
 ------------
 
 This package requires as a minimum that you have numpy_ available, and requires setuptools_ for installation.
+The dask_ package is an optional dependency that will be used if `dask.array` is available and `dask` arrays are provided to the solver.
 The `eofs.cdms` meta-data enabled interface can only be used if the `cdms2` module is available.
 This module is distributed as part of the UV-CDAT_ project.
 The `eofs.iris` meta-data enabled interface can only be used if the iris_ package is available at version 1.2 or higher.
-The `eofs.xarray` meta-data enabled interface can only be used if the xarray_ package (or earlier xray package) is installed.
+The `eofs.xarray` meta-data enabled interface can only be used if the xarray_ package is installed.
 
 
 Citation
@@ -102,6 +103,8 @@ If you would like to contribute code or documentation please see the :doc:`devgu
 
 
 .. _UV-CDAT: http://uv-cdat.llnl.gov
+
+.. _dask: https://dask.org
 
 .. _iris: http://scitools.org.uk/iris
 

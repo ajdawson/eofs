@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Package description &#8212; eofs 1.3.1+16.g402ab38 documentation</title>
+    <title>Package description &#8212; eofs 1.3.1+18.g2c537c0 documentation</title>
     <link rel="stylesheet" href="_static/sphinx13.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -78,7 +78,7 @@
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 
-    <h2>eofs v1.3.1+16.g402ab38</h2>
+    <h2>eofs v1.3.1+18.g2c537c0</h2>
     <h3>Table of Contents</h3>
     <ul>
 <li class="toctree-l1"><a class="reference internal" href="userguide/index.html">User Guide</a></li>
@@ -153,7 +153,7 @@ After downloading the source code archive, unzip it and change into the unzipped
 </div>
 <div class="section" id="getting-started">
 <h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
-<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">eofs</span></code> provides three interfaces for EOF analysis: one for analysing data contained in <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.16)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy</span></code></a> arrays or masked arrays, suitable for any data set; and two for meta-data aware EOF analysis, suitable for analysing data read from self-describing files, using either the <code class="xref py py-obj docutils literal notranslate"><span class="pre">cdms2</span></code>, <a class="reference external" href="https://scitools.org.uk/iris/docs/latest/iris/iris.html#module-iris" title="(in Iris v2.2)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iris</span></code></a>, or <code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray</span></code> packages.
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">eofs</span></code> provides various interfaces for EOF analysis: a <em>standard</em> interface for analysing data contained in either <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.16)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy</span></code></a> arrays or <code class="xref py py-obj docutils literal notranslate"><span class="pre">dask</span></code> arrays, suitable for any data set; and meta-data interfaces suitable for analysing data read from self-describing files, using the <code class="xref py py-obj docutils literal notranslate"><span class="pre">cdms2</span></code>, <a class="reference external" href="https://scitools.org.uk/iris/docs/latest/iris/iris.html#module-iris" title="(in Iris v2.2)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iris</span></code></a>, or <code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray</span></code> packages.
 All the interfaces support the same set of operations.</p>
 <p>Regardless of which interface you use, the basic usage is the same.
 The EOF analysis is handled by a solver class, and the EOF solution is computed when the solver class is created.
@@ -177,10 +177,11 @@ Method calls are then used to retrieve the quantities of interest from the solve
 <div class="section" id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
 <p>This package requires as a minimum that you have <a class="reference external" href="http://www.numpy.org">numpy</a> available, and requires <a class="reference external" href="https://pypi.python.org/pypi/setuptools">setuptools</a> for installation.
+The <a class="reference external" href="https://dask.org">dask</a> package is an optional dependency that will be used if <code class="xref py py-obj docutils literal notranslate"><span class="pre">dask.array</span></code> is available and <code class="xref py py-obj docutils literal notranslate"><span class="pre">dask</span></code> arrays are provided to the solver.
 The <a class="reference internal" href="api/eofs.cdms.html#module-eofs.cdms" title="eofs.cdms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eofs.cdms</span></code></a> meta-data enabled interface can only be used if the <code class="xref py py-obj docutils literal notranslate"><span class="pre">cdms2</span></code> module is available.
 This module is distributed as part of the <a class="reference external" href="http://uv-cdat.llnl.gov">UV-CDAT</a> project.
 The <a class="reference internal" href="api/eofs.iris.html#module-eofs.iris" title="eofs.iris"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eofs.iris</span></code></a> meta-data enabled interface can only be used if the <a class="reference external" href="http://scitools.org.uk/iris">iris</a> package is available at version 1.2 or higher.
-The <a class="reference internal" href="api/eofs.xarray.html#module-eofs.xarray" title="eofs.xarray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eofs.xarray</span></code></a> meta-data enabled interface can only be used if the <a class="reference external" href="http://xarray.pydata.org">xarray</a> package (or earlier xray package) is installed.</p>
+The <a class="reference internal" href="api/eofs.xarray.html#module-eofs.xarray" title="eofs.xarray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eofs.xarray</span></code></a> meta-data enabled interface can only be used if the <a class="reference external" href="http://xarray.pydata.org">xarray</a> package is installed.</p>
 </div>
 <div class="section" id="citation">
 <h2>Citation<a class="headerlink" href="#citation" title="Permalink to this headline">¶</a></h2>
