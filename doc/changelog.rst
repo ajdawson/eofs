@@ -9,7 +9,7 @@ v1.4
 ----
 
 :Release: v1.4.0
-:Date: 2019
+:Date: 3 May 2019
 
 * Add support for dask arrays [:issue:`107`, :pr:`109`], thanks to `@ScottWales <https://github.com/ScottWales>`_.
 
