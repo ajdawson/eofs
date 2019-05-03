@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Method of solution &#8212; eofs 1.4.0 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinx13.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Speeding up the solvers" href="speed.html" />
+    <link rel="prev" title="Multivariate solvers" href="multivariate.html" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
+          rel='stylesheet' type='text/css' />
+     
+        <style type="text/css">
+            table.right { float: right; margin-left: 20px; }
+            table.right td { border: 1px solid #ccc; }
+        </style>
+        <script type="text/javascript">
+            // intelligent scrolling of the sidebar content
+            $(window).scroll(function() {
+                var sb = $('.sphinxsidebarwrapper');
+                var win = $(window);
+                var sbh = sb.height();
+                var offset = $('.sphinxsidebar').position()['top'];
+                var wintop = win.scrollTop();
+                var winbot = wintop + win.innerHeight();
+                var curtop = sb.position()['top'];
+                var curbot = curtop + sbh;
+                // does sidebar fit in window?
+                if (sbh < win.innerHeight()) {
+                    // yes: easy case -- always keep at the top
+                    sb.css('top', $u.min([$u.max([0, wintop - offset - 10]),
+                                         $(document).height() - sbh - 200]));
+                } else {
+                    // no: only scroll if top/bottom edge of sidebar is at
+                    // top/bottom edge of window
+                    if (curtop > wintop && curbot > winbot) {
+                        sb.css('top', $u.max([wintop - offset - 10, 0]));
+                    } else if (curtop < wintop && curbot < winbot) {
+                        sb.css('top', $u.min([winbot - sbh - offset - 20,
+                                             $(document).height() - sbh - 200]));
+                    }
+                }
+            });
+        </script>
+
+  </head><body>
+<div class="pageheader">
+  <div>
+    <a href="../index.html">
+      <img src="../_static/eofsheader.png" alt="SPHINX" />
+    </a>
+  </div>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="speed.html" title="Speeding up the solvers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="multivariate.html" title="Multivariate solvers"
+             accesskey="P">previous</a> |</li>
+    <li><a href="../index.html">home</a>|&nbsp;</li>
+    <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User Guide</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+    <h2>eofs v1.4.0</h2>
+    <h3>Table of Contents</h3>
+    <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interfaces.html">Solver interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html">Basic usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multivariate.html">Multivariate solvers</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Method of solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="speed.html">Speeding up the solvers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API references</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/index.html">Developer Guide</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="multivariate.html"
+                        title="previous chapter">Multivariate solvers</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="speed.html"
+                        title="next chapter">Speeding up the solvers</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/userguide/method.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+  
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="method-of-solution">
+<h1>Method of solution<a class="headerlink" href="#method-of-solution" title="Permalink to this headline">¶</a></h1>
+<p><cite>eofs</cite> uses a technique based on <a class="reference external" href="http://en.wikipedia.org/wiki/Singular_value_decomposition">singular value decomposition (SVD)</a> to compute the EOF solution <a class="footnote-reference brackets" href="#id5" id="id1">1</a>. This avoids having to compute a potentially very large covariance matrix, making <cite>eofs</cite> usable for large data sets.</p>
+<p>The input to an EOF analysis is a temporal-spatial field, represented in Python by an array or array-like structure of two or more dimensions. When an <cite>eofs</cite> solver class receives a field as input it is reshaped and stored internally as a two-dimensional array where time is the first dimension and all spatial dimensions are represented by the second dimension. It is a formal requirement of EOF analysis that this array have a time-mean of zero, therefore the <cite>eofs</cite> solver classes will by default subtract the mean along the first dimension.</p>
+<p>Any missing values in the input array will be identified and removed <a class="footnote-reference brackets" href="#id6" id="id2">2</a>, and the SVD of the array computed. The EOFs are the right singular vectors and the standardized PCs are the left singular vectors, while the singular values are proportional to the variances associated with each EOF mode. The SVD is computed in truncated form, where only singular vectors (EOFs/PCs) that correspond to non-zero singular values are returned. This is done to further reduce the computational cost of the analysis <a class="footnote-reference brackets" href="#id7" id="id3">3</a>. Since a singular value is proportional to the variance explained by its associated EOF mode neglecting modes with a singular value of zero maintains a full solution.</p>
+<div class="section" id="mathematical-motivation-for-the-svd-method">
+<h2>Mathematical motivation for the SVD method<a class="headerlink" href="#mathematical-motivation-for-the-svd-method" title="Permalink to this headline">¶</a></h2>
+<p>Consider a data set that consists of observations of a single geophysical variable at multiple positions in space <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_M\)</span> and at multiple times <span class="math notranslate nohighlight">\(t_1, t_2, \ldots, t_N,\)</span>. These observations are arranged in a matrix <span class="math notranslate nohighlight">\(\mathbf{F}\)</span> with dimension <span class="math notranslate nohighlight">\(N \times M\)</span> such that each row of <span class="math notranslate nohighlight">\(\mathbf{F}\)</span> is a map of observations at all points in space at a particular time, and each column is a time-series of observations at a particular point at all times.
+The time-mean is then removed from of the <span class="math notranslate nohighlight">\(M\)</span> time series to form the anomaly matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> whose columns have zero-mean:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{A} = \begin{pmatrix}
+    a_{1,1} &amp; a_{1,2} &amp; \cdots &amp; a_{1,M} \\
+    a_{2,1} &amp; a_{2,2} &amp; \cdots &amp; a_{2,M} \\
+    \vdots  &amp; \vdots  &amp; \ddots &amp; \vdots \\
+    a_{N,1} &amp; a_{N,2} &amp; \cdots &amp; a_{N,M}
+\end{pmatrix}.\end{split}\]</div>
+<p>Typically one would then compute the covariance matrix <span class="math notranslate nohighlight">\(\mathbf{R} = \mathbf{A}^\intercal \mathbf{A}\)</span> and solve the eigenvalue problem:</p>
+<div class="math notranslate nohighlight" id="equation-eig">
+<span class="eqno">(1)<a class="headerlink" href="#equation-eig" title="Permalink to this equation">¶</a></span>\[\mathbf{R C} = \mathbf{C} \Lambda,\]</div>
+<p>where the columns of <span class="math notranslate nohighlight">\(\mathbf{C}\)</span> are the eigenvectors (EOFs) and the eigenvalues (EOF variances) are on the leading diagonal of <span class="math notranslate nohighlight">\(\Lambda\)</span>. The PCs <span class="math notranslate nohighlight">\(\mathbf{P}\)</span> can then be computed from the projection of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> onto the EOFs:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{P} = \mathbf{A C}.\]</div>
+<p>Since computing the covariance matrix can be an expensive operation, a different method is used in <cite>eofs</cite>. Instead of computing the covariance matrix, the SVD of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is computed:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{SVD}\left(\mathbf{A}\right) = \mathbf{U} \Gamma \mathbf{V}^\intercal.\]</div>
+<p>The columns of <span class="math notranslate nohighlight">\(\mathbf{U}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{V}\)</span> are the singular vectors and the singular values are on the leading diagonal of <span class="math notranslate nohighlight">\(\Gamma\)</span>. To demonstrate the equivalence of this method and the covariance matrix method we write the covariance matrix in two ways, first a rearranged form of <a class="reference internal" href="#equation-eig">(1)</a> <a class="footnote-reference brackets" href="#id8" id="id4">4</a>:</p>
+<div class="math notranslate nohighlight" id="equation-r1">
+<span class="eqno">(2)<a class="headerlink" href="#equation-r1" title="Permalink to this equation">¶</a></span>\[\mathbf{R} = \mathbf{C} \Lambda \mathbf{C}^\intercal,\]</div>
+<p>and second the expression for the covariance matrix <span class="math notranslate nohighlight">\(\mathbf{R}\)</span> after first taking the SVD of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-r2">
+<span class="eqno">(3)<a class="headerlink" href="#equation-r2" title="Permalink to this equation">¶</a></span>\[\mathbf{R} = \mathbf{A}^\intercal \mathbf{A} = \left( \mathbf{U} \Gamma \mathbf{V}^\intercal \right)^\intercal \left( \mathbf{U} \Gamma \mathbf{V}^\intercal \right) = \mathbf{V} \Gamma^\intercal \mathbf{U}^\intercal \mathbf{U} \Gamma \mathbf{V}^\intercal = \mathbf{V} \Gamma^\intercal \Gamma \mathbf{V}^\intercal.\]</div>
+<p>Comparing <a class="reference internal" href="#equation-r1">(2)</a> and <a class="reference internal" href="#equation-r2">(3)</a> it is clear that <span class="math notranslate nohighlight">\(\mathbf{C} = \mathbf{V}\)</span> and <span class="math notranslate nohighlight">\(\Lambda = \Gamma^\intercal \Gamma\)</span>. A bonus of using the SVD method is that the singular vectors in <span class="math notranslate nohighlight">\(\mathbf{U}\)</span> are the standardized PCs. This can be shown by first forming an expression for <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> in terms of the EOFs and the PCs:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A} = \mathbf{P} \mathbf{C}^\intercal,\]</div>
+<p>which is the expression for reconstructing a field based on its EOFs and PCs. Defining a normalized PC <span class="math notranslate nohighlight">\(\phi_j\)</span> as:</p>
+<div class="math notranslate nohighlight">
+\[\phi_j = \dfrac{\mathbf{p}_j}{\sqrt{\lambda_j}},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{p}_j\)</span> is a column of <span class="math notranslate nohighlight">\(\mathbf{P}\)</span>, and a diagonal matrix <span class="math notranslate nohighlight">\(\mathbf{D}\)</span> with <span class="math notranslate nohighlight">\(\sqrt{\lambda}_j\)</span> on the leading diagonal, and a matrix <span class="math notranslate nohighlight">\(\Phi\)</span> of the ordered <span class="math notranslate nohighlight">\(\phi_j\)</span> as columns, we can write a new expression for <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A} = \Phi \mathbf{D} \mathbf{C}^\intercal.\]</div>
+<p>This expression is exactly equivalent to the SVD of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> and therefore the left singular vectors are the PCs scaled to unit variance.</p>
+<p class="rubric">Footnotes</p>
+<dl class="footnote brackets">
+<dt class="label" id="id5"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Here SVD is referring to the linear algebra method of singular value decomposition. This is entirely different from the data analysis technique which analyses coupled covariance of two fields, also sometimes referred to as SVD because it makes use of the linear algebra techinque of the same name. The latter data analysis technique is often (and less ambiguously) referred to as maximum covariance analysis (MCA).</p>
+</dd>
+<dt class="label" id="id6"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>An often used alternative and equally valid strategy is to set missing values to a constant value. This method yields the same solution since a constant time-series has zero-variance, but increases the computational cost of computing the EOFs as these values are still included in the SVD operation.</p>
+</dd>
+<dt class="label" id="id7"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
+<dd><p>For an <span class="math notranslate nohighlight">\(N\)</span> by <span class="math notranslate nohighlight">\(M\)</span> anomaly matrix the rank of the corresponding covariance matrix can be at most <span class="math notranslate nohighlight">\(\mathrm{min} \left( m, n \right)\)</span>. The number of zero eigenvalues is therefore at least <span class="math notranslate nohighlight">\(\left| m - n \right|\)</span>.</p>
+</dd>
+<dt class="label" id="id8"><span class="brackets"><a class="fn-backref" href="#id4">4</a></span></dt>
+<dd><p>This rearrangement is possible since the column eigenvectors in <span class="math notranslate nohighlight">\(\mathbf{C}\)</span> are mutually orthogonal and hence <span class="math notranslate nohighlight">\(\mathbf{C} \mathbf{C}^\intercal = \mathbf{I}\)</span> where <span class="math notranslate nohighlight">\(\mathbf{I}\)</span> is the identity matrix.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <script type=text/javascript src="/eofs/version_switch.js" async></script>
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="speed.html" title="Speeding up the solvers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="multivariate.html" title="Multivariate solvers"
+             >previous</a> |</li>
+    <li><a href="../index.html">home</a>|&nbsp;</li>
+    <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >User Guide</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2013-2019 Andrew Dawson.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>
