@@ -14,7 +14,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
-from __future__ import (absolute_import, division, print_function)  # noqa
+from __future__ import absolute_import, division, print_function  # noqa
 
 import collections
 
@@ -24,8 +24,11 @@ except ImportError:
     import xray as xr
 
 from . import standard
-from ..tools.xarray import (find_time_coordinates, categorise_ndcoords,
-                            weights_array)
+from ..tools.xarray import (
+    find_time_coordinates,
+    categorise_ndcoords,
+    weights_array,
+)
 
 
 class ExtendedEof(object):
@@ -90,29 +93,33 @@ class ExtendedEof(object):
         """
         # Check that dataset is a xarray.DataArray.
         if not isinstance(dataset, xr.DataArray):
-            raise TypeError('the input data must be a xarray DataArray')
+            raise TypeError("the input data must be a xarray DataArray")
         # Find a time-like dimension, and check if it is the first
         time_coords = find_time_coordinates(dataset)
         if not time_coords:
-            raise ValueError('cannot find a time coordinate (must be called '
-                             '"time", have a numpy.datetime64 dtype, or have '
-                             'an attribute named "axis" with value "T")')
+            raise ValueError(
+                "cannot find a time coordinate (must be called "
+                '"time", have a numpy.datetime64 dtype, or have '
+                'an attribute named "axis" with value "T")'
+            )
         if len(time_coords) > 1:
-            raise ValueError('multiple time dimensions are not allowed')
+            raise ValueError("multiple time dimensions are not allowed")
         if dataset.dims[0] != time_coords[0].name:
-            raise ValueError('time must be the first dimension, '
-                             'consider using the transpose() method')
+            raise ValueError(
+                "time must be the first dimension, "
+                "consider using the transpose() method"
+            )
         self._timeax = time_coords[0]
 
         self.window = lag + 1
-        if (lag < 0):
-            raise ValueError('lag should not be less than 0')
-        elif (lag == 0):
+        if lag < 0:
+            raise ValueError("lag should not be less than 0")
+        elif lag == 0:
             self._lagtimeax = self._timeax
         else:
             # genearate lag time axis
             # Remove last window length from original time axis
-            lag_time_axis = self._timeax[:-self.window+1]
+            lag_time_axis = self._timeax[: -self.window + 1]
             self._lagtimeax = lag_time_axis
 
         # Verify the presence of at least one spatial dimension. The
@@ -121,14 +128,15 @@ class ExtendedEof(object):
         # dimensions.
         self._coords = [dataset.coords[dim] for dim in dataset.dims[1:]]
         if len(self._coords) < 1:
-            raise ValueError('one or more spatial dimensions are required')
+            raise ValueError("one or more spatial dimensions are required")
 
         # Collect other non-dimension coordinates and store them categorised
         # according to the dimensions they span.
-        (self._time_ndcoords,
-         self._space_ndcoords,
-         self._time_space_ndcoords) = categorise_ndcoords(dataset,
-                                                          self._timeax.name)
+        (
+            self._time_ndcoords,
+            self._space_ndcoords,
+            self._time_space_ndcoords,
+        ) = categorise_ndcoords(dataset, self._timeax.name)
 
         # Generate an appropriate set of weights for the input dataset.
         # Determine the required weights.
@@ -152,11 +160,9 @@ class ExtendedEof(object):
         # Create an ExtendedEof Solver object using appropriate arguments for
         # this data set. The object will be used for the decomposition and for
         # returning the results.
-        self._solver = standard.ExtendedEof(dataset.data,
-                                            lag=lag,
-                                            weights=wtarray,
-                                            center=center,
-                                            ddof=ddof)
+        self._solver = standard.ExtendedEof(
+            dataset.data, lag=lag, weights=wtarray, center=center, ddof=ddof
+        )
         # Number of EEOFs in the solution.
         self.neeofs = self._solver.neeofs
         # name for the dataset.
@@ -200,12 +206,18 @@ class ExtendedEof(object):
 
         """
         pcs = self._solver.pcs(pcscaling, npcs)
-        pcdim = xr.IndexVariable('mode', range(pcs.shape[1]),
-                                 attrs={'long_name': 'extended_eof_mode_number'})
+        pcdim = xr.IndexVariable(
+            "mode",
+            range(pcs.shape[1]),
+            attrs={"long_name": "extended_eof_mode_number"},
+        )
         coords = [self._lagtimeax, pcdim]
-        pcs = xr.DataArray(pcs, coords=coords, name='extended_eof_principal_components')
-        pcs.coords.update({coord.name: ('time', coord)
-                           for coord in self._time_ndcoords})
+        pcs = xr.DataArray(
+            pcs, coords=coords, name="extended_eof_principal_components"
+        )
+        pcs.coords.update(
+            {coord.name: ("time", coord) for coord in self._time_ndcoords}
+        )
         return pcs
 
     def eeofs(self, eeofscaling=0, neeofs=None):
@@ -246,16 +258,22 @@ class ExtendedEof(object):
 
         """
         eeofs = self._solver.eeofs(eeofscaling, neeofs)
-        eeofdim = xr.IndexVariable('mode', range(eeofs.shape[0]),
-                                  attrs={'long_name': 'extended_eof_mode_number'})
-        lagax = xr.IndexVariable('lag', range(self.window),
-                                 attrs={'long_name': 'lag'})
+        eeofdim = xr.IndexVariable(
+            "mode",
+            range(eeofs.shape[0]),
+            attrs={"long_name": "extended_eof_mode_number"},
+        )
+        lagax = xr.IndexVariable(
+            "lag", range(self.window), attrs={"long_name": "lag"}
+        )
         coords = [eeofdim, lagax] + self._coords
-        long_name = 'extended_empirical_orthogonal_functions'
-        eeofs = xr.DataArray(eeofs, coords=coords, name='eeofs',
-                            attrs={'long_name': long_name})
-        eeofs.coords.update({coord.name: (coord.dims, coord)
-                            for coord in self._space_ndcoords})
+        long_name = "extended_empirical_orthogonal_functions"
+        eeofs = xr.DataArray(
+            eeofs, coords=coords, name="eeofs", attrs={"long_name": long_name}
+        )
+        eeofs.coords.update(
+            {coord.name: (coord.dims, coord) for coord in self._space_ndcoords}
+        )
         return eeofs
 
     def eigenvalues(self, neigs=None):
@@ -287,12 +305,19 @@ class ExtendedEof(object):
 
         """
         lambdas = self._solver.eigenvalues(neigs=neigs)
-        eeofdim = xr.IndexVariable('mode', range(lambdas.shape[0]),
-                                  attrs={'long_name': 'extended_eof_mode_number'})
+        eeofdim = xr.IndexVariable(
+            "mode",
+            range(lambdas.shape[0]),
+            attrs={"long_name": "extended_eof_mode_number"},
+        )
         coords = [eeofdim]
-        long_name = 'eigenvalues'
-        lambdas = xr.DataArray(lambdas, coords=coords, name='eigenvalues',
-                               attrs={'long_name': long_name})
+        long_name = "eigenvalues"
+        lambdas = xr.DataArray(
+            lambdas,
+            coords=coords,
+            name="eigenvalues",
+            attrs={"long_name": long_name},
+        )
         return lambdas
 
     def varianceFraction(self, neigs=None):
@@ -329,12 +354,19 @@ class ExtendedEof(object):
 
         """
         vf = self._solver.varianceFraction(neigs=neigs)
-        eeofdim = xr.IndexVariable('mode', range(len(vf)),
-                                  attrs={'long_name': 'extended_eof_mode_number'})
+        eeofdim = xr.IndexVariable(
+            "mode",
+            range(len(vf)),
+            attrs={"long_name": "extended_eof_mode_number"},
+        )
         coords = [eeofdim]
-        long_name = 'variance_fractions'
-        vf = xr.DataArray(vf, coords=coords, name='variance_fractions',
-                          attrs={'long_name': long_name})
+        long_name = "variance_fractions"
+        vf = xr.DataArray(
+            vf,
+            coords=coords,
+            name="variance_fractions",
+            attrs={"long_name": long_name},
+        )
         return vf
 
     def northTest(self, neigs=None, vfscaled=False):
@@ -384,12 +416,19 @@ class ExtendedEof(object):
 
         """
         typerrs = self._solver.northTest(neigs=neigs, vfscaled=vfscaled)
-        eofdim = xr.IndexVariable('mode', range(typerrs.shape[0]),
-                                  attrs={'long_name': 'extended_eof_mode_number'})
+        eofdim = xr.IndexVariable(
+            "mode",
+            range(typerrs.shape[0]),
+            attrs={"long_name": "extended_eof_mode_number"},
+        )
         coords = [eofdim]
-        long_name = 'typical_errors'
-        typerrs = xr.DataArray(typerrs, coords=coords, name='typical_errors',
-                               attrs={'long_name': long_name})
+        long_name = "typical_errors"
+        typerrs = xr.DataArray(
+            typerrs,
+            coords=coords,
+            name="typical_errors",
+            attrs={"long_name": long_name},
+        )
         return typerrs
 
     def reconstructedField(self, neofs):
@@ -430,15 +469,24 @@ class ExtendedEof(object):
         rfield = self._solver.reconstructedField(neofs)
         coords = [self._timeax] + self._coords
         if isinstance(neofs, collections.Iterable):
-            name_part = 'EOFs_{}'.format('_'.join([str(e) for e in neofs]))
+            name_part = "EOFs_{}".format("_".join([str(e) for e in neofs]))
         else:
-            name_part = '{}_EOFs'.format(neofs)
-        long_name = '{!s}_reconstructed_with_{!s}'.format(self._dataset_name,
-                                                          name_part)
-        rfield = xr.DataArray(rfield, coords=coords, name=self._dataset_name,
-                              attrs={'long_name': long_name})
-        ndcoords = (self._time_ndcoords + self._space_ndcoords +
-                    self._time_space_ndcoords)
-        rfield.coords.update({coord.name: (coord.dims, coord)
-                              for coord in ndcoords})
+            name_part = "{}_EOFs".format(neofs)
+        long_name = "{!s}_reconstructed_with_{!s}".format(
+            self._dataset_name, name_part
+        )
+        rfield = xr.DataArray(
+            rfield,
+            coords=coords,
+            name=self._dataset_name,
+            attrs={"long_name": long_name},
+        )
+        ndcoords = (
+            self._time_ndcoords
+            + self._space_ndcoords
+            + self._time_space_ndcoords
+        )
+        rfield.coords.update(
+            {coord.name: (coord.dims, coord) for coord in ndcoords}
+        )
         return rfield

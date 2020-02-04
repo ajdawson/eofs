@@ -14,7 +14,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
-from __future__ import (absolute_import, division, print_function)  # noqa
+from __future__ import absolute_import, division, print_function  # noqa
 
 from eofs import standard
 import collections
@@ -23,6 +23,7 @@ import numpy.ma as ma
 
 try:
     import dask.array
+
     has_dask = True
 except ImportError:
     has_dask = False
@@ -103,8 +104,9 @@ class ExtendedEof(object):
         """
         # Store the input data in an instance variable.
         if dataset.ndim < 2:
-            raise ValueError('the input data set must be '
-                             'at least two dimensional')
+            raise ValueError(
+                "the input data set must be " "at least two dimensional"
+            )
         data = dataset.copy()
         # Store information about the shape/size of the input data.
         self._records = data.shape[0]
@@ -118,13 +120,12 @@ class ExtendedEof(object):
                 # is retained, but also we want to remove the time dimension
                 # from the weights so the the first index from the broadcast
                 # array is taken.
-                self._weights = np.broadcast_arrays(
-                    data[0:1], weights)[1][0]
+                self._weights = np.broadcast_arrays(data[0:1], weights)[1][0]
                 data = data * self._weights
             except ValueError:
-                raise ValueError('weight array dimensions are incompatible')
+                raise ValueError("weight array dimensions are incompatible")
             except TypeError:
-                raise TypeError('weights are not a valid type')
+                raise TypeError("weights are not a valid type")
         else:
             self._weights = None
         # Remove the time mean of the input data unless explicitly told
@@ -138,10 +139,9 @@ class ExtendedEof(object):
         cov_matrix_eeof = self._embed_dimension(data, self._window)
         # new channels dimension
         new_channels = self._window * channels
-        self._solver = standard.Eof(cov_matrix_eeof,
-                                    weights=None,
-                                    center=False,
-                                    ddof=ddof)
+        self._solver = standard.Eof(
+            cov_matrix_eeof, weights=None, center=False, ddof=ddof
+        )
         self.neeofs = self._solver.neofs
 
     def _center(self, in_array):
@@ -150,7 +150,7 @@ class ExtendedEof(object):
         mean = in_array.mean(axis=0)
         # Return the input array with its mean along the first dimension
         # removed.
-        return (in_array - mean)
+        return in_array - mean
 
     def _embed_dimension(self, array, window):
         """
@@ -205,10 +205,12 @@ class ExtendedEof(object):
 
         """
         if array.ndim != 2:
-            raise ValueError('array must have exactly 2 dimensions')
+            raise ValueError("array must have exactly 2 dimensions")
         if window >= array.shape[0]:
-            raise ValueError('embedding window must be shorter than the '
-                             'first dimension of the array')
+            raise ValueError(
+                "embedding window must be shorter than the "
+                "first dimension of the array"
+            )
         n, _ = array.shape
         nwin = n - window + 1
         shape = (nwin, window) + array.shape[1:]
@@ -219,10 +221,13 @@ class ExtendedEof(object):
             if array.mask is ma.nomask:
                 windowed_mask = array.mask
             else:
-                strides = ((array.mask.strides[0], array.mask.strides[0]) +
-                           array.mask.strides[1:])
-                windowed_mask = as_strided(array.mask, shape=shape,
-                                           strides=strides)
+                strides = (
+                    array.mask.strides[0],
+                    array.mask.strides[0],
+                ) + array.mask.strides[1:]
+                windowed_mask = as_strided(
+                    array.mask, shape=shape, strides=strides
+                )
             windowed = ma.array(windowed, mask=windowed_mask)
         out_shape = (nwin, window * array.shape[1])
 
@@ -413,8 +418,12 @@ class ExtendedEof(object):
         # Take the mean of the values for one location
         channels = np.product(self._originalshape)
         rval = rval[::-1].reshape(rval.shape[0], self._window, channels)
-        rval = np.array([rval.diagonal(i).mean(axis=1)
-                         for i in range(1-rval.shape[0], self._window)])
+        rval = np.array(
+            [
+                rval.diagonal(i).mean(axis=1)
+                for i in range(1 - rval.shape[0], self._window)
+            ]
+        )
         # Reshape the reconstructed field so it has the same shape as the
         # input data set.
         rval = rval.reshape((self._records,) + self._originalshape)
