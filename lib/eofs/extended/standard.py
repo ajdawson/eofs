@@ -211,27 +211,36 @@ class ExtendedEof(object):
                 "embedding window must be shorter than the "
                 "first dimension of the array"
             )
-        n, _ = array.shape
-        nwin = n - window + 1
-        shape = (nwin, window) + array.shape[1:]
 
-        strides = (array.strides[0], array.strides[0]) + array.strides[1:]
-        windowed = as_strided(array, shape=shape, strides=strides)
-        if ma.isMaskedArray(array):
-            if array.mask is ma.nomask:
-                windowed_mask = array.mask
-            else:
-                strides = (
-                    array.mask.strides[0],
-                    array.mask.strides[0],
-                ) + array.mask.strides[1:]
-                windowed_mask = as_strided(
-                    array.mask, shape=shape, strides=strides
-                )
-            windowed = ma.array(windowed, mask=windowed_mask)
-        out_shape = (nwin, window * array.shape[1])
+        if isinstance(array, dask.array.Array):  # dask array
+            data = [
+                [array[row + offset] for offset in range(window)]
+                for row in range(array.shape[0] - window + 1)
+            ]
+            ret = dask.array.block(data)
+            ret = ret.rechunk((ret.chunksize[0], -1))
+        else:  # numpy array
+            n, _ = array.shape
+            nwin = n - window + 1
+            shape = (nwin, window) + array.shape[1:]
 
-        ret = windowed.reshape(out_shape)
+            strides = (array.strides[0], array.strides[0]) + array.strides[1:]
+            windowed = as_strided(array, shape=shape, strides=strides)
+            if ma.isMaskedArray(array):
+                if array.mask is ma.nomask:
+                    windowed_mask = array.mask
+                else:
+                    strides = (
+                        array.mask.strides[0],
+                        array.mask.strides[0],
+                    ) + array.mask.strides[1:]
+                    windowed_mask = as_strided(
+                        array.mask, shape=shape, strides=strides
+                    )
+                windowed = ma.array(windowed, mask=windowed_mask)
+            out_shape = (nwin, window * array.shape[1])
+
+            ret = windowed.reshape(out_shape)
         return ret
 
     def pcs(self, pcscaling=0, npcs=None):
