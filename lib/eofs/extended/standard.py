@@ -491,3 +491,88 @@ class ExtendedEof(object):
 
         """
         return self._solver.northTest(neigs, vfscaled)
+
+    def projectField(self, field, neofs=None, eofscaling=0, weighted=True):
+        """Project a field onto the EEOFs.
+
+        Given a data set, projects it onto the EEOFs to generate a
+        corresponding set of pseudo-PCs.
+
+        **Argument:**
+
+        *field*
+            A `numpy.ndarray` or `numpy.ma.MaskedArray` with two or more
+            dimensions containing the data to be projected onto the
+            EEOFs. It must have the same corresponding spatial dimensions
+            (including missing values in the same places) as the `ExtendedEof`
+            input *dataset*. *field* may have a different length time
+            dimension to the `ExtendedEof` input *dataset* or no time dimension
+            at all.
+
+        **Optional arguments:**
+
+        *neofs*
+            Number of EEOFs to project onto. Defaults to all EEOFs. If the
+            number of EEOFs requested is more than the number that are
+            available, then the field will be projected onto all
+            available EEOFs.
+
+        *eofscaling*
+            Set the scaling of the EEOFs that are projected onto. The
+            following values are accepted:
+
+            * *0* : Un-scaled EEOFs (default).
+            * *1* : EEOFs are divided by the square-root of their
+              eigenvalue.
+            * *2* : EEOFs are multiplied by the square-root of their
+              eigenvalue.
+
+        *weighted*
+            If *True* then *field* is weighted using the same weights
+            used for the EOF analysis prior to projection. If *False*
+            then no weighting is applied. Defaults to *True* (weighting
+            is applied). Generally only the default setting should be
+            used.
+
+        **Returns:**
+
+        *pseudo_pcs*
+            An array where the columns are the ordered pseudo-PCs.
+
+        **Examples:**
+
+        Project a data set onto all EEOFs::
+
+            pseudo_pcs = solver.projectField(data)
+
+        Project a data set onto the four leading EEOFs::
+
+            pseudo_pcs = solver.projectField(data, neofs=4)
+
+        """
+        field = field.copy()
+        if weighted:
+            wts = self.getWeights()
+            if wts is not None:
+                field = field * wts
+        channels = np.product(self._originalshape)
+        field = field.reshape([self._records, channels])
+        field = self._embed_dimension(field, self._window)
+        return self._solver.projectField(field, neofs, eofscaling, False)
+
+    def getWeights(self):
+        """Weights used for the analysis.
+
+        **Returns:**
+
+        *weights*
+            An array containing the analysis weights.
+
+        **Example:**
+
+        The weights used for the analysis::
+
+            weights = solver.getWeights()
+
+        """
+        return self._weights

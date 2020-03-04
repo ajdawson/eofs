@@ -490,3 +490,131 @@ class ExtendedEof(object):
             {coord.name: (coord.dims, coord) for coord in ndcoords}
         )
         return rfield
+
+    def projectField(self, array, neofs=None, eofscaling=0, weighted=True):
+        """Project a field onto the EEOFs.
+
+        Given a data set, projects it onto the EEOFs to generate a
+        corresponding set of pseudo-PCs.
+
+        **Argument:**
+
+        *field*
+            An `xarray.DataArray` containing the field to project onto
+            the EOFs. It must have the same corresponding spatial
+            dimensions (including missing values in the same places) as
+            the `ExtendedEof` input *dataset*. It may have a different length
+            time dimension to the `ExtendedEof` input *dataset* or no time
+            dimension at all. If a time dimension exists it must be the
+            first dimension.
+
+        **Optional arguments:**
+
+        *neofs*
+            Number of EEOFs to project onto. Defaults to all EEOFs. If the
+            number of EEOFs requested is more than the number that are
+            available, then the field will be projected onto all
+            available EEOFs.
+
+        *eofscaling*
+            Set the scaling of the EEOFs that are projected
+            onto. The following values are accepted:
+
+            * *0* : Un-scaled EEOFs (default).
+            * *1* : EEOFs are divided by the square-root of their eigenvalue.
+            * *2* : EEOFs are multiplied by the square-root of their
+              eigenvalue.
+
+        *weighted*
+            If *True* then the field is weighted using the same weights
+            used for the EEOF analysis prior to projection. If *False*
+            then no weighting is applied. Defaults to *True* (weighting
+            is applied). Generally only the default setting should be
+            used.
+
+        **Returns:**
+
+        *pseudo_pcs*
+            A `~xarray.DataArray` containing the pseudo-PCs. The PCs are
+            numbered from 0 to *neofs* - 1.
+
+        **Examples:**
+
+        Project a field onto all EEOFs::
+
+            pseudo_pcs = solver.projectField(field)
+
+        Project fields onto the three leading EEOFs::
+
+            pseudo_pcs = solver.projectField(field, neofs=3)
+
+        """
+        if not isinstance(array, xr.DataArray):
+            raise TypeError("the input must be an xarray DataArray")
+        array_name = array.name
+        time_coords = find_time_coordinates(array)
+        if len(time_coords) > 1:
+            raise ValueError("multiple time dimensions are not allowed")
+        if time_coords:
+            has_time = True
+            time_coord = time_coords[0][: -self.window + 1]
+            if array.dims[0] != time_coord.name:
+                raise ValueError(
+                    "time must be the first dimension, "
+                    "consider using the transpose() method"
+                )
+            time_ndcoords, _, _ = categorise_ndcoords(array, time_coord.name)
+        else:
+            has_time = False
+        pcs = self._solver.projectField(
+            array.values, neofs=neofs, eofscaling=eofscaling, weighted=weighted
+        )
+        # Create the PCs DataArray.
+        if pcs.ndim == 2:
+            pcdim = xr.IndexVariable(
+                "mode",
+                range(pcs.shape[1]),
+                attrs={"long_name": "extended_eof_mode_number"},
+            )
+            pcs = xr.DataArray(
+                pcs,
+                coords=[time_coord, pcdim],
+                name="pseudo_pcs",
+                attrs={"long_name": "{}_pseudo_pcs".format(array_name)},
+            )
+        else:
+            pcdim = xr.IndexVariable(
+                "mode",
+                range(pcs.shape[0]),
+                attrs={"long_name": "extended_eof_mode_number"},
+            )
+            pcs = xr.DataArray(
+                pcs,
+                coords=[pcdim],
+                name="pseudo_pcs",
+                attrs={"long_name": "{}_pseudo_pcs".format(array_name)},
+            )
+        if has_time:
+            # Add non-dimension coordinates.
+            pcs.coords.update(
+                {coord.name: (coord.dims, coord) for coord in time_ndcoords}
+            )
+        return pcs
+
+    def getWeights(self):
+        """Weights used for the analysis.
+
+        **Returns:**
+
+        *weights*
+            An array contaning the analysis weights (not a
+            `~xarray.DataArray`).
+
+        **Example:**
+
+        The weights used for the analysis::
+
+            weights = solver.getWeights()
+
+        """
+        return self._solver.getWeights()
