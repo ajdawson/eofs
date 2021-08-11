@@ -636,7 +636,7 @@ class Eof(object):
                 attrs={'long_name': '{}_pseudo_pcs'.format(array_name)})
         if has_time:
             # Add non-dimension coordinates.
-            pcs.coords.update({coord.name: (coord.dims, coord)
+            pcs.coords.update({coord.name: (coord.dims, coord.data)
                                for coord in time_ndcoords})
         return pcs
 
