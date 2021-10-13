@@ -178,7 +178,7 @@ class Eof(object):
                                  attrs={'long_name': 'eof_mode_number'})
         coords = [self._time, pcdim]
         pcs = xr.DataArray(pcs, coords=coords, name='pcs')
-        pcs.coords.update({coord.name: ('time', coord)
+        pcs.coords.update({coord.name: ('time', coord.data)
                            for coord in self._time_ndcoords})
         return pcs
 
