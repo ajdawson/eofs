@@ -226,7 +226,7 @@ class Eof(object):
         long_name = 'empirical_orthogonal_functions'
         eofs = xr.DataArray(eofs, coords=coords, name='eofs',
                             attrs={'long_name': long_name})
-        eofs.coords.update({coord.name: (coord.dims, coord)
+        eofs.coords.update({coord.name: (coord.dims, coord.data)
                             for coord in self._space_ndcoords})
         return eofs
 
@@ -273,7 +273,7 @@ class Eof(object):
         long_name = 'correlation_between_pcs_and_{!s}'.format(self._name)
         eofs = xr.DataArray(eofs, coords=coords, name='eofs',
                             attrs={'long_name': long_name})
-        eofs.coords.update({coord.name: (coord.dims, coord)
+        eofs.coords.update({coord.name: (coord.dims, coord.data)
                             for coord in self._space_ndcoords})
         return eofs
 
@@ -333,7 +333,7 @@ class Eof(object):
         long_name = 'covariance_between_pcs_and_{!s}'.format(self._name)
         eofs = xr.DataArray(eofs, coords=coords, name='eofs',
                             attrs={'long_name': long_name})
-        eofs.coords.update({coord.name: (coord.dims, coord)
+        eofs.coords.update({coord.name: (coord.dims, coord.data)
                             for coord in self._space_ndcoords})
         return eofs
 
@@ -538,7 +538,7 @@ class Eof(object):
                               attrs={'long_name': long_name})
         ndcoords = (self._time_ndcoords + self._space_ndcoords +
                     self._time_space_ndcoords)
-        rfield.coords.update({coord.name: (coord.dims, coord)
+        rfield.coords.update({coord.name: (coord.dims, coord.data)
                               for coord in ndcoords})
         return rfield
 
