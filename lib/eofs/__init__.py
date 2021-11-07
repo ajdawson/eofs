@@ -1,5 +1,5 @@
 """Fast and efficient EOF analysis for Python."""
-# (c) Copyright 2010-2013 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2010-2016 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -15,17 +15,18 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
-from __future__ import absolute_import
+from __future__ import (absolute_import, division, print_function)  # noqa
 
 from . import standard
 from . import tools
 
+from ._version import get_versions
+__version__ = get_versions()['version']
+del get_versions
+
 
 # Define the objects imported by imports of the form: from eofs import *
 __all__ = ['standard', 'tools']
-
-# Package version number.
-__version__ = '0.5.x'
 
 try:
     from . import cdms
@@ -36,5 +37,11 @@ except ImportError:
 try:
     from . import iris
     __all__.append('iris')
+except ImportError:
+    pass
+
+try:
+    from . import xarray
+    __all__.append('xarray')
 except ImportError:
     pass

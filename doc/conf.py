@@ -12,11 +12,13 @@
 # serve to show the default.
 
 import sys, os
+import time
+
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-sys.path.append(os.path.abspath('sphinxext'))
+# sys.path.append(os.path.abspath('sphinxext'))
 
 # -- General configuration -----------------------------------------------------
 
@@ -30,7 +32,8 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.viewcode',
               'sphinx.ext.autosummary',
               'sphinx.ext.intersphinx',
-              'plot_directive',]
+              'sphinx.ext.extlinks',
+              'matplotlib.sphinxext.plot_directive',]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -45,8 +48,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'eofs'
-copyright = u'2013 Andrew Dawson'
+project = 'eofs'
+copyright = '2013-{} Andrew Dawson'.format(time.localtime().tm_year)
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -95,6 +98,13 @@ highlight_language = 'python'
 #modindex_common_prefix = []
 
 
+# -- extlinks configuration ----------------------------------------------------
+
+# Allow e.g. :issue:`42` and :pr:`42` roles:
+extlinks = {'issue': ('https://github.com/ajdawson/eofs/issues/%s', '#'),
+            'pr': ('https://github.com/ajdawson/eofs/pull/%s', '#')}
+
+
 # -- Options for HTML output ---------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
@@ -139,7 +149,10 @@ html_static_path = ['_static']
 #html_use_smartypants = True
 
 # Custom sidebar templates, maps document names to template names.
-#html_sidebars = {}
+html_sidebars = {'**': ['sidebar_toc.html',
+                        'relations.html',
+                        'sourcelink.html',
+                        'searchbox.html']}
 
 # Additional templates that should be rendered to pages, maps page names to
 # template names.
@@ -179,6 +192,8 @@ intersphinx_mapping = {
         'eof2': ('http://ajdawson.github.com/eof2', None),
         'iris': ('http://scitools.org.uk/iris/docs/latest', None),
         'numpy': ('http://docs.scipy.org/doc/numpy', None),
+        'xarray': ('http://xarray.pydata.org/en/stable', None),
+        'dask': ('https://docs.dask.org/en/latest', None),
 }
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -198,8 +213,12 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('userguide', 'userguide.tex', u'eofs User Guide',
-   u'Andrew Dawson', 'manual'),
+  ('userguide/index', 'userguide.tex', 'eofs User Guide', 'Andrew Dawson',
+   'manual'),
+  ('examples/index', 'examples.tex', 'eofs Examples', 'Andrew Dawson',
+   'manual'),
+  ('api/index', 'api.tex', 'eofs API Reference', 'Andrew Dawson',
+   'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -228,8 +247,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'eofs', u'eofs Documentation',
-     [u'Andrew Dawson'], 1)
+    ('index', 'eofs', 'eofs Documentation',
+     ['Andrew Dawson'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -242,8 +261,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'eofs', u'eofs Documentation',
-   u'Andrew Dawson', 'eofs', 'EOF analysis in Python.',
+  ('index', 'eofs', 'eofs Documentation',
+   'Andrew Dawson', 'eofs', 'EOF analysis in Python.',
    'Miscellaneous'),
 ]
 

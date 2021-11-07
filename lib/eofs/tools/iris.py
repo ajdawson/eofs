@@ -1,5 +1,5 @@
 """Supplementary tools for the `iris` EOF analysis interface."""
-# (c) Copyright 2013 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2013-2016 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -15,15 +15,16 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
-from __future__ import absolute_import
+from __future__ import (absolute_import, division, print_function)  # noqa
 from copy import copy
+from functools import reduce
 import warnings
 
 import numpy as np
 from iris.cube import Cube
 from iris.analysis.cartography import area_weights
 from iris.analysis.cartography import cosine_latitude_weights
-from iris.exceptions import CoordinateMultiDimError
+from iris.exceptions import CoordinateMultiDimError, CoordinateNotFoundError
 
 from . import standard
 from .generic import covcor_dimensions
@@ -79,7 +80,7 @@ def weights_array(cube, scheme):
         # Handle square-root of cosine of latitude weighting.
         try:
             weights = np.sqrt(cosine_latitude_weights(cube))
-        except (ValueError, CoordinateMultiDimError), err:
+        except (ValueError, CoordinateMultiDimError):
             raise ValueError('cannot generate latitude weights')
     else:
         raise ValueError("invalid weighting scheme: '{!s}'".format(scheme))
@@ -104,8 +105,17 @@ def coord_and_dim(cube, coord, multiple=False):
     *coord_tuple*
         A 2-tuple of (coordinate_dimension, dimension_number).
 
+    .. deprecated:: version 1.2
+
+       The function `get_time_coord` is used instead for finding time
+       coordinates. For other coordinates please use the iris built-in
+       functionality for locating required cooridnates.
+
     """
-    coords = filter(lambda c: coord in c.name(), cube.dim_coords)
+    deprecation_message = ('coord_and_dim() is deprecated, please use '
+                           'get_time_coord() or built-in iris functionality')
+    warnings.warn(deprecation_message, DeprecationWarning)
+    coords = [c for c in cube.dim_coords if coord in c.name()]
     if len(coords) > 1:
         raise ValueError('multiple {} coordinates are not '
                          'allowed'.format(coord))
@@ -119,12 +129,108 @@ def coord_and_dim(cube, coord, multiple=False):
     return c, c_dim
 
 
+def get_time_coord(cube):
+    """
+    Retrieve the time coordinate dimension and its corresponding
+    position from a `~iris.cube.Cube` instance.
+
+    **Arguments:**
+
+    *cube*
+        An `~iris.cube.Cube` instance to retrieve the dimension from.
+
+    **Returns:**
+
+    *coord_tuple*
+        A 2-tuple of (coordinate_dimension, dimension_number).
+
+    """
+    time_coords = cube.coords(axis='T', dim_coords=True)
+    if not time_coords:
+        # If no coordinates were identified as time, relax the criteria and
+        # look for dimension coordinates with 'time' in the name:
+        time_coords = [coord for coord in cube.dim_coords
+                       if 'time' in coord.name()]
+        if not time_coords:
+            raise ValueError('cannot find a time dimension coordinate')
+    if len(time_coords) > 1:
+        raise ValueError('multiple time coordinates are not allowed')
+    time_coord = time_coords[0]
+    time_dim = cube.coord_dims(time_coord)[0]
+    return time_coord, time_dim
+
+
+def classified_aux_coords(cube):
+    """
+    Classify a Cube's auxiliary coordinates into those that span only
+    the time dimension, those that span only space dimensions, and those
+    that span both time and space dimensions.
+
+    **Arguments:**
+
+    *cube*
+        An `~iris.cube.Cube` instance whose auxiliary coordinates should
+        be classified.
+
+    **Returns:**
+
+    *coord_sets*
+        A 3-tuple of lists of coordinates. The first element is the list
+        of all auxiliary coordinates spannning only the time dimension,
+        the second element is the list of all auxiliary coordinates
+        spannning only space dimensions, and the third element is the
+        list of all auxiliary coordinates spannning both time and space
+        dimensions.
+
+    """
+    try:
+        _, timedim = get_time_coord(cube)
+    except ValueError:
+        timedim = None
+    time_only = []
+    space_only = []
+    time_and_space = []
+    for coord in cube.aux_coords:
+        dims = cube.coord_dims(coord)
+        if dims == (timedim,):
+            time_only.append((copy(coord), timedim))
+        elif dims:
+            if timedim in dims:
+                time_and_space.append((copy(coord), dims))
+            else:
+                space_only.append((copy(coord), dims))
+    return time_only, space_only, time_and_space
+
+
+def common_items(item_set):
+    """
+    Given an iterable of lists, constructs a list of every item that is
+    present in all of the lists.
+
+    **Arguments:**
+
+    *item_set*
+        An iterable containing lists of items.
+
+    **Returns:**
+
+    *common*
+        A list of the items which occur in all sublists in the input.
+
+    """
+    common = []
+    for item in reduce(lambda x, y: x + y, item_set):
+        item_ok = all([item in items for items in item_set])
+        if item_ok and item not in common:
+            common.append(item)
+    return common
+
+
 def _time_coord_info(cube):
-    name = cube.name
-    time, time_dim = coord_and_dim(cube, 'time')
-    coords = list(copy(cube.dim_coords))
+    time, time_dim = get_time_coord(cube)
+    coords = [copy(coord) for coord in cube.dim_coords]
     coords.remove(time)
-    coords = [time] + coords
+    coords = [copy(time)] + coords
     return time_dim, coords
 
 
@@ -190,7 +296,7 @@ def correlation_map(pcs, field):
         # There are no output dimensions, return a scalar.
         return cor
     # Otherwise return an Iris cube.
-    cor = Cube(cor, dim_coords_and_dims=zip(dims, range(cor.ndim)))
+    cor = Cube(cor, dim_coords_and_dims=list(zip(dims, range(cor.ndim))))
     cor.long_name = 'pc_correlation'
     return cor
 
@@ -240,11 +346,11 @@ def covariance_map(pcs, field, ddof=1):
     """
     # Compute the covariance map and retrieve appropriate Iris coordinate
     # dimensions for it.
-    cov, dims = _map_and_dims(pcs, field, standard.covariance_map, ddof=1)
+    cov, dims = _map_and_dims(pcs, field, standard.covariance_map, ddof=ddof)
     if not dims:
         # There are no output dimensions, return a scalar.
         return cov
     # Otherwise return an Iris cube.
-    cov = Cube(cov, dim_coords_and_dims=zip(dims, range(cov.ndim)))
+    cov = Cube(cov, dim_coords_and_dims=list(zip(dims, range(cov.ndim))))
     cov.long_name = 'pc_covariance'
     return cov

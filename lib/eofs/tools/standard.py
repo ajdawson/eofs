@@ -1,5 +1,5 @@
 """Supplementary tools for the `numpy` EOF analysis interface."""
-# (c) Copyright 2010-2013 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2010-2015 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -15,7 +15,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
-from __future__ import absolute_import
+from __future__ import (absolute_import, division, print_function)  # noqa
 
 import numpy as np
 import numpy.ma as ma
@@ -41,7 +41,6 @@ def _check_flat_center(pcs, field):
         raise ValueError("PCs must be 1D or 2D")
     # Check if the field is 1D.
     if len(field.shape) == 1:
-        field_oned = True
         originalshape = tuple()
         channels = 1
     else:
@@ -109,6 +108,7 @@ def correlation_map(pcs, field):
     div = np.float64(pcs_cent.shape[0])
     # Compute the correlation map.
     cor = ma.dot(field_cent.T, pcs_cent).T / div
+    cor = ma.masked_invalid(cor)
     cor /= ma.outer(pcs_std, field_std)
     # Return the correlation with the appropriate shape.
     return cor.reshape(out_shape)
@@ -161,4 +161,5 @@ def covariance_map(pcs, field, ddof=1):
     div = np.float64(pcs_cent.shape[0] - ddof)
     # Compute the covariance map, making sure it has the appropriate shape.
     cov = (ma.dot(field_cent.T, pcs_cent).T / div).reshape(out_shape)
+    cov = ma.masked_invalid(cov)
     return cov

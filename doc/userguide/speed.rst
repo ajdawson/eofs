@@ -12,11 +12,6 @@ Intel's MKL provides highly optimised BLAS and LAPACK routines which can take ad
 If you have access to Intel's MKL you can build a numpy_ library using it following the instructions from intel_.
 It is actually not that hard to do and can provide a great performance boost.
 
-Enthought Python Distribution (EPD)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The version of numpy_ provided with EPD is linked against the Intel MKL, and you don't need a license for the MKL yourself. EPD is free for academics.
-
 Numpy built with the AMD Core Math Library (ACML)
 -------------------------------------------------
 
@@ -48,6 +43,19 @@ The following instructions worked for me:
     include_dirs = /path-to-acml-and-cblas/include
 
 7. build and install numpy as normal 
+
+Pre-built options
+-----------------
+
+Anaconda
+~~~~~~~~
+
+Continuum IO's Anaconda product has the option of using MKL optimised components.
+
+Canopy (Express)
+~~~~~~~~~~~~~~~~
+
+Enthought provides MKL linked packages in its Canopy product. I don't know if the free version Canopy Express also includes MKL linked libraries, but it may be worth investigating.
 
 
 .. _numpy: http://numpy.org

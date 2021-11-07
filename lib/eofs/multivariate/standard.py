@@ -1,5 +1,5 @@
 """Multivariate EOF analysis for `numpy` array data."""
-# (c) Copyright 2013 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2013-2016 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -15,10 +15,9 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
-from __future__ import absolute_import
+from __future__ import (absolute_import, division, print_function)  # noqa
 
 import numpy as np
-import numpy.ma as ma
 
 from eofs import standard
 
@@ -154,7 +153,7 @@ class MultivariateEof(object):
             raise ValueError('number of weights is incorrect, '
                              'expecting {:d} but got {:d}'.format(
                                  self._ndata, len(weights)))
-        if not filter(lambda i: False if i is None else True, weights):
+        if all([w is None for w in weights]):
             # If all the entries are None, then just use the single value
             # None to indicate no weights are required.
             return None
@@ -507,7 +506,9 @@ class MultivariateEof(object):
             Number of EOFs to use for the reconstruction. If the
             number of EOFs requested is more than the number that are
             available, then all available EOFs will be used for the
-            reconstruction.
+            reconstruction. Alternatively this argument can be an
+            iterable of mode numbers (where the first mode is 1) in
+            order to facilitate reconstruction with arbitrary modes.
 
         **Returns:**
 
@@ -520,7 +521,11 @@ class MultivariateEof(object):
 
         Reconstruct the input data sets using 3 EOFs::
 
-            reconstruction_list = solver.reconstructedField(neofs=3)
+            reconstruction_list = solver.reconstructedField(3)
+
+        Reconstruct the input field using EOFs 1, 2 and 5::
+
+            reconstruction_list = solver.reconstuctedField([1, 2, 5])
 
         """
         rf = self._solver.reconstructedField(neofs)
@@ -593,10 +598,12 @@ class MultivariateEof(object):
         # Make sure the input fields have valid shapes/dimensionalities.
         for field, shape in zip(fields, self._shapes):
             self._solver._verify_projection_shape(field, shape)
+
         # Check for a time dimension in each field.
-        time_check = lambda f, e: len(e) + 1 == f.ndim
+        def time_check(field, shape):
+            return len(shape) + 1 == field.ndim
         has_time = [time_check(f, e) for f, e in zip(fields, self._shapes)]
-        if filter(lambda t: t != has_time[0], has_time):
+        if [t for t in has_time if t != has_time[0]]:
             raise ValueError('detected a mixture of fields with and without '
                              'time dimensions, this is not allowed')
         has_time = has_time[0]

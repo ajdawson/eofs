@@ -13,6 +13,7 @@ Available EOF solvers
    eofs.standard.Eof
    eofs.cdms.Eof
    eofs.iris.Eof
+   eofs.xarray.Eof
    eofs.multivariate.standard.MultivariateEof
    eofs.multivariate.cdms.MultivariateEof
    eofs.multivariate.iris.MultivariateEof
@@ -27,6 +28,7 @@ Full documentation
    eofs.standard
    eofs.cdms
    eofs.iris
+   eofs.xarray
    eofs.tools
    eofs.multivariate.standard
    eofs.multivariate.cdms

@@ -1,0 +1,80 @@
+language: minimal
+
+env:
+  global:
+    # Doctr deploy key for ajdawson/eofs
+    - secure: "ewft/Mb7zDRH7peE5YD6rpgEiIy8NRHaz1lm2EbFPtzJfKV/vXh+WGeapaVpGWemVvfkRCO4nCXngYZWD5cQozTk0SOZL3m5tlm1RxK0KqdcKPS6BXgmWg/oRmDBEducWFTRydAELPU1rh8oN5TAx8K5ErTGxGSjprNfkItbM14="
+    - PACKAGES_STANDARD="setuptools numpy pytest pycodestyle"
+    - PACKAGES_EXTRA="iris xarray cdms2 genutil"
+    - UVCDAT_ANONYMOUS_LOG=no
+  matrix:
+    - PYTHON_VERSION=2.7
+      SUITE_TYPE=test_standard
+    - PYTHON_VERSION=2.7
+      SUITE_TYPE=test_extras
+    - PYTHON_VERSION=3.6
+      SUITE_TYPE=test_standard
+    - PYTHON_VERSION=3.6
+      SUITE_TYPE=test_extras
+    - PYTHON_VERSION=3.7
+      SUITE_TYPE=test_standard
+    - PYTHON_VERSION=3.7
+      SUITE_TYPE=test_extras
+    - PYTHON_VERSION=3.7
+      SUITE_TYPE=deploy
+
+before_install:
+  - wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - export PATH="$HOME/miniconda/bin:$PATH"
+  - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda config --add channels conda-forge
+  - conda update conda
+  - conda info -a
+
+install:
+  - conda create -n test python=$PYTHON_VERSION
+  - source activate test
+  - if [[ $SUITE_TYPE = test_standard ]]; then
+      conda install $PACKAGES_STANDARD;
+    elif [[ $SUITE_TYPE = test_extras ]]; then
+      conda install $PACKAGES_STANDARD $PACKAGES_EXTRA;
+    else
+      conda install $PACKAGES_STANDARD $PACKAGES_EXTRA sphinx doctr;
+    fi
+  - python setup.py install
+
+deploy:
+  provider: pypi
+  user: ajdawson
+  password:
+    secure: "Iu6CFvCOj8wxfbAoY8mWRZrmQ6bQJp7yxHMEOIwj6B/VlOONxttVGkWY0zdPl0glYPJel3gFDmsoJTEF+9uISuoW/p43HV3StrZpgUkLu63mKTidP/56rSctKDBKEgwTljC99/OrC7sP5oE5l/0NYipLd1HVccizzdBrdxy5jRE="
+  upload_docs: no
+  on:
+    repo: ajdawson/eofs
+    tags: true
+    condition: '$SUITE_TYPE == "deploy"'
+
+script:
+  # Fail on error to avoid building documentation when the tests don't pass
+  - set -e
+
+  # Run the test suite
+  - pytest -vrsx
+
+  # Deploy the documentation. By default doctr only works on the master
+  # branch. We also want to deploy when building a tag, which requires
+  # post-processing to update the "latest" symlink.
+  - if [[ $SUITE_TYPE = "deploy" ]]; then
+      cd doc && make html && cd ..;
+      doctr -V;
+      if [[ -n "$TRAVIS_TAG" ]]; then
+        doctr deploy --build-tags --command './update_links.py && git add latest' "${TRAVIS_TAG%.*}";
+      else
+        doctr deploy dev;
+      fi;
+    fi
+
+notifications:
+    email: false

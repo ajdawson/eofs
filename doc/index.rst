@@ -7,55 +7,65 @@
    userguide/index
    examples/index
    api/index
-   downloads
+   changelog
+   devguide/index
 
 
 Package description
 ===================
 
-`eofs` is a Python package for EOF analysis of spatial-temporal data, some of its key features are:
+`eofs` is a Python package for EOF analysis of spatial-temporal data.
+Using EOFs (empirical orthogonal functions) is a common technique to decompose a signal varying in time and space into a form that is easier to interpret in terms of spatial and temporal variance.
+Some of the key features of `eofs` are:
 
 * **Suitable for large data sets:** computationally efficient for the large output data sets of modern climate models.
 * **Transparent handling of missing values:** missing values are removed automatically during computations and placed back into output fields.
-* **Automatic metadata:** metadata from input fields is used to construct metadata for output fields (requires the `cdms2` module from CDAT_ or the iris_ data analysis package).
+* **Automatic metadata:** metadata from input fields is used to construct metadata for output fields.
 * **No Compiler required:** a fast implementation written in pure Python using the power of numpy_, no Fortran or C dependencies.
 
 
 Download and installation
 -------------------------
 
-Released versions of `eofs` can be downloaded from the :doc:`downloads` page.
-After downloading the source code archive, unzip it and change into the unzipped archive's directory, then to install in your home directory:
+The core of the package runs on Python 2 or 3, on Linux, Windows or OSX; basically anywhere Python+NumPy are available.
+The :ref:`cdms <cdms-interface>`, :ref:`iris <iris-interface>`, and :ref:`xarray <xarray-interface>` interfaces are available on all platforms where their respective supporting packages UV-CDAT_, iris_, and xarray_ can be installed.
 
-.. code-block:: bash
+`eofs` can be installed for all platforms using conda_::
 
-   $ python setup.py install --user
+    conda install -c conda-forge eofs
 
-Alternatively you can check out the source code for the development version from the `github repository <https://github.com/ajdawson/eofs>`_.
+or using pip::
+
+    pip install eofs
+
+The source code for released versions of `eofs` can be downloaded from `Github <https://github.com/ajdawson/eofs/releases>`_.
+You must have setuptools_ installed in order to install `eofs` from source.
+After downloading the source code archive, unzip it and change into the unzipped archive's directory, then to install it::
+
+    python setup.py install
+
+You can also check out the source code for the development version from the `github repository <https://github.com/ajdawson/eofs>`_ to access features which are not yet in a release.
 
 
 Getting started
 ---------------
 
-`eofs` provides three interfaces for EOF analysis: one for analysing data contained in `numpy` arrays or masked arrays, suitable for any data set; and two for meta-data aware EOF analysis, suitable for analysing data read from self-describing files, using either the `cdms2` or `iris` packages.
+`eofs` provides various interfaces for EOF analysis: a *standard* interface for analysing data contained in either `numpy` arrays or `dask` arrays, suitable for any data set; and meta-data interfaces suitable for analysing data read from self-describing files, using the `cdms2`, `iris`, or `xarray` packages.
 All the interfaces support the same set of operations.
 
 Regardless of which interface you use, the basic usage is the same.
-The EOF analysis is handled by a solver class.
-The EOF solution is computed when the solver class in instantiated.
+The EOF analysis is handled by a solver class, and the EOF solution is computed when the solver class is created.
 Method calls are then used to retrieve the quantities of interest from the solver class.
 
-The following is a very simple illustrative example which computes the leading 2 EOFs of a temporal spatial field using the `eofs.cdms` interface:
+The following is a very simple illustrative example which computes the leading 2 EOFs of a temporal spatial field using the `eofs.iris` interface:
 
 .. code-block:: python
 
-   import cdms2
-   from eofs.cdms import Eof
+   import iris
+   from eofs.iris import Eof
 
    # read a spatial-temporal field, time must be the first dimension
-   ncin = cdms2.open('sst_monthly.nc')
-   sst = ncin('sst')
-   ncin.close()
+   sst = iris.load_cube('sst_monthly.nc')
 
    # create a solver class, taking advantage of built-in weighting
    solver = Eof(sst, weights='coslat')
@@ -69,61 +79,41 @@ More detailed description of usage are found in the :doc:`userguide/index` or th
 Requirements
 ------------
 
-This package requires as a minimum that you have numpy_ available.
+This package requires as a minimum that you have numpy_ available, and requires setuptools_ for installation.
+The dask_ package is an optional dependency that will be used if `dask.array` is available and `dask` arrays are provided to the solver.
 The `eofs.cdms` meta-data enabled interface can only be used if the `cdms2` module is available.
-This module is distributed as part of the CDAT_ project.
-It is also distributed as part of the cdat-lite_ package.
+This module is distributed as part of the UV-CDAT_ project.
 The `eofs.iris` meta-data enabled interface can only be used if the iris_ package is available at version 1.2 or higher.
+The `eofs.xarray` meta-data enabled interface can only be used if the xarray_ package is installed.
 
 
-Compatibility with **eof2**
----------------------------
+Citation
+--------
 
-See the :doc:`userguide/eof2_compatibility` section of the :doc:`userguide/index`.
+If you use eofs in published research, please cite it by referencing the `peer-reviewed paper <http://doi.org/10.5334/jors.122>`_.
+You can additionally cite the `Zenodo DOI <http://dx.doi.org/10.5281/zenodo.46871>`_ if you need to cite a particular version (but please also cite the paper, it helps me justify my time working on this and similar projects).
 
 
 Developing and contributing
 ---------------------------
 
-All development is done through `Github <http://github.com/ajdawson/eofs>`_. To check out the latest sources run:
-
-.. code-block:: bash
-
-   $ git clone git://github.com/ajdawson/eofs.git
-
-It is always a good idea to run the tests during development, to do so:
-
-.. code-block:: bash
-
-   $ cd eofs
-   $ python tests.py
-
-Running the tests requires nose_.
-
-Bug reports and feature requests should be filed using the Github issues_ system.
-If you have code you would like to contribute, fork the `repository <http://github.com/ajdawson/eofs>`_ on Github, do the work on a feature branch of your fork, push your feature branch to *your* Github fork, and send a pull request.
+Contributions big or small are welcomed from anyone with an interest in the project.
+Bug reports and feature requests can be filed using the Github issues_ system.
+If you would like to contribute code or documentation please see the :doc:`devguide/index`.
 
 
-History
--------
+.. _UV-CDAT: http://uv-cdat.llnl.gov
 
-`eofs` is the successor to eof2_.
-`eof2` was always written to be part of CDAT which already had a package called `eof`, hence the name `eof2`.
-When support for `iris` was added it didn't make sense to call the package `eof2` anymore, and `eofs` was created.
-`eofs` is much more than just a name change.
-The package is restructured to make it easier to add new meta-data interfaces, and a comprehensive set of tests has been added to ensure that the package remains stable when new features are added.
-
-
-.. _CDAT: http://uv-cdat.llnl.gov
+.. _dask: https://dask.org
 
 .. _iris: http://scitools.org.uk/iris
 
-.. _numpy: http://numpy.scipy.org
+.. _xarray: http://xarray.pydata.org
 
-.. _cdat-lite: http://proj.badc.rl.ac.uk/cedaservices/wiki/CdatLite
+.. _numpy: http://www.numpy.org
 
-.. _nose: https://nose.readthedocs.org/en/latest/
+.. _setuptools: https://pypi.python.org/pypi/setuptools
 
-.. _issues: http://github.com/ajdawson/eofs/issues?state=open
+.. _issues: http://github.com/ajdawson/eofs/issues
 
-.. _eof2: http://ajdawson.github.com/eof2
+.. _conda: http://conda.pydata.org/docs/

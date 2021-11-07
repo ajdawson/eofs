@@ -1,5 +1,5 @@
 """Supplementary tools useful for multiple interfaces."""
-# (c) Copyright 2013 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2013-2016 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -15,7 +15,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
-from __future__ import absolute_import
+from __future__ import (absolute_import, division, print_function)  # noqa
 
 
 def covcor_dimensions(pc_dims, field_dims):
@@ -29,5 +29,5 @@ def covcor_dimensions(pc_dims, field_dims):
         pc_dim = pc_dims[1]
     except IndexError:
         pc_dim = None
-    covcor_dims = filter(None, [pc_dim] + spatial_dims)
+    covcor_dims = [d for d in [pc_dim] + spatial_dims if d is not None]
     return covcor_dims

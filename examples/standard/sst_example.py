@@ -8,10 +8,17 @@ El Nino and La Nina events.
 
 This example uses the plain numpy interface.
 
+Additional requirements for this example:
+
+    * netCDF4 (http://unidata.github.io/netcdf4-python/)
+    * matplotlib (http://matplotlib.org/)
+    * cartopy (http://scitools.org.uk/cartopy/)
+
 """
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
 from netCDF4 import Dataset
 import matplotlib.pyplot as plt
-from mpl_toolkits.basemap import Basemap
 import numpy as np
 
 from eofs.standard import Eof
@@ -40,13 +47,12 @@ eof1 = solver.eofsAsCorrelation(neofs=1)
 pc1 = solver.pcs(npcs=1, pcscaling=1)
 
 # Plot the leading EOF expressed as correlation in the Pacific domain.
-m = Basemap(projection='cyl', llcrnrlon=120, llcrnrlat=-20,
-        urcrnrlon=260, urcrnrlat=60)
-x, y = m(*np.meshgrid(lons, lats))
 clevs = np.linspace(-1, 1, 11)
-m.contourf(x, y, eof1.squeeze(), clevs, cmap=plt.cm.RdBu_r)
-m.drawcoastlines()
-cb = plt.colorbar(orientation='horizontal')
+ax = plt.axes(projection=ccrs.PlateCarree(central_longitude=190))
+fill = ax.contourf(lons, lats, eof1.squeeze(), clevs,
+                   transform=ccrs.PlateCarree(), cmap=plt.cm.RdBu_r)
+ax.add_feature(cfeature.LAND, facecolor='w', edgecolor='k')
+cb = plt.colorbar(fill, orientation='horizontal')
 cb.set_label('correlation coefficient', fontsize=12)
 plt.title('EOF1 expressed as correlation', fontsize=16)
 

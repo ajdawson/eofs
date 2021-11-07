@@ -1,5 +1,5 @@
 """Utilities for testing the `eofs` package."""
-# (c) Copyright 2013 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2013-2016 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -15,6 +15,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
+from __future__ import (absolute_import, division, print_function)  # noqa
+
 import numpy as np
 try:
     from iris.cube import Cube
@@ -54,9 +56,9 @@ def __tomasked(*args):
 
 def error(a, b):
     """Compute the error between two arrays.
-    
+
     Computes the RMSD normalized by the range of the second input.
-    
+
     """
     a, b = __tomasked(a, b)
     return np.sqrt((a - b)**2).mean() / (np.max(b) - np.min(b))
@@ -64,38 +66,42 @@ def error(a, b):
 
 def sign_adjustments(eofset, refeofset):
     """Sign adjustments for EOFs/PCs.
-    
+
     Create a matrix of sign weights used for adjusting the sign of a set
     of EOFs or PCs to the sign of a reference set.
-    
+
     The first dimension is assumed to be modes.
-    
+
     **Arguments:**
-    
+
     *eofset*
         Set of EOFs.
-    
+
     *refeofset*
         Reference set of EOFs.
-    
+
     """
     if eofset.shape != refeofset.shape:
         raise ValueError('input set has different shape from reference set')
     eofset, refeofset = __tomasked(eofset, refeofset)
     nmodes = eofset.shape[0]
     signs = np.ones([nmodes])
-    shape = np.ones(eofset.ndim)
-    shape[0] = nmodes
-    eofset = eofset.reshape([nmodes, np.prod(eofset.shape[1:])])
-    refeofset = refeofset.reshape([nmodes, np.prod(refeofset.shape[1:])])
-    for mode in xrange(nmodes):
+    shape = [nmodes] + [1] * (eofset.ndim - 1)
+    eofset = eofset.reshape([nmodes, np.prod(eofset.shape[1:], dtype=np.int)])
+    refeofset = refeofset.reshape([nmodes,
+                                   np.prod(refeofset.shape[1:],
+                                           dtype=np.int)])
+    for mode in range(nmodes):
         i = 0
         try:
-            while _close(eofset[mode,i], 0.) or _close(refeofset[mode,i], 0.):
+            while _close(eofset[mode, i], 0.) or \
+                  _close(refeofset[mode, i], 0.) \
+                  or np.ma.is_masked(eofset[mode, i]) or \
+                  np.ma.is_masked(refeofset[mode, i]):
                 i += 1
         except IndexError:
             i = 0
-        if np.sign(eofset[mode,i]) != np.sign(refeofset[mode,i]):
+        if np.sign(eofset[mode, i]) != np.sign(refeofset[mode, i]):
             signs[mode] = -1
     return signs.reshape(shape)
 

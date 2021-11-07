@@ -8,17 +8,24 @@ El Nino and La Nina events.
 
 This example uses the metadata-retaining cdms2 interface.
 
+Additional requirements for this example:
+
+    * cdms2 (http://uvcdat.llnl.gov/)
+    * matplotlib (http://matplotlib.org/)
+    * cartopy (http://scitools.org.uk/cartopy/)
+
 """
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
 import cdms2
 import matplotlib.pyplot as plt
-from mpl_toolkits.basemap import Basemap
 import numpy as np
 
 from eofs.cdms import Eof
 from eofs.examples import example_data_path
 
 
-# Read SST anomalies using the cdms2 module from CDAT. The file contains
+# Read SST anomalies using the cdms2 module from UV-CDAT. The file contains
 # November-March averages of SST anomaly in the central and northern Pacific.
 filename = example_data_path('sst_ndjfm_anom.nc')
 ncin = cdms2.open(filename, 'r')
@@ -36,21 +43,20 @@ eof1 = solver.eofsAsCorrelation(neofs=1)
 pc1 = solver.pcs(npcs=1, pcscaling=1)
 
 # Plot the leading EOF expressed as correlation in the Pacific domain.
-m = Basemap(projection='cyl', llcrnrlon=120, llcrnrlat=-20,
-        urcrnrlon=260, urcrnrlat=60)
 lons, lats = eof1.getLongitude()[:], eof1.getLatitude()[:]
-x, y = m(*np.meshgrid(lons, lats))
 clevs = np.linspace(-1, 1, 11)
-m.contourf(x, y, eof1(squeeze=True), clevs, cmap=plt.cm.RdBu_r)
-m.drawcoastlines()
-cb = plt.colorbar(orientation='horizontal')
+ax = plt.axes(projection=ccrs.PlateCarree(central_longitude=190))
+fill = ax.contourf(lons, lats, eof1(squeeze=True).data, clevs,
+                   transform=ccrs.PlateCarree(), cmap=plt.cm.RdBu_r)
+ax.add_feature(cfeature.LAND, facecolor='w', edgecolor='k')
+cb = plt.colorbar(fill, orientation='horizontal')
 cb.set_label('correlation coefficient', fontsize=12)
 plt.title('EOF1 expressed as correlation', fontsize=16)
 
 # Plot the leading PC time series.
 plt.figure()
 years = range(1962, 2012)
-plt.plot(years, pc1, color='b', linewidth=2)
+plt.plot(years, pc1.data, color='b', linewidth=2)
 plt.axhline(0, color='k')
 plt.title('PC1 Time Series')
 plt.xlabel('Year')
@@ -59,4 +65,3 @@ plt.xlim(1962, 2012)
 plt.ylim(-3, 3)
 
 plt.show()
-

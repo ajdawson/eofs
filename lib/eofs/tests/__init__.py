@@ -1,5 +1,5 @@
 """Test for the `eofs` package."""
-# (c) Copyright 2013 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2013-2016 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -15,11 +15,13 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
-from __future__ import absolute_import
+from __future__ import (absolute_import, division, print_function)  # noqa
 
-from nose.tools import assert_almost_equal, assert_true, assert_equal
 import numpy as np
-from numpy.testing.utils import assert_array_almost_equal
+import numpy.ma as ma
+
+
+np.seterr(all='ignore')
 
 
 class EofsTest(object):
@@ -40,7 +42,7 @@ class EofsTest(object):
         """
         return value
 
-    def assert_array_almost_equal(self, a, b, **kwargs):
+    def assert_array_almost_equal(self, a, b):
         """Assertion that two arrays compare almost equal.
 
         The arrays are converted to :class:`numpy.ma.MaskedArray` using
@@ -48,17 +50,18 @@ class EofsTest(object):
         comparison is made.
 
         """
-        assert_array_almost_equal(self._tomasked(a), self._tomasked(b),
-                                  **kwargs)
+        assert ma.allclose(self._tomasked(a), self._tomasked(b))
 
-    def assert_almost_equal(self, a, b, **kwargs):
+    def assert_almost_equal(self, a, b):
         """Assertion that two values compare almost equal."""
-        assert_almost_equal(self._tomasked(a), self._tomasked(b), **kwargs)
+        assert ma.allclose(self._tomasked(a), self._tomasked(b))
 
-    def assert_true(self, cond, **kwargs):
+    def assert_true(self, cond):
         """Assertion that a condition is True."""
-        assert_true(cond, **kwargs)
+        assert cond
 
-    def assert_equal(self, a, b, **kwargs):
-        """Assertion that two values are equal."""
-        assert_equal(a, b, **kwargs)
+    def assert_equal(self, a, b, message=None):
+        if message is not None:
+            assert a == b, message
+        else:
+            assert a == b

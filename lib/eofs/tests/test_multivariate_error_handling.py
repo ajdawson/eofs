@@ -1,5 +1,5 @@
 """Tests for error handling in `eofs.multivariate`."""
-# (c) Copyright 2013 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2013-2016 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -15,18 +15,19 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
-from nose import SkipTest
-from nose.tools import raises
+from __future__ import (absolute_import, division, print_function)  # noqa
+
 import numpy as np
 try:
     import cdms2
 except ImportError:
     pass
+import pytest
 
 import eofs.multivariate as multivariate
 from eofs.tests import EofsTest
 
-from reference import reference_multivariate_solution
+from .reference import reference_multivariate_solution
 
 
 # Create a mapping from interface name to solver class.
@@ -48,31 +49,32 @@ class MVErrorHandlersTest(EofsTest):
     @classmethod
     def setup_class(cls):
         try:
-            cls.solution = reference_multivariate_solution(cls.interface, cls.weights)
+            cls.solution = reference_multivariate_solution(cls.interface,
+                                                           cls.weights)
         except ValueError:
-            raise SkipTest('library component not available '
-                           'for {!s} interface'.format(cls.interface))
+            pytest.skip('missing dependencies required to test '
+                        'the {!s} interface'.format(cls.interface))
         cls.neofs = cls.solution['eigenvalues'].shape[0]
         try:
-            cls.solver = solvers[cls.interface](cls.solution['sst'],
-                                                weights=cls.solution['weights'])
+            cls.solver = solvers[cls.interface](
+                cls.solution['sst'], weights=cls.solution['weights'])
         except KeyError:
-            raise SkipTest('library component not available '
-                           'for {!s} interface'.format(cls.interface))
+            pytest.skip('missing dependencies required to test '
+                        'the {!s} interface'.format(cls.interface))
 
-    @raises(ValueError)
     def test_projectField_wrong_number_fields(self):
-        pcs  = self.solver.projectField([self.solution['sst'][0]])
+        with pytest.raises(ValueError):
+            pcs = self.solver.projectField([self.solution['sst'][0]])
 
-    @raises(ValueError)
     def testProjectField_time_dimension_mixture(self):
         sst1, sst2 = self.solution['sst']
         sst1 = sst1[0]
         sst2 = sst2[0:1]
-        pcs = self.solver.projectField([sst1, sst2])
+        with pytest.raises(ValueError):
+            pcs = self.solver.projectField([sst1, sst2])
 
 
-#-----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Error Handler tests for the standard interface
 
 
@@ -81,7 +83,7 @@ class TestErrorHandlersStandard(MVErrorHandlersTest):
     weights = 'equal'
 
 
-#-----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Error Handler tests for the cdms interface
 
 
@@ -89,19 +91,19 @@ class TestErrorHandlersCDMS(MVErrorHandlersTest):
     interface = 'cdms'
     weights = 'equal'
 
-    @raises(TypeError)
     def test_projectField_wrong_input_type(self):
         solution = reference_multivariate_solution('standard', self.weights)
-        pcs = self.solver.projectField(solution['sst'])
+        with pytest.raises(TypeError):
+            pcs = self.solver.projectField(solution['sst'])
 
-    @raises(ValueError)
     def test_projectField_time_dimension_not_first(self):
         sst1, sst2 = self.solution['sst']
         sst1 = sst1.reorder('-t')
-        pcs = self.solver.projectField([sst1, sst2])
+        with pytest.raises(ValueError):
+            pcs = self.solver.projectField([sst1, sst2])
 
 
-#-----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Error Handler tests for the iris interface
 
 
@@ -109,19 +111,19 @@ class TestErrorHandlersIris(MVErrorHandlersTest):
     interface = 'iris'
     weights = 'equal'
 
-    @raises(TypeError)
     def test_projectField_wrong_input_type(self):
         solution = reference_multivariate_solution('standard', self.weights)
-        pcs = self.solver.projectField(solution['sst'])
+        with pytest.raises(TypeError):
+            pcs = self.solver.projectField(solution['sst'])
 
-    @raises(ValueError)
     def test_projectField_time_dimension_not_first(self):
         sst1, sst2 = self.solution['sst']
         sst1.transpose([1, 2, 0])
-        pcs = self.solver.projectField([sst1, sst2])
+        with pytest.raises(ValueError):
+            pcs = self.solver.projectField([sst1, sst2])
 
 
-#-----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Constructor tests for the standard interface
 
 
@@ -132,30 +134,30 @@ class TestConstructorStandard(EofsTest):
     def setup_class(cls):
         cls.solver_class = solvers['standard']
 
-    @raises(ValueError)
     def test_input_first_dimension_different(self):
         solution = reference_multivariate_solution('standard', 'equal')
         sst1, sst2 = solution['sst']
-        sst1 = sst1[0:10]
-        sst2 = sst2[0:11]
-        solver = self.solver_class([sst1, sst2])
+        sst1 = sst1[0:3]
+        sst2 = sst2[0:4]
+        with pytest.raises(ValueError):
+            solver = self.solver_class([sst1, sst2])
 
-    @raises(ValueError)
     def test_wrong_number_weights(self):
         solution = reference_multivariate_solution('standard', 'area')
         weights1, weights2 = solution['weights']
-        solver = self.solver_class(solution['sst'], weights=[weights1])
+        with pytest.raises(ValueError):
+            solver = self.solver_class(solution['sst'], weights=[weights1])
 
-    @raises(ValueError)
     def test_incompatible_weights(self):
         solution = reference_multivariate_solution('standard', 'area')
         weights1, weights2 = solution['weights']
         weights2 = weights2[..., :-1]
-        solver = self.solver_class(solution['sst'],
-                                   weights=[weights1, weights2])
+        with pytest.raises(ValueError):
+            solver = self.solver_class(solution['sst'],
+                                       weights=[weights1, weights2])
 
 
-#-----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Constructor tests for the cdms interface
 
 
@@ -167,36 +169,36 @@ class TestConstructorCDMS(EofsTest):
         try:
             cls.solver_class = solvers['cdms']
         except KeyError:
-            raise SkipTest('library component not available '
-                           'for cdms interface')
+            pytest.skip('missing dependencies required to test '
+                        'the cdms interface')
 
-    @raises(ValueError)
     def test_wrong_number_weights(self):
         solution = reference_multivariate_solution('cdms', 'area')
         weights1, weights2 = solution['weights']
-        solver = self.solver_class(solution['sst'], weights=[weights1])
+        with pytest.raises(ValueError):
+            solver = self.solver_class(solution['sst'], weights=[weights1])
 
-    @raises(TypeError)
     def test_wrong_input_type(self):
         solution = reference_multivariate_solution('standard', 'equal')
-        solver = self.solver_class(solution['sst'])
+        with pytest.raises(TypeError):
+            solver = self.solver_class(solution['sst'])
 
-    @raises(ValueError)
     def test_input_time_dimension_not_first(self):
         solution = reference_multivariate_solution('cdms', 'equal')
         sst1, sst2 = solution['sst']
         sst1 = sst1.reorder('-t')
-        solver = self.solver_class([sst1, sst2])
+        with pytest.raises(ValueError):
+            solver = self.solver_class([sst1, sst2])
 
-    @raises(ValueError)
     def test_input_no_spatial_dimensions(self):
         solution = reference_multivariate_solution('cdms', 'equal')
         sst1, sst2 = solution['sst']
         sst1 = sst1[:, 0, 0]
-        solver = self.solver_class([sst1, sst2])
+        with pytest.raises(ValueError):
+            solver = self.solver_class([sst1, sst2])
 
 
-#-----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Constructor tests for the standard interface
 
 
@@ -208,30 +210,30 @@ class TestConstructorIris(EofsTest):
         try:
             cls.solver_class = solvers['iris']
         except KeyError:
-            raise SkipTest('library component not available '
-                           'for iris interface')
+            pytest.skip('missing dependencies required to test '
+                        'the iris interface')
 
-    @raises(ValueError)
     def test_wrong_number_weights(self):
         solution = reference_multivariate_solution('iris', 'area')
         weights1, weights2 = solution['weights']
-        solver = self.solver_class(solution['sst'], weights=[weights1])
+        with pytest.raises(ValueError):
+            solver = self.solver_class(solution['sst'], weights=[weights1])
 
-    @raises(TypeError)
     def test_wrong_input_type(self):
         solution = reference_multivariate_solution('standard', 'equal')
-        solver = self.solver_class(solution['sst'])
+        with pytest.raises(TypeError):
+            solver = self.solver_class(solution['sst'])
 
-    @raises(ValueError)
     def test_input_time_dimension_not_first(self):
         solution = reference_multivariate_solution('iris', 'equal')
         sst1, sst2 = solution['sst']
         sst1.transpose([1, 2, 0])
-        solver = self.solver_class([sst1, sst2])
+        with pytest.raises(ValueError):
+            solver = self.solver_class([sst1, sst2])
 
-    @raises(ValueError)
     def test_input_no_spatial_dimensions(self):
         solution = reference_multivariate_solution('iris', 'equal')
         sst1, sst2 = solution['sst']
         sst1 = sst1[:, 0, 0]
-        solver = self.solver_class([sst1, sst2])
+        with pytest.raises(ValueError):
+            solver = self.solver_class([sst1, sst2])

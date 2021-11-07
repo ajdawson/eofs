@@ -8,11 +8,17 @@ El Nino and La Nina events.
 
 This example uses the metadata-retaining iris interface.
 
+Additional requirements for this example:
+
+    * iris (http://scitools.org.uk/iris/)
+    * matplotlib (http://matplotlib.org/)
+    * cartopy (http://scitools.org.uk/cartopy/)
+
 """
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
 import iris
 import iris.plot as iplt
-import cartopy
-import cartopy.crs as ccrs
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -39,14 +45,14 @@ pc1 = solver.pcs(npcs=1, pcscaling=1)
 clevs = np.linspace(-1, 1, 11)
 ax = plt.axes(projection=ccrs.PlateCarree(central_longitude=190))
 fill = iplt.contourf(eof1[0], clevs, cmap=plt.cm.RdBu_r)
-ax.add_feature(cartopy.feature.LAND, facecolor='w', edgecolor='k')
+ax.add_feature(cfeature.LAND, facecolor='w', edgecolor='k')
 cb = plt.colorbar(fill, orientation='horizontal')
 cb.set_label('correlation coefficient', fontsize=12)
 ax.set_title('EOF1 expressed as correlation', fontsize=16)
 
 # Plot the leading PC time series.
 plt.figure()
-iplt.plot(pc1, coords=['time'], color='b', linewidth=2)
+iplt.plot(pc1[:, 0], color='b', linewidth=2)
 ax = plt.gca()
 ax.axhline(0, color='k')
 ax.set_ylim(-3, 3)

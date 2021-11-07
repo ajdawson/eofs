@@ -1,5 +1,5 @@
 """Meta-data preserving EOF analysis for `cdms2`."""
-# (c) Copyright 2010-2013 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2010-2015 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -15,11 +15,11 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
-from __future__ import absolute_import
+from __future__ import (absolute_import, division, print_function)  # noqa
+
+import collections
 
 import cdms2
-import numpy as np
-import numpy.ma as ma
 
 from . import standard
 from .tools.cdms import weights_array, cdms2_name
@@ -128,7 +128,7 @@ class Eof(object):
         # are several weighting schemes. The 'area' weighting scheme requires
         # a latitude-longitude grid to be present, the 'cos_lat' scheme only
         # requires a latitude dimension.
-        if weights in ('none', None):
+        if weights is None or weights == 'none':
             # No weights requested, set the weight array to None.
             wtarray = None
         else:
@@ -140,7 +140,7 @@ class Eof(object):
             except AttributeError:
                 # Weights is not a string, assume it is an array.
                 wtarray = weights
-            except ValueError, err:
+            except ValueError as err:
                 # Weights is not recognized, raise an error.
                 raise ValueError(err)
         # Cast the wtarray to the same type as the dataset. This prevents the
@@ -203,7 +203,7 @@ class Eof(object):
 
         """
         pcs = self._solver.pcs(pcscaling, npcs)
-        pcsax = cdms2.createAxis(range(pcs.shape[1]), id='pc')
+        pcsax = cdms2.createAxis(list(range(pcs.shape[1])), id='pc')
         pcsax.long_name = 'pc_number'
         axlist = [self._timeax, pcsax]
         pcs = cdms2.createVariable(pcs, id='pcs', axes=axlist)
@@ -249,7 +249,7 @@ class Eof(object):
         """
         eofs = self._solver.eofs(eofscaling, neofs)
         eofs.fill_value = self._missing_value
-        eofax = cdms2.createAxis(range(len(eofs)), id='eof')
+        eofax = cdms2.createAxis(list(range(len(eofs))), id='eof')
         eofax.long_name = 'eof_number'
         axlist = [eofax] + self._channels
         eofs = cdms2.createVariable(eofs,
@@ -297,7 +297,7 @@ class Eof(object):
         """
         eofs = self._solver.eofsAsCorrelation(neofs)
         eofs.fill_value = self._missing_value
-        eofax = cdms2.createAxis(range(len(eofs)), id='eof')
+        eofax = cdms2.createAxis(list(range(len(eofs))), id='eof')
         eofax.long_name = 'eof_number'
         axlist = [eofax] + self._channels
         eofs = cdms2.createVariable(eofs,
@@ -359,7 +359,7 @@ class Eof(object):
         """
         eofs = self._solver.eofsAsCovariance(neofs, pcscaling)
         eofs.fill_value = self._missing_value
-        eofax = cdms2.createAxis(range(len(eofs)), id='eof')
+        eofax = cdms2.createAxis(list(range(len(eofs))), id='eof')
         axlist = [eofax] + self._channels
         eofs = cdms2.createVariable(eofs,
                                     id='eofs_cov',
@@ -398,7 +398,7 @@ class Eof(object):
 
         """
         lambdas = self._solver.eigenvalues(neigs=neigs)
-        eofax = cdms2.createAxis(range(len(lambdas)), id='eigenvalue')
+        eofax = cdms2.createAxis(list(range(len(lambdas))), id='eigenvalue')
         eofax.long_name = 'eigenvalue_number'
         axlist = [eofax]
         lambdas = cdms2.createVariable(lambdas, id='eigenvalues', axes=axlist)
@@ -439,7 +439,7 @@ class Eof(object):
 
         """
         vfrac = self._solver.varianceFraction(neigs=neigs)
-        eofax = cdms2.createAxis(range(len(vfrac)), id='eigenvalue')
+        eofax = cdms2.createAxis(list(range(len(vfrac))), id='eigenvalue')
         eofax.long_name = 'eigenvalue_number'
         axlist = [eofax]
         vfrac = cdms2.createVariable(vfrac, id='variance_fractions',
@@ -513,7 +513,7 @@ class Eof(object):
 
         """
         typerrs = self._solver.northTest(neigs=neigs, vfscaled=vfscaled)
-        eofax = cdms2.createAxis(range(len(typerrs)), id='eigenvalue')
+        eofax = cdms2.createAxis(list(range(len(typerrs))), id='eigenvalue')
         eofax.long_name = 'eigenvalue_number'
         axlist = [eofax]
         typerrs = cdms2.createVariable(typerrs,
@@ -534,6 +534,9 @@ class Eof(object):
 
         *neofs*
             Number of EOFs to use for the reconstruction.
+            Alternatively this argument can be an iterable of mode
+            numbers (where the first mode is 1) in order to facilitate
+            reconstruction with arbitrary modes.
 
         **Returns:**
 
@@ -545,7 +548,11 @@ class Eof(object):
 
         Reconstruct the input field using 3 EOFs::
 
-            reconstruction = solver.reconstructedField(neofs=3)
+            reconstruction = solver.reconstructedField(3)
+
+        Reconstruct the input field using EOFs 1, 2 and 5::
+
+            reconstruction = solver.reconstuctedField([1, 2, 5])
 
         """
         rfield = self._solver.reconstructedField(neofs)
@@ -555,8 +562,12 @@ class Eof(object):
                                       id=self._dataset_id,
                                       axes=axlist,
                                       fill_value=self._missing_value)
-        rfield.long_name = '{:s}_reconstructed_with_{:d}_EOFs'.format(
-            self._dataset_name, neofs)
+        if isinstance(neofs, collections.Iterable):
+            name_part = 'EOFs_{}'.format('_'.join([str(e) for e in neofs]))
+        else:
+            name_part = '{:d}_EOFs'.format(neofs)
+        rfield.long_name = '{:s}_reconstructed_with_{:s}'.format(
+            self._dataset_name, name_part)
         rfield.neofs = neofs
         return rfield
 
@@ -630,13 +641,13 @@ class Eof(object):
         # Construct the required axes.
         if pcs.ndim == 2:
             # 2D PCs require a time axis and a PC axis.
-            pcsax = cdms2.createAxis(range(pcs.shape[1]), id='pc')
+            pcsax = cdms2.createAxis(list(range(pcs.shape[1])), id='pc')
             pcsax.long_name = 'pc_number'
             timeax = field.getAxis(0)  # time is assumed to be first anyway
             axlist = [timeax, pcsax]
         else:
             # 1D PCs require only a PC axis.
-            pcsax = cdms2.createAxis(range(pcs.shape[0]), id='pc')
+            pcsax = cdms2.createAxis(list(range(pcs.shape[0])), id='pc')
             pcsax.long_name = 'pc_number'
             axlist = [pcsax]
         # Apply meta data to the projected PCs.

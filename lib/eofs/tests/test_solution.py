@@ -1,5 +1,5 @@
 """Test `eofs` computations against reference solutions."""
-# (c) Copyright 2013 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2013-2016 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -15,18 +15,21 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
-from nose import SkipTest
+from __future__ import (absolute_import, division, print_function)  # noqa
+
 import numpy as np
+import numpy.ma as ma
 try:
     from iris.cube import Cube
-except:
+except ImportError:
     pass
+import pytest
 
 import eofs
 from eofs.tests import EofsTest
 
-from utils import sign_adjustments
-from reference import reference_solution
+from .utils import sign_adjustments
+from .reference import reference_solution
 
 
 # Create a mapping from interface name to solver class.
@@ -37,6 +40,10 @@ except AttributeError:
     pass
 try:
     solvers['iris'] = eofs.iris.Eof
+except AttributeError:
+    pass
+try:
+    solvers['xarray'] = eofs.xarray.Eof
 except AttributeError:
     pass
 
@@ -52,8 +59,8 @@ class SolutionTest(EofsTest):
         try:
             cls.solution = reference_solution(cls.interface, cls.weights)
         except ValueError:
-            raise SkipTest('library component not available '
-                           'for {!s} interface'.format(cls.interface))
+            pytest.skip('missing dependencies required to test '
+                        'the {!s} interface'.format(cls.interface))
         cls.modify_solution()
         cls.neofs = cls.solution['eigenvalues'].shape[0]
         if cls.alternate_weights_arg is not None:
@@ -64,8 +71,8 @@ class SolutionTest(EofsTest):
             cls.solver = solvers[cls.interface](cls.solution['sst'],
                                                 weights=weights)
         except KeyError:
-            raise SkipTest('library component not available '
-                           'for {!s} interface'.format(cls.interface))
+            pytest.skip('missing dependencies required to test '
+                        'the {!s} interface'.format(cls.interface))
 
     @classmethod
     def modify_solution(cls):
@@ -76,12 +83,8 @@ class SolutionTest(EofsTest):
             self.solver.eigenvalues(neigs=self.neofs),
             self.solution['eigenvalues'])
 
-    def test_eofs(self):
-        # generate EOF tests for each value of the scaling parameter
-        for eofscaling in (0, 1, 2):
-            yield self.check_eofs, eofscaling
-
-    def check_eofs(self, eofscaling):
+    @pytest.mark.parametrize('eofscaling', (0, 1, 2))
+    def test_eofs(self, eofscaling):
         # EOFs should match the (possibly scaled) reference solution
         eofs = self._tomasked(self.solver.eofs(neofs=self.neofs,
                                                eofscaling=eofscaling))
@@ -94,18 +97,13 @@ class SolutionTest(EofsTest):
             reofs *= np.sqrt(reigs)[:, np.newaxis, np.newaxis]
         self.assert_array_almost_equal(eofs, reofs)
 
-    def test_eofs_orthogonal(self):
-        # generate EOF orthogonality tests for each value of the scaling
-        # parameter
-        for eofscaling in (0, 1, 2):
-            yield self.check_eofs_orthogonal, eofscaling
-
-    def check_eofs_orthogonal(self, eofscaling):
+    @pytest.mark.parametrize('eofscaling', (0, 1, 2))
+    def test_eofs_orthogonal(self, eofscaling):
         # EOFs should be mutually orthogonal
         eofs = self._tomasked(self.solver.eofs(neofs=self.neofs,
                                                eofscaling=eofscaling))
         eofs = eofs.compressed()
-        ns = eofs.shape[0] / self.neofs
+        ns = eofs.shape[0] // self.neofs
         eofs = eofs.reshape([self.neofs, ns])
         dot = np.dot(eofs, eofs.T)
         residual = dot - np.diag(dot.diagonal())
@@ -134,12 +132,8 @@ class SolutionTest(EofsTest):
         eofs = self._tomasked(self.solver.eofsAsCorrelation(neofs=self.neofs))
         self.assert_true(np.abs(eofs).max() < 1.000000001)
 
-    def test_pcs(self):
-        # generate PCs tests for each value of the scaling parameter
-        for pcscaling in (0, 1, 2):
-            yield self.check_pcs, pcscaling
-
-    def check_pcs(self, pcscaling):
+    @pytest.mark.parametrize('pcscaling', (0, 1, 2))
+    def test_pcs(self, pcscaling):
         # PCs should match the (possibly scaled) reference solution
         pcs = self._tomasked(self.solver.pcs(npcs=self.neofs,
                                              pcscaling=pcscaling))
@@ -152,12 +146,8 @@ class SolutionTest(EofsTest):
             rpcs *= np.sqrt(reigs)
         self.assert_array_almost_equal(pcs, rpcs)
 
-    def test_pcs_uncorrelated(self):
-        # generate PC correlation tests for each value of the scaling parameter
-        for pcscaling in (0, 1, 2):
-            yield self.check_pcs_uncorrelated, pcscaling
-
-    def check_pcs_uncorrelated(self, pcscaling):
+    @pytest.mark.parametrize('pcscaling', (0, 1, 2))
+    def test_pcs_uncorrelated(self, pcscaling):
         # PCs should be uncorrelated in time
         pcs = self._tomasked(self.solver.pcs(npcs=self.neofs,
                                              pcscaling=pcscaling))
@@ -185,12 +175,8 @@ class SolutionTest(EofsTest):
         if weights is not None:
             self.assert_array_almost_equal(weights, self.solution['weights'])
 
-    def test_northTest(self):
-        # generate tests for typical errors in the scaled and non-scaled cases
-        for vfscaled in (True, False):
-            yield self.check_northTest, vfscaled
-
-    def check_northTest(self, vfscaled):
+    @pytest.mark.parametrize('vfscaled', (True, False))
+    def test_northTest(self, vfscaled):
         # typical errors should match the reference solution
         errs = self.solver.northTest(neigs=self.neofs, vfscaled=vfscaled)
         error_name = 'scaled_errors' if vfscaled else 'errors'
@@ -201,13 +187,12 @@ class SolutionTest(EofsTest):
         sst = self.solver.reconstructedField(self.solver.neofs)
         self.assert_array_almost_equal(sst, self.solution['sst'])
 
-    def test_projectField(self):
-        # generate tests for projecting a field onto the EOFs using each value
-        # of the scaling parameter
-        for eofscaling in (0, 1, 2):
-            yield self.check_projectField, eofscaling
+    def test_reconstructedField_arb(self):
+        sst = self.solver.reconstructedField([1, 2, 5])
+        self.assert_array_almost_equal(sst, self.solution['rcon'])
 
-    def check_projectField(self, eofscaling):
+    @pytest.mark.parametrize('eofscaling', (0, 1, 2))
+    def test_projectField(self, eofscaling):
         # original input projected onto the EOFs should match the reference
         # solution PCs
         pcs = self._tomasked(self.solver.projectField(self.solution['sst'],
@@ -238,14 +223,12 @@ class SolutionTest(EofsTest):
         pcs = self._tomasked(
             self.solver.projectField(self.solution['sst'][0],
                                      neofs=self.neofs))
-        print pcs.shape
         rpcs = self._tomasked(self.solution['pcs'])[0]
-        print rpcs.shape
         pcs *= sign_adjustments(pcs.transpose(), rpcs.transpose()).transpose()
         self.assert_array_almost_equal(pcs, rpcs)
 
 
-#-----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Tests for the standard interface
 
 
@@ -284,15 +267,86 @@ class TestStandardMissingValuesAsNaN(StandardSolutionTest):
     def modify_solution(cls):
         for name in cls.solution:
             try:
-                cls.solution[name] = cls.solution[name].filled(fill_value=np.nan)
+                cls.solution[name] = cls.solution[name].filled(
+                    fill_value=np.nan)
             except AttributeError:
                 pass
 
     def _tomasked(self, value):
-        return np.ma.MaskedArray(value, mask=np.isnan(value))
+        return ma.MaskedArray(value, mask=np.isnan(value))
 
 
-#-----------------------------------------------------------------------------
+class TestStandardDask(StandardSolutionTest):
+    weights = 'equal'
+
+    def _tomasked(self, value):
+        return ma.masked_invalid(value)
+
+    @classmethod
+    def modify_solution(cls):
+        # Skip this class if dask not available
+        pytest.importorskip('dask.array')
+        import dask
+
+        sst = cls.solution['sst']
+        da = dask.array.from_array(sst, chunks=(1, -1, -1))
+        dm = dask.array.from_array(sst.mask, chunks=(1, -1, -1))
+        mda = dask.array.ma.masked_array(da, dm)
+
+        cls.solution['sst'] = mda
+
+    def test_source_is_dask(self):
+        # Source dataset should be a dask array
+        import dask
+        assert isinstance(self.solution['sst'], dask.array.Array)
+        assert isinstance(self.solution['sst'].compute(), ma.masked_array)
+
+    def test_solver_data_is_dask(self):
+        # The input to the SVD algorithm should be a dask array
+        import dask
+        assert isinstance(self.solver._data, dask.array.Array)
+
+
+# ----------------------------------------------------------------------------
+# Tests for the xarray interface
+
+
+class XarraySolutionTest(SolutionTest):
+    interface = 'xarray'
+
+    def _tomasked(self, value):
+        try:
+            return ma.masked_invalid(value.values)
+        except AttributeError:
+            return ma.masked_invalid(value)
+
+
+class TestXarrayEqualWeights(XarraySolutionTest):
+    weights = 'equal'
+
+
+class TestXarrayDask(XarraySolutionTest):
+    weights = 'equal'
+
+    @classmethod
+    def modify_solution(cls):
+        # Skip this class if dask not available
+        pytest.importorskip('dask.array')
+
+        cls.solution['sst'] = cls.solution['sst'].chunk({'time': 1})
+
+    def test_source_is_dask(self):
+        # Source dataset should be a dask array
+        import dask
+        assert isinstance(self.solution['sst'].data, dask.array.Array)
+
+    def test_solver_data_is_dask(self):
+        # The input to the SVD algorithm should be a dask array
+        import dask
+        assert isinstance(self.solver._solver._data, dask.array.Array)
+
+
+# ----------------------------------------------------------------------------
 # Tests for the cdms interface
 
 
@@ -310,27 +364,27 @@ class CDMSSolutionTest(SolutionTest):
 class TestCDMSEqualWeights(CDMSSolutionTest):
     """Equal grid weighting."""
     weights = 'equal'
-    
+
 
 class TestCDMSLatitudeWeights(CDMSSolutionTest):
     """
     Square-root of cosine of latitude grid weighting (automatically
     generated weights).
-    
+
     """
     weights = 'latitude'
     alternate_weights_arg = 'coslat'
-    
+
 
 class TestCDMSAreaWeights(CDMSSolutionTest):
     """
     Square-root of normalised grid cell area grid weighting
     (automatically generated weights).
-    
+
     """
     weights = 'area'
     alternate_weights_arg = 'area'
-    
+
 
 class TestCDMSAreaWeightsTransposedGrid(CDMSSolutionTest):
     """
@@ -349,13 +403,14 @@ class TestCDMSAreaWeightsTransposedGrid(CDMSSolutionTest):
         cls.solution['eofscor'] = cls.solution['eofscor'].reorder('-xy')
         cls.solution['eofscov'] = cls.solution['eofscov'].reorder('-xy')
         cls.solution['weights'] = cls.solution['weights'].transpose()
+        cls.solution['rcon'] = cls.solution['rcon'].reorder('-xy')
 
 
 class TestCDMSLatitudeWeightsManual(CDMSSolutionTest):
     """
     Square-root of cosine of latitude grid weighting (weights from
     reference solution).
-    
+
     """
     weights = 'latitude'
 
@@ -369,7 +424,7 @@ class TestCDMSAreaWeightsManual(CDMSSolutionTest):
     weights = 'area'
 
 
-#-----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Tests for the iris interface
 
 
@@ -392,7 +447,7 @@ class TestIrisLatitudeWeights(IrisSolutionTest):
     """
     Square-root of cosine of latitude grid weighting (automatically
     generated weights).
-    
+
     """
     weights = 'latitude'
     alternate_weights_arg = 'coslat'
@@ -402,7 +457,7 @@ class TestIrisAreaWeights(IrisSolutionTest):
     """
     Square-root of normalised grid cell area grid weighting
     (automatically generated weights).
-    
+
     """
     weights = 'area'
     alternate_weights_arg = 'area'
@@ -412,7 +467,7 @@ class TestIrisLatitudeWeightsManual(IrisSolutionTest):
     """
     Square-root of cosine of latitude grid weighting (weights from
     reference solution).
-    
+
     """
     weights = 'latitude'
 

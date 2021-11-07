@@ -1,6 +1,6 @@
 """EOF analysis for data in `numpy` arrays."""
 # (c) Copyright 2000 Jon Saenz, Jesus Fernandez and Juan Zubillaga.
-# (c) Copyright 2010-2013 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2010-2016 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -16,11 +16,18 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
-from __future__ import absolute_import
+from __future__ import (absolute_import, division, print_function)  # noqa
+import collections
 import warnings
 
 import numpy as np
 import numpy.ma as ma
+
+try:
+    import dask.array
+    has_dask = True
+except ImportError:
+    has_dask = False
 
 from .tools.standard import correlation_map, covariance_map
 
@@ -37,10 +44,10 @@ class Eof(object):
         **Arguments:**
 
         *dataset*
-            A `numpy.ndarray` or `numpy.ma.MaskedArray` with two or more
-            dimensions containing the data to be analysed. The first
-            dimension is assumed to represent time. Missing values are
-            permitted, either in the form of a masked array, or
+            A `numpy.ndarray`, `numpy.ma.MaskedArray` or `dask.array.Array`
+            with two or more dimensions containing the data to be analysed.
+            The first dimension is assumed to represent time. Missing
+            values are permitted, either in the form of a masked array, or
             `numpy.nan` values. Missing values must be constant with time
             (e.g., values of an oceanographic field over land).
 
@@ -146,12 +153,26 @@ class Eof(object):
         if not self._valid_nan(self._data):
             raise ValueError('missing values detected in different '
                              'locations at different times')
-        nonMissingIndex = np.where(np.isnan(self._data[0]) == False)[0]
+        nonMissingIndex = np.where(np.logical_not(np.isnan(self._data[0])))[0]
         # Remove missing values from the design matrix.
         dataNoMissing = self._data[:, nonMissingIndex]
+        if dataNoMissing.size == 0:
+            raise ValueError('all input data is missing')
         # Compute the singular value decomposition of the design matrix.
         try:
-            A, Lh, E = np.linalg.svd(dataNoMissing, full_matrices=False)
+            if has_dask and isinstance(dataNoMissing, dask.array.Array):
+                # Use the parallel Dask algorithm
+                dsvd = dask.array.linalg.svd(dataNoMissing)
+                A, Lh, E = (x.compute() for x in dsvd)
+
+                # Trim the arrays (since Dask doesn't support
+                # 'full_matrices=False')
+                A = A[:, :len(Lh)]
+                E = E[:len(Lh), :]
+            else:
+                # Basic numpy algorithm
+                A, Lh, E = np.linalg.svd(dataNoMissing, full_matrices=False)
+
         except (np.linalg.LinAlgError, ValueError):
             raise ValueError('error encountered in SVD, check that missing '
                              'values are in the same places at each time and '
@@ -292,7 +313,7 @@ class Eof(object):
             eof1 = solver.eofs(neofs=1, eofscaling=1)
 
         """
-        if neofs > self.neofs:
+        if neofs is None or neofs > self.neofs:
             neofs = self.neofs
         slicer = slice(0, neofs)
         neofs = neofs or self.neofs
@@ -301,7 +322,6 @@ class Eof(object):
             # No modification. A copy needs to be returned in case it is
             # modified. If no copy is made the internally stored eigenvectors
             # could be modified unintentionally.
-            #rval = self._flatE[slicer].copy()
             rval = flat_eofs
         elif eofscaling == 1:
             # Divide by the square-root of the eigenvalues.
@@ -593,7 +613,9 @@ class Eof(object):
             Number of EOFs to use for the reconstruction. If the
             number of EOFs requested is more than the number that are
             available, then all available EOFs will be used for the
-            reconstruction.
+            reconstruction. Alternatively this argument can be an
+            iterable of mode numbers (where the first mode is 1) in
+            order to facilitate reconstruction with arbitrary modes.
 
         **Returns:**
 
@@ -601,16 +623,25 @@ class Eof(object):
             An array the same shape as the `Eof` input *dataset*
             contaning the reconstruction using *neofs* EOFs.
 
-        **Example:**
+        **Examples:**
 
         Reconstruct the input field using 3 EOFs::
 
-            reconstruction = solver.reconstructedField(neofs=3)
+            reconstruction = solver.reconstructedField(3)
+
+        Reconstruct the input field using EOFs 1, 2 and 5::
+
+            reconstruction = solver.reconstuctedField([1, 2, 5])
 
         """
+        # Determine how the PCs and EOFs will be selected.
+        if isinstance(neofs, collections.Iterable):
+            modes = [m - 1 for m in neofs]
+        else:
+            modes = slice(0, neofs)
         # Project principal components onto the EOFs to compute the
         # reconstructed field.
-        rval = np.dot(self._P[:, :neofs], self._flatE[:neofs])
+        rval = np.dot(self._P[:, modes], self._flatE[modes])
         # Reshape the reconstructed field so it has the same shape as the
         # input data set.
         rval = rval.reshape((self._records,) + self._originalshape)
@@ -710,11 +741,12 @@ class Eof(object):
         if not self._valid_nan(field_flat):
             raise ValueError('missing values detected in different '
                              'locations at different times')
-        nonMissingIndex = np.where(np.isnan(field_flat[0]) == False)[0]
+        nonMissingIndex = np.where(np.logical_not(np.isnan(field_flat[0])))[0]
         field_flat = field_flat[:, nonMissingIndex]
         # Locate the non-missing values in the EOFs and check they match those
         # in the data set, then isolate the non-missing values.
-        eofNonMissingIndex = np.where(np.isnan(self._flatE[0]) == False)[0]
+        eofNonMissingIndex = np.where(
+            np.logical_not(np.isnan(self._flatE[0])))[0]
         if eofNonMissingIndex.shape != nonMissingIndex.shape or \
                 (eofNonMissingIndex != nonMissingIndex).any():
             raise ValueError('field and EOFs have different '

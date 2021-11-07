@@ -15,7 +15,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
-from __future__ import absolute_import
+from __future__ import (absolute_import, division, print_function)  # noqa
 
 import cdms2
 import numpy as np
@@ -146,7 +146,7 @@ def cdms2_name(variable):
              getattr(variable, 'long_name', None),
              getattr(variable, 'id', None)]
     try:
-        return filter(None, names)[0]
+        return [name for name in names if name is not None][0]
     except IndexError:
         return 'dataset'
 

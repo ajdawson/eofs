@@ -77,6 +77,7 @@
 
 {# show the full table of contents in the sidebar #}
 {% block sidebartoc %}
+    <h2>{{ project }} v{{ version }}</h2>
     <h3>{{ _('Table of Contents') }}</h3>
-    {{ toctree() }}
+    {{ toctree(includehidden=True) }}
 {% endblock %}

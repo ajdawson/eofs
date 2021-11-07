@@ -1,0 +1,4 @@
+include README.md
+include COPYING
+include versioneer.py
+include lib/eofs/_version.py

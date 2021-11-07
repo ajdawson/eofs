@@ -1,5 +1,5 @@
 """Meta-data preserving EOF analysis for `iris`."""
-# (c) Copyright 2013 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2013-2016 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -15,16 +15,16 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
-from __future__ import absolute_import
+from __future__ import (absolute_import, division, print_function)  # noqa
+
+import collections
 from copy import copy
 
-import numpy as np
-import numpy.ma as ma
 from iris.cube import Cube
 from iris.coords import DimCoord
 
 from . import standard
-from .tools.iris import coord_and_dim, weights_array
+from .tools.iris import get_time_coord, weights_array, classified_aux_coords
 
 
 class Eof(object):
@@ -101,21 +101,31 @@ class Eof(object):
 
         """
         # Check that the input is an Iris cube.
-        if type(cube) is not Cube:
+        if not isinstance(cube, Cube):
             raise TypeError('the input must be an iris cube')
         # Check for a time coordinate, raise an error if there isn't one.
-        # The coord_and_dim function will raise a ValuerError with a
+        # The get_time_coord function will raise a ValuerError with a
         # useful message so no need to handle it explicitly here.
-        self._time, self._time_dim = coord_and_dim(cube, 'time')
+        _time, self._time_dim = get_time_coord(cube)
+        self._time = copy(_time)
         if self._time_dim != 0:
             raise ValueError('time must be the first dimension, '
                              'consider using the transpose() method')
         # Get the cube coordinates and remove time, leaving just the other
         # dimensions.
-        self._coords = list(copy(cube.dim_coords))
+        self._coords = [copy(coord) for coord in cube.dim_coords]
         self._coords.remove(self._time)
-        if len(self._coords) < 1:
+        if not self._coords:
             raise ValueError('one or more non-time dimensions are required')
+        # Store the auxiliary coordinates from the cube, categorising them into
+        # coordinates spanning time only, coordinates spanning space only, and
+        # coordinates spanning both time and space. This is helpful due to the
+        # natural separation of space and time in EOF analysis. The time and
+        # space spanning coordinates are only useful for reconstruction, as all
+        # other methods return either a temporal field or a spatial field.
+        (self._time_aux_coords,
+         self._space_aux_coords,
+         self._time_space_aux_coords) = classified_aux_coords(cube)
         # Define the weights array for the cube.
         if weights is None:
             wtarray = None
@@ -179,13 +189,18 @@ class Eof(object):
 
         """
         pcs = self._solver.pcs(pcscaling, npcs)
-        pcdim = DimCoord(range(pcs.shape[1]),
+        pcdim = DimCoord(list(range(pcs.shape[1])),
                          var_name='pc',
                          long_name='pc_number')
-        coords = [self._time, pcdim]
-        pcs = Cube(pcs,
-                   dim_coords_and_dims=zip(coords, range(pcs.ndim)),
-                   var_name='pcs', long_name='principal_components')
+        coords = [copy(self._time), pcdim]
+        pcs = Cube(
+            pcs,
+            dim_coords_and_dims=list(zip(coords, list(range(pcs.ndim)))),
+            var_name='pcs',
+            long_name='principal_components')
+        # Add any auxiliary coords spanning time back to the returned cube.
+        for coord, dims in self._time_aux_coords:
+            pcs.add_aux_coord(copy(coord), dims)
         return pcs
 
     def eofs(self, eofscaling=0, neofs=None):
@@ -226,14 +241,18 @@ class Eof(object):
 
         """
         eofs = self._solver.eofs(eofscaling, neofs)
-        eofdim = DimCoord(range(eofs.shape[0]),
+        eofdim = DimCoord(list(range(eofs.shape[0])),
                           var_name='eof',
                           long_name='eof_number')
-        coords = [eofdim] + self._coords
-        eofs = Cube(eofs,
-                    dim_coords_and_dims=zip(coords, range(eofs.ndim)),
-                    var_name='eofs',
-                    long_name='empirical_orthogonal_functions')
+        coords = [eofdim] + [copy(coord) for coord in self._coords]
+        eofs = Cube(
+            eofs,
+            dim_coords_and_dims=list(zip(coords, list(range(eofs.ndim)))),
+            var_name='eofs',
+            long_name='empirical_orthogonal_functions')
+        # Add any auxiliary coordinates spanning space to the returned cube.
+        for coord, dims in self._space_aux_coords:
+            eofs.add_aux_coord(copy(coord), dims)
         return eofs
 
     def eofsAsCorrelation(self, neofs=None):
@@ -273,15 +292,19 @@ class Eof(object):
 
         """
         eofs = self._solver.eofsAsCorrelation(neofs)
-        eofdim = DimCoord(range(eofs.shape[0]),
+        eofdim = DimCoord(list(range(eofs.shape[0])),
                           var_name='eof',
                           long_name='eof_number')
-        coords = [eofdim] + self._coords
-        eofs = Cube(eofs,
-                    dim_coords_and_dims=zip(coords, range(eofs.ndim)),
-                    var_name='eofs',
-                    long_name='correlation_between_pcs_and_{:s}'.format(
-                              self._cube_name))
+        coords = [eofdim] + [copy(coord) for coord in self._coords]
+        eofs = Cube(
+            eofs,
+            dim_coords_and_dims=list(zip(coords, list(range(eofs.ndim)))),
+            var_name='eofs',
+            long_name='correlation_between_pcs_and_{:s}'.format(
+                self._cube_name))
+        # Add any auxiliary coordinates spanning space to the returned cube.
+        for coord, dims in self._space_aux_coords:
+            eofs.add_aux_coord(copy(coord), dims)
         return eofs
 
     def eofsAsCovariance(self, neofs=None, pcscaling=1):
@@ -334,15 +357,19 @@ class Eof(object):
 
         """
         eofs = self._solver.eofsAsCovariance(neofs, pcscaling)
-        eofdim = DimCoord(range(eofs.shape[0]),
+        eofdim = DimCoord(list(range(eofs.shape[0])),
                           var_name='eof',
                           long_name='eof_number')
-        coords = [eofdim] + self._coords
-        eofs = Cube(eofs,
-                    dim_coords_and_dims=zip(coords, range(eofs.ndim)),
-                    var_name='eofs',
-                    long_name='covariance_between_pcs_and_{:s}'.format(
-                              self._cube_name))
+        coords = [eofdim] + [copy(coord) for coord in self._coords]
+        eofs = Cube(
+            eofs,
+            dim_coords_and_dims=list(zip(coords, list(range(eofs.ndim)))),
+            var_name='eofs',
+            long_name='covariance_between_pcs_and_{:s}'.format(
+                self._cube_name))
+        # Add any auxiliary coordinates spanning space to the returned cube.
+        for coord, dims in self._space_aux_coords:
+            eofs.add_aux_coord(copy(coord), dims)
         return eofs
 
     def eigenvalues(self, neigs=None):
@@ -375,14 +402,15 @@ class Eof(object):
 
         """
         lambdas = self._solver.eigenvalues(neigs=neigs)
-        eofdim = DimCoord(range(lambdas.shape[0]),
+        eofdim = DimCoord(list(range(lambdas.shape[0])),
                           var_name='eigenvalue',
                           long_name='eigenvalue_number')
         coords = [eofdim]
-        lambdas = Cube(lambdas,
-                       dim_coords_and_dims=zip(coords, range(lambdas.ndim)),
-                       var_name='eigenvalues',
-                       long_name='eigenvalues')
+        lambdas = Cube(
+            lambdas,
+            dim_coords_and_dims=list(zip(coords, list(range(lambdas.ndim)))),
+            var_name='eigenvalues',
+            long_name='eigenvalues')
         return lambdas
 
     def varianceFraction(self, neigs=None):
@@ -420,14 +448,15 @@ class Eof(object):
 
         """
         vfrac = self._solver.varianceFraction(neigs=neigs)
-        eofdim = DimCoord(range(vfrac.shape[0]),
+        eofdim = DimCoord(list(range(vfrac.shape[0])),
                           var_name='eigenvalue',
                           long_name='eigenvalue_number')
         coords = [eofdim]
-        vfrac = Cube(vfrac,
-                     dim_coords_and_dims=zip(coords, range(vfrac.ndim)),
-                     var_name='variance_fractions',
-                     long_name='variance_fractions')
+        vfrac = Cube(
+            vfrac,
+            dim_coords_and_dims=list(zip(coords, list(range(vfrac.ndim)))),
+            var_name='variance_fractions',
+            long_name='variance_fractions')
         return vfrac
 
     def totalAnomalyVariance(self):
@@ -496,14 +525,15 @@ class Eof(object):
 
         """
         typerrs = self._solver.northTest(neigs=neigs, vfscaled=vfscaled)
-        eofdim = DimCoord(range(typerrs.shape[0]),
+        eofdim = DimCoord(list(range(typerrs.shape[0])),
                           var_name='eigenvalue',
                           long_name='eigenvalue_number')
         coords = [eofdim]
-        typerrs = Cube(typerrs,
-                       dim_coords_and_dims=zip(coords, range(typerrs.ndim)),
-                       var_name='typical_errors',
-                       long_name='typical_errors')
+        typerrs = Cube(
+            typerrs,
+            dim_coords_and_dims=list(zip(coords, list(range(typerrs.ndim)))),
+            var_name='typical_errors',
+            long_name='typical_errors')
         return typerrs
 
     def reconstructedField(self, neofs):
@@ -520,6 +550,9 @@ class Eof(object):
 
         *neofs*
             Number of EOFs to use for the reconstruction.
+            Alternatively this argument can be an iterable of mode
+            numbers (where the first mode is 1) in order to facilitate
+            reconstruction with arbitrary modes.
 
         **Returns:**
 
@@ -531,17 +564,31 @@ class Eof(object):
 
         Reconstruct the input field using 3 EOFs::
 
-            reconstruction = solver.reconstructedField(neofs=3)
+            reconstruction = solver.reconstructedField(3)
+
+        Reconstruct the input field using EOFs 1, 2 and 5::
+
+            reconstruction = solver.reconstuctedField([1, 2, 5])
 
         """
         rfield = self._solver.reconstructedField(neofs)
-        coords = [self._time] + self._coords
-        rfield = Cube(rfield,
-                      dim_coords_and_dims=zip(coords, range(rfield.ndim)),
-                      var_name=self._cube_var_name or 'dataset',
-                      long_name='{:s}_reconstructed_with_{:d}_EOFs'.format(
-                                self._cube_name, neofs))
+        coords = [copy(self._time)] + [copy(coord) for coord in self._coords]
+        if isinstance(neofs, collections.Iterable):
+            name_part = 'EOFs_{}'.format('_'.join([str(e) for e in neofs]))
+        else:
+            name_part = '{}_EOFs'.format(neofs)
+        rfield = Cube(
+            rfield,
+            dim_coords_and_dims=list(zip(coords, list(range(rfield.ndim)))),
+            var_name=self._cube_var_name or 'dataset',
+            long_name='{:s}_reconstructed_with_{:s}'.format(
+                self._cube_name, name_part))
         rfield.attributes.update({'neofs': neofs})
+        # Add any auxiliary coordinates to the returned cube.
+        for coord, dims in (self._time_aux_coords +
+                            self._space_aux_coords +
+                            self._time_space_aux_coords):
+            rfield.add_aux_coord(copy(coord), dims)
         return rfield
 
     def projectField(self, cube, neofs=None, eofscaling=0, weighted=True):
@@ -553,7 +600,7 @@ class Eof(object):
         **Argument:**
 
         *field*
-            A `cdms2` variable containing the field to project onto the
+            An `iris.cube.Cube` containing the field to project onto the
             EOFs. It must have the same corresponding spatial dimensions
             (including missing values in the same places) as the `Eof`
             input *dataset*. It may have a different length time
@@ -603,13 +650,13 @@ class Eof(object):
 
         """
         # Check that the input is an Iris cube.
-        if type(cube) is not Cube:
+        if not isinstance(cube, Cube):
             raise TypeError('the input must be an iris cube')
         cube_name = cube.name(default='dataset').replace(' ', '_')
         has_time = False
         try:
             # A time dimension must be first.
-            time, time_dim = coord_and_dim(cube, 'time')
+            time, time_dim = get_time_coord(cube)
             has_time = True
         except ValueError:
             # No time dimension is also acceptable.
@@ -618,27 +665,33 @@ class Eof(object):
             if time_dim != 0:
                 raise ValueError('time must be the first dimension, '
                                  'consider using the transpose() method')
+            _time_aux_coords, _, _ = classified_aux_coords(cube)
         pcs = self._solver.projectField(cube.data,
                                         neofs=neofs,
                                         eofscaling=eofscaling,
                                         weighted=weighted)
+        # Create the PCs cube.
+        pcs = Cube(pcs,
+                   long_name='{}_pseudo_pcs'.format(cube_name),
+                   var_name='pseudo_pcs')
         # Construct the required dimensions.
         if pcs.ndim == 2:
             # 2D PCs require a time axis and a PC axis.
-            pcdim = DimCoord(range(pcs.shape[1]),
+            pcdim = DimCoord(list(range(pcs.shape[1])),
                              var_name='pc',
                              long_name='pc_number')
-            coords = [time, pcdim]
+            pcs.add_dim_coord(copy(time), 0)
+            pcs.add_dim_coord(pcdim, 1)
+            # Add any time-spanning auxiliary coordinates from the input cube
+            # to the returned PCs.
+            for coord, dims in _time_aux_coords:
+                pcs.add_aux_coord(copy(coord), dims)
         else:
             # 1D PCs require only a PC axis.
-            pcdim = DimCoord(range(pcs.shape[0]),
+            pcdim = DimCoord(list(range(pcs.shape[0])),
                              var_name='pc',
                              long_name='pc_number')
-            coords = [pcdim]
-        pcs = Cube(pcs,
-                   dim_coords_and_dims=zip(coords, range(pcs.ndim)),
-                   var_name='pseudo_pcs',
-                   long_name='{:s}_pseudo_pcs'.format(cube_name))
+            pcs.add_dim_coord(pcdim, 0)
         return pcs
 
     def getWeights(self):

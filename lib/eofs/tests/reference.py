@@ -1,5 +1,5 @@
 """Reference solutions for testing the `eofs` package."""
-# (c) Copyright 2013 Andrew Dawson. All Rights Reserved.
+# (c) Copyright 2013-2016 Andrew Dawson. All Rights Reserved.
 #
 # This file is part of eofs.
 #
@@ -19,16 +19,6 @@ import os
 
 import numpy as np
 import numpy.ma as ma
-try:
-    import cdms2
-except ImportError:
-    pass
-try:
-    from iris.cube import Cube
-    from iris.coords import DimCoord
-    from iris.unit import Unit
-except ImportError:
-    pass
 
 
 def _test_data_path():
@@ -52,7 +42,8 @@ def _tomasked(array):
 
 
 def _read_reference_solution(weights):
-    if weights not in ('equal', 'latitude', 'area', 'area_multi', 'area_multi_mix'):
+    if weights not in ('equal', 'latitude', 'area', 'area_multi',
+                       'area_multi_mix'):
         raise ValueError("invalid weights: '{!s}'".format(weights))
     field_names = ['time',
                    'latitude',
@@ -66,11 +57,160 @@ def _read_reference_solution(weights):
                    'variance.{!s}'.format(weights),
                    'weights.{!s}'.format(weights),
                    'errors.{!s}'.format(weights),
-                   'scaled_errors.{!s}'.format(weights),]
+                   'scaled_errors.{!s}'.format(weights),
+                   'rcon.{!s}'.format(weights)]
     fields = {name.split('.')[0]: _tomasked(_retrieve_test_field(name))
               for name in field_names}
     fields['sst'] -= fields['sst'].mean(axis=0)
     return fields
+
+
+def _wrap_cdms(solution, neofs, time_units):
+    try:
+        import cdms2
+    except ImportError:
+        raise ValueError("cannot use container 'cdms' without "
+                         "the cdms2 module")
+    time_dim = cdms2.createAxis(solution['time'], id='time')
+    time_dim.designateTime()
+    time_dim.units = time_units
+    lat_dim = cdms2.createAxis(solution['latitude'], id='latitude')
+    lat_dim.designateLatitude()
+    lon_dim = cdms2.createAxis(solution['longitude'], id='longitude')
+    lon_dim.designateLongitude()
+    eof_dim = cdms2.createAxis(np.arange(1, neofs+1), id='eof')
+    eof_dim.long_name = 'eof_number'
+    solution['sst'] = cdms2.createVariable(
+        solution['sst'],
+        axes=[time_dim, lat_dim, lon_dim],
+        id='sst')
+    solution['eigenvalues'] = cdms2.createVariable(
+        solution['eigenvalues'],
+        axes=[eof_dim],
+        id='eigenvalues')
+    solution['eofs'] = cdms2.createVariable(
+        solution['eofs'],
+        axes=[eof_dim, lat_dim, lon_dim],
+        id='eofs')
+    solution['pcs'] = cdms2.createVariable(
+        solution['pcs'],
+        axes=[time_dim, eof_dim],
+        id='pcs')
+    solution['variance'] = cdms2.createVariable(
+        solution['variance'],
+        axes=[eof_dim],
+        id='variance')
+    solution['eofscor'] = cdms2.createVariable(
+        solution['eofscor'],
+        axes=[eof_dim, lat_dim, lon_dim],
+        id='eofscor')
+    solution['eofscov'] = cdms2.createVariable(
+        solution['eofscov'],
+        axes=[eof_dim, lat_dim, lon_dim],
+        id='eofscov')
+    solution['errors'] = cdms2.createVariable(
+        solution['errors'],
+        axes=[eof_dim],
+        id='errors')
+    solution['scaled_errors'] = cdms2.createVariable(
+        solution['scaled_errors'],
+        axes=[eof_dim],
+        id='scaled_errors')
+    solution['rcon'] = cdms2.createVariable(
+        solution['rcon'],
+        axes=[time_dim, lat_dim, lon_dim],
+        id='reconstructed_sst')
+
+
+def _wrap_iris(solution, neofs, time_units):
+    try:
+        from iris.cube import Cube
+        from iris.coords import DimCoord
+        from cf_units import Unit
+    except ImportError:
+        raise ValueError("cannot use container 'iris' without "
+                         "the iris module")
+    time_dim = DimCoord(solution['time'],
+                        standard_name='time',
+                        units=Unit(time_units, 'gregorian'))
+    lat_dim = DimCoord(solution['latitude'],
+                       standard_name='latitude',
+                       units='degrees_north')
+    lat_dim.guess_bounds()
+    lon_dim = DimCoord(solution['longitude'],
+                       standard_name='longitude',
+                       units='degrees_east')
+    lon_dim.guess_bounds()
+    eof_dim = DimCoord(np.arange(1, neofs+1),
+                       long_name='eof')
+    solution['sst'] = Cube(
+        solution['sst'],
+        dim_coords_and_dims=list(zip((time_dim, lat_dim, lon_dim), range(3))),
+        long_name='sst')
+    solution['eigenvalues'] = Cube(
+        solution['eigenvalues'],
+        dim_coords_and_dims=list(zip((eof_dim,), range(1))),
+        long_name='eigenvalues')
+    solution['eofs'] = Cube(
+        solution['eofs'],
+        dim_coords_and_dims=list(zip((eof_dim, lat_dim, lon_dim), range(3))),
+        long_name='eofs')
+    solution['pcs'] = Cube(
+        solution['pcs'],
+        dim_coords_and_dims=list(zip((time_dim, eof_dim), range(2))),
+        long_name='pcs')
+    solution['variance'] = Cube(
+        solution['variance'],
+        dim_coords_and_dims=list(zip((eof_dim,), range(1))),
+        long_name='variance')
+    solution['eofscor'] = Cube(
+        solution['eofscor'],
+        dim_coords_and_dims=list(zip((eof_dim, lat_dim, lon_dim), range(3))),
+        long_name='eofscor')
+    solution['eofscov'] = Cube(
+        solution['eofscov'],
+        dim_coords_and_dims=list(zip((eof_dim, lat_dim, lon_dim), range(3))),
+        long_name='eofscov')
+    solution['errors'] = Cube(
+        solution['errors'],
+        dim_coords_and_dims=list(zip((eof_dim,), range(1))),
+        long_name='errors')
+    solution['scaled_errors'] = Cube(
+        solution['scaled_errors'],
+        dim_coords_and_dims=list(zip((eof_dim,), range(1))),
+        long_name='scaled_errors')
+    solution['rcon'] = Cube(
+        solution['rcon'],
+        dim_coords_and_dims=list(zip((time_dim, lat_dim, lon_dim), range(3))),
+        long_name='reconstructed_sst')
+
+
+def _wrap_xarray(solution, neofs, time_units):
+    try:
+        import xarray as xr
+    except ImportError:
+        try:
+            import xray as xr
+        except ImportError:
+            raise ValueError("cannot use container 'xarray' without "
+                             "the xarray/xray module")
+    time_dim = xr.IndexVariable('time', solution['time'])
+    lat_dim = xr.IndexVariable('latitude', solution['latitude'])
+    lon_dim = xr.IndexVariable('longitude', solution['longitude'])
+    eof_dim = xr.IndexVariable('eof', np.arange(1, neofs+1))
+    solution['sst'] = xr.DataArray(solution['sst'],
+                                   coords=[time_dim, lat_dim, lon_dim])
+    solution['eigenvalues'] = xr.DataArray(solution['eigenvalues'],
+                                           coords=[eof_dim])
+    solution['eofs'] = xr.DataArray(solution['eofs'],
+                                    coords=[eof_dim, lat_dim, lon_dim])
+
+
+def _get_wrapper(container_type):
+    return {'standard': lambda *args: None,
+            'cdms': _wrap_cdms,
+            'iris': _wrap_iris,
+            'xarray': _wrap_xarray}[container_type]
 
 
 def reference_solution(container_type, weights):
@@ -79,7 +219,7 @@ def reference_solution(container_type, weights):
     **Arguments:**
 
     *container_type*
-        Either 'standard', 'cdms', or 'iris'.
+        Either 'standard', 'cdms', 'iris' or 'xarray'.
 
     *weights*
         Weights method. One of 'equal', 'latitude', or 'area'.
@@ -87,125 +227,13 @@ def reference_solution(container_type, weights):
     """
     container_type = container_type.lower()
     weights = weights.lower()
-    if container_type not in ('standard', 'iris', 'cdms'):
+    if container_type not in ('standard', 'iris', 'cdms', 'xarray'):
         raise ValueError("unknown container type "
                          "'{!s}'".format(container_type))
     solution = _read_reference_solution(weights)
     time_units = 'months since 0-1-1 00:00:0.0'
     neofs = len(solution['eigenvalues'])
-    if container_type == 'cdms':
-        try:
-            time_dim = cdms2.createAxis(solution['time'], id='time')
-            time_dim.designateTime()
-            time_dim.units = time_units
-            lat_dim = cdms2.createAxis(solution['latitude'], id='latitude')
-            lat_dim.designateLatitude()
-            lon_dim = cdms2.createAxis(solution['longitude'], id='longitude')
-            lon_dim.designateLongitude()
-            eof_dim = cdms2.createAxis(np.arange(1, neofs+1), id='eof')
-            eof_dim.long_name = 'eof_number'
-            solution['sst'] = cdms2.createVariable(
-                solution['sst'], 
-                axes=[time_dim, lat_dim, lon_dim],
-                id='sst')
-            solution['eigenvalues'] = cdms2.createVariable(
-                solution['eigenvalues'],
-                axes=[eof_dim],
-                id='eigenvalues')
-            solution['eofs'] = cdms2.createVariable(
-                solution['eofs'],
-                axes=[eof_dim, lat_dim, lon_dim],
-                id='eofs')
-            solution['pcs'] = cdms2.createVariable(
-                solution['pcs'],
-                axes=[time_dim, eof_dim],
-                id='pcs')
-            solution['variance'] = cdms2.createVariable(
-                solution['variance'],
-                axes=[eof_dim],
-                id='variance')
-            solution['eofscor'] = cdms2.createVariable(
-                solution['eofscor'],
-                axes=[eof_dim, lat_dim, lon_dim],
-                id='eofscor')
-            solution['eofscov'] = cdms2.createVariable(
-                solution['eofscov'],
-                axes=[eof_dim, lat_dim, lon_dim],
-                id='eofscov')
-            solution['errors'] = cdms2.createVariable(
-                solution['errors'],
-                axes=[eof_dim],
-                id='errors')
-            solution['scaled_errors'] = cdms2.createVariable(
-                solution['scaled_errors'],
-                axes=[eof_dim],
-                id='scaled_errors')
-        except NameError:
-            raise ValueError("cannot use container 'cdms' without the "
-                             "cdms2 module")
-    elif container_type == 'iris':
-        try:
-            time_dim = DimCoord(solution['time'],
-                                standard_name='time',
-                                units=Unit(time_units, 'gregorian'))
-            lat_dim = DimCoord(solution['latitude'],
-                               standard_name='latitude',
-                               units='degrees_north')
-            lat_dim.guess_bounds()
-            lon_dim = DimCoord(solution['longitude'],
-                               standard_name='longitude',
-                               units='degrees_east')
-            lon_dim.guess_bounds()
-            eof_dim = DimCoord(np.arange(1, neofs+1),
-                               long_name='eof')
-            solution['sst']= Cube(
-                solution['sst'],
-                dim_coords_and_dims=zip((time_dim, lat_dim, lon_dim),
-                                        range(3)),
-                long_name='sst')
-            solution['eigenvalues']= Cube(
-                solution['eigenvalues'],
-                dim_coords_and_dims=zip((eof_dim,),
-                                        range(1)),
-                long_name='eigenvalues')
-            solution['eofs']= Cube(
-                solution['eofs'],
-                dim_coords_and_dims=zip((eof_dim, lat_dim, lon_dim),
-                                        range(3)),
-                long_name='eofs')
-            solution['pcs']= Cube(
-                solution['pcs'],
-                dim_coords_and_dims=zip((time_dim, eof_dim),
-                                        range(2)),
-                long_name='pcs')
-            solution['variance']= Cube(
-                solution['variance'],
-                dim_coords_and_dims=zip((eof_dim,),
-                                        range(1)),
-                long_name='variance')
-            solution['eofscor']= Cube(
-                solution['eofscor'],
-                dim_coords_and_dims=zip((eof_dim, lat_dim, lon_dim),
-                                        range(3)),
-                long_name='eofscor')
-            solution['eofscov']= Cube(
-                solution['eofscov'],
-                dim_coords_and_dims=zip((eof_dim, lat_dim, lon_dim),
-                                        range(3)),
-                long_name='eofscov')
-            solution['errors']= Cube(
-                solution['errors'],
-                dim_coords_and_dims=zip((eof_dim,),
-                                        range(1)),
-                long_name='errors')
-            solution['scaled_errors']= Cube(
-                solution['scaled_errors'],
-                dim_coords_and_dims=zip((eof_dim,),
-                                        range(1)),
-                long_name='scaled_errors')
-        except NameError:
-            raise ValueError("cannot use container 'iris' without the "
-                             "iris module")
+    _get_wrapper(container_type)(solution, neofs, time_units)
     return solution
 
 
@@ -235,9 +263,11 @@ def reference_multivariate_solution(container_type, weights):
                 'eofs',
                 'eofscor',
                 'eofscov',
-                'weights',):
+                'weights',
+                'rcon',):
         try:
-            solution[var] = solution[var][..., slice1], solution[var][..., slice2]
+            solution[var] = (solution[var][..., slice1],
+                             solution[var][..., slice2])
         except TypeError:
             solution[var] = None, None
     return solution
