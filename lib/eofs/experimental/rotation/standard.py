@@ -90,6 +90,10 @@ class Rotator(object):
         # Compute variances of the rotated EOFs as these are used by several
         # methods.
         self._eofs_rot_var = (self._eofs_rot ** 2).sum(axis=1)
+        self._var_idx = np.argsort(self._eofs_rot_var)[::-1]
+        # Reorder rotated EOFs according to their variance
+        self._eofs_rot = self._eofs_rot[self._var_idx]
+        self._eofs_rot_var = self._eofs_rot_var[self._var_idx]
 
     def eofs(self, neofs=None, renormalize=False):
         """Rotated empirical orthogonal functions (EOFs).
