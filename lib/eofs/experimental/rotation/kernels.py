@@ -58,7 +58,7 @@ def _varimax_kernel(eofs, eps=1e-10, itermax=1000, kaisernorm=True):
     rotation = np.eye(neofs, dtype=eofs.dtype)
     delta = 0.
     # Iteratively compute the rotation matrix.
-    for i in xrange(itermax):
+    for i in range(itermax):
         z = np.dot(eofs.T, rotation)
         b = np.dot(eofs,
                    z ** 3 - np.dot(z, np.diag((z ** 2).sum(axis=0)) / nspace))
@@ -74,7 +74,7 @@ def _varimax_kernel(eofs, eps=1e-10, itermax=1000, kaisernorm=True):
     if kaisernorm:
         # Remove the normalization.
         reofs *= scale
-    return reofs
+    return reofs, rotation
 
 
 KERNEL_MAPPING = {
