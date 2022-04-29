@@ -742,6 +742,13 @@ class Eof(object):
             raise ValueError('missing values detected in different '
                              'locations at different times')
         nonMissingIndex = np.where(np.logical_not(np.isnan(field_flat[0])))[0]
+        try:
+            # Compute chunk sizes if nonMissingIndex is a dask array, so its
+            # shape can be compared with eofsNonMissingIndex later.
+            nonMissingIndex.compute_chunk_sizes()
+        except AttributeError:
+            # If it isn't a dask array then no problem...
+            pass
         field_flat = field_flat[:, nonMissingIndex]
         # Locate the non-missing values in the EOFs and check they match those
         # in the data set, then isolate the non-missing values.
