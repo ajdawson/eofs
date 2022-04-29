@@ -17,7 +17,7 @@
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
 from __future__ import (absolute_import, division, print_function)  # noqa
 
-import collections
+import collections.abc
 
 import cdms2
 
@@ -562,7 +562,7 @@ class Eof(object):
                                       id=self._dataset_id,
                                       axes=axlist,
                                       fill_value=self._missing_value)
-        if isinstance(neofs, collections.Iterable):
+        if isinstance(neofs, collections.abc.Iterable):
             name_part = 'EOFs_{}'.format('_'.join([str(e) for e in neofs]))
         else:
             name_part = '{:d}_EOFs'.format(neofs)

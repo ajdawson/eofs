@@ -17,7 +17,7 @@
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
 from __future__ import (absolute_import, division, print_function)  # noqa
 
-import collections
+import collections.abc
 from copy import copy
 
 from iris.cube import Cube
@@ -595,7 +595,7 @@ class MultivariateEof(object):
 
         """
         rfset = self._solver.reconstructedField(neofs)
-        if isinstance(neofs, collections.Iterable):
+        if isinstance(neofs, collections.abc.Iterable):
             name_part = 'EOFs_{}'.format('_'.join([str(e) for e in neofs]))
         else:
             name_part = '{:d}_EOFs'.format(neofs)

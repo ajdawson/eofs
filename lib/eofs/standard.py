@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
 from __future__ import (absolute_import, division, print_function)  # noqa
-import collections
+import collections.abc
 import warnings
 
 import numpy as np
@@ -635,7 +635,7 @@ class Eof(object):
 
         """
         # Determine how the PCs and EOFs will be selected.
-        if isinstance(neofs, collections.Iterable):
+        if isinstance(neofs, collections.abc.Iterable):
             modes = [m - 1 for m in neofs]
         else:
             modes = slice(0, neofs)
