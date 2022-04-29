@@ -162,7 +162,7 @@ class Eof(object):
         try:
             if has_dask and isinstance(dataNoMissing, dask.array.Array):
                 # Use the parallel Dask algorithm
-                dsvd = dask.array.linalg.svd(dataNoMissing)
+                dsvd = dask.array.linalg.svd(dataNoMissing, coerce_signs=False)
                 A, Lh, E = (x.compute() for x in dsvd)
 
                 # Trim the arrays (since Dask doesn't support
