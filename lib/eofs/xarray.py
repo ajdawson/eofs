@@ -17,7 +17,7 @@
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
 from __future__ import (absolute_import, division, print_function)  # noqa
 
-import collections
+import collections.abc
 
 try:
     import xarray as xr
@@ -528,7 +528,7 @@ class Eof(object):
         """
         rfield = self._solver.reconstructedField(neofs)
         coords = [self._time] + self._coords
-        if isinstance(neofs, collections.Iterable):
+        if isinstance(neofs, collections.abc.Iterable):
             name_part = 'EOFs_{}'.format('_'.join([str(e) for e in neofs]))
         else:
             name_part = '{}_EOFs'.format(neofs)

@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
 from __future__ import (absolute_import, division, print_function)  # noqa
-import collections
+import collections.abc
 import warnings
 
 import numpy as np
@@ -162,7 +162,7 @@ class Eof(object):
         try:
             if has_dask and isinstance(dataNoMissing, dask.array.Array):
                 # Use the parallel Dask algorithm
-                dsvd = dask.array.linalg.svd(dataNoMissing)
+                dsvd = dask.array.linalg.svd(dataNoMissing, coerce_signs=False)
                 A, Lh, E = (x.compute() for x in dsvd)
 
                 # Trim the arrays (since Dask doesn't support
@@ -635,7 +635,7 @@ class Eof(object):
 
         """
         # Determine how the PCs and EOFs will be selected.
-        if isinstance(neofs, collections.Iterable):
+        if isinstance(neofs, collections.abc.Iterable):
             modes = [m - 1 for m in neofs]
         else:
             modes = slice(0, neofs)
@@ -742,6 +742,13 @@ class Eof(object):
             raise ValueError('missing values detected in different '
                              'locations at different times')
         nonMissingIndex = np.where(np.logical_not(np.isnan(field_flat[0])))[0]
+        try:
+            # Compute chunk sizes if nonMissingIndex is a dask array, so its
+            # shape can be compared with eofsNonMissingIndex later.
+            nonMissingIndex.compute_chunk_sizes()
+        except AttributeError:
+            # If it isn't a dask array then no problem...
+            pass
         field_flat = field_flat[:, nonMissingIndex]
         # Locate the non-missing values in the EOFs and check they match those
         # in the data set, then isolate the non-missing values.
