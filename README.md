@@ -28,7 +28,7 @@ In order to use the meta-data preserving interfaces one (or more) of cdms2 (part
 Documentation
 -------------
 
-Documentation is available [online](http://ajdawson.github.com/eofs).
+Documentation is available [online](http://ajdawson.github.io/eofs).
 The package docstrings are also very complete and can be used as a source of reference when working interactively.
 
 
