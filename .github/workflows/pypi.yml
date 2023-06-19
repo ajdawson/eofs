@@ -1,0 +1,54 @@
+name: Publish to PyPI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  release:
+    types:
+      - published
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  packages:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.x"
+
+    - name: Get tags
+      run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+
+    - name: Install build tools
+      run: |
+        python -m pip install --upgrade build
+
+    - name: Build binary wheel
+      run: python -m build --sdist --wheel . --outdir dist
+
+    - name: CheckFiles
+      run: |
+        ls dist
+        python -m pip install --upgrade check-manifest
+        check-manifest --verbose
+
+    - name: Test wheels
+      run: |
+        cd dist && python -m pip install *.whl
+        python -m pip install --upgrade build twine
+        python -m twine check *
+
+    - name: Publish a Python distribution to PyPI
+      if: success() && github.event_name == 'release'
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_PASSWORD }}
