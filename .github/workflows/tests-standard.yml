@@ -1,4 +1,4 @@
-name: Full Tests
+name: Standard Tests
 
 on:
   pull_request:
@@ -23,7 +23,7 @@ jobs:
         environment-name: TEST
         init-shell: bash
         create-args: >-
-          python=${{ matrix.python-version }} pip pytest iris xarray cdms2 cdutil --channel conda-forge
+          python=${{ matrix.python-version }} pip pytest numpy --channel conda-forge
 
 
     - name: Install eofs
