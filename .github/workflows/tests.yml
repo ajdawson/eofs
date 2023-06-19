@@ -23,7 +23,7 @@ jobs:
         environment-name: TEST
         init-shell: bash
         create-args: >-
-          python=${{ matrix.python-version }} pip pytest pycodestyle iris xarray cdms2 genutil cdutil --channel conda-forge
+          python=${{ matrix.python-version }} pip pytest iris xarray cdms2 genutil cdutil --channel conda-forge
 
 
     - name: Install eofs

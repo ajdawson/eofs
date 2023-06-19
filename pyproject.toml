@@ -57,6 +57,19 @@ write_to = "lib/eofs/_version.py"
 write_to_template = "__version__ = '{version}'"
 tag_regex = "^(?P<prefix>v)?(?P<version>[^\\+]+)(?P<suffix>.*)?$"
 
+[tool.ruff]
+select = [
+    "E", # pycodecstyle
+]
+[tool.ruff.per-file-ignores]
+"doc/conf.py" = [
+  "E401",
+  "E402",
+]
+"doc/devguide/gitwash_dumper.py" = [
+  "E714",
+]
+
 [tool.pytest.ini_options]
 addopts = "-vrsx"
 testpaths = "lib"

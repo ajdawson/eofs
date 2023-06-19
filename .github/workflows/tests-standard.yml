@@ -23,7 +23,7 @@ jobs:
         environment-name: TEST
         init-shell: bash
         create-args: >-
-          python=${{ matrix.python-version }} pip pytest pycodestyle numpy --channel conda-forge
+          python=${{ matrix.python-version }} pip pytest numpy --channel conda-forge
 
 
     - name: Install eofs
