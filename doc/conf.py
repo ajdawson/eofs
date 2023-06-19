@@ -278,3 +278,8 @@ autoclass_content = 'both'
 autodoc_member_order = 'bysource'
 autodoc_docstring_signature = True
 autosummary_generate = True
+
+linkcheck_exclude_documents = [
+  r'devguide/.*',
+  r'devguide/gitwash/.*',
+  ]
