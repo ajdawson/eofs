@@ -87,10 +87,10 @@ def sign_adjustments(eofset, refeofset):
     nmodes = eofset.shape[0]
     signs = np.ones([nmodes])
     shape = [nmodes] + [1] * (eofset.ndim - 1)
-    eofset = eofset.reshape([nmodes, np.prod(eofset.shape[1:], dtype=np.int)])
+    eofset = eofset.reshape([nmodes, np.prod(eofset.shape[1:], dtype=int)])
     refeofset = refeofset.reshape([nmodes,
                                    np.prod(refeofset.shape[1:],
-                                           dtype=np.int)])
+                                           dtype=int)])
     for mode in range(nmodes):
         i = 0
         try:
