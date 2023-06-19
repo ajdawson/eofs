@@ -128,7 +128,7 @@ class Eof(object):
         # are several weighting schemes. The 'area' weighting scheme requires
         # a latitude-longitude grid to be present, the 'cos_lat' scheme only
         # requires a latitude dimension.
-        if weights is None or weights == 'none':
+        if weights is None or (isinstance(weights, str) and weights == 'none'):
             # No weights requested, set the weight array to None.
             wtarray = None
         else:
