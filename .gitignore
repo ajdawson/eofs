@@ -19,3 +19,4 @@ dist
 .coverage
 MANIFEST
 .cache/
+lib/eofs/_version.py

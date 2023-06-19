@@ -20,9 +20,10 @@ from __future__ import (absolute_import, division, print_function)  # noqa
 from . import standard
 from . import tools
 
-from ._version import get_versions
-__version__ = get_versions()['version']
-del get_versions
+try:
+    from ._version import __version__
+except ImportError:
+    __version__ = "unknown"
 
 
 # Define the objects imported by imports of the form: from eofs import *
