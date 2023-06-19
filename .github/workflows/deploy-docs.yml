@@ -1,0 +1,50 @@
+
+name: Documentation
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  release:
+    types:
+      - published
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Setup Micromamba
+      uses: mamba-org/setup-micromamba@v1
+      with:
+        environment-name: TEST
+        init-shell: bash
+        create-args: >-
+          python=3 pip iris xarray cdms2 genutil cdutil sphinx sphinx-issues --channel conda-forge
+
+    - name: Install eofs
+      shell: bash -l {0}
+      run: |
+        python -m pip install -e . --no-deps --force-reinstall
+
+    - name: Build documentation
+      shell: bash -l {0}
+      run: |
+        set -e
+        micromamba activate TEST
+        pushd doc
+        make clean html linkcheck
+        popd
+
+    - name: Deploy
+      if: success() && github.event_name == 'release'
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: doc/_build/html
