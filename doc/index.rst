@@ -90,8 +90,8 @@ The `eofs.xarray` meta-data enabled interface can only be used if the xarray_ pa
 Citation
 --------
 
-If you use eofs in published research, please cite it by referencing the `peer-reviewed paper <http://doi.org/10.5334/jors.122>`_.
-You can additionally cite the `Zenodo DOI <http://dx.doi.org/10.5281/zenodo.46871>`_ if you need to cite a particular version (but please also cite the paper, it helps me justify my time working on this and similar projects).
+If you use eofs in published research, please cite it by referencing the `peer-reviewed paper <https://doi.org/10.5334/jors.122>`_.
+You can additionally cite the `Zenodo DOI <https://dx.doi.org/10.5281/zenodo.46871>`_ if you need to cite a particular version (but please also cite the paper, it helps me justify my time working on this and similar projects).
 
 
 Developing and contributing
@@ -104,16 +104,16 @@ If you would like to contribute code or documentation please see the :doc:`devgu
 
 .. _UV-CDAT: http://uv-cdat.llnl.gov
 
-.. _dask: https://dask.org
+.. _dask: https://www.dask.org/
 
 .. _iris: http://scitools.org.uk/iris
 
 .. _xarray: http://xarray.pydata.org
 
-.. _numpy: http://www.numpy.org
+.. _numpy: https://numpy.org/
 
-.. _setuptools: https://pypi.python.org/pypi/setuptools
+.. _setuptools: https://pypi.org/project/setuptools/
 
-.. _issues: http://github.com/ajdawson/eofs/issues
+.. _issues: https://github.com/ajdawson/eofs/issues
 
-.. _conda: http://conda.pydata.org/docs/
+.. _conda: https://docs.conda.io/en/latest/

@@ -1,7 +1,7 @@
 Method of solution
 ==================
 
-`eofs` uses a technique based on `singular value decomposition (SVD) <http://en.wikipedia.org/wiki/Singular_value_decomposition>`_ to compute the EOF solution [#]_. This avoids having to compute a potentially very large covariance matrix, making `eofs` usable for large data sets.
+`eofs` uses a technique based on `singular value decomposition (SVD) <https://en.wikipedia.org/wiki/Singular_value_decomposition>`_ to compute the EOF solution [#]_. This avoids having to compute a potentially very large covariance matrix, making `eofs` usable for large data sets.
 
 The input to an EOF analysis is a temporal-spatial field, represented in Python by an array or array-like structure of two or more dimensions. When an `eofs` solver class receives a field as input it is reshaped and stored internally as a two-dimensional array where time is the first dimension and all spatial dimensions are represented by the second dimension. It is a formal requirement of EOF analysis that this array have a time-mean of zero, therefore the `eofs` solver classes will by default subtract the mean along the first dimension.
 
