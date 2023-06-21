@@ -25,7 +25,6 @@ jobs:
         create-args: >-
           python=${{ matrix.python-version }} pip pytest iris xarray cdms2 genutil cdutil --channel conda-forge
 
-
     - name: Install eofs
       shell: bash -l {0}
       run: |
