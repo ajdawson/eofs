@@ -18,4 +18,4 @@ Multivariate EOF analysis only yields a single set of PCs and eigenvalues etc. s
 
     pcs = msolver.pcs()
 
-.. _Wheeler and Hendon (2004): http://dx.doi.org/10.1175/1520-0493(2004)132<1917:AARMMI>2.0.CO;2
+.. _Wheeler and Hendon (2004): https://dx.doi.org/10.1175/1520-0493(2004)132<1917:AARMMI>2.0.CO;2

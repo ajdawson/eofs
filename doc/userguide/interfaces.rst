@@ -52,12 +52,12 @@ Standard interface
 The standard interface works with numpy_ arrays or dask_ arrays, which makes the standard interface the general purpose interface. Any data that can be stored in a `numpy.ndarray`, `numpy.ma.MaskedArray` or `dask.array.Array` can be analysed with the `eofs.standard.Eof` solver interface.
 
 
-.. _iris: http://scitools.org.uk/iris
+.. _iris: https://scitools-iris.readthedocs.io/en/stable/
 
-.. _UV-CDAT: http://uv-cdat.llnl.gov
+.. _UV-CDAT: https://uv-cdat.llnl.gov/
 
-.. _xarray: http://xarray.pydata.org
+.. _xarray: https://docs.xarray.dev/en/stable/
 
-.. _dask: https://dask.org
+.. _dask: https://www.dask.org/
 
 .. _numpy: https://numpy.org

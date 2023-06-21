@@ -24,10 +24,14 @@ Testing an installed version
 
 First you need to install `eofs` into your current Python environment::
 
+.. code-block:: shell
+
     cd eofs/
     python setup.py install
 
 Then create a directory somewhere else without any Python code in it and run ``pytest`` from there::
+
+.. code-block:: shell
 
     mkdir $HOME/eofs-test-dir && cd $HOME/eofs-test-dir
     pytest --pyargs eofs

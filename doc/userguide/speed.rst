@@ -19,7 +19,7 @@ AMD's ACML provides optimised BLAS and LAPACK routines in both single and multi-
 You will have to build CBLAS first as ACML only includes Fortran interfaces.
 The following instructions worked for me:
 
-1. download CBLAS from the link at www.netlib.org/blas
+1. download CBLAS from the link at https://www.netlib.org/blas/
 
 2. edit Makefile.LINUX and change BLLIB to point to your libacml.so or libacml_mp.so
 
@@ -27,7 +27,7 @@ The following instructions worked for me:
 
 4. copy the resulting cblas library to libcblas.a in the same directory as the ACML library
 
-5. download a stable version fo the numpy source code from http://sourceforge.net/projects/numpy/files/NumPy/ or the latest code from https://github.com/numpy/numpy
+5. download a stable version fo the numpy source code from https://github.com/numpy/numpy
 
 6. create a site.cfg in the numpy source tree (copy site.cfg.example) and add::
 
@@ -58,10 +58,10 @@ Canopy (Express)
 Enthought provides MKL linked packages in its Canopy product. I don't know if the free version Canopy Express also includes MKL linked libraries, but it may be worth investigating.
 
 
-.. _numpy: http://numpy.org
+.. _numpy: https://numpy.org/
 
-.. _LAPACK: http://www.netlib.org/lapack/
+.. _LAPACK: https://www.netlib.org/lapack/
 
-.. _BLAS: http://www.netlib.org/blas/
+.. _BLAS: https://www.netlib.org/blas/
 
-.. _intel: http://software.intel.com/en-us/articles/numpyscipy-with-intel-mkl
+.. _intel: https://www.intel.com/content/www/us/en/developer/articles/technical/numpyscipy-with-intel-mkl.html
