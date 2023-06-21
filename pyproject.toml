@@ -23,6 +23,7 @@ classifiers = [
 ]
 dynamic = [
   "version",
+  "readme",
 ]
 dependencies = [
   "numpy",
