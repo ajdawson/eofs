@@ -24,6 +24,8 @@ import versioneer
 packages = ['eofs',
             'eofs.tools',
             'eofs.multivariate',
+            'eofs.experimental',
+            'eofs.experimental.rotation',
             'eofs.examples',
             'eofs.tests']
 
