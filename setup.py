@@ -46,4 +46,5 @@ if __name__ == '__main__':
           packages=packages,
           package_dir={'': 'lib'},
           package_data=package_data,
-          install_requires=['numpy'])
+          install_requires=['numpy'],
+          license='GPLv3+')
