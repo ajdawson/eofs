@@ -1,4 +1,17 @@
+include pyproject.toml
 include README.md
 include COPYING
-include versioneer.py
-include lib/eofs/_version.py
+
+graft lib/eofs
+
+recursive-include examples *.py
+recursive-include lib *.nc
+recursive-include lib *.npy
+
+prune .github
+prune *.egg-info
+prune doc
+
+exclude *.enc
+exclude *.yaml
+exclude lib/eofs/_version.py
