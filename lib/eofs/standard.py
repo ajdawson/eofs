@@ -153,7 +153,10 @@ class Eof(object):
         if not self._valid_nan(self._data):
             raise ValueError('missing values detected in different '
                              'locations at different times')
-        nonMissingIndex = np.where(np.logical_not(np.isnan(self._data[0])))[0]
+        if has_dask:
+            nonMissingIndex = dask.array.where(np.logical_not(np.isnan(self._data[0])))[0]
+        else:
+            nonMissingIndex = np.where(np.logical_not(np.isnan(self._data[0])))[0]
         # Remove missing values from the design matrix.
         dataNoMissing = self._data[:, nonMissingIndex]
         if dataNoMissing.size == 0:
@@ -741,7 +744,10 @@ class Eof(object):
         if not self._valid_nan(field_flat):
             raise ValueError('missing values detected in different '
                              'locations at different times')
-        nonMissingIndex = np.where(np.logical_not(np.isnan(field_flat[0])))[0]
+        if has_dask:
+            nonMissingIndex = dask.array.where(np.logical_not(np.isnan(self._data[0])))[0]  # lee1043 testing
+        else:
+            nonMissingIndex = np.where(np.logical_not(np.isnan(field_flat[0])))[0]
         try:
             # Compute chunk sizes if nonMissingIndex is a dask array, so its
             # shape can be compared with eofsNonMissingIndex later.
