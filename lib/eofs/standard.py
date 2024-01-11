@@ -121,7 +121,7 @@ class Eof(object):
         # Store information about the shape/size of the input data.
         self._records = self._data.shape[0]
         self._originalshape = self._data.shape[1:]
-        channels = np.product(self._originalshape)
+        channels = np.prod(self._originalshape)
         # Weight the data set according to weighting argument.
         if weights is not None:
             try:
@@ -738,7 +738,7 @@ class Eof(object):
         if eof_ndim > input_ndim:
             field = field.reshape((1,) + field.shape)
         records = field.shape[0]
-        channels = np.product(field.shape[1:])
+        channels = np.prod(field.shape[1:])
         field_flat = field.reshape([records, channels])
         # Locate the non-missing values and isolate them.
         if not self._valid_nan(field_flat):

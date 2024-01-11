@@ -46,7 +46,7 @@ def _check_flat_center(pcs, field):
     else:
         # Record the shape of the field and the number of spatial elements.
         originalshape = field.shape[1:]
-        channels = np.product(originalshape)
+        channels = np.prod(originalshape)
     # Record the number of PCs.
     if len(pcs.shape) == 1:
         npcs = 1
