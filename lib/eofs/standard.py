@@ -31,7 +31,7 @@ except ImportError:
 from .tools.standard import correlation_map, covariance_map
 
 
-class Eof(object):
+class Eof:
     """EOF analysis (`numpy` interface)"""
 
     def __init__(self, dataset, weights=None, center=True, ddof=1):

@@ -22,7 +22,7 @@ import numpy.ma as ma
 np.seterr(all='ignore')
 
 
-class EofsTest(object):
+class EofsTest:
     """Base class for tests."""
 
     def _tomasked(self, value):

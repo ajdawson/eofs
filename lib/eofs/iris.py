@@ -25,7 +25,7 @@ from . import standard
 from .tools.iris import get_time_coord, weights_array, classified_aux_coords
 
 
-class Eof(object):
+class Eof:
     """EOF analysis (meta-data enabled `iris` interface)"""
 
     def __init__(self, cube, weights=None, center=True, ddof=1):

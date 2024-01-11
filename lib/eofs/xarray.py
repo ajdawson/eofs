@@ -27,7 +27,7 @@ from .tools.xarray import (find_time_coordinates, categorise_ndcoords,
                            weights_array)
 
 
-class Eof(object):
+class Eof:
     """EOF analysis (meta-data enabled `xarray` interface)"""
 
     def __init__(self, array, weights=None, center=True, ddof=1):

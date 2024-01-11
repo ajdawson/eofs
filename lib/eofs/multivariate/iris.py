@@ -26,7 +26,7 @@ from eofs.tools.iris import (get_time_coord, weights_array,
 from . import standard
 
 
-class MultivariateEof(object):
+class MultivariateEof:
     """Multivariate EOF analysis (meta-data enabled `iris` interface)"""
 
     def __init__(self, cubes, weights=None, center=True, ddof=1):

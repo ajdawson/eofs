@@ -20,7 +20,7 @@ import numpy as np
 from eofs import standard
 
 
-class MultivariateEof(object):
+class MultivariateEof:
     """Multivariate EOF analysis (`numpy` interface)"""
 
     def __init__(self, datasets, weights=None, center=True, ddof=1):
