@@ -5,7 +5,7 @@ The package comes with a comprehensive set of tests to make sure it is working c
 The tests can be run against an installed version of `eofs` or against the current source tree.
 Testing against the source tree is handy during development when quick iteration is required, but for most other cases testing against the installed version is more suitable.
 
-Running the test suite requires pytest_ and pycodestyle_ to be installed.
+Running the test suite requires pytest_ to be installed.
 The test suite will function as long as the minimum dependencies for the package are installed, but some tests will be skipped if they require optional dependencies that are not present.
 To run the full test suite you need to have the optional dependencies iris_ and xarray_ installed.
 
@@ -14,7 +14,7 @@ Testing against the current source tree
 
 Testing the current source is straightforward, from the source directory run::
 
-    pytest
+    python -m pytest
 
 This will perform verbose testing of the current source tree and print a summary at the end.
 
@@ -27,20 +27,18 @@ First you need to install `eofs` into your current Python environment::
 .. code-block:: shell
 
     cd eofs/
-    python setup.py install
+    python -m pip install ".[iris,xarray]"
 
 Then create a directory somewhere else without any Python code in it and run ``pytest`` from there::
 
 .. code-block:: shell
 
     mkdir $HOME/eofs-test-dir && cd $HOME/eofs-test-dir
-    pytest --pyargs eofs
+    python -m pytest --pyargs eofs
 
 This will run the tests on the version of `eofs` you just installed.
 
 .. _pytest: https://docs.pytest.org/en/latest/
-
-.. _pycodestyle: https://pypi.python.org/pypi/pycodestyle
 
 .. _iris: http://scitools.org.uk/iris
 
