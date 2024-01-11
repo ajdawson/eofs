@@ -30,10 +30,8 @@ dependencies = [
   "numpy",
 ]
 [project.optional-dependencies]
-extras = [
-  "iris",
-  "xarray",
-]
+iris = ["scitools-iris"]
+xarray = ["xarray"]
 [project.urls]
 documentation = "https://ajdawson.github.io/eofs"
 homepage = "https://github.com/ajdawson/eofs"
