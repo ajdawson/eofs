@@ -17,10 +17,7 @@
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
 import collections.abc
 
-try:
-    import xarray as xr
-except ImportError:
-    import xray as xr
+import xarray as xr
 
 from . import standard
 from .tools.xarray import (find_time_coordinates, categorise_ndcoords,

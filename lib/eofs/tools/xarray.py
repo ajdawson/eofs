@@ -16,10 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
 import numpy as np
-try:
-    import xarray as xr
-except ImportError:
-    import xray as xr
+import xarray as xr
 
 from . import standard
 from .generic import covcor_dimensions

@@ -132,11 +132,9 @@ def _wrap_xarray(solution, neofs, time_units):
     try:
         import xarray as xr
     except ImportError:
-        try:
-            import xray as xr
-        except ImportError:
-            raise ValueError("cannot use container 'xarray' without "
-                             "the xarray/xray module")
+        raise ValueError(
+            "cannot use container 'xarray' without the xarray module"
+        )
     time_dim = xr.IndexVariable('time', solution['time'])
     lat_dim = xr.IndexVariable('latitude', solution['latitude'])
     lon_dim = xr.IndexVariable('longitude', solution['longitude'])
