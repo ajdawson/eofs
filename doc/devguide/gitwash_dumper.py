@@ -144,7 +144,7 @@ def make_link_targets(proj_name,
     if not url is None:
         lines.append('.. _`%s`: %s\n' % (proj_name, url))
     if not have_gh_url:
-        gh_url = 'http://github.com/%s/%s\n' % (user_name, repo_name)
+        gh_url = 'https://github.com/%s/%s\n' % (user_name, repo_name)
         lines.append('.. _`%s github`: %s\n' % (proj_name, gh_url))
     if not ml_url is None:
         lines.append('.. _`%s mailing list`: %s\n' % (proj_name, ml_url))
@@ -166,8 +166,8 @@ If not set with options, the main github user is the same as the
 repository name.'''
 
 
-GITWASH_CENTRAL = 'git://github.com/matthew-brett/gitwash.git'
-GITWASH_BRANCH = 'master'
+GITWASH_CENTRAL = 'https://github.com/matthew-brett/gitwash.git'
+GITWASH_BRANCH = 'main'
 
 
 def main():
@@ -181,7 +181,7 @@ def main():
                       metavar="MAIN_GH_USER")
     parser.add_option("--gitwash-url", dest="gitwash_url",
                       help="URL to gitwash repository - default %s"
-                      % GITWASH_CENTRAL,
+                      % GITWASH_CENTRAL, 
                       default=GITWASH_CENTRAL,
                       metavar="GITWASH_URL")
     parser.add_option("--gitwash-branch", dest="gitwash_branch",

@@ -1,3 +1,5 @@
+.. highlight:: bash
+
 .. _development-workflow:
 
 ####################
@@ -22,8 +24,9 @@ In what follows we'll refer to the upstream eofs ``master`` branch, as
 * Name your branch for the purpose of the changes - e.g.
   ``bugfix-for-issue-14`` or ``refactor-database-code``.
 * If you can possibly avoid it, avoid merging trunk or any other branches into
-  your feature branch while you are working.
+  your feature branch while you are working.  
 * If you do find yourself merging from trunk, consider :ref:`rebase-on-trunk`
+* Ask on the `eofs mailing list`_ if you get stuck.
 * Ask for code review!
 
 This way of working helps to keep work well organized, with readable history.
@@ -115,7 +118,9 @@ In more detail
 
 #. Make some changes
 #. See which files have changed with ``git status`` (see `git status`_).
-   You'll see a listing like this one::
+   You'll see a listing like this one:
+
+   .. code-block:: none
 
      # On branch ny-new-feature
      # Changed but not updated:
@@ -149,7 +154,7 @@ Ask for your changes to be reviewed or merged
 When you are ready to ask for someone to review your code and consider a merge:
 
 #. Go to the URL of your forked repo, say
-   ``http://github.com/your-user-name/eofs``.
+   ``https://github.com/your-user-name/eofs``.
 #. Use the 'Switch Branches' dropdown menu near the top left of the page to
    select the branch with your changes:
 
@@ -181,8 +186,8 @@ Delete a branch on github
    # delete branch on github
    git push origin :my-unwanted-branch
 
-(Note the colon ``:`` before ``test-branch``.  See also:
-http://github.com/guides/remove-a-remote-branch
+Note the colon ``:`` before ``my-unwanted-branch``.  See also:
+https://help.github.com/articles/pushing-to-a-remote/#deleting-a-remote-branch-or-tag
 
 Several people sharing a single repository
 ------------------------------------------
@@ -194,7 +199,7 @@ share it via github.
 First fork eofs into your account, as from :ref:`forking`.
 
 Then, go to your forked repository github page, say
-``http://github.com/your-user-name/eofs``
+``https://github.com/your-user-name/eofs``
 
 Click on the 'Admin' button, and add anyone else to the repo as a
 collaborator:
@@ -203,10 +208,7 @@ collaborator:
 
 Now all those people can do::
 
-    git clone git@githhub.com:your-user-name/eofs.git
-
-Remember that links starting with ``git@`` use the ssh protocol and are
-read-write; links starting with ``git://`` are read-only.
+    git clone git@github.com:your-user-name/eofs.git
 
 Your collaborators can then commit directly into that repo with the
 usual::
@@ -242,7 +244,9 @@ Let's say you thought of some work you'd like to do. You
 ``cool-feature``. At this stage trunk is at some commit, let's call it E. Now
 you make some new commits on your ``cool-feature`` branch, let's call them A, B,
 C.  Maybe your changes take a while, or you come back to them after a while.  In
-the meantime, trunk has progressed from commit E to commit (say) G::
+the meantime, trunk has progressed from commit E to commit (say) G:
+
+.. code-block:: none
 
           A---B---C cool-feature
          /
@@ -258,7 +262,9 @@ you may prefer to do a rebase.
 rebase takes your changes (A, B, C) and replays them as if they had been made to
 the current state of ``trunk``.  In other words, in this case, it takes the
 changes represented by A, B, C and replays them on top of G. After the rebase,
-your history will look like this::
+your history will look like this:
+
+.. code-block:: none
 
                   A'--B'--C' cool-feature
                  /

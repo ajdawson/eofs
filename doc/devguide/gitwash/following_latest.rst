@@ -1,3 +1,5 @@
+.. highlight:: bash
+
 .. _following-latest:
 
 =============================
@@ -18,7 +20,7 @@ Get the local copy of the code
 
 From the command line::
 
-   git clone git://github.com/ajdawson/eofs.git
+   git clone https://github.com/ajdawson/eofs.git
 
 You now have a copy of the code tree in the new ``eofs`` directory.
 

@@ -1,3 +1,5 @@
+.. highlight:: bash
+
 .. _set-up-fork:
 
 ==================
@@ -13,7 +15,7 @@ Overview
 
    git clone git@github.com:your-user-name/eofs.git
    cd eofs
-   git remote add upstream git://github.com/ajdawson/eofs.git
+   git remote add upstream https://github.com/ajdawson/eofs.git
 
 In detail
 =========
@@ -25,7 +27,9 @@ Clone your fork
    git@github.com:your-user-name/eofs.git``
 #. Investigate.  Change directory to your new repo: ``cd eofs``. Then
    ``git branch -a`` to show you all branches.  You'll get something
-   like::
+   like:
+
+   .. code-block:: none
 
       * master
       remotes/origin/master
@@ -46,21 +50,23 @@ Linking your repository to the upstream repo
 ::
 
    cd eofs
-   git remote add upstream git://github.com/ajdawson/eofs.git
+   git remote add upstream https://github.com/ajdawson/eofs.git
 
 ``upstream`` here is just the arbitrary name we're using to refer to the
 main `eofs`_ repository at `eofs github`_.
 
-Note that we've used ``git://`` for the URL rather than ``git@``.  The
-``git://`` URL is read only.  This means we that we can't accidentally
+Note that we've used ``https://`` for the URL rather than ``git@``.  The
+``https://`` URL is read only.  This means we that we can't accidentally
 (or deliberately) write to the upstream repo, and we are only going to
 use it to merge into our own code.
 
 Just for your own satisfaction, show yourself that you now have a new
-'remote', with ``git remote -v show``, giving you something like::
+'remote', with ``git remote -v show``, giving you something like:
 
-   upstream	git://github.com/ajdawson/eofs.git (fetch)
-   upstream	git://github.com/ajdawson/eofs.git (push)
+.. code-block:: none
+
+   upstream	https://github.com/ajdawson/eofs.git (fetch)
+   upstream	https://github.com/ajdawson/eofs.git (push)
    origin	git@github.com:your-user-name/eofs.git (fetch)
    origin	git@github.com:your-user-name/eofs.git (push)
 
