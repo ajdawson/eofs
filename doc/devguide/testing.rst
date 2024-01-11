@@ -7,7 +7,7 @@ Testing against the source tree is handy during development when quick iteration
 
 Running the test suite requires pytest_ and pycodestyle_ to be installed.
 The test suite will function as long as the minimum dependencies for the package are installed, but some tests will be skipped if they require optional dependencies that are not present.
-To run the full test suite you need to have the optional dependencies `cdms2` (from UV-CDAT_), iris_, and xarray_ installed.
+To run the full test suite you need to have the optional dependencies iris_ and xarray_ installed.
 
 Testing against the current source tree
 ---------------------------------------
@@ -41,8 +41,6 @@ This will run the tests on the version of `eofs` you just installed.
 .. _pytest: https://docs.pytest.org/en/latest/
 
 .. _pycodestyle: https://pypi.python.org/pypi/pycodestyle
-
-.. _UV-CDAT: http://uv-cdat.llnl.gov
 
 .. _iris: http://scitools.org.uk/iris
 

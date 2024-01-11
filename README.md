@@ -14,7 +14,7 @@ Some of the key features are listed below:
 
 * Suitable for large data sets: computationally efficient for the large data sets typical of modern climate model output.
 * Transparent handling of missing values: missing values are removed automatically when computing EOFs and re-inserted into output fields.
-* Meta-data preserving interfaces (optional): works with the iris data analysis package, xarray, or the cdms2 module (from UV-CDAT) to carry meta-data over from input fields to output.
+* Meta-data preserving interfaces (optional): works with the iris data analysis package or xarray to carry meta-data over from input fields to output.
 * No Fortran dependencies: written in Python using the power of NumPy, no compilers required.
 
 
@@ -22,7 +22,7 @@ Requirements
 ------------
 
 eofs only requires the NumPy package (and setuptools to install).
-In order to use the meta-data preserving interfaces one (or more) of cdms2 (part of [UV-CDAT](http://uvcdat.llnl.gov/)), [iris](http://scitools.org.uk/iris), or [xarray](http://xarray.pydata.org) is needed.
+In order to use the meta-data preserving interfaces one (or both) of [iris](http://scitools.org.uk/iris) or [xarray](http://xarray.pydata.org) is needed.
 
 
 Documentation
@@ -42,7 +42,7 @@ You can additionally cite the [Zenodo DOI](http://dx.doi.org/10.5281/zenodo.4687
 Installation
 ------------
 
-eofs works on Python 2 or 3 on Linux, Windows or OSX.
+eofs works on Python 3 on Linux, Windows or MacOS.
 The easiest way to install eofs is by using [conda](http://conda.pydata.org/docs/) or pip:
 
     conda install -c conda-forge eofs
@@ -59,6 +59,6 @@ You can also install from the source distribution:
 Frequently asked questions
 --------------------------
 
-* **Do I need UV-CDAT/cdms2, iris or xarray to use eofs?**
+* **Do I need iris or xarray to use eofs?**
   No. All the computation code uses NumPy only.
-  The cdms2 module, iris and xarray are only required for the meta-data preserving interfaces.
+  The iris and xarray modules are only required for the meta-data preserving interfaces.

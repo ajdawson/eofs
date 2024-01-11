@@ -16,13 +16,6 @@
    :members:
 
 
-`eofs.tools.cdms`
------------------
-
-.. automodule:: eofs.tools.cdms
-   :members:
-
-
 `eofs.tools.iris`
 -----------------
 

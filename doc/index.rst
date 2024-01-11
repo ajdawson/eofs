@@ -28,7 +28,7 @@ Download and installation
 -------------------------
 
 The core of the package runs on Python 2 or 3, on Linux, Windows or OSX; basically anywhere Python+NumPy are available.
-The :ref:`cdms <cdms-interface>`, :ref:`iris <iris-interface>`, and :ref:`xarray <xarray-interface>` interfaces are available on all platforms where their respective supporting packages UV-CDAT_, iris_, and xarray_ can be installed.
+The :ref:`iris <iris-interface>`, and :ref:`xarray <xarray-interface>` interfaces are available on all platforms where their respective supporting packages iris_ and xarray_ can be installed.
 
 `eofs` can be installed for all platforms using conda_::
 
@@ -50,7 +50,7 @@ You can also check out the source code for the development version from the `git
 Getting started
 ---------------
 
-`eofs` provides various interfaces for EOF analysis: a *standard* interface for analysing data contained in either `numpy` arrays or `dask` arrays, suitable for any data set; and meta-data interfaces suitable for analysing data read from self-describing files, using the `cdms2`, `iris`, or `xarray` packages.
+`eofs` provides various interfaces for EOF analysis: a *standard* interface for analysing data contained in either `numpy` arrays or `dask` arrays, suitable for any data set; and meta-data interfaces suitable for analysing data read from self-describing files, using the `iris` or `xarray` packages.
 All the interfaces support the same set of operations.
 
 Regardless of which interface you use, the basic usage is the same.
@@ -81,8 +81,6 @@ Requirements
 
 This package requires as a minimum that you have numpy_ available, and requires setuptools_ for installation.
 The dask_ package is an optional dependency that will be used if `dask.array` is available and `dask` arrays are provided to the solver.
-The `eofs.cdms` meta-data enabled interface can only be used if the `cdms2` module is available.
-This module is distributed as part of the UV-CDAT_ project.
 The `eofs.iris` meta-data enabled interface can only be used if the iris_ package is available at version 1.2 or higher.
 The `eofs.xarray` meta-data enabled interface can only be used if the xarray_ package is installed.
 
@@ -101,8 +99,6 @@ Contributions big or small are welcomed from anyone with an interest in the proj
 Bug reports and feature requests can be filed using the Github issues_ system.
 If you would like to contribute code or documentation please see the :doc:`devguide/index`.
 
-
-.. _UV-CDAT: http://uv-cdat.llnl.gov
 
 .. _dask: https://www.dask.org/
 

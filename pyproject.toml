@@ -30,8 +30,6 @@ dependencies = [
 ]
 [project.optional-dependencies]
 extras = [
-  "cdms2",
-  "cdutil",
   "iris",
   "xarray",
 ]

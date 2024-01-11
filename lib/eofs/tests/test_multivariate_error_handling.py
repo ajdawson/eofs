@@ -18,10 +18,6 @@
 from __future__ import (absolute_import, division, print_function)  # noqa
 
 import numpy as np
-try:
-    import cdms2
-except ImportError:
-    pass
 import pytest
 
 import eofs.multivariate as multivariate
@@ -32,10 +28,6 @@ from .reference import reference_multivariate_solution
 
 # Create a mapping from interface name to solver class.
 solvers = {'standard': multivariate.standard.MultivariateEof}
-try:
-    solvers['cdms'] = multivariate.cdms.MultivariateEof
-except AttributeError:
-    pass
 try:
     solvers['iris'] = multivariate.iris.MultivariateEof
 except AttributeError:
@@ -81,26 +73,6 @@ class MVErrorHandlersTest(EofsTest):
 class TestErrorHandlersStandard(MVErrorHandlersTest):
     interface = 'standard'
     weights = 'equal'
-
-
-# ----------------------------------------------------------------------------
-# Error Handler tests for the cdms interface
-
-
-class TestErrorHandlersCDMS(MVErrorHandlersTest):
-    interface = 'cdms'
-    weights = 'equal'
-
-    def test_projectField_wrong_input_type(self):
-        solution = reference_multivariate_solution('standard', self.weights)
-        with pytest.raises(TypeError):
-            pcs = self.solver.projectField(solution['sst'])
-
-    def test_projectField_time_dimension_not_first(self):
-        sst1, sst2 = self.solution['sst']
-        sst1 = sst1.reorder('-t')
-        with pytest.raises(ValueError):
-            pcs = self.solver.projectField([sst1, sst2])
 
 
 # ----------------------------------------------------------------------------
@@ -155,47 +127,6 @@ class TestConstructorStandard(EofsTest):
         with pytest.raises(ValueError):
             solver = self.solver_class(solution['sst'],
                                        weights=[weights1, weights2])
-
-
-# ----------------------------------------------------------------------------
-# Constructor tests for the cdms interface
-
-
-class TestConstructorCDMS(EofsTest):
-    """Test the error handling in the cdms interface constructor."""
-
-    @classmethod
-    def setup_class(cls):
-        try:
-            cls.solver_class = solvers['cdms']
-        except KeyError:
-            pytest.skip('missing dependencies required to test '
-                        'the cdms interface')
-
-    def test_wrong_number_weights(self):
-        solution = reference_multivariate_solution('cdms', 'area')
-        weights1, weights2 = solution['weights']
-        with pytest.raises(ValueError):
-            solver = self.solver_class(solution['sst'], weights=[weights1])
-
-    def test_wrong_input_type(self):
-        solution = reference_multivariate_solution('standard', 'equal')
-        with pytest.raises(TypeError):
-            solver = self.solver_class(solution['sst'])
-
-    def test_input_time_dimension_not_first(self):
-        solution = reference_multivariate_solution('cdms', 'equal')
-        sst1, sst2 = solution['sst']
-        sst1 = sst1.reorder('-t')
-        with pytest.raises(ValueError):
-            solver = self.solver_class([sst1, sst2])
-
-    def test_input_no_spatial_dimensions(self):
-        solution = reference_multivariate_solution('cdms', 'equal')
-        sst1, sst2 = solution['sst']
-        sst1 = sst1[:, 0, 0]
-        with pytest.raises(ValueError):
-            solver = self.solver_class([sst1, sst2])
 
 
 # ----------------------------------------------------------------------------

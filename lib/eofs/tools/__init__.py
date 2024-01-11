@@ -25,12 +25,6 @@ __all__ = ['standard']
 
 
 try:
-    from . import cdms
-    __all__.append('cdms')
-except ImportError:
-    pass
-
-try:
     from . import iris
     __all__.append('iris')
 except ImportError:

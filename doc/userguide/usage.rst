@@ -12,10 +12,6 @@ Importing the solver class
 The solver classes are all called `Eof` and are stored in interface specific modules: `eofs.<interface>.Eof`. To import the standard interface solver class::
 
     from eofs.standard import Eof
-
-the cdms interface solver class::
-
-    from eofs.cdms import Eof
  
 the iris interface solver class::
 
@@ -33,7 +29,7 @@ Creating an instance of a solver calss can be as simple as::
 
     solver = Eof(data)
 
-but all interfaces have options available. It is highly likely that input data will need to be weighted prior to EOF analysis, which is best done using the *weights* keyword argument. This argument accepts an array of weights in all interfaces, and also a selection of pre-defined weighting method names in the cdms and iris interfaces::
+but all interfaces have options available. It is highly likely that input data will need to be weighted prior to EOF analysis, which is best done using the *weights* keyword argument. This argument accepts an array of weights in all interfaces, and also a selection of pre-defined weighting method names in the iris interface::
 
     solver = Eof(data, weights=weights_array)
 

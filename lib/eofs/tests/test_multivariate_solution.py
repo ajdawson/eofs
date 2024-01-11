@@ -34,10 +34,6 @@ from .reference import reference_multivariate_solution
 # Create a mapping from interface name to solver class.
 solvers = {'standard': multivariate.standard.MultivariateEof}
 try:
-    solvers['cdms'] = multivariate.cdms.MultivariateEof
-except AttributeError:
-    pass
-try:
     solvers['iris'] = multivariate.iris.MultivariateEof
 except AttributeError:
     pass
@@ -244,39 +240,6 @@ class TestStandardAreaWeights(StandardMVSolutionTest):
 
 class TestStandardMixedWeights(StandardMVSolutionTest):
     weights = 'none_area'
-
-
-# ----------------------------------------------------------------------------
-# Tests for the cdms interface
-
-
-class CDMSMVSolutionTest(MVSolutionTest):
-    interface = 'cdms'
-
-    def _tomasked(self, value):
-        try:
-            return value.asma()
-        except AttributeError:
-            return value
-
-
-class TestCDMSEqualWeights(CDMSMVSolutionTest):
-    weights = 'equal'
-
-
-class TestCDMSLatitudeWeights(CDMSMVSolutionTest):
-    weights = 'latitude'
-    alternate_weights_arg = 'coslat'
-
-
-class TestCDMSAreaWeights(CDMSMVSolutionTest):
-    weights = 'area'
-    alternate_weights_arg = 'area'
-
-
-class TestCDMSMixedWeights(CDMSMVSolutionTest):
-    weights = 'none_area'
-    alternate_weights_arg = (None, 'area')
 
 
 # ----------------------------------------------------------------------------

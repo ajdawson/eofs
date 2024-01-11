@@ -36,11 +36,6 @@ from .utils import sign_adjustments
 tools = {'standard': eofs.tools.standard}
 solvers = {'standard': eofs.standard.Eof}
 try:
-    tools['cdms'] = eofs.tools.cdms
-    solvers['cdms'] = eofs.cdms.Eof
-except AttributeError:
-    pass
-try:
     tools['iris'] = eofs.tools.iris
     solvers['iris'] = eofs.iris.Eof
 except AttributeError:
@@ -138,22 +133,6 @@ class TestToolsStandard(ToolsTest):
 
     def _tomasked(self, value):
         return value
-
-
-# ----------------------------------------------------------------------------
-# Tests for the cdms interface
-
-
-class TestToolsCDMS(ToolsTest):
-    """Test the cdms interface tools."""
-    interface = 'cdms'
-    weights = 'equal'
-
-    def _tomasked(self, value):
-        try:
-            return value.asma()
-        except AttributeError:
-            return value
 
 
 # ----------------------------------------------------------------------------
