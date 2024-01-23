@@ -16,12 +16,19 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
-from __future__ import (absolute_import, division, print_function)  # noqa
+from __future__ import absolute_import, division, print_function  # noqa
+
 import collections.abc
 import warnings
 
 import numpy as np
 import numpy.ma as ma
+from packaging.version import Version
+
+if Version(np.__version__) < Version('1.25.0'):
+    from numpy import product as prod
+else:
+    from numpy import prod
 
 try:
     import dask.array
@@ -121,7 +128,7 @@ class Eof(object):
         # Store information about the shape/size of the input data.
         self._records = self._data.shape[0]
         self._originalshape = self._data.shape[1:]
-        channels = np.product(self._originalshape)
+        channels = prod(self._originalshape)
         # Weight the data set according to weighting argument.
         if weights is not None:
             try:
@@ -738,7 +745,7 @@ class Eof(object):
         if eof_ndim > input_ndim:
             field = field.reshape((1,) + field.shape)
         records = field.shape[0]
-        channels = np.product(field.shape[1:])
+        channels = prod(field.shape[1:])
         field_flat = field.reshape([records, channels])
         # Locate the non-missing values and isolate them.
         if not self._valid_nan(field_flat):
