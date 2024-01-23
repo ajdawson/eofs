@@ -19,6 +19,12 @@ from __future__ import (absolute_import, division, print_function)  # noqa
 
 import numpy as np
 import numpy.ma as ma
+from packaging.version import Version
+
+if Version(np.__version__) < Version('1.25.0'):
+    from numpy import product as prod
+else:
+    from numpy import prod
 
 
 def _check_flat_center(pcs, field):
@@ -46,7 +52,7 @@ def _check_flat_center(pcs, field):
     else:
         # Record the shape of the field and the number of spatial elements.
         originalshape = field.shape[1:]
-        channels = np.product(originalshape)
+        channels = prod(originalshape)
     # Record the number of PCs.
     if len(pcs.shape) == 1:
         npcs = 1

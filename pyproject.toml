@@ -27,6 +27,7 @@ dynamic = [
 ]
 dependencies = [
   "numpy",
+  "packaging",
 ]
 [project.optional-dependencies]
 extras = [
