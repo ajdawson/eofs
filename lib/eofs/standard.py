@@ -119,7 +119,7 @@ class Eof(object):
             raise ValueError('the input data set must be '
                              'at least two dimensional')
         self._data = dataset.copy()
-        # Check if the input is a masked array. If so fill it with NaN.
+        # Check if the input is a masked array. If so fill it with nan.
         try:
             self._data = self._data.filled(fill_value=np.nan)
             self._filled = True
@@ -201,9 +201,9 @@ class Eof(object):
         # as they exist in the input maps. Create an array of not-a-numbers
         # and then introduce data values where required. We have to use the
         # astype method to ensure the eigenvectors are the same type as the
-        # input dataset since multiplication by np.NaN will promote to 64-bit.
+        # input dataset since multiplication by np.nan will promote to 64-bit.
         self._flatE = np.ones([self.neofs, channels],
-                              dtype=self._data.dtype) * np.NaN
+                              dtype=self._data.dtype) * np.nan
         self._flatE = self._flatE.astype(self._data.dtype)
         self._flatE[:, nonMissingIndex] = E
         # Remove the scaling on the principal component time-series that is
@@ -736,7 +736,7 @@ class Eof(object):
             wts = self.getWeights()
             if wts is not None:
                 field = field * wts
-        # Fill missing values with NaN if this is a masked array.
+        # Fill missing values with nan if this is a masked array.
         try:
             field = field.filled(fill_value=np.nan)
         except AttributeError:
