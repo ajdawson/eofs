@@ -153,7 +153,9 @@ class Eof:
             raise ValueError('missing values detected in different '
                              'locations at different times')
         if has_dask:
-            nonMissingIndex = dask.array.where(np.logical_not(np.isnan(self._data[0])))[0]
+            nonMissingIndex = dask.array.where(
+                np.logical_not(np.isnan(self._data[0]))
+            )[0]
         else:
             nonMissingIndex = np.where(np.logical_not(np.isnan(self._data[0])))[0]
         # Remove missing values from the design matrix.
@@ -744,7 +746,9 @@ class Eof:
             raise ValueError('missing values detected in different '
                              'locations at different times')
         if has_dask:
-            nonMissingIndex = dask.array.where(np.logical_not(np.isnan(self._data[0])))[0]  # lee1043 testing
+            nonMissingIndex = dask.array.where(
+                np.logical_not(np.isnan(self._data[0]))
+            )[0]
         else:
             nonMissingIndex = np.where(np.logical_not(np.isnan(field_flat[0])))[0]
         try:
