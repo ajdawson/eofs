@@ -15,7 +15,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
-from __future__ import (absolute_import, division, print_function)  # noqa
 from copy import copy
 from functools import reduce
 import warnings

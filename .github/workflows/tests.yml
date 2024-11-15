@@ -10,7 +10,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        python-version: ["3.8", "3.9", "3.10"]
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
         os: [ubuntu-latest, macos-latest]
       fail-fast: false
 
@@ -23,7 +23,7 @@ jobs:
         environment-name: TEST
         init-shell: bash
         create-args: >-
-          python=${{ matrix.python-version }} pip pytest iris xarray cdms2 genutil cdutil --channel conda-forge
+          python=${{ matrix.python-version }} pip pytest iris xarray --channel conda-forge
 
     - name: Install eofs
       shell: bash -l {0}

@@ -15,13 +15,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
-from __future__ import (absolute_import, division, print_function)  # noqa
-
 import numpy as np
-try:
-    import cdms2
-except ImportError:
-    pass
 import pytest
 
 import eofs
@@ -32,10 +26,6 @@ from .reference import reference_solution
 
 # Create a mapping from interface name to solver class.
 solvers = {'standard': eofs.standard.Eof}
-try:
-    solvers['cdms'] = eofs.cdms.Eof
-except AttributeError:
-    pass
 try:
     solvers['iris'] = eofs.iris.Eof
 except AttributeError:
@@ -104,22 +94,6 @@ class ErrorHandlersTest(EofsTest):
 class TestErroHandlersStandard(ErrorHandlersTest):
     interface = 'standard'
     weights = 'equal'
-
-
-# ----------------------------------------------------------------------------
-# Error Handler tests for the cdms interface
-
-
-class TestErrorHandlersCDMS(ErrorHandlersTest):
-    """Test error handling in the cdms interface."""
-    interface = 'cdms'
-    weights = 'equal'
-
-    def test_projectField_invalid_type(self):
-        # projecting a field of the wrong type
-        solution = reference_solution('standard', 'equal')
-        with pytest.raises(TypeError):
-            pcs = self.solver.projectField(solution['sst'])
 
 
 # ----------------------------------------------------------------------------
@@ -240,85 +214,6 @@ class TestConstructorStandard(EofsTest):
         mask[-1] = True
         with pytest.raises(ValueError):
             solver = self.solver_class(data, center=False)
-
-
-# ----------------------------------------------------------------------------
-# Constructor tests for the cdms interface
-
-
-class TestConstructorCDMS(EofsTest):
-    """Test the error handling in the cdms interface constructor."""
-
-    @classmethod
-    def setup_class(cls):
-        try:
-            cls.solver_class = solvers['cdms']
-        except KeyError:
-            pytest.skip('missing dependencies required to test the '
-                        'cdms interface')
-
-    def test_wrong_input_type(self):
-        # input of the wrong type
-        solution = reference_solution('standard', 'equal')
-        data = solution['sst']
-        with pytest.raises(TypeError):
-            solver = self.solver_class(data)
-
-    def test_input_without_time_dimension(self):
-        # no time dimension in the input
-        solution = reference_solution('cdms', 'equal')
-        data = solution['sst'](time=slice(0, 1), squeeze=True)
-        with pytest.raises(ValueError):
-            solver = self.solver_class(data)
-
-    def test_input_time_dimension_not_first(self):
-        # time not the first dimension in the input
-        solution = reference_solution('cdms', 'equal')
-        data = solution['sst']
-        data = data.reorder('xyt')
-        with pytest.raises(ValueError):
-            solver = self.solver_class(data)
-
-    def test_input_no_spatial_dimensions(self):
-        # not enough dimensions in the input
-        solution = reference_solution('cdms', 'equal')
-        data = solution['sst'][:, 0, 0]
-        with pytest.raises(ValueError):
-            solver = self.solver_class(data)
-
-    def test_invalid_builtin_weights_value(self):
-        # invalid weighting scheme name
-        solution = reference_solution('cdms', 'equal')
-        data = solution['sst']
-        with pytest.raises(ValueError):
-            solver = self.solver_class(data, weights='invalid')
-
-    def test_builtin_latitude_weights_with_missing_dimension(self):
-        # latitude weights without latitude dimension
-        solution = reference_solution('cdms', 'equal')
-        data = solution['sst'](latitude=slice(0, 1), squeeze=True)
-        with pytest.raises(ValueError):
-            solver = self.solver_class(data, weights='coslat')
-
-    def test_builtin_area_weights_with_missing_dimension(self):
-        # area weights without longitude dimension
-        solution = reference_solution('cdms', 'equal')
-        data = solution['sst'](longitude=slice(0, 1), squeeze=True)
-        with pytest.raises(ValueError):
-            solver = self.solver_class(data, weights='area')
-
-    def test_builtin_area_weights_with_non_adjacent_dimensions(self):
-        # area weights with latitude and longitude not adjacent in input
-        solution = reference_solution('cdms', 'equal')
-        data = solution['sst']
-        newdim = cdms2.createAxis([0.], id='height')
-        newdim.designateLevel()
-        data = cdms2.createVariable(cdms2.MV.reshape(data, data.shape + (1,)),
-                                    axes=data.getAxisList() + [newdim],
-                                    id=data.id)
-        data = data.reorder('txzy')
-        with pytest.raises(ValueError):
-            solver = self.solver_class(data, weights='area')
 
 
 # ----------------------------------------------------------------------------

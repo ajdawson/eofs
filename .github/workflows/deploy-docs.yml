@@ -26,7 +26,7 @@ jobs:
         environment-name: TEST
         init-shell: bash
         create-args: >-
-          python=3 pip iris xarray cdms2 genutil cdutil sphinx sphinx-issues --channel conda-forge
+          python=3 pip iris xarray sphinx sphinx-issues --channel conda-forge
 
     - name: Install eofs
       shell: bash -l {0}

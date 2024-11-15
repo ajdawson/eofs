@@ -10,22 +10,12 @@ Solver interfaces
 ========= =====================================================================
 Interface Type of input/output data
 ========= =====================================================================
-cdms      Data read from a self-describing data format stored in a `cdms2`
-          variable.
 iris      Data read from a self-describing data format stored in an `iris`
           cube.
 xarray    Data stored in an `xarray.DataArray`.
 standard  Other data, stored in a `numpy.ndarray`, a `numpy.ma.MaskedArray`,
           or a `dask.array.Array`.
 ========= =====================================================================
-
-
-.. _cdms-interface:
-
-cdms interface
---------------
-
-The `eofs.cdms` interface works with cdms variables, which are the core data container used by UV-CDAT_. A cdms variable has meta-data associated with it, including dimensions, which are understood by the `eofs.cdms.Eof` solver interface. The outputs of the `eofs.cdms.Eof` solver are cdms variables with meta-data, which can be written straight to a netCDF file using cdms, or used with other parts of the UV-CDAT framework.
 
 
 .. _iris-interface:
@@ -53,8 +43,6 @@ The standard interface works with numpy_ arrays or dask_ arrays, which makes the
 
 
 .. _iris: https://scitools-iris.readthedocs.io/en/stable/
-
-.. _UV-CDAT: https://uv-cdat.llnl.gov/
 
 .. _xarray: https://docs.xarray.dev/en/stable/
 

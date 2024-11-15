@@ -15,21 +15,16 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
-from __future__ import (absolute_import, division, print_function)  # noqa
-
 import collections.abc
 
-try:
-    import xarray as xr
-except ImportError:
-    import xray as xr
+import xarray as xr
 
 from . import standard
 from .tools.xarray import (find_time_coordinates, categorise_ndcoords,
                            weights_array)
 
 
-class Eof(object):
+class Eof:
     """EOF analysis (meta-data enabled `xarray` interface)"""
 
     def __init__(self, array, weights=None, center=True, ddof=1):

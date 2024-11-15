@@ -15,8 +15,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
-from __future__ import (absolute_import, division, print_function)  # noqa
-
 import numpy as np
 import numpy.ma as ma
 
@@ -24,7 +22,7 @@ import numpy.ma as ma
 np.seterr(all='ignore')
 
 
-class EofsTest(object):
+class EofsTest:
     """Base class for tests."""
 
     def _tomasked(self, value):

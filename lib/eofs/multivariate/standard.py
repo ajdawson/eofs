@@ -15,14 +15,12 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
-from __future__ import (absolute_import, division, print_function)  # noqa
-
 import numpy as np
 
 from eofs import standard
 
 
-class MultivariateEof(object):
+class MultivariateEof:
     """Multivariate EOF analysis (`numpy` interface)"""
 
     def __init__(self, datasets, weights=None, center=True, ddof=1):

@@ -65,63 +65,6 @@ def _read_reference_solution(weights):
     return fields
 
 
-def _wrap_cdms(solution, neofs, time_units):
-    try:
-        import cdms2
-    except ImportError:
-        raise ValueError("cannot use container 'cdms' without "
-                         "the cdms2 module")
-    time_dim = cdms2.createAxis(solution['time'], id='time')
-    time_dim.designateTime()
-    time_dim.units = time_units
-    lat_dim = cdms2.createAxis(solution['latitude'], id='latitude')
-    lat_dim.designateLatitude()
-    lon_dim = cdms2.createAxis(solution['longitude'], id='longitude')
-    lon_dim.designateLongitude()
-    eof_dim = cdms2.createAxis(np.arange(1, neofs+1), id='eof')
-    eof_dim.long_name = 'eof_number'
-    solution['sst'] = cdms2.createVariable(
-        solution['sst'],
-        axes=[time_dim, lat_dim, lon_dim],
-        id='sst')
-    solution['eigenvalues'] = cdms2.createVariable(
-        solution['eigenvalues'],
-        axes=[eof_dim],
-        id='eigenvalues')
-    solution['eofs'] = cdms2.createVariable(
-        solution['eofs'],
-        axes=[eof_dim, lat_dim, lon_dim],
-        id='eofs')
-    solution['pcs'] = cdms2.createVariable(
-        solution['pcs'],
-        axes=[time_dim, eof_dim],
-        id='pcs')
-    solution['variance'] = cdms2.createVariable(
-        solution['variance'],
-        axes=[eof_dim],
-        id='variance')
-    solution['eofscor'] = cdms2.createVariable(
-        solution['eofscor'],
-        axes=[eof_dim, lat_dim, lon_dim],
-        id='eofscor')
-    solution['eofscov'] = cdms2.createVariable(
-        solution['eofscov'],
-        axes=[eof_dim, lat_dim, lon_dim],
-        id='eofscov')
-    solution['errors'] = cdms2.createVariable(
-        solution['errors'],
-        axes=[eof_dim],
-        id='errors')
-    solution['scaled_errors'] = cdms2.createVariable(
-        solution['scaled_errors'],
-        axes=[eof_dim],
-        id='scaled_errors')
-    solution['rcon'] = cdms2.createVariable(
-        solution['rcon'],
-        axes=[time_dim, lat_dim, lon_dim],
-        id='reconstructed_sst')
-
-
 def _wrap_iris(solution, neofs, time_units):
     try:
         from iris.cube import Cube
@@ -189,11 +132,9 @@ def _wrap_xarray(solution, neofs, time_units):
     try:
         import xarray as xr
     except ImportError:
-        try:
-            import xray as xr
-        except ImportError:
-            raise ValueError("cannot use container 'xarray' without "
-                             "the xarray/xray module")
+        raise ValueError(
+            "cannot use container 'xarray' without the xarray module"
+        )
     time_dim = xr.IndexVariable('time', solution['time'])
     lat_dim = xr.IndexVariable('latitude', solution['latitude'])
     lon_dim = xr.IndexVariable('longitude', solution['longitude'])
@@ -208,7 +149,6 @@ def _wrap_xarray(solution, neofs, time_units):
 
 def _get_wrapper(container_type):
     return {'standard': lambda *args: None,
-            'cdms': _wrap_cdms,
             'iris': _wrap_iris,
             'xarray': _wrap_xarray}[container_type]
 
@@ -219,7 +159,7 @@ def reference_solution(container_type, weights):
     **Arguments:**
 
     *container_type*
-        Either 'standard', 'cdms', 'iris' or 'xarray'.
+        Either 'standard', 'iris' or 'xarray'.
 
     *weights*
         Weights method. One of 'equal', 'latitude', or 'area'.
@@ -227,7 +167,7 @@ def reference_solution(container_type, weights):
     """
     container_type = container_type.lower()
     weights = weights.lower()
-    if container_type not in ('standard', 'iris', 'cdms', 'xarray'):
+    if container_type not in ('standard', 'iris', 'xarray'):
         raise ValueError("unknown container type "
                          "'{!s}'".format(container_type))
     solution = _read_reference_solution(weights)
@@ -243,7 +183,7 @@ def reference_multivariate_solution(container_type, weights):
     **Arguments:**
 
     *container_type*
-        Either 'standard', 'cdms', or 'iris'.
+        Either 'standard' or 'iris'.
 
     *weights*
         Weights method. One of 'equal', 'latitude', 'area',

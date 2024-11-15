@@ -16,16 +16,15 @@
    :members:
 
 
-`eofs.tools.cdms`
------------------
-
-.. automodule:: eofs.tools.cdms
-   :members:
-
-
 `eofs.tools.iris`
 -----------------
 
 .. automodule:: eofs.tools.iris
    :members:
 
+
+`eofs.tools.xarray`
+-------------------
+
+.. automodule:: eofs.tools.xarray
+   :members:

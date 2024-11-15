@@ -15,8 +15,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
-from __future__ import (absolute_import, division, print_function)  # noqa
-
 import collections.abc
 from copy import copy
 
@@ -28,7 +26,7 @@ from eofs.tools.iris import (get_time_coord, weights_array,
 from . import standard
 
 
-class MultivariateEof(object):
+class MultivariateEof:
     """Multivariate EOF analysis (meta-data enabled `iris` interface)"""
 
     def __init__(self, cubes, weights=None, center=True, ddof=1):

@@ -20,6 +20,7 @@ classifiers = [
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
 ]
 dynamic = [
   "version",
@@ -29,12 +30,8 @@ dependencies = [
   "numpy",
 ]
 [project.optional-dependencies]
-extras = [
-  "cdms2",
-  "cdutil",
-  "iris",
-  "xarray",
-]
+iris = ["scitools-iris"]
+xarray = ["xarray"]
 [project.urls]
 documentation = "https://ajdawson.github.io/eofs"
 homepage = "https://github.com/ajdawson/eofs"

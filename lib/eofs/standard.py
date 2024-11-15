@@ -16,7 +16,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
-from __future__ import (absolute_import, division, print_function)  # noqa
 import collections.abc
 import warnings
 
@@ -32,7 +31,7 @@ except ImportError:
 from .tools.standard import correlation_map, covariance_map
 
 
-class Eof(object):
+class Eof:
     """EOF analysis (`numpy` interface)"""
 
     def __init__(self, dataset, weights=None, center=True, ddof=1):
@@ -121,7 +120,7 @@ class Eof(object):
         # Store information about the shape/size of the input data.
         self._records = self._data.shape[0]
         self._originalshape = self._data.shape[1:]
-        channels = np.product(self._originalshape)
+        channels = np.prod(self._originalshape)
         # Weight the data set according to weighting argument.
         if weights is not None:
             try:
@@ -196,7 +195,7 @@ class Eof(object):
         # astype method to ensure the eigenvectors are the same type as the
         # input dataset since multiplication by np.NaN will promote to 64-bit.
         self._flatE = np.ones([self.neofs, channels],
-                              dtype=self._data.dtype) * np.NaN
+                              dtype=self._data.dtype) * np.nan
         self._flatE = self._flatE.astype(self._data.dtype)
         self._flatE[:, nonMissingIndex] = E
         # Remove the scaling on the principal component time-series that is
@@ -738,7 +737,7 @@ class Eof(object):
         if eof_ndim > input_ndim:
             field = field.reshape((1,) + field.shape)
         records = field.shape[0]
-        channels = np.product(field.shape[1:])
+        channels = np.prod(field.shape[1:])
         field_flat = field.reshape([records, channels])
         # Locate the non-missing values and isolate them.
         if not self._valid_nan(field_flat):

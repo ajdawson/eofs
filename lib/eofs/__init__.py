@@ -15,8 +15,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
-from __future__ import (absolute_import, division, print_function)  # noqa
-
 from . import standard
 from . import tools
 
@@ -28,12 +26,6 @@ except ImportError:
 
 # Define the objects imported by imports of the form: from eofs import *
 __all__ = ['standard', 'tools']
-
-try:
-    from . import cdms
-    __all__.append('cdms')
-except ImportError:
-    pass
 
 try:
     from . import iris

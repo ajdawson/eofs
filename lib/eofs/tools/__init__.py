@@ -15,8 +15,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
-from __future__ import (absolute_import, division, print_function)  # noqa
-
 from . import standard
 
 
@@ -25,13 +23,13 @@ __all__ = ['standard']
 
 
 try:
-    from . import cdms
-    __all__.append('cdms')
+    from . import iris
+    __all__.append('iris')
 except ImportError:
     pass
 
 try:
-    from . import iris
-    __all__.append('iris')
+    from . import xarray
+    __all__.append('xarray')
 except ImportError:
     pass

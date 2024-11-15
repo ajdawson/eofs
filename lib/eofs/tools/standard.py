@@ -15,8 +15,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
-from __future__ import (absolute_import, division, print_function)  # noqa
-
 import numpy as np
 import numpy.ma as ma
 
@@ -46,7 +44,7 @@ def _check_flat_center(pcs, field):
     else:
         # Record the shape of the field and the number of spatial elements.
         originalshape = field.shape[1:]
-        channels = np.product(originalshape)
+        channels = np.prod(originalshape)
     # Record the number of PCs.
     if len(pcs.shape) == 1:
         npcs = 1

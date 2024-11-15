@@ -10,5 +10,3 @@ User Guide
    usage
    multivariate
    method
-   speed
-

@@ -15,8 +15,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with eofs.  If not, see <http://www.gnu.org/licenses/>.
-from __future__ import (absolute_import, division, print_function)  # noqa
-
 import numpy as np
 import numpy.ma as ma
 try:
@@ -34,10 +32,6 @@ from .reference import reference_solution
 
 # Create a mapping from interface name to solver class.
 solvers = {'standard': eofs.standard.Eof}
-try:
-    solvers['cdms'] = eofs.cdms.Eof
-except AttributeError:
-    pass
 try:
     solvers['iris'] = eofs.iris.Eof
 except AttributeError:
@@ -344,84 +338,6 @@ class TestXarrayDask(XarraySolutionTest):
         # The input to the SVD algorithm should be a dask array
         import dask
         assert isinstance(self.solver._solver._data, dask.array.Array)
-
-
-# ----------------------------------------------------------------------------
-# Tests for the cdms interface
-
-
-class CDMSSolutionTest(SolutionTest):
-    """Base class for all cdms interface solution test classes."""
-    interface = 'cdms'
-
-    def _tomasked(self, value):
-        try:
-            return value.asma()
-        except AttributeError:
-            return value
-
-
-class TestCDMSEqualWeights(CDMSSolutionTest):
-    """Equal grid weighting."""
-    weights = 'equal'
-
-
-class TestCDMSLatitudeWeights(CDMSSolutionTest):
-    """
-    Square-root of cosine of latitude grid weighting (automatically
-    generated weights).
-
-    """
-    weights = 'latitude'
-    alternate_weights_arg = 'coslat'
-
-
-class TestCDMSAreaWeights(CDMSSolutionTest):
-    """
-    Square-root of normalised grid cell area grid weighting
-    (automatically generated weights).
-
-    """
-    weights = 'area'
-    alternate_weights_arg = 'area'
-
-
-class TestCDMSAreaWeightsTransposedGrid(CDMSSolutionTest):
-    """
-    Square-root of normalised grid cell area grid weighting
-    (automatically generated weights) after transposing grid variables
-    to a longitude-latitude grid.
-
-    """
-    weights = 'area'
-    alternate_weights_arg = 'area'
-
-    @classmethod
-    def modify_solution(cls):
-        cls.solution['sst'] = cls.solution['sst'].reorder('txy')
-        cls.solution['eofs'] = cls.solution['eofs'].reorder('-xy')
-        cls.solution['eofscor'] = cls.solution['eofscor'].reorder('-xy')
-        cls.solution['eofscov'] = cls.solution['eofscov'].reorder('-xy')
-        cls.solution['weights'] = cls.solution['weights'].transpose()
-        cls.solution['rcon'] = cls.solution['rcon'].reorder('-xy')
-
-
-class TestCDMSLatitudeWeightsManual(CDMSSolutionTest):
-    """
-    Square-root of cosine of latitude grid weighting (weights from
-    reference solution).
-
-    """
-    weights = 'latitude'
-
-
-class TestCDMSAreaWeightsManual(CDMSSolutionTest):
-    """
-    Square-root of normalised grid cell area grid weighting (weights
-    from reference solution).
-
-    """
-    weights = 'area'
 
 
 # ----------------------------------------------------------------------------
