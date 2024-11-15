@@ -195,7 +195,7 @@ class Eof:
         # astype method to ensure the eigenvectors are the same type as the
         # input dataset since multiplication by np.NaN will promote to 64-bit.
         self._flatE = np.ones([self.neofs, channels],
-                              dtype=self._data.dtype) * np.NaN
+                              dtype=self._data.dtype) * np.nan
         self._flatE = self._flatE.astype(self._data.dtype)
         self._flatE[:, nonMissingIndex] = E
         # Remove the scaling on the principal component time-series that is
