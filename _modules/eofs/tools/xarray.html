@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eofs.tools.xarray &#8212; eofs 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx13.css?v=84d1f121" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+    <script src="../../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
+          rel='stylesheet' type='text/css' />
+     
+        <style type="text/css">
+            table.right { float: right; margin-left: 20px; }
+            table.right td { border: 1px solid #ccc; }
+        </style>
+        <script type="text/javascript">
+            // intelligent scrolling of the sidebar content
+            $(window).scroll(function() {
+                var sb = $('.sphinxsidebarwrapper');
+                var win = $(window);
+                var sbh = sb.height();
+                var offset = $('.sphinxsidebar').position()['top'];
+                var wintop = win.scrollTop();
+                var winbot = wintop + win.innerHeight();
+                var curtop = sb.position()['top'];
+                var curbot = curtop + sbh;
+                // does sidebar fit in window?
+                if (sbh < win.innerHeight()) {
+                    // yes: easy case -- always keep at the top
+                    sb.css('top', $u.min([$u.max([0, wintop - offset - 10]),
+                                         $(document).height() - sbh - 200]));
+                } else {
+                    // no: only scroll if top/bottom edge of sidebar is at
+                    // top/bottom edge of window
+                    if (curtop > wintop && curbot > winbot) {
+                        sb.css('top', $u.max([wintop - offset - 10, 0]));
+                    } else if (curtop < wintop && curbot < winbot) {
+                        sb.css('top', $u.min([winbot - sbh - offset - 20,
+                                             $(document).height() - sbh - 200]));
+                    }
+                }
+            });
+        </script>
+
+  </head><body>
+<div class="pageheader">
+  <div>
+    <a href="../../../index.html">
+      <img src="../../../_static/eofsheader.png" alt="SPHINX" />
+    </a>
+  </div>
+</div>
+
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+    <li><a href="../../../index.html">home</a>|&nbsp;</li>
+    <li><a href="../../../search.html">search</a>|&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">eofs.tools.xarray</a></li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+
+    <h2>eofs v2.0.0</h2>
+    <h3>Table of Contents</h3>
+    <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../userguide/index.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">API references</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devguide/index.html">Developer Guide</a></li>
+</ul>
+
+
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+
+    <div class="document">
+  
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for eofs.tools.xarray</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Supplementary tools for the `xarray` EOF analysis interface.&quot;&quot;&quot;</span>
+<span class="c1"># (c) Copyright 2016 Andrew Dawson. All Rights Reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of eofs.</span>
+<span class="c1">#</span>
+<span class="c1"># eofs is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># eofs is distributed in the hope that it will be useful, but WITHOUT</span>
+<span class="c1"># ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span>
+<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License</span>
+<span class="c1"># for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with eofs.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">standard</span>
+<span class="kn">from</span> <span class="nn">.generic</span> <span class="kn">import</span> <span class="n">covcor_dimensions</span>
+
+
+<div class="viewcode-block" id="find_time_coordinates">
+<a class="viewcode-back" href="../../../api/eofs.tools.html#eofs.tools.xarray.find_time_coordinates">[docs]</a>
+<span class="k">def</span> <span class="nf">find_time_coordinates</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find time dimension coordinates in an `xarray.DataArray`.</span>
+
+<span class="sd">    Time coordinates satisfy one or more of:</span>
+
+<span class="sd">    * Values have a dtype of `numpy.datetime64`.</span>
+<span class="sd">    * Name of the coordinate is &#39;time&#39;.</span>
+<span class="sd">    * The coordinate has an attribute &#39;axis&#39; with value &#39;T&#39;.</span>
+
+<span class="sd">    **Argument:**</span>
+
+<span class="sd">    *array*</span>
+<span class="sd">        An `xarray.DataArray`.</span>
+
+<span class="sd">    **Returns:**</span>
+
+<span class="sd">    *time_coords*</span>
+<span class="sd">        A list of time dimension coordinates. The list may be empty if</span>
+<span class="sd">        no coordinates were recognised as time.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">time_coords</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">array</span><span class="o">.</span><span class="n">dims</span><span class="p">:</span>
+        <span class="n">coord</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="n">is_time</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">coord</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">)</span> <span class="ow">or</span>
+                   <span class="n">coord</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;time&#39;</span> <span class="ow">or</span>
+                   <span class="n">coord</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;axis&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;T&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">is_time</span><span class="p">:</span>
+            <span class="n">time_coords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">time_coords</span></div>
+
+
+
+<div class="viewcode-block" id="categorise_ndcoords">
+<a class="viewcode-back" href="../../../api/eofs.tools.html#eofs.tools.xarray.categorise_ndcoords">[docs]</a>
+<span class="k">def</span> <span class="nf">categorise_ndcoords</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">time_name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Categorise all the non-dimension coordinates of an</span>
+<span class="sd">    `xarray.DataArray` into those that span only time, those that span</span>
+<span class="sd">    only space, and those that span both time and space.</span>
+
+<span class="sd">    **Arguments:**</span>
+
+<span class="sd">    *array*</span>
+<span class="sd">        An `xarray.DataArray`.</span>
+
+<span class="sd">    *time_name*</span>
+<span class="sd">        Name of the time dimension coordinate in the input *array*.</span>
+
+<span class="sd">    **Returns:**</span>
+
+<span class="sd">    *time_coords*</span>
+<span class="sd">        A list of coordinates that span only the time dimension.</span>
+
+<span class="sd">    *space_coords*</span>
+<span class="sd">        A list of coordinates that span only the space dimensions.</span>
+
+<span class="sd">    *time_space_coords*</span>
+<span class="sd">        A list of coordinates that span both the time and space</span>
+<span class="sd">        coordinates.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ndcoords</span> <span class="o">=</span> <span class="p">[</span><span class="n">coord</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">array</span><span class="o">.</span><span class="n">coords</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">array</span><span class="o">.</span><span class="n">dims</span><span class="p">]</span>
+    <span class="n">time_ndcoords</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">space_ndcoords</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">time_space_ndcoords</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">ndcoords</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">coord</span><span class="o">.</span><span class="n">dims</span> <span class="o">==</span> <span class="p">(</span><span class="n">time_name</span><span class="p">,):</span>
+            <span class="n">time_ndcoords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">coord</span><span class="o">.</span><span class="n">dims</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">time_name</span> <span class="ow">in</span> <span class="n">coord</span><span class="o">.</span><span class="n">dims</span><span class="p">:</span>
+                <span class="n">time_space_ndcoords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">space_ndcoords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">time_ndcoords</span><span class="p">,</span> <span class="n">space_ndcoords</span><span class="p">,</span> <span class="n">time_space_ndcoords</span></div>
+
+
+
+<div class="viewcode-block" id="weights_array">
+<a class="viewcode-back" href="../../../api/eofs.tools.html#eofs.tools.xarray.weights_array">[docs]</a>
+<span class="k">def</span> <span class="nf">weights_array</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">scheme</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate a weights array for a given weighting scheme.</span>
+
+<span class="sd">    .. note::</span>
+
+<span class="sd">       Currently not implemented, will raise a ValueError().</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">scheme</span> <span class="o">=</span> <span class="n">scheme</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid weighting scheme: &#39;</span><span class="si">{!s}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">scheme</span><span class="p">))</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">_coord_info</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
+    <span class="n">time_coords</span> <span class="o">=</span> <span class="n">find_time_coordinates</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">time_coords</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;multiple time coordinates are not allowed&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">time_coords</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;no time coordinates found in </span><span class="si">{!s}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    <span class="n">time_coord</span> <span class="o">=</span> <span class="n">time_coords</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">time_dim</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">time_coord</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">coords</span> <span class="o">=</span> <span class="p">[</span><span class="n">time_coord</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">array</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">array</span><span class="o">.</span><span class="n">dims</span>
+                             <span class="k">if</span> <span class="n">name</span> <span class="o">!=</span> <span class="n">time_coord</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">time_dim</span><span class="p">,</span> <span class="n">coords</span>
+
+
+<span class="k">def</span> <span class="nf">_map_and_coords</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">mapfunc</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">array</span> <span class="ow">in</span> <span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">pcs</span><span class="p">):</span>
+        <span class="n">info</span><span class="p">[</span><span class="n">array</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">_coord_info</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+    <span class="n">cmap_args</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">rollaxis</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">info</span><span class="p">[</span><span class="n">array</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+                 <span class="k">for</span> <span class="n">array</span> <span class="ow">in</span> <span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="n">field</span><span class="p">)]</span>
+    <span class="n">cmap_args</span> <span class="o">+=</span> <span class="n">args</span>
+    <span class="n">cmap</span> <span class="o">=</span> <span class="n">mapfunc</span><span class="p">(</span><span class="o">*</span><span class="n">cmap_args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">dim_args</span> <span class="o">=</span> <span class="p">[</span><span class="n">info</span><span class="p">[</span><span class="n">array</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">array</span> <span class="ow">in</span> <span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="n">field</span><span class="p">)]</span>
+    <span class="n">dims</span> <span class="o">=</span> <span class="n">covcor_dimensions</span><span class="p">(</span><span class="o">*</span><span class="n">dim_args</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cmap</span><span class="p">,</span> <span class="n">dims</span>
+
+
+<div class="viewcode-block" id="correlation_map">
+<a class="viewcode-back" href="../../../api/eofs.tools.html#eofs.tools.xarray.correlation_map">[docs]</a>
+<span class="k">def</span> <span class="nf">correlation_map</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Correlation between PCs and a field.</span>
+
+<span class="sd">    Computes maps of the correlation between each PC and the given</span>
+<span class="sd">    field at each grid point.</span>
+
+<span class="sd">    Given a set of PCs contained in a `~xarray.DataArray` (e.g., as</span>
+<span class="sd">    output from `eofs.xarray.Eof.pcs`) and a field with a time dimension</span>
+<span class="sd">    contained in a `xarray.DataArray`, one correlation map per PC is</span>
+<span class="sd">    computed.</span>
+
+<span class="sd">    The field must have the same length time dimension as the PCs. Any</span>
+<span class="sd">    number of spatial dimensions (including zero) are allowed in the</span>
+<span class="sd">    field and there can be any number of PCs.</span>
+
+<span class="sd">    **Arguments:**</span>
+
+<span class="sd">    *pcs*</span>
+<span class="sd">        PCs contained in a `~xarray.DataArray`.</span>
+
+<span class="sd">    *field*</span>
+<span class="sd">        Field Spatial-temporal field contained in a `~xarray.DataArray`.</span>
+
+<span class="sd">    **Returns:**</span>
+
+<span class="sd">    *correlation_maps*</span>
+<span class="sd">        A `~xarray.DataArray` containing the correlation maps.</span>
+
+<span class="sd">    **Examples:**</span>
+
+<span class="sd">    Assuming *solver* is an instance of `eofs.xarray.Eof`, compute</span>
+<span class="sd">    correlation maps for each PC::</span>
+
+<span class="sd">        pcs = solver.pcs(pcscaling=1)</span>
+<span class="sd">        correlation_maps = correlation_map(pcs, field)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cor</span><span class="p">,</span> <span class="n">coords</span> <span class="o">=</span> <span class="n">_map_and_coords</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">standard</span><span class="o">.</span><span class="n">correlation_map</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">coords</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">cor</span>
+    <span class="n">cor</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">cor</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="n">coords</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;pc_correlation&#39;</span><span class="p">,</span>
+                       <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;long_name&#39;</span><span class="p">:</span> <span class="s1">&#39;pc_correlation&#39;</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">cor</span></div>
+
+
+
+<div class="viewcode-block" id="covariance_map">
+<a class="viewcode-back" href="../../../api/eofs.tools.html#eofs.tools.xarray.covariance_map">[docs]</a>
+<span class="k">def</span> <span class="nf">covariance_map</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Covariance between PCs and a field.</span>
+
+<span class="sd">    Computes maps of the covariance between each PC and the given</span>
+<span class="sd">    field at each grid point.</span>
+
+<span class="sd">    Given a set of PCs contained in a `~xarray.DataArray` (e.g., as</span>
+<span class="sd">    output from `eofs.xarray.Eof.pcs`) and a field with a time dimension</span>
+<span class="sd">    contained in a `xarray.DataArray`, one covariance map per PC is</span>
+<span class="sd">    computed.</span>
+
+<span class="sd">    The field must have the same length time dimension as the PCs. Any</span>
+<span class="sd">    number of spatial dimensions (including zero) are allowed in the</span>
+<span class="sd">    field and there can be any number of PCs.</span>
+
+<span class="sd">    **Arguments:**</span>
+
+<span class="sd">    *pcs*</span>
+<span class="sd">        PCs contained in a `~xarray.DataArray`.</span>
+
+<span class="sd">    *field*</span>
+<span class="sd">        Field Spatial-temporal field contained in a `~xarray.DataArray`.</span>
+
+<span class="sd">    **Keyword arguments:**</span>
+
+<span class="sd">    *ddof*</span>
+<span class="sd">        &#39;Delta degrees of freedom&#39;. The divisor used to normalize</span>
+<span class="sd">        the covariance matrix is *N - ddof* where *N* is the</span>
+<span class="sd">        number of samples. Defaults to *1*.</span>
+
+<span class="sd">    **Returns:**</span>
+
+<span class="sd">    *covariance_maps*</span>
+<span class="sd">        A `~xarray.DataArray` containing the covariance maps.</span>
+
+<span class="sd">    **Examples:**</span>
+
+<span class="sd">    Assuming *solver* is an instance of `eofs.xarray.Eof`, compute</span>
+<span class="sd">    covariance maps for each PC::</span>
+
+<span class="sd">        pcs = solver.pcs(pcscaling=1)</span>
+<span class="sd">        covariance_maps = covariance_map(pcs, field)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cov</span><span class="p">,</span> <span class="n">coords</span> <span class="o">=</span> <span class="n">_map_and_coords</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">standard</span><span class="o">.</span><span class="n">covariance_map</span><span class="p">,</span>
+                                  <span class="n">ddof</span><span class="o">=</span><span class="n">ddof</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">coords</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">cov</span>
+    <span class="n">cov</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">cov</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="n">coords</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;pc_covariance&#39;</span><span class="p">,</span>
+                       <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;long_name&#39;</span><span class="p">:</span> <span class="s1">&#39;pc_covariance&#39;</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">cov</span></div>
+
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+  <script type=text/javascript src="/eofs/version_switch.js" async></script>
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+    <li><a href="../../../index.html">home</a>|&nbsp;</li>
+    <li><a href="../../../search.html">search</a>|&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">eofs.tools.xarray</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2013-2024 Andrew Dawson.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>
