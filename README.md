@@ -1,7 +1,7 @@
 eofs - EOF analysis in Python
 =============================
 
-[![DOI (paper)](https://img.shields.io/badge/DOI%20%28paper%29-10.5334%2Fjors.122-blue.svg)](http://doi.org/10.5334/jors.122) [![DOI (latest release)](https://zenodo.org/badge/20448/ajdawson/eofs.svg)](https://zenodo.org/badge/latestdoi/20448/ajdawson/eofs)
+[![DOI (paper)](https://img.shields.io/badge/DOI%20%28paper%29-10.5334%2Fjors.122-blue.svg)](https://doi.org/10.5334/jors.122) [![DOI (latest release)](https://zenodo.org/badge/20448/ajdawson/eofs.svg)](https://zenodo.org/badge/latestdoi/20448/ajdawson/eofs)
 
 
 Overview
@@ -22,28 +22,28 @@ Requirements
 ------------
 
 eofs only requires the NumPy package (and setuptools to install).
-In order to use the meta-data preserving interfaces one (or both) of [iris](http://scitools.org.uk/iris) or [xarray](http://xarray.pydata.org) is needed.
+In order to use the meta-data preserving interfaces one (or both) of [iris](https://scitools-iris.readthedocs.io) or [xarray](https://docs.xarray.dev/en/stable) is needed.
 
 
 Documentation
 -------------
 
-Documentation is available [online](http://ajdawson.github.io/eofs).
+Documentation is available [online](https://ajdawson.github.io/eofs).
 The package docstrings are also very complete and can be used as a source of reference when working interactively.
 
 
 Citation
 --------
 
-If you use eofs in published research, please cite it by referencing the [peer-reviewed paper](http://doi.org/10.5334/jors.122).
-You can additionally cite the [Zenodo DOI](http://dx.doi.org/10.5281/zenodo.46871) if you need to cite a particular version (but please also cite the paper, it helps me justify my time working on this and similar projects).
+If you use eofs in published research, please cite it by referencing the [peer-reviewed paper](https://doi.org/10.5334/jors.122).
+You can additionally cite the [Zenodo DOI](https://dx.doi.org/10.5281/zenodo.46871) if you need to cite a particular version (but please also cite the paper, it helps me justify my time working on this and similar projects).
 
 
 Installation
 ------------
 
 eofs works on Python 3 on Linux, Windows or MacOS.
-The easiest way to install eofs is by using [conda](http://conda.pydata.org/docs/) or pip:
+The easiest way to install eofs is by using [conda](https://docs.conda.io/en/latest/) or pip:
 
     conda install -c conda-forge eofs
 

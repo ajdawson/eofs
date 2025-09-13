@@ -40,6 +40,6 @@ This will run the tests on the version of `eofs` you just installed.
 
 .. _pytest: https://docs.pytest.org/en/latest/
 
-.. _iris: http://scitools.org.uk/iris
+.. _iris: https://scitools-iris.readthedocs.io
 
-.. _xarray: http://xarray.pydata.org
+.. _xarray: https://docs.xarray.dev/en/stable

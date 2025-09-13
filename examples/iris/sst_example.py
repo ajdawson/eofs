@@ -10,9 +10,9 @@ This example uses the metadata-retaining iris interface.
 
 Additional requirements for this example:
 
-    * iris (http://scitools.org.uk/iris/)
-    * matplotlib (http://matplotlib.org/)
-    * cartopy (http://scitools.org.uk/cartopy/)
+    * iris (https://scitools-iris.readthedocs.io/)
+    * matplotlib (https://matplotlib.org/)
+    * cartopy (https://cartopy.readthedocs.io/)
 
 """
 import cartopy.crs as ccrs

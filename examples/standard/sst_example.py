@@ -10,9 +10,9 @@ This example uses the plain numpy interface.
 
 Additional requirements for this example:
 
-    * netCDF4 (http://unidata.github.io/netcdf4-python/)
-    * matplotlib (http://matplotlib.org/)
-    * cartopy (http://scitools.org.uk/cartopy/)
+    * netCDF4 (https://unidata.github.io/netcdf4-python/)
+    * matplotlib (https://matplotlib.org/)
+    * cartopy (https://cartopy.readthedocs.io/)
 
 """
 import cartopy.crs as ccrs
