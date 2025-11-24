@@ -102,9 +102,9 @@ If you would like to contribute code or documentation please see the :doc:`devgu
 
 .. _dask: https://www.dask.org/
 
-.. _iris: http://scitools.org.uk/iris
+.. _iris: https://scitools-iris.readthedocs.io
 
-.. _xarray: http://xarray.pydata.org
+.. _xarray: https://docs.xarray.dev/en/stable
 
 .. _numpy: https://numpy.org/
 
