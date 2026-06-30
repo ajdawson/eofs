@@ -289,4 +289,5 @@ linkcheck_ignore = [
     # accessible from GitHub CI runners. We can skip this check since the DOI
     # URL is canonical and we don't need to test doi.org redirects.
     r"https://doi\.org/10\.5334/jors\.122",
+    r"https://dx\.doi\.org/10\.1175/1520-0493\(2004\)132<1917:AARMMI>2\.0\.CO;2"
 ]
