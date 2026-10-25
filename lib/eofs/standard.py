@@ -443,6 +443,7 @@ class Eof:
         # the covariance maps.
         data = self._data.reshape((self._records,) + self._originalshape)
         if self._weights is not None:
+            data = data.copy()
             with warnings.catch_warnings():
                 warnings.simplefilter('ignore', RuntimeWarning)
                 data /= self._weights

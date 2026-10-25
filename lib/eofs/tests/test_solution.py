@@ -112,6 +112,14 @@ class SolutionTest(EofsTest):
         eofs *= sign_adjustments(eofs, reofs)
         self.assert_array_almost_equal(eofs, reofs)
 
+    @pytest.mark.parametrize('pcscaling', (0, 1, 2))
+    def test_eofsAsCovariance_repeated(self, pcscaling):
+        first = self._tomasked(self.solver.eofsAsCovariance(
+            neofs=self.neofs, pcscaling=pcscaling))
+        second = self._tomasked(self.solver.eofsAsCovariance(
+            neofs=self.neofs, pcscaling=pcscaling))
+        self.assert_array_almost_equal(first, second)
+
     def test_eofsAsCorrelation(self):
         # EOFs as correlation between PCs and input field should match the
         # reference solution
