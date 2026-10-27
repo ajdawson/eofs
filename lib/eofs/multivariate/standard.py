@@ -134,9 +134,14 @@ class MultivariateEof:
             info['slicers'].append(slice(islice, islice + channels))
             islice += channels
         try:
-            merged = np.concatenate(
+            concatenate = (np.ma.concatenate
+                           if any(np.ma.isMaskedArray(f) for f in fields)
+                           else np.concatenate)
+            merged = concatenate(
                 [field.reshape([field.shape[0], np.prod(field.shape[1:])])
                  for field in fields], axis=1)
+            if np.ma.isMaskedArray(merged) and merged.dtype.kind in 'biu':
+                merged = merged.astype(float)
         except ValueError:
             raise ValueError('all fields must have the same first dimension')
         return merged, info
